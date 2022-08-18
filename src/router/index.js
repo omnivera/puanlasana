@@ -1,85 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Anasayfa from '../views/anasayfa.vue'
+import Home from '../views/Home.vue'
+import Hakkimizda from '../views/Hakkimizda.vue'
+import Ekle from '../views/Ekle.vue'
+import Oyunlar from '../views/Oyunlar.vue'
+import {authRef} from '../firebase/config'
 
 
+const authKontrol=(to,from,next)=>{
 
-/* import {authRef} from '../firebase/config'
-import getYetki from '@/composables/getYetki' */
-/* const authGiris=(to,from,next)=>{
-  let kullanici=authRef.currentUser
+  let user=authRef.currentUser
 
-  if(!kullanici){
-    next({name:'Login'})
+  if(!user){
+    next({name:'Home'})
   }else{
     next()
   }
 }
 
 
-const adminkontrol=async (to,from,next)=>{
-
-  let kullanici=authRef.currentUser;
-           
-  const {admin} = await getYetki(kullanici.email) 
-
-  if(admin.value==true){
-    next()
-  }else{
-    next({name:'Home'})
-  }
-
-} */
-
-
-
-
-
-
-
-
-
 
 const routes = [
-
-
-
-
   {
     path: '/',
     name: 'Home',
-    component: Home,
-/*     beforeEnter:authGiris, */
-
-    children:[
-      
-     
-      {
-        path: '/anasayfa',
-        name: 'anasayfa',
-        component: Anasayfa,
-       
-      },
-      
-      
-
-     
-      
-
-
-    ],
-   
-    
+    component: Home
   },
-
- 
-/*   {
-    path: '/login',
-    name: 'Login',
-    component: Login
-  }, */
-
- 
-  
+  {
+    path: '/hakkimizda',
+    name: 'Hakkimizda',
+    component: Hakkimizda
+  },
+  {
+    path: '/ekle',
+    name: 'Ekle',
+    component: Ekle,
+    beforeEnter: authKontrol
+  },
+  {
+    path: '/oyunlar',
+    name: 'Oyunlar',
+    component: Oyunlar,
+    beforeEnter: authKontrol
+  }
 ]
 
 const router = createRouter({

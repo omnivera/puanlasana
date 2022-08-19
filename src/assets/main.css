@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&display=swap');
+
+.navbar-custom {
+    background-color: #DE354C;
+    color: white;
+}
+
+#kategoributton{
+height: 17vh;
+width: 17vw;
+border-color: #DE354C;
+color: #DE354C;
+}
+
+#kategoributton:hover{
+background-color: #DE354C;
+color: white;
+}
+
+body{
+    font-family: 'DynaPuff', cursive;
+    background-color: #F3F3F3;
+}

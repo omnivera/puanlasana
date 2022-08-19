@@ -3,6 +3,8 @@ import Home from '../views/Home.vue'
 
 import Anasayfa from '../views/anasayfa.vue'
 
+import Kategoriekle from '../views/kategori/Kategoriekle.vue'
+
 
 
 /* import {authRef} from '../firebase/config'
@@ -62,6 +64,13 @@ const routes = [
         path: '/',
         name: 'anasayfa',
         component: Anasayfa,
+       
+      },
+
+      {
+        path: '/Kategoriekle',
+        name: 'Kategoriekle',
+        component: Kategoriekle,
        
       },
       

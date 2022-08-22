@@ -15,127 +15,36 @@
 
 
 <br>
+<div class="d-flex justify-content-center">
+<div class="main">
 
-<form class="rating">
-	<div class="rating__stars">
-		<input id="rating-1" class="rating__input rating__input-1" type="radio" name="rating" value="1">
-		<input id="rating-2" class="rating__input rating__input-2" type="radio" name="rating" value="2">
-		<input id="rating-3" class="rating__input rating__input-3" type="radio" name="rating" value="3">
-		<input id="rating-4" class="rating__input rating__input-4" type="radio" name="rating" value="4">
-		<input id="rating-5" class="rating__input rating__input-5" type="radio" name="rating" value="5">
-		<label class="rating__label" for="rating-1">
-			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-				<g transform="translate(16,16)">
-					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
-				</g>
-				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<g transform="translate(16,16) rotate(180)">
-						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
-						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
-					</g>
-					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
-						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
-					</g>
-				</g>
-			</svg>
-			<span class="rating__sr">1 star—Terrible</span>
-		</label>
-		<label class="rating__label" for="rating-2">
-			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-				<g transform="translate(16,16)">
-					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
-				</g>
-				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<g transform="translate(16,16) rotate(180)">
-						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
-						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
-					</g>
-					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
-						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
-					</g>
-				</g>
-			</svg>
-			<span class="rating__sr">2 stars—Bad</span>
-		</label>
-		<label class="rating__label" for="rating-3">
-			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-				<g transform="translate(16,16)">
-					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
-				</g>
-				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<g transform="translate(16,16) rotate(180)">
-						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
-						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
-					</g>
-					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
-						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
-					</g>
-				</g>
-			</svg>
-			<span class="rating__sr">3 stars—OK</span>
-		</label>
-		<label class="rating__label" for="rating-4">
-			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-				<g transform="translate(16,16)">
-					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
-				</g>
-				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<g transform="translate(16,16) rotate(180)">
-						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
-						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
-					</g>
-					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
-						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
-					</g>
-				</g>
-			</svg>
-			<span class="rating__sr">4 stars—Good</span>
-		</label>
-		<label class="rating__label" for="rating-5">
-			<svg class="rating__star" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
-				<g transform="translate(16,16)">
-					<circle class="rating__star-ring" fill="none" stroke="#000" stroke-width="16" r="8" transform="scale(0)" />
-				</g>
-				<g stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<g transform="translate(16,16) rotate(180)">
-						<polygon class="rating__star-stroke" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="none" />
-						<polygon class="rating__star-fill" points="0,15 4.41,6.07 14.27,4.64 7.13,-2.32 8.82,-12.14 0,-7.5 -8.82,-12.14 -7.13,-2.32 -14.27,4.64 -4.41,6.07" fill="#000" />
-					</g>
-					<g transform="translate(16,16)" stroke-dasharray="12 12" stroke-dashoffset="12">
-						<polyline class="rating__star-line" transform="rotate(0)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(72)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(144)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(216)" points="0 4,0 16" />
-						<polyline class="rating__star-line" transform="rotate(288)" points="0 4,0 16" />
-					</g>
-				</g>
-			</svg>
-			<span class="rating__sr">5 stars—Excellent</span>
-		</label>
-		<p class="rating__display" data-rating="1" hidden>Terrible</p>
-		<p class="rating__display" data-rating="2" hidden>Bad</p>
-		<p class="rating__display" data-rating="3" hidden>OK</p>
-		<p class="rating__display" data-rating="4" hidden>Good</p>
-		<p class="rating__display" data-rating="5" hidden>Excellent</p>
-	</div>
-</form>
+<div class="star-rating">
+      <div class="star-rating__wrap">
+        <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+        <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+        <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+        <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+        <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+        <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+      </div>
+</div>
+</div>
 
+
+
+
+
+
+
+ 
+
+
+
+</div>
 <form @submit.prevent="verikayit" autocomplete="false">
 
 
@@ -217,7 +126,7 @@ export default {
 
 
            
-         await firestoreRef.collection('itemler').where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
+         await firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
@@ -225,7 +134,7 @@ export default {
            resimUrl.value = doc.data().resimUrl
         });
             }else{
-                 firestoreRef.collection('itemler').where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
+                 firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
                  .then(snapshot => {
             snapshot.forEach(doc => {
                 itemisim.value = doc.data().itemisim
@@ -258,5 +167,83 @@ export default {
 </script>
 
 <style>
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+
+
+
+.fa {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.star-rating{
+  font-size: 0;
+}
+
+.star-rating__wrap {
+  font-size: 4rem;
+}
+.star-rating__wrap:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.star-rating__input {
+  display: none;
+}
+
+.star-rating__input {
+  display: none;
+}
+.star-rating__ico:hover:before,
+.star-rating__ico:hover ~ .star-rating__ico:before,
+.star-rating__input:checked ~ .star-rating__ico:before {
+  content: "\f005";
+}
+
+.star-rating__ico {
+  float: right;
+  padding-left: 2px;
+  cursor: pointer;
+  color: #104a5d;
+}
+
+.star-rating__ico:last-child {
+  padding-left: 0;
+}
+
+
+
+.back{
+  margin-top: 5px;
+  font-size: 1.2rem;
+  border: none;
+  background: transparent;
+  border-bottom: solid black 2px;
+}
+
+.back:hover{
+  cursor: pointer;
+  color: #104a5d;
+  border-bottom: solid #104a5d 2px;
+}
+
+
+
+
+
+
+
+
+
 
 </style>

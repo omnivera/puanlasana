@@ -8,13 +8,15 @@
 #kategoributton{
 height: 17vh;
 width: 17vw;
-border-color: #DE354C;
+border-color: transparent;
+background-color: white;
 color: #DE354C;
 }
 
 #kategoributton:hover{
 background-color: #DE354C;
 color: white;
+border-color: transparent;
 }
 
 
@@ -25,6 +27,23 @@ color: white;
     border-color: #DE354C;
    
     }
+
+
+    #guncellebutton{
+        background-color: #1CD6CE;
+        color: white;
+        border-color: #1CD6CE;
+       
+        }
+
+
+        #silbutton{
+            background-color: #C21010;
+            color: white;
+            border-color: #C21010;
+           
+            }
+
 
 body{
     font-family: 'DynaPuff', cursive;
@@ -82,7 +101,7 @@ body{
   }
    
   tr:hover td {
-    background:#DE354C;
+    background:#454545;
     color:#FFFFFF;
     border-top: 1px solid #22262e;
   }
@@ -100,7 +119,7 @@ body{
   }
    
   tr:nth-child(odd):hover td {
-    background:#DE354C;
+    background:#454545;
   }
   
   tr:last-child td:first-child {

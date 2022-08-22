@@ -14,15 +14,11 @@
 
            <div class="kategoriler">
 
-       
-
-     
-       <button type="button" id="kategoributton" class="btn btn-outline-primary btn-lg">Filmler</button>
-       <button type="button" id="kategoributton" class="btn btn-outline-primary btn-lg">Diziler</button>
-       <button type="button" id="kategoributton" class="btn btn-outline-primary btn-lg">Oyunlar</button>
-       <button type="button" id="kategoributton" class="btn btn-outline-primary btn-lg">Kitaplar</button>
-       
-       
+  <transition-group @before-enter="beforeEnter" @enter="enter" appear >      
+<div v-for="veri in veriler" :key="veri.id">
+<button type="button" id="kategoributton" @click="puanla(veri.kisim)" class="btn btn-outline-primary btn-lg shadow p-3 mb-5 rounded">{{veri.kisim}}</button>
+</div>
+   </transition-group>   
 
       </div>
         </div>
@@ -30,7 +26,63 @@
 </template>
 
 <script>
+
+import {onMounted,ref} from 'vue'
+import {firestoreRef} from '@/firebase/config'
+import gsap from 'gsap'
+import { useRoute,useRouter} from 'vue-router'
 export default {
+
+    setup() {
+
+        const veriler=ref([])
+
+
+            const route=useRoute()
+          const router=useRouter()
+
+
+         const puanla= (Kategori)=>{
+          
+         
+         router.push({name:'Puanla',params:{Kategori:Kategori}})
+         
+
+        }
+
+
+               const beforeEnter=(el)=>{
+          el.style.opacity=0;
+          el.style.transform='translateY(100px)'
+        }
+
+           const enter=(el)=>{
+
+          gsap.to(el,{
+            opacity:1,
+            y:0,
+            duration:0.8,
+            delay:el.dataset.index*0.2
+          })
+        }
+
+            onMounted(async () => {
+
+           
+            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                veriler.value=[]
+                snap.docs.forEach(doc=>{
+                    veriler.value.push({...doc.data(),id:doc.id})
+                })
+            })
+
+         
+        })
+
+        return {veriler,beforeEnter,enter,puanla
+        }
+        
+    }
 
 }
 </script>

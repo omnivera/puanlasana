@@ -5,6 +5,11 @@ import Anasayfa from '../views/anasayfa.vue'
 
 import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 
+import Itemekle from '../views/Item/Itemekle.vue'
+
+
+import Puanla from '../views/Puanla.vue'
+
 
 
 /* import {authRef} from '../firebase/config'
@@ -73,6 +78,22 @@ const routes = [
         component: Kategoriekle,
        
       },
+
+      {
+        path: '/Itemekle',
+        name: 'Itemekle',
+        component: Itemekle,
+       
+      },
+
+      {
+        path: '/Puanla/:Kategori',
+        name: 'Puanla',
+        component: Puanla,
+       
+      },
+
+
       
     
 

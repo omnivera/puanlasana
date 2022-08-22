@@ -29,7 +29,7 @@
         </li>
 
          <li class="nav-item">
-           <router-link :to="{name:'anasayfa'} "> <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-file-circle-plus"></i> İtem Ekle</button></a></router-link>
+           <router-link :to="{name:'Itemekle'} "> <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-file-circle-plus"></i> İtem Ekle</button></a></router-link>
           
         </li>
     

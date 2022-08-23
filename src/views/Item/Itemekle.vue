@@ -24,7 +24,7 @@
 
 
     <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required maxlength="20" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required maxlength="45" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem İsmi</label>
 </div>
 
@@ -80,7 +80,7 @@
   <div class="alert alert-danger d-flex align-items-center" role="alert">
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
   <div>
-    <strong>Kayıt Başarısız!</strong> "{{itemisimgoster}}" isminde bir kategori zaten var!
+    <strong>Kayıt Başarısız!</strong> "{{itemisim}}" isminde bir item zaten var!
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
 </div>
@@ -185,18 +185,19 @@ export default {
                  const verikayit=async ()=>{
 
 
-
-         const doc = await  firestoreRef.collection('itemler').doc(itemisim.value).get()
-
+                     let itemID= "IT"+Date.parse(new Date())
 
 
-         
+
+      
 
 
-            if (doc.exists) {
 
-                
-                basarisiz.value=true
+                await firestoreRef.collection('itemler').where('kategori','==',kategori.value).where('itemisim','==',itemisim.value).limit(1).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+             
+     basarisiz.value=true
                     itemisimgoster.value=itemisim.value
 
 
@@ -207,30 +208,10 @@ setTimeout(  function(){
 
                 },3000)
 
-                  
-              }else{
+            }else{
 
 
-
-
-              
-                      
-                     
-          const dataitem = {
-                  itemisim:itemisim.value,
-                  resimUrl:resimUrl.value,
-                  totalpuan:0,
-                  puancount:0,
-                  kategori:kategori.value
-};
-
-const res = firestoreRef.collection('itemler').doc().set(dataitem);
-           
-          
-
-    
-
-    progressVisible.value=true;
+              progressVisible.value=true;
 
                 const storage=storageRef.ref(`itemresim/`+itemisim.value)
 
@@ -247,25 +228,55 @@ const res = firestoreRef.collection('itemler').doc().set(dataitem);
 
                         resimUrl.value=await storage.getDownloadURL();
                      
-                  await firestoreRef.collection('itemler').doc(itemisim.value).update({
-                   resimUrl:resimUrl.value,
-                  
-        })
+                      const dataitem = {
+                  itemisim:itemisim.value,
+                  resimUrl:resimUrl.value,
+                  totalpuan:0,
+                  puancount:0,
+                  kategori:kategori.value
+};
+
+const res = firestoreRef.collection('itemler').doc().set(dataitem);
+
+
+basarili.value=true
+itemisim.value=""
            
                     },500)
                 })
 
-basarili.value=true
+
+
+              
+                    setTimeout(  function(){
+                        
+                 
+           
+                    },2000)
+                     
+       
+          
+
+    
+
+ 
+
+
 
 
 setTimeout(  function(){
 
     basarili.value=false
 
-                },3000)
+                },4000)
 
 
-              }
+
+            }
+        })
+
+
+           
               
 
 

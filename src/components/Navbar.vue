@@ -1,7 +1,8 @@
 <template>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
   <div class="container-fluid">
-     <span class="navbar-brand mb-0 h1"><strong>puanlasana</strong></span>
+     <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">  <span ><strong>Puanlasana</strong></span>		</router-link>
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

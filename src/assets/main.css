@@ -21,6 +21,23 @@ border-color: transparent;
 
 
 
+#yorumlabutton{
+    margin-top: 2vh;
+
+    border-color: transparent;
+    background-color: white;
+    color: #DE354C;
+    }
+    
+    #yorumlabutton:hover{
+    background-color: #DE354C;
+    color: white;
+    border-color: transparent;
+    }
+    
+
+
+
 #normalbutton{
     background-color: #DE354C;
     color: white;
@@ -48,6 +65,7 @@ border-color: transparent;
 body{
     font-family: 'DynaPuff', cursive;
     background-color: #F3F3F3;
+    overflow-x: hidden;
 }
 
 

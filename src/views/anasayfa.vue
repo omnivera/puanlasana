@@ -205,7 +205,8 @@ a {
   background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg');
   padding: 20px 40px;
   position: relative;
-  object-fit: cover;
+ background-size: cover;
+ height: 95vh;
 }
 
 #main-landing > header {

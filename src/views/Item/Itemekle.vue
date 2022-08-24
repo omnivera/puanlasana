@@ -227,8 +227,13 @@ setTimeout(  function(){
                         dosyaHata.value='Dosya Yüklendi'
 
                         resimUrl.value=await storage.getDownloadURL();
-                     
-                      const dataitem = {
+
+
+
+              
+                    setTimeout(  function(){
+                        
+                         const dataitem = {
                   itemisim:itemisim.value,
                   resimUrl:resimUrl.value,
                   totalpuan:0,
@@ -238,22 +243,22 @@ setTimeout(  function(){
 
 const res = firestoreRef.collection('itemler').doc().set(dataitem);
 
+itemisim.value=""
+           
+                    },2000)
+                     
+                     
+              
+
 
 basarili.value=true
-itemisim.value=""
+
            
                     },500)
                 })
 
 
 
-              
-                    setTimeout(  function(){
-                        
-                 
-           
-                    },2000)
-                     
        
           
 

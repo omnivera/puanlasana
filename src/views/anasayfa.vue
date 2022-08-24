@@ -7,7 +7,7 @@
 
     <div id="main-landing-message">
 <transition @before-enter="beforeEnter" @enter="enterv2" appear >      
-      <h1 style="color:#DE354C">Puanlasana.com</h1>
+      <h1 style="color:#DE354C;">Puanlasana</h1>
          </transition>  
 
          <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
@@ -33,7 +33,7 @@
 
             <div class="d-flex justify-content-center" style="margin-top:7vh">
    
-     <h1 style="font-size:3vw; color: #DE354C">KATEGORİLER </h1>
+     <h1 style="font-size:2.3vw; color: #DE354C">- KATEGORİLER -</h1>
 
       <hr>
        
@@ -157,7 +157,7 @@ export default {
 
 <style scoped>
 
-
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
 
 
 /* GLOBAL STYLES */
@@ -171,6 +171,7 @@ img {
 }
 h1, h2, p {
   margin: 0;
+
   
 }
 a {

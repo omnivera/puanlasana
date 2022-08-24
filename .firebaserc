@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "puanlasana-a711d"
-  }
+    "default": "puanlasana-a711d",
+    "puanlasana": "puanlasana-a711d"
+  },
+  "targets": {}
 }

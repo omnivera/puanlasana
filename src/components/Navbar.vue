@@ -54,8 +54,8 @@ export default {
 
 <style scoped>
 
-.navbar-brand{
-
+.navbar.scrolled{
+background-color: red;
 }
 
 .btn{

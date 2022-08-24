@@ -33,7 +33,7 @@
 
             <div class="d-flex justify-content-center" style="margin-top:7vh">
    
-     <h1 style="font-size:2.3vw; color: #DE354C">- KATEGORİLER -</h1>
+     <h1 style="font-size:2.2vw; color: white">- KATEGORİLER -</h1>
 
       <hr>
        

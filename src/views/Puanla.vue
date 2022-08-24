@@ -1,5 +1,13 @@
 <template>
 
+<div class="bigshadow">
+
+<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+   </div>
+ 
 
 <div class="text-center">
   <div class="row">
@@ -8,8 +16,8 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >
 
-         <div class="card">
-  <div class="card-body shadow rounded">
+         <div  class="card">
+  <div id="infocard" class="card-body">
   <h4>Senin Puanın</h4>
     <h1>
  <vue3-autocounter ref='counter' :startAmount='0' :endAmount='puan' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='2' :autoinit='true' />
@@ -31,8 +39,8 @@
                      
  <div class="d-flex justify-content-center">
                    
-<div class="card text-center shadow rounded" style="margin-top:5vh;width:30vw" >
-    <img :src="resimUrl" class="img-fluid shadow" style="height:54vh"  alt="" srcset="">
+<div id="showcard" class="card text-center" >
+    <img :src="itemresim" class="img-fluid" style="height:54vh"  alt="" srcset="">
   <div class="card-body">
 
 
@@ -132,8 +140,8 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >
 
-         <div id="puanlainfo" class="card">
-  <div class="card-body shadow rounded">
+         <div id="infocard" class="card">
+  <div class="card-body shadow-lg rounded">
        
     <h4>Ortalama Puan</h4>
     <h1>
@@ -286,10 +294,19 @@ export default {
     
   },
 
+  
+
     setup() {
 
+
+    
+
+
+     
         const kategorikontrol=ref(false)
          const veriler=ref([])
+      
+  const seenItems=ref([{itemisim:""}])
 
           const route=useRoute()
           const router=useRouter()
@@ -300,8 +317,9 @@ export default {
          const basarili=ref(false)
 
 
-         const resimUrl=ref('')
+         const itemresim=ref('')
          const itemisim=ref('')
+         const itemvideo=ref('')
 
          const kategorigoster=ref(route.params.Kategori)
 
@@ -318,6 +336,7 @@ export default {
 
 
          const itemID=ref('')
+         
 
 
 
@@ -385,11 +404,29 @@ location. reload()
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
            itemisim.value = doc.data().itemisim
-           resimUrl.value = doc.data().resimUrl
+           itemresim.value = doc.data().itemresim
+           itemvideo.value = doc.data().itemvideo
 
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
+
+
+
+
+
+ /* for (let i = 0; i < sessionStorage.length; i++) {
+     if (sessionStorage.key(i) == itemisim.value) {
+         return console.log("var")
+     }
+     
+ }
+
+ sessionStorage.setItem(itemisim.value, itemisim.value);
+ return console.log("yok") */
+
+
+
           
           
          
@@ -399,11 +436,22 @@ location. reload()
                  .then(snapshot => {
             snapshot.forEach(doc => {
                 itemisim.value = doc.data().itemisim
-           resimUrl.value = doc.data().resimUrl
+           itemresim.value = doc.data().itemresim
+           itemvideo.value = doc.data().itemvideo
 
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
+
+           
+      
+
+
+
+
+
+
+         
           
             });
         })
@@ -438,7 +486,7 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 
 
-          return {veriler,verikayit,itemisim,resimUrl,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit
+          return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit
         }
         
     }
@@ -448,8 +496,60 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 <style scoped>
 
+.bigshadow{
+  z-index: 2;
+    background: black;
+    opacity: 0.85;
+
+    pointer-events: none;
+   
+}
+
+
+
+.card{
+    background: #181818;
+      border-radius: 6px;
+     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#showcard{
+
+    margin-top:5vh;
+    width:30vw;
+    
+   
+    box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;
+    
+}
+
+#infocard{
+    box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+ 
+  
+  
+}
+h1{
+font-size: 2.3vw;
+color: white;
+}
+
+h2{
+font-size: 2vw;
+color: white;
+}
+
 h4{
   color: #DE354C;  
+  font-size: 1.7vw;
 }
 
 button {
@@ -457,7 +557,7 @@ button {
   border: none;
   color: #000;
   font-weight: bold;
-  font-size: 1.4rem;
+  font-size: 1.2vw;
   padding: 1rem 1.5rem;
   border-radius: 6px;
   position: relative;
@@ -581,6 +681,7 @@ input {
 
 body {
   overflow: hidden; /* Hide scrollbars */
+  
 }
 
 
@@ -600,9 +701,9 @@ input.star{
 
 label.star {
   float: right;
-  padding: 10px;
+  padding: 0.5vw;
   font-size: 1.4vw;
-  color: #444;
+  color: #DE354C;
   transition: all .2s;
 }
 

@@ -1,8 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&display=swap');
 
+.card{
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+
+nav {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    opacity: 0.9;
+  }
+
 .navbar-custom {
-    background-color: #DE354C;
-    color: white;
+    background-color: black;
+    color: #DE354C;
+
+    
 }
 
 #kategoributton{
@@ -11,6 +23,8 @@ width: 17vw;
 border-color: transparent;
 background-color: white;
 color: #DE354C;
+border-radius: 6px;
+box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 #kategoributton:hover{
@@ -64,7 +78,7 @@ border-color: transparent;
 
 body{
     font-family: 'DynaPuff', cursive;
-    background-color: #F3F3F3;
+    background: #181818;
     overflow-x: hidden;
 }
 

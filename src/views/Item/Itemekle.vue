@@ -28,11 +28,18 @@
   <label for="floatingInput">İtem İsmi</label>
 </div>
 
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required  class="form-control" v-model="itemresim" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">İtem Resim URL</label>
+</div>
 
  <div class="form-floating mb-3">
-            <input type="file" class="form-control rounded-4" id="floatingInput" @change="resimDosyaYukle"  placeholder="name@example.com" >
-            <label for="floatingInput">İtem Resmi</label>
-          </div>
+  <input type="search" autocomplete="off" required  class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">İtem Video Kodu</label>
+</div>
+
+
+ 
 
 
 
@@ -126,6 +133,10 @@ export default {
 
 
          const itemisim=ref('')
+         const itemresim=ref('')
+         const itemvideo=ref('')
+
+
          const basarisiz=ref(false)
          const itemisimgoster=ref('')
          const basarili=ref(false)
@@ -211,31 +222,10 @@ setTimeout(  function(){
             }else{
 
 
-              progressVisible.value=true;
-
-                const storage=storageRef.ref(`itemresim/`+itemisim.value)
-
-                const resimRef=storage.put(resimDosya.value).on('state_changed',(snap)=>{
-                    let yuzdelik=(snap.bytesTransferred/snap.totalBytes)*100;
-
-                    progressStyle.value=`width:${yuzdelik}%`
-                },err=>{
-                    dosyaHata.value="Dosya yüklenirken hata oluştu"
-                },async ()=>{
-                    setTimeout(async ()=>{
-                        progressVisible.value=false;
-                        dosyaHata.value='Dosya Yüklendi'
-
-                        resimUrl.value=await storage.getDownloadURL();
-
-
-
-              
-                    setTimeout(  function(){
-                        
                          const dataitem = {
                   itemisim:itemisim.value,
-                  resimUrl:resimUrl.value,
+                  itemresim:itemresim.value,
+                  itemvideo:"https://www.youtube.com/embed/"+itemvideo.value+"?autoplay=1&&mute=1&playlist="+itemvideo.value+"&loop=1&controls=0",
                   totalpuan:0,
                   puancount:0,
                   kategori:kategori.value
@@ -244,20 +234,13 @@ setTimeout(  function(){
 const res = firestoreRef.collection('itemler').doc().set(dataitem);
 
 itemisim.value=""
-           
-                    },2000)
-                     
-                     
-              
+itemresim.value=""
+itemvideo.value=""
 
+
+      
 
 basarili.value=true
-
-           
-                    },500)
-                })
-
-
 
        
           
@@ -273,7 +256,7 @@ setTimeout(  function(){
 
     basarili.value=false
 
-                },4000)
+                },2000)
 
 
 
@@ -303,7 +286,7 @@ setTimeout(  function(){
 
 
 
-          return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori
+          return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo
         }
         
     }

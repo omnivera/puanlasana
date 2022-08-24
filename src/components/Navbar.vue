@@ -1,15 +1,15 @@
 <template>
-<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-custom">
   <div class="container-fluid">
-     <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">  <span ><strong>Puanlasana</strong></span>		</router-link>
+     <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">  <span style="color: #DE354C; font-size:1.5vw"><strong>Puanlasana</strong></span>		</router-link>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-white ">
         <li class="nav-item">
-           <router-link :to="{name:'anasayfa'} ">   <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-house"></i> Ana Sayfa</button></a></router-link>
+           <router-link :to="{name:'anasayfa'} ">   <a class="nav-link" style="border-color:red" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-house"></i> Ana Sayfa</button></a></router-link>
         
 
         </li>
@@ -53,5 +53,8 @@ export default {
 </script>
 
 <style>
-  
+.btn{
+  border-color: transparent;
+}
+
 </style>

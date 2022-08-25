@@ -38,10 +38,11 @@ border-color: transparent;
 
 
 #yorumlabutton{
-    margin-top: 2vh;
+    margin-top: 1.5vh;
 
     border-color: transparent;
     background-color: white;
+    font-size: 1.1vw;
     color: #DE354C;
     
     }
@@ -101,7 +102,7 @@ border-color: transparent;
 
 body{
     font-family: "Montserrat", sans-serif;
-    background: #181818;
+    background: black;
     overflow-x: hidden;
 }
 

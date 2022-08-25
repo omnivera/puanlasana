@@ -3,9 +3,13 @@ import Home from '../views/Home.vue'
 
 import Anasayfa from '../views/anasayfa.vue'
 
+import Rankings from '../views/Rankings.vue'
+
 import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 
 import Itemekle from '../views/Item/Itemekle.vue'
+import Itemduzenle from '../views/Item/Itemduzenle.vue'
+import Itemview from '../views/Item/Itemview.vue'
 
 
 import Puanla from '../views/Puanla.vue'
@@ -73,6 +77,13 @@ const routes = [
       },
 
       {
+        path: '/Rankings',
+        name: 'Rankings',
+        component: Rankings,
+       
+      },
+
+      {
         path: '/Kategoriekle',
         name: 'Kategoriekle',
         component: Kategoriekle,
@@ -83,6 +94,20 @@ const routes = [
         path: '/Itemekle',
         name: 'Itemekle',
         component: Itemekle,
+       
+      },
+
+      {
+        path: '/Itemduzenle',
+        name: 'Itemduzenle',
+        component: Itemduzenle,
+       
+      },
+
+      {
+        path: '/Itemview/:veriID',
+        name: 'Itemview',
+        component: Itemview,
        
       },
 

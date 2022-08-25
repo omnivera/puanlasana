@@ -10,7 +10,7 @@
 
        
 <transition @before-enter="beforeEnter" @enter="enterv2" appear >      
-     <img src="@/assets/plogo6.png" style="width:13vw;" alt="">
+     <img @click="randompuanla" src="@/assets/plogo6.png" style="width:13vw;" alt="">
          </transition>  
 
 
@@ -41,7 +41,7 @@
                 <div class="col">
 
     <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-     <button type="button" id="mainbutton" @click="randompuan" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> Puanlasana</button>
+     <button type="button" id="mainbutton" @click="randompuanla" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> Puanlasana</button>
       </transition> 
 
                 </div>
@@ -151,6 +151,18 @@ gsap.registerPlugin(ScrollTrigger);
           const router=useRouter()
 
 
+           const randompuanla= ()=>{
+
+
+               let random = Math.floor(Math.random() * veriler.value.length);
+          
+         
+         router.push({name:'Puanla',params:{Kategori:veriler.value[random].kisim}})
+         
+
+        }
+
+
          const puanla= (Kategori)=>{
           
          
@@ -187,7 +199,7 @@ gsap.registerPlugin(ScrollTrigger);
           gsap.to(el,{
             opacity:1,
             y:0,
-            duration:1.2,
+            duration:1,
             delay:el.dataset.index*0.2,
             ease:'back'
           })
@@ -206,7 +218,7 @@ gsap.registerPlugin(ScrollTrigger);
          
         })
 
-        return {veriler,beforeEnter,enter,puanla,enterv2
+        return {veriler,beforeEnter,enter,puanla,enterv2,randompuanla
         }
         
     }
@@ -228,6 +240,43 @@ gsap.registerPlugin(ScrollTrigger);
   font-weight: normal;
 }
 
+
+@keyframes switch {
+    0% { opacity: 0;filter: blur(10px); transform:scale(7)}
+   
+
+
+    100% { transform:scale(1); filter: blur(0);}
+}
+
+
+@keyframes MoveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@-webkit-keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+
+img {
+  display: block;
+  cursor: pointer;
+ -webkit-animation: action 1s infinite  alternate;
+    animation: action 1s infinite  alternate;
+    
+}
 
 
 .baslik{
@@ -266,9 +315,7 @@ body {
   font-family: sans-serif;
 }
 
-img {
-  display: block;
-}
+
 h1, h2, p {
   margin: 0;
  
@@ -339,7 +386,7 @@ a {
 }
 #main-landing-message h1, h2 {
   color: #FFF;
-  text-shadow: 1px 1px 1px #DE354C;
+
   margin-top: 2vh;
   font-family: 'Comfortaa', cursive;
 }

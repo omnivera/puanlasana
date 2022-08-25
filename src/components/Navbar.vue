@@ -14,7 +14,7 @@
 
         </li>
         <li class="nav-item">
-          <router-link :to="{name:'anasayfa'} ">   <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-ranking-star"></i> Sıralamalar</button></a></router-link>
+          <router-link :to="{name:'Rankings'} ">   <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-ranking-star"></i> Sıralamalar</button></a></router-link>
         
           
         </li>
@@ -29,10 +29,16 @@
           
         </li>
 
-         <li class="nav-item">
-           <router-link :to="{name:'Itemekle'} "> <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-file-circle-plus"></i> İtem Ekle</button></a></router-link>
-          
-        </li>
+        <div class="dropdown nav-link">
+         <button class="btn btn-outline-light dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" type="submit"><i class="fa-solid fa-file"></i> İtemler</button>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+   <router-link :to="{name:'Itemekle'} " class="dropdown-item"> <li><i class="fa-solid fa-file-circle-plus"></i> İtem Ekle</li></router-link>
+    <router-link :to="{name:'Itemduzenle'} " class="dropdown-item"> <li><i class="fa-solid fa-file-pen"></i> İtem Düzenle</li></router-link>
+  </ul>
+</div>
+
+       
     
         
       </ul>
@@ -61,7 +67,7 @@ background-color: red;
 span{
  color: white; 
  font-size:1.1vw;
-text-shadow: 1px 1px 1px #DE354C;
+
 font-family: 'Comfortaa', cursive;
 
 }

@@ -40,7 +40,7 @@
  <div class="d-flex justify-content-center">
                    
 <div id="showcard" class="card text-center" >
-    <img :src="itemresim" class="img-fluid" style="height:59vh"  alt="" srcset="">
+    <img :src="itemresim" class="img-fluid" data-bs-toggle="modal" data-bs-target="#visualview" style="height:54vh"  alt="" srcset="">
   <div class="card-body">
 
 
@@ -51,12 +51,15 @@
 
 
 
-  <!--   <h2>Kategori: {{kategorigoster}}</h2> -->
 
 
 
-<h2 style="margin-top:2vh">{{itemisim}}</h2>
- <h6 class="card-subtitle  mt-2 text-muted">Kategori: {{kategorigoster}}</h6>
+
+<h2 style="margin-top:2vh" class="text-center"><input class="textarea" type="text" v-model="itemisim"></h2>
+ <h6 class="card-subtitle  mt-1 text-muted">
+     <select class="textarea form-select" v-model="kategorigoster" aria-label="Default select example">
+  <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
+</select></h6>
 </div>
 
 
@@ -72,25 +75,25 @@
 
 <div class="stars">
 <form action="">
-    <input :disabled="puanladi" @click="yildizladi=true;puan=10" class="star star-10"  id="star-10" type="radio" name="star"/>
+    <input disabled @click="yildizladi=true;puan=10" class="star star-10"  id="star-10" type="radio" name="star"/>
   <label class="star star-10" for="star-10"></label>
-    <input :disabled="puanladi" @click="yildizladi=true;puan=9" class="star star-9" id="star-9" type="radio" name="star"/>
+    <input disabled @click="yildizladi=true;puan=9" class="star star-9" id="star-9" type="radio" name="star"/>
   <label class="star star-9" for="star-9"></label>
-    <input :disabled="puanladi" @click="yildizladi=true;puan=8" class="star star-8" id="star-8" type="radio" name="star"/>
+    <input disabled @click="yildizladi=true;puan=8" class="star star-8" id="star-8" type="radio" name="star"/>
   <label class="star star-8" for="star-8"></label>
-    <input :disabled="puanladi" @click="yildizladi=true;puan=7" class="star star-7" id="star-7" type="radio" name="star"/>
+    <input disabled @click="yildizladi=true;puan=7" class="star star-7" id="star-7" type="radio" name="star"/>
   <label class="star star-7" for="star-7"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=6" class="star star-6" id="star-6" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=6" class="star star-6" id="star-6" type="radio" name="star"/>
   <label class="star star-6" for="star-6"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=5" class="star star-5" id="star-5" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=5" class="star star-5" id="star-5" type="radio" name="star"/>
   <label class="star star-5" for="star-5"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=4" class="star star-4" id="star-4" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=4" class="star star-4" id="star-4" type="radio" name="star"/>
   <label class="star star-4" for="star-4"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=3" class="star star-3" id="star-3" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=3" class="star star-3" id="star-3" type="radio" name="star"/>
   <label class="star star-3" for="star-3"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=2" class="star star-2" id="star-2" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=2" class="star star-2" id="star-2" type="radio" name="star"/>
   <label class="star star-2" for="star-2"></label>
-  <input :disabled="puanladi" @click="yildizladi=true;puan=1" class="star star-1" id="star-1" type="radio" name="star"/>
+  <input disabled @click="yildizladi=true;puan=1" class="star star-1" id="star-1" type="radio" name="star"/>
   <label class="star star-1" for="star-1"></label>
 </form>
 </div>
@@ -213,6 +216,25 @@
          </div>
 
 
+                   <div v-if="!yildizladi && !puanladi">
+         <transition @before-enter="beforeEnter" @enter="enter" appear >   
+ 
+                     
+                     
+ <div class="d-flex align-items-center">
+                   
+<br>
+
+ 
+<button type="button" id="yorumlabutton" @click="guncelle" class=" btn-lg shadow "><i class="fas fa-edit"></i> Güncelle</button>
+
+
+
+      </div>   
+
+
+ </transition> 
+         </div>
 
          
 
@@ -226,7 +248,7 @@
 <br>
 
  
-<button type="button" id="yorumlabutton" @click="verikayit" class=" btn-lg shadow "><i class="fas fa-trophy"></i> Puanlasana</button>
+<button type="button" id="yorumlabutton" @click="guncelle" class=" btn-lg shadow "><i class="fas fa-trophy"></i> Puanlasana</button>
 
 
 
@@ -247,37 +269,43 @@
     <button id="yorumlabutton" class="shadow" @click="next"><i class="fa fa-play"></i>Devam</button>
              </transition>
 </div>
-
-
-
-             
-
-
     </div>
 
 
 
 
   </div>
-        <div v-if="!yildizladi && !puanladi">
-         <transition @before-enter="beforeEnter" @enter="enter" appear >   
- 
-                     
 
-                   
+</div>
 
 
- 
-<button type="button" id="yorumlabutton" @click="next" class=" btn-lg shadow top-right"><i class="fas fa-fast-forward"></i> Pas Geç</button>
+<div class="modal fade" id="visualview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Uyarı!</h5>
+        <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">İtem İsmi</label>
+</div>
 
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required  class="form-control" v-model="itemresim" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">İtem Resim URL</label>
+</div>
 
-
-
-
-
- </transition> 
-         </div>
-
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off"  class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">İtem Video Kodu</label>
+</div>
+      
+      </div>
+     
+    </div>
+  </div>
 </div>
 
 
@@ -342,6 +370,23 @@ export default {
 
 
          const itemID=ref('')
+
+
+
+
+            onMounted(async () => {
+
+           
+            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                veriler.value=[]
+                snap.docs.forEach(doc=>{
+                    veriler.value.push({...doc.data(),id:doc.id})
+                })
+            })
+
+         
+        })
+
          
 
 
@@ -401,68 +446,35 @@ location. reload()
 
      onMounted(async () => {
 
-         const ref = firestoreRef.collection('itemler').doc();
+
 
 
            
-         await firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
-        .then(snapshot =>{
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
+         const doc = await firestoreRef.collection('itemler').doc(route.params.veriID).get()
+      
+           
+                
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
            itemvideo.value = doc.data().itemvideo
 
-           totalpuan.value = doc.data().totalpuan
-           puancount.value = doc.data().puancount
-           itemID.value = doc.id
-
-
-
-
-
- /* for (let i = 0; i < sessionStorage.length; i++) {
-     if (sessionStorage.key(i) == itemisim.value) {
-         return console.log("var")
-     }
-     
- }
-
- sessionStorage.setItem(itemisim.value, itemisim.value);
- return console.log("yok") */
-
-
-
-          
-          
-         
-        });
-            }else{
-                 firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
-                 .then(snapshot => {
-            snapshot.forEach(doc => {
-                itemisim.value = doc.data().itemisim
-           itemresim.value = doc.data().itemresim
-           itemvideo.value = doc.data().itemvideo
+           kategorigoster.value = doc.data().kategori
 
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
 
-           
-      
 
 
 
 
 
-
-         
           
-            });
-        })
-            }
-        })
+          
+         
+ 
+            
+ 
 
 
          
@@ -470,29 +482,35 @@ location. reload()
 
 
 
-                 const verikayit=async ()=>{
+                 const guncelle=async ()=>{
 
 
 
 
            await firestoreRef.collection('itemler').doc(itemID.value).update({
 
-                   totalpuan: puan.value + totalpuan.value,
-                   puancount: puancount.value + 1
+                   itemisim: itemisim.value,
+                   itemresim: itemresim.value,
+                   itemvideo: itemvideo.value,
+                   kategori: kategorigoster.value
+                   
+                   
                   
                    
         })
 
-puanladi.value=true;
-yildizladi.value=false;
 
-ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1))
+
+
   
          }
 
 
+    
 
-          return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit
+
+
+          return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit
         }
         
     }
@@ -501,14 +519,16 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 </script>
 
 <style scoped>
-.top-right{
-   position: absolute;
-    bottom: 1.8vh;
-    right: 0.7vw;
-    
-}
 
-  
+
+.textarea{
+    width: 100%;
+    color: #FFF;
+    background: transparent;
+    border: none;
+    outline: none;
+     text-align: center;
+}
 
 .bigshadow{
   z-index: 2;

@@ -23,7 +23,7 @@
 
          <div class="d-flex justify-content-center">
   <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-      <h1>Puanlasana</h1>
+      <h1>puanlasana</h1>
         </transition> 
       
          </div>
@@ -82,15 +82,15 @@
    
           
 
-            <div class="d-flex justify-content-center" style="margin-top:7vh">
+        <!--     <div class="d-flex justify-content-center" style="margin-top:7vh">
    
-     <h1 style="font-size:2.2vw; color: white">- KATEGORİLER -</h1>
+     <h1> <span class="baslik"> <strong>- KATEGORİLER -</strong></span> </h1>
 
       <hr>
        
 
      
-  </div>
+  </div> -->
 
    <div class="d-flex justify-content-center"  style="margin-top:7vh">
 
@@ -100,7 +100,8 @@
 
   <transition-group @before-enter="beforeEnter" @enter="enter" appear >      
 <div v-for="veri in veriler" :key="veri.id">
-<button type="button" id="kategoributton" @click="puanla(veri.kisim)" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded">{{veri.kisim}}</button>
+    <main @click="puanla(veri.kisim)">{{veri.kisim}}</main>
+<!-- <button type="button" id="kategoributton" @click="puanla(veri.kisim)" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded">{{veri.kisim}}</button> -->
 </div>
    </transition-group>   
 
@@ -132,7 +133,7 @@
 import {onMounted,ref} from 'vue'
 import {firestoreRef} from '@/firebase/config'
 import gsap from 'gsap'
-
+import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
 export default {
 
@@ -141,6 +142,7 @@ export default {
     setup() {
 
 
+gsap.registerPlugin(ScrollTrigger);
 
         const veriler=ref([])
 
@@ -173,6 +175,8 @@ export default {
             y:0,
             duration:1,
             delay:el.dataset.index*0.2,
+
+            
            
           })
         }
@@ -213,6 +217,42 @@ export default {
 <style scoped>
 
 @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+
+@font-face {
+  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
+    format("woff2");
+  font-family: "Meta";
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+
+.baslik{
+      font-variation-settings: "wght" 900, "ital" 0;
+      color: #DE354C;
+      font-size:2.3vw ;
+
+}
+
+main {
+  transition: all 0.5s;
+  -webkit-text-stroke: 4px #d6f4f4;
+  font-variation-settings: "wght" 900, "ital" 0;
+  font-size: 4vw;
+  text-align: center;
+  color: transparent;
+  font-family: "Meta", sans-serif;
+  
+  cursor: pointer;
+}
+
+main:hover {
+  font-variation-settings: "wght" 100, "ital" 0;
+  text-shadow: none;
+}
 
 
 h1{
@@ -272,10 +312,7 @@ a {
  
 }
 
-#main-landing > header {
-  
- 
-}
+
 /* HEADER */
 /* logo */
 #brand svg {
@@ -304,10 +341,12 @@ a {
   color: #FFF;
   text-shadow: 1px 1px 1px #DE354C;
   margin-top: 2vh;
+  font-family: 'Comfortaa', cursive;
 }
 #main-landing-message > h1 {
   font-size: 6em;
-  margin-bottom: 15px;;
+  margin-bottom: 15px;
+  
 }
 #main-landing-message > h2 {
   font-weight: 300;
@@ -420,8 +459,8 @@ a {
 
 .kategoriler{
     display: grid;
-     grid-template-columns: 1fr 1fr 1fr 1fr;
-     grid-gap: 20px;
+     grid-template-columns: 5fr 2fr 5fr 2fr;
+     grid-gap: 4vw;
    
 }
 

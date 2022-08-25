@@ -34,7 +34,7 @@
 </div>
 
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required  class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off"  class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem Video Kodu</label>
 </div>
 

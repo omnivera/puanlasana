@@ -5,21 +5,72 @@
     <div id="black-ov"></div>
   
 
-    <div id="main-landing-message">
+    <div id="main-landing-message" style="margin-top:-3vh">
+        <div class="d-flex justify-content-center">
+
+       
 <transition @before-enter="beforeEnter" @enter="enterv2" appear >      
-      <h1 style="color:#DE354C;">Puanlasana</h1>
+     <img src="@/assets/plogo6.png" style="width:13vw;" alt="">
          </transition>  
 
-         <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-      <h2>Buraya bir Slogan</h2>
+
+
+       
+   </div>
+
+<div class="row">
+
+
+         <div class="d-flex justify-content-center">
+  <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+      <h1>Puanlasana</h1>
         </transition> 
-       <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-     <button type="button" id="yorumlabutton" @click="randompuan" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> Puanlasana</button>
+      
+         </div>
+
+         </div>
+
+         <div class="row">
+
+
+         <div class="d-flex justify-content-center">
+            
+
+            <div class="row g-2">
+
+                <div class="col">
+
+    <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+     <button type="button" id="mainbutton" @click="randompuan" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> Puanlasana</button>
       </transition> 
 
-             <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-    <a href="#option-select-view"><button type="button" id="yorumlabutton" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> Kategoriler</button></a> 
+                </div>
+
+
+                <div class="col">
+                     <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+              <a href="#option-select-view">  <button type="button" id="mainbutton" @click="randompuan" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> Kategoriler</button></a>  
+  
      </transition> 
+                </div>
+
+
+
+            </div>
+
+    
+
+            
+  
+             </div>
+         </div>
+ 
+   
+
+
+
+        
+
 
     </div>
 
@@ -65,6 +116,10 @@
 
 
   </section>
+
+
+
+  
 
 
 
@@ -160,6 +215,11 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
 
 
+h1{
+    font-size: 3vw;
+    color: #DE354C;
+}
+
 /* GLOBAL STYLES */
 body {
   margin: 0;
@@ -171,6 +231,7 @@ img {
 }
 h1, h2, p {
   margin: 0;
+ 
 
   
 }
@@ -208,14 +269,12 @@ a {
   position: relative;
  background-size: cover;
  height: 95vh;
+ 
 }
 
 #main-landing > header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1000;
+  
+ 
 }
 /* HEADER */
 /* logo */
@@ -234,12 +293,17 @@ a {
   left: 0;
   top: 0;
 }
+
+
+
 #main-landing-message {
-  position: relative;
+
   padding: 18em 0;
 }
 #main-landing-message h1, h2 {
   color: #FFF;
+  text-shadow: 1px 1px 1px #DE354C;
+  margin-top: 2vh;
 }
 #main-landing-message > h1 {
   font-size: 6em;
@@ -250,7 +314,7 @@ a {
   margin-bottom: 1em;
 }
 #main-landing-message > a {
-  display: inline-block;
+ 
   font-size: 15px;
   padding: 12px 26px;
   letter-spacing: 1px;

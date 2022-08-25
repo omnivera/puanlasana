@@ -56,6 +56,7 @@
 
 
 <h2 style="margin-top:4vh">{{itemisim}}</h2>
+ <h6 class="card-subtitle  mt-2 text-muted">Kategori: {{kategorigoster}}</h6>
 </div>
 
 

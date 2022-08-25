@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
 .card{
     border-radius: 6px;
@@ -49,6 +50,25 @@ border-color: transparent;
     color: white;
     border-color: transparent;
     }
+
+
+
+#mainbutton{
+    margin-top: 2vh;
+
+    border-color: transparent;
+    background-color: white;
+    color: #DE354C;
+    width: 10vw;
+    font-size: 1.2vw;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+    
+    #mainbutton:hover{
+    background-color: #DE354C;
+    color: white;
+    border-color: transparent;
+    }
     
 
 
@@ -78,7 +98,7 @@ border-color: transparent;
 
 
 body{
-    font-family: 'DynaPuff', cursive;
+    font-family: "Montserrat", sans-serif;
     background: #181818;
     overflow-x: hidden;
 }

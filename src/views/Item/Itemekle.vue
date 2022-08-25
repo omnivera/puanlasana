@@ -24,7 +24,7 @@
 
 
     <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required maxlength="45" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem İsmi</label>
 </div>
 
@@ -233,6 +233,9 @@ setTimeout(  function(){
 
 const res = firestoreRef.collection('itemler').doc().set(dataitem);
 
+
+setTimeout(  function(){
+
 itemisim.value=""
 itemresim.value=""
 itemvideo.value=""
@@ -241,6 +244,10 @@ itemvideo.value=""
       
 
 basarili.value=true
+
+},1000)
+
+
 
        
           

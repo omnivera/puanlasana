@@ -10,7 +10,7 @@
 
 <!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
-<video id="myVideo" height="100" width="100"  autoplay muted>
+<video id="myVideo" muted autoplay  loop>
   <source src="@/assets/videos/mainvideo.mp4" type="video/mp4">
 Your browser does not support the video tag.
 </video>
@@ -113,11 +113,18 @@ import { useRoute,useRouter} from 'vue-router'
 export default {
 
 
-  
+    mounted() {
+
+  document.getElementById("myVideo").volume = 0.2;
+
+  }, 
     setup() {
 
 
 gsap.registerPlugin(ScrollTrigger);
+
+
+
 
         const veriler=ref([])
 
@@ -159,6 +166,7 @@ gsap.registerPlugin(ScrollTrigger);
           el.style.opacity=0;
           el.style.transform='translateY(100px)'
         }
+
 
 
 

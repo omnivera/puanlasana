@@ -1,11 +1,11 @@
 <template>
 
-<div>
+<div  >
 
 
-<div class="bigshadow">
+<div  class="bigshadow">
 
-<iframe autofocus id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe  autofocus id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -223,10 +223,10 @@
  </transition> 
          </div>
 
-              <div v-if="yildizladi==false" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
+              <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
        
-    <span class="bigtitle">{{itemisim}}</span>
+    <span @click="watchinfo=true" class="bigtitle">{{itemisim}}</span>
     <br>
 
     <div class="stars">
@@ -254,6 +254,9 @@
 </form>
 </div>
 
+<br>
+
+<button class="upbutton"   data-bs-toggle="modal" data-bs-target="#filminfo"><i  class="bi bi-chevron-up"></i></button>
     
     
      
@@ -261,7 +264,6 @@
 </div>
 
 <br>
-
 
 
          
@@ -314,10 +316,80 @@
 
 
 </div>
+
+
+<div class="modal fade" @focus="titlecheck=false" @blur="titlecheck=true" id="filminfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl scrollable">
+    <div class="modal-content infomodal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-film"></i> {{itemisim}}</h5> 
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+          <div class="row text-left">
+              <div class="col-md-4">
+                  <img :src="itemresim" class="img-fluid" style="height:50vh"  alt="" srcset="">
+
+              </div>
+              <div class="col-md-8">
+
+                  <div class="row">
+                  
+                      <p class="aciklama">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                 </p>
+                       </div>
+
+                       <br>
+
+                  <div class="row">
+                      <div class="col-md-6">
+                      <h5 class="redtitle">Oyuncular</h5>
+                      <hr class="">
+                      <p>Mert Dallar, Haktan Uzun</p>
+                      </div>
+
+                        <div class="col-md-6">
+                      <h5 class="redtitle">Türler</h5>
+                      <hr>
+                      <p>Aksiyon, Komedi, Macera, Bilim Kurgu</p>
+
+                      </div>
+                     
+                  </div>
+
+                  <br>
+
+                         <div class="row">
+                      <div class="col-md-6">
+                      <h5 class="redtitle">Çıkış Yılı</h5>
+                      <hr class="">
+                      <p>2009</p>
+                      </div>
+
+                        <div class="col-md-6">
+                      <h5 class="redtitle">Film Uzunluğu</h5>
+                      <hr>
+                      <p>2 Saat 15 dakika</p>
+
+                      </div>
+                     
+                  </div>
+
+              </div>
+          </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
- import {ref,onMounted} from 'vue'
+ import {ref,onMounted,watch} from 'vue'
 import {firestoreRef,storageRef} from '@/firebase/config' 
 
 import { useRoute,useRouter} from 'vue-router'
@@ -368,6 +440,9 @@ export default {
          const puanladi = ref(false)
          const yildizladi = ref(false)
 
+         const watchinfo = ref(false)
+          const titlecheck = ref(true)
+
          
 
          const puan=ref(0)
@@ -384,6 +459,11 @@ export default {
 
       
 
+            watch ( () => {
+
+                
+
+})
 
 
          setTimeout(  function(){
@@ -432,7 +512,7 @@ showtitle.value="hidden"
 
 
           const anasayfagit=()=>{
-        window.location.href = window.location.origin +"/#option-select-view";
+     router.push({name:'anasayfa'})
         }
 
  
@@ -496,8 +576,7 @@ location. reload()
                   snapshot.forEach(doc => {
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-           itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1&cc_load_policy=0'
-
+           itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
@@ -528,7 +607,7 @@ location. reload()
             snapshot.forEach(doc => {
                 itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-            itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1&cc_load_policy=0'
+            itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
 
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
@@ -577,7 +656,7 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
-          showtitle,doYildizla
+          showtitle,doYildizla,watchinfo,titlecheck
         }
         
     }
@@ -586,6 +665,57 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 </script>
 
 <style scoped>
+
+
+.aciklama{
+    height:20vh; float: left;   overflow: scroll;
+overflow-x: hidden; 
+
+}
+
+.redtitle{
+    color: #DE354C;
+    font-weight: 500;
+}
+
+
+.infomodal{
+    background-color: #181818;
+    color: white;
+    opacity: 0.8;
+}
+
+
+
+@-webkit-keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+@keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+}
+
+
+.upbutton{
+font-size: 3vw;
+
+background-color: transparent;
+border-color: transparent;
+color: white;
+margin-top: -3vh;
+text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+outline: none;
+   
+}
+
+
+.upbutton:hover{
+  -webkit-animation: action 1s infinite  alternate;
+    animation: action 1s infinite  alternate;
+}
 
 
 .visible {
@@ -846,6 +976,8 @@ input {
 
 
 
+
+
 body {
   overflow: hidden; /* Hide scrollbars */
   
@@ -872,6 +1004,8 @@ label.star {
   font-size: 1.5vw;
   color: #DE354C;
   transition: all .2s;
+  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px #DE354C;
 }
 
 input.star:checked ~ label.star:before {

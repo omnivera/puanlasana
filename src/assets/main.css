@@ -2,8 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
 .card{
-    border-radius: 6px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  
 }
 
 nav {
@@ -42,8 +41,9 @@ border-color: transparent;
 
     border-color: transparent;
     background-color: white;
-    font-size: 1.1vw;
+    font-size: 1vw;
     color: #DE354C;
+ 
     
     }
     
@@ -104,6 +104,7 @@ body{
     font-family: "Montserrat", sans-serif;
     background: black;
     overflow-x: hidden;
+    
 }
 
 

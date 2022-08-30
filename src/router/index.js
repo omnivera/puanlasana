@@ -7,6 +7,8 @@ import Rankings from '../views/Rankings.vue'
 
 import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 
+import Kategoriler from '../views/Kategoriler.vue'
+
 import Itemekle from '../views/Item/Itemekle.vue'
 import Itemduzenle from '../views/Item/Itemduzenle.vue'
 import Itemview from '../views/Item/Itemview.vue'
@@ -87,6 +89,13 @@ const routes = [
         path: '/Kategoriekle',
         name: 'Kategoriekle',
         component: Kategoriekle,
+       
+      },
+
+      {
+        path: '/Kategoriler',
+        name: 'Kategoriler',
+        component: Kategoriler,
        
       },
 

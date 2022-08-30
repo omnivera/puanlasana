@@ -13,6 +13,13 @@
         
 
         </li>
+
+         <li class="nav-item">
+          <router-link :to="{name:'Kategoriler'} ">   <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-cubes"></i> Kategoriler</button></a></router-link>
+        
+          
+        </li>
+
         <li class="nav-item">
           <router-link :to="{name:'Rankings'} ">   <a class="nav-link" aria-current="page" href="#"><button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-ranking-star"></i> Sıralamalar</button></a></router-link>
         

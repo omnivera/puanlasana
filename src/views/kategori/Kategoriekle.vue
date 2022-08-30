@@ -13,6 +13,7 @@
   <input type="search" autocomplete="off" required maxlength="20" class="form-control" v-model="kisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Kategori İsmi</label>
 </div>
+
  <button type="submit" id="normalbutton" class="btn btn-outline-primary btn-lg btn-block">Ekle</button>
 </form>
 

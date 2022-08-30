@@ -2,7 +2,7 @@
 
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -283,7 +283,7 @@
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Uyarı!</h5>
+        <h5 class="modal-title" id="exampleModalLabel">İtem Bilgileri</h5>
         <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -313,7 +313,7 @@
 </template>
 
 <script>
- import {ref,onMounted} from 'vue'
+ import {ref,onMounted,watch} from 'vue'
 import {firestoreRef,storageRef} from '@/firebase/config' 
 
 import { useRoute,useRouter} from 'vue-router'
@@ -354,6 +354,7 @@ export default {
          const itemresim=ref('')
          const itemisim=ref('')
          const itemvideo=ref('')
+         const itemvideogoster=ref('')
 
          const kategorigoster=ref(route.params.Kategori)
 
@@ -370,6 +371,13 @@ export default {
 
 
          const itemID=ref('')
+
+
+            watch ( () => {
+
+ itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'
+
+})
 
 
 
@@ -456,7 +464,7 @@ location. reload()
                 
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-           itemvideo.value = doc.data().itemvideo
+            itemvideo.value = doc.data().itemvideo
 
            kategorigoster.value = doc.data().kategori
 
@@ -510,7 +518,8 @@ location. reload()
 
 
 
-          return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit
+          return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,
+          itemvideogoster
         }
         
     }

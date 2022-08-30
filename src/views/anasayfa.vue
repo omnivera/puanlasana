@@ -6,11 +6,22 @@
   
 
     <div id="main-landing-message" style="margin-top:-3vh">
+        <div class="bigshadow">
+
+<!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+<video id="myVideo" height="100" width="100"  autoplay muted>
+  <source src="@/assets/videos/mainvideo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+   </div>
         <div class="d-flex justify-content-center">
+            
 
        
 <transition @before-enter="beforeEnter" @enter="enterv2" appear >      
-     <img @click="randompuanla" src="@/assets/plogo6.png" style="width:13vw;" alt="">
+     <img @click="randompuanla" data-bs-toggle="tooltip" data-bs-placement="top" title="Puanlamak için tıkla" src="@/assets/plogo6.png" style="width:13vw;" alt="">
          </transition>  
 
 
@@ -24,7 +35,10 @@
          <div class="d-flex justify-content-center">
   <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
       <h1>puanlasana</h1>
+      
         </transition> 
+
+
       
          </div>
 
@@ -41,7 +55,7 @@
                 <div class="col">
 
     <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-     <button type="button" id="mainbutton" @click="randompuanla" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> Puanlasana</button>
+     <button type="button" id="mainbutton" @click="randompuanla" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> <br> Puanlasana</button>
       </transition> 
 
                 </div>
@@ -49,7 +63,7 @@
 
                 <div class="col">
                      <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-              <a href="#option-select-view">  <button type="button" id="mainbutton" @click="randompuan" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> Kategoriler</button></a>  
+              <button type="button" id="mainbutton" @click="kategorigit" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> <br> Kategoriler</button>
   
      </transition> 
                 </div>
@@ -77,46 +91,7 @@
   </section>
 
 
-  <section id="option-select-view">
-    <div class="view-option">
-   
-          
-
-        <!--     <div class="d-flex justify-content-center" style="margin-top:7vh">
-   
-     <h1> <span class="baslik"> <strong>- KATEGORİLER -</strong></span> </h1>
-
-      <hr>
-       
-
-     
-  </div> -->
-
-   <div class="d-flex justify-content-center"  style="margin-top:7vh">
-
-       <div class="row">
-
-           <div class="kategoriler">
-
-  <transition-group @before-enter="beforeEnter" @enter="enter" appear >      
-<div v-for="veri in veriler" :key="veri.id">
-    <main @click="puanla(veri.kisim)">{{veri.kisim}}</main>
-<!-- <button type="button" id="kategoributton" @click="puanla(veri.kisim)" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded">{{veri.kisim}}</button> -->
-</div>
-   </transition-group>   
-
-      </div>
-        </div>
-            </div>
-
-
-          
-    
-     
-    </div>
-
-
-  </section>
+ 
 
 
 
@@ -171,6 +146,14 @@ gsap.registerPlugin(ScrollTrigger);
 
         }
 
+          const kategorigit= (Kategori)=>{
+          
+         
+         router.push({name:'Kategoriler'})
+         
+
+        }
+
 
                const beforeEnter=(el)=>{
           el.style.opacity=0;
@@ -199,7 +182,7 @@ gsap.registerPlugin(ScrollTrigger);
           gsap.to(el,{
             opacity:1,
             y:0,
-            duration:1,
+            duration:1.5,
             delay:el.dataset.index*0.2,
             ease:'back'
           })
@@ -218,7 +201,7 @@ gsap.registerPlugin(ScrollTrigger);
          
         })
 
-        return {veriler,beforeEnter,enter,puanla,enterv2,randompuanla
+        return {veriler,beforeEnter,enter,puanla,enterv2,randompuanla,kategorigit
         }
         
     }
@@ -239,6 +222,8 @@ gsap.registerPlugin(ScrollTrigger);
   font-style: normal;
   font-weight: normal;
 }
+
+
 
 
 @keyframes switch {
@@ -270,11 +255,23 @@ gsap.registerPlugin(ScrollTrigger);
 }
 
 
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+ pointer-events: none;
+  
+  
+}
+
 img {
   display: block;
   cursor: pointer;
  -webkit-animation: action 1s infinite  alternate;
     animation: action 1s infinite  alternate;
+    
     
 }
 
@@ -313,6 +310,7 @@ h1{
 body {
   margin: 0;
   font-family: sans-serif;
+   overflow: hidden
 }
 
 
@@ -351,11 +349,12 @@ a {
 /* ================= */
 /* SECTION MAIN LANDING */
 #main-landing {
-  background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg');
+ /*  background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg'); */
   padding: 20px 40px;
   position: relative;
  background-size: cover;
  height: 95vh;
+  overflow: hidden
  
 }
 
@@ -389,6 +388,10 @@ a {
 
   margin-top: 2vh;
   font-family: 'Comfortaa', cursive;
+  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+  
+
 }
 #main-landing-message > h1 {
   font-size: 6em;

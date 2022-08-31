@@ -323,7 +323,7 @@
     <div class="modal-content infomodal">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel"><i class="bi bi-film"></i> {{itemisim}}</h5> 
-        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+        <i data-bs-dismiss="modal"  class="fa-solid fa-circle-xmark top-right2 close-btn"></i>
       </div>
       <div class="modal-body">
           <div class="row text-left">
@@ -667,6 +667,13 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 <style scoped>
 
 
+.close-btn{
+   font-size:25px;
+   cursor:pointer;
+
+}
+
+
 .aciklama{
     height:20vh; float: left;   overflow: scroll;
 overflow-x: hidden; 
@@ -683,6 +690,7 @@ overflow-x: hidden;
     background-color: #181818;
     color: white;
     opacity: 0.8;
+
 }
 
 
@@ -747,6 +755,12 @@ outline: none;
   transform: translate(-50%, -50%);
 }
 
+.top-right2{
+   position: absolute;
+    top: 1.8vh;
+    right: 0.4vw;
+    
+}
 
 .top-right{
    position: absolute;

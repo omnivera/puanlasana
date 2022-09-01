@@ -277,16 +277,24 @@ td {
  
  /* for custom scrollbar for webkit browser*/
  
- ::-webkit-scrollbar {
-    width: 0.5em;
-  }
+ .aciklama::-webkit-scrollbar,
+ .aciklama::-webkit-scrollbar-thumb {
+   width: 26px;
+   border-radius: 13px;
+   background-clip: padding-box;
+   border: 10px solid transparent;
+   background-color: transparent;
+ }
+ 
+ .aciklama::-webkit-scrollbar-thumb {        
+   box-shadow: inset 0 0 0 10px;
    
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-   
-  ::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
+ }
 
+
+ body::-webkit-scrollbar {
+    /* This is the magic bit for WebKit */
+    display: none;
   }
+ 
+

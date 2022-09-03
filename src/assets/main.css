@@ -17,6 +17,8 @@ nav {
     
 }
 
+
+
 #kategoributton{
 height: 17vh;
 width: 17vw;
@@ -52,6 +54,27 @@ border-color: transparent;
     color: white;
     border-color: transparent;
     }
+
+
+
+    #yorumlabuttonv2{
+        margin-top: 0.7vh;
+    
+        border-color: transparent;
+        background-color: #DE354C;
+        font-size: 1vw;
+        color: white;
+        border-radius: 6px;
+        padding: 0.7vw;
+     
+        
+        }
+        
+        #yorumlabuttonv2:hover{
+        background-color: white;
+        color: #DE354C;
+        border-color: transparent;
+        }
 
 
 

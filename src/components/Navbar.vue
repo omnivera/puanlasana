@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style scoped>
+button:hover, button:focus {
+  outline: none;
+}
 
 .navbar.scrolled{
 background-color: red;

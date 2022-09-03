@@ -3,9 +3,19 @@
    <div class="row">
        <div class="col-md-12">
 
+
+           
+
            <div class="row">
 <div class="card text-center shadow rounded" style="width: 47rem;">
   <div class="card-body">
+<div class="form-floating">
+  <select class="form-select" required v-model="kategori" id="floatingSelect" aria-label="Floating label select example">
+ <option v-for="veri in kategoriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
+  </select>
+  <label for="floatingSelect">Kategori</label>
+</div>
+      <br>
       <form @submit.prevent="arama" autocomplete="false">
  <div id="search"> <input id="input" type="search" autocomplete="off" placeholder="İtem Ara..." v-model="search" /> <button id="button"><i class="fa fa-search" ></i></button>
 </div>
@@ -65,10 +75,12 @@ export default {
 
         const kategorikontrol=ref(false)
          const veriler=ref([])
+         const kategoriler=ref([])
          const router=useRouter()
 
 
          const search=ref('')
+         const kategori=ref()
        
 
 
@@ -76,7 +88,7 @@ export default {
  const arama= ()=>{
           
      
-  firestoreRef.collection('itemler').where('itemisim','==',search.value).get()
+  firestoreRef.collection(kategori.value).where('itemisim','==',search.value).get()
         .then(snapshot =>{
 
             if (snapshot.size > 0 ) {
@@ -108,9 +120,22 @@ export default {
  }
 
 
+onMounted(async () => {
+
+           
+            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                kategoriler.value=[]
+                snap.docs.forEach(doc=>{
+                    kategoriler.value.push({...doc.data(),id:doc.id})
+                })
+            })
+
+         
+        })
+
   const veriyegit= (veri)=>{
              
- router.push({name:'Itemview',params:{veriID:veri.id}})
+ router.push({name:'Itemview',params:{kategori:kategori.value,veriID:veri.id}})
  
 
       
@@ -123,7 +148,7 @@ export default {
 
 
 
-          return {arama,veriler,search,veriyegit
+          return {arama,veriler,search,veriyegit,kategoriler,kategori
         }
         
     }

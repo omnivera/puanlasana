@@ -164,7 +164,7 @@
  <thead>
 <tr>
 <th class="text-center">Kategori İsmi</th>
-<th class="text-center">Düzelt/Sil</th>
+<!-- <th class="text-center">Düzelt/Sil</th> -->
 </tr>
 </thead>
 <tbody class="table-hover">
@@ -173,7 +173,7 @@
 <td >{{veri.kisim}}</td>
 
 
-<td  style="width:3vw;">
+<!-- <td  style="width:3vw;">
   
 
      <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -192,7 +192,7 @@
 
 
 
-</td>
+</td> -->
 
 </tr>
 
@@ -325,10 +325,13 @@ export default {
 
               const datakategori = {
                   kisim:kisim.value,
+                  click:0
                  
 };
 
 const res = firestoreRef.collection('kategoriler').doc(kategoriID).set(datakategori);
+
+const res2 = firestoreRef.collection(kisim.value).doc(kategoriID).set();
 
 basarili.value=true
 

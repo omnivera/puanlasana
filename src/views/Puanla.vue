@@ -211,7 +211,7 @@
                    
 <br>
 
-<button type="button" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorum Yapsana</button>
+<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorum Yapsana</button></a>
 
 
 
@@ -335,11 +335,8 @@
 
                   <div class="row">
                   
-                      <p class="aciklama">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
-                       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore maxime sint possimus commodi incidunt quos deleniti voluptatibus assumenda aliquam quae, consequuntur non autem accusantium aperiam natus earum unde reiciendis deserunt?
+                      <p class="aciklama">
+                          {{filmozet}}
                  </p>
                        </div>
 
@@ -349,13 +346,13 @@
                       <div class="col-md-6">
                       <h5 class="redtitle">Oyuncular</h5>
                       <hr class="">
-                      <p>Mert Dallar, Haktan Uzun</p>
+                      <p>{{oyuncular}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Türler</h5>
                       <hr>
-                      <p>Aksiyon, Komedi, Macera, Bilim Kurgu</p>
+                      <p>{{turler}}</p>
 
                       </div>
                      
@@ -367,13 +364,13 @@
                       <div class="col-md-6">
                       <h5 class="redtitle">Çıkış Yılı</h5>
                       <hr class="">
-                      <p>2009</p>
+                      <p>{{cyili}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Film Süresi</h5>
                       <hr>
-                      <p>2 Saat 15 dakika</p>
+                      <p>{{fsure}}</p>
 
                       </div>
                      
@@ -388,107 +385,120 @@
 </div>
 
 
+<div v-if="yorumclick" class="yorumlar">
+<h2 class="text-center">YORUMLAR</h2>
+<hr style="color:white">
+<br>
+    <section id="yorumyap">
+<div class="container text-dark">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-8 col-lg-10 col-xl-9">
+        <div class="card yorumcard">
+          <div id="yorumyapcardbody" class="card-body p-5">
+            <div class="d-flex flex-start w-100">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
+                height="65" />
+              <div class="w-100">
+                <h5>Kullanıcı İsmi</h5>
 
-
-<div class="yorumlar">
-    <div class="row">
-
-  
-    <div class="col-md-1">
-<img class="yorumresim" src="@/assets/plogo6.png" alt=""> 
-    </div>
-
-    <div class="col-md-11">
-         <textarea class="textarea" rows = "5" cols = "60" name = "description" placeholder="Yorum Yapsana!">
-            
-         </textarea>
-<!-- <input class="textarea" type="textarea" placeholder="Yorum Yapsana!"> -->
-    </div>
-
+                <div class="form-floating">
+  <textarea class="form-control" maxlength="400" v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">Yorum Yapsana</label>
 </div>
-
+<br>
+   <div class="me-0">
+                  
+                  <button @click="yorumkayit" style="float:right" type="button" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button>
+                </div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+    </section>
+        <section id="yorumlar" class="mb-5">
+  <transition @before-enter="beforeEnter" @enter="enteryorumlar" appear >      
 <div class="row">
-    <div class="comments-container">
+    
+    <div class="container my-2 py-5 text-dark">
+    <div class="row d-flex justify-content-center">
         
+      <div v-for="yorum in yorumlar" :key="yorum.id" class="col-md-11 col-lg-9 col-xl-7">
+        <div class="d-flex flex-start mb-4">
+          <img class="rounded-circle shadow-1-strong me-3"
+            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
+            height="65" />
+          <div  class="card w-100 yorumcard">
+            <div id="yorumcardbody" class="card-body p-4">
+              <div class="">
+                <h5>{{yorum.kullaniciad}}</h5>
+                <p class="small text-muted">{{itemisim}}</p>
+                <p>
+                  {{yorum.yorum}}
+                </p>
 
-    <ul id="comments-list" class="comments-list">
-      <li>
-        <div class="comment-main-level">
-          <!-- Avatar -->
-          <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-          <!-- Contenedor del Comentario -->
-          <div class="comment-box">
-            <div class="comment-head">
-              <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-              <span>hace 20 minutos</span>
-              <i class="fa fa-reply"></i>
-              <i class="fa fa-heart"></i>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <a @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2"><i class="fas fa-thumbs-up me-1"></i>{{yorum.like}}</a>
+                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss"><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
+                  </div>
+                  <a href="#!" class="link-muted">    
+<div class="small-ratings">
+
+                <i v-if="yorum.puan > 0" class="fa fa-star rating-color"></i> 
+                <i v-if="yorum.puan == 0"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 1" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 1"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 2" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 2"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 3" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 3"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 4" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 4"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 5" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 5"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 6" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 6"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 7" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 7"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 8" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 8"  class="fa fa-star"></i>
+                <i v-if="yorum.puan > 9" class="fa fa-star rating-color"></i>
+                <i v-if="yorum.puan <= 9"  class="fa fa-star"></i>
+                
+               
+
+            
+                
+                
             </div>
-            <div class="comment-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
+</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- Respuestas de los comentarios -->
-        <ul class="comments-list reply-list">
-          <li>
-            <!-- Avatar -->
-            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-            <!-- Contenedor del Comentario -->
-            <div class="comment-box">
-              <div class="comment-head">
-                <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-                <span>hace 10 minutos</span>
-                <i class="fa fa-reply"></i>
-                <i class="fa fa-heart"></i>
-              </div>
-              <div class="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-              </div>
-            </div>
-          </li>
 
-          <li>
-            <!-- Avatar -->
-            <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-            <!-- Contenedor del Comentario -->
-            <div class="comment-box">
-              <div class="comment-head">
-                <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">Agustin Ortiz</a></h6>
-                <span>hace 10 minutos</span>
-                <i class="fa fa-reply"></i>
-                <i class="fa fa-heart"></i>
-              </div>
-              <div class="comment-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
+        
+        
+      </div>
 
-      <li>
-        <div class="comment-main-level">
-          <!-- Avatar -->
-          <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_2_zps7de12f8b.jpg" alt=""></div>
-          <!-- Contenedor del Comentario -->
-          <div class="comment-box">
-            <div class="comment-head">
-              <h6 class="comment-name"><a href="http://creaticode.com/blog">Lorena Rojero</a></h6>
-              <span>hace 10 minutos</span>
-              <i class="fa fa-reply"></i>
-              <i class="fa fa-heart"></i>
-            </div>
-            <div class="comment-content">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo?
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
+
+
+
+    </div>
   </div>
+      
 </div>
+  </transition>
+        </section>
   </div>
+
 
 </template>
 
@@ -522,6 +532,7 @@ export default {
      
         const kategorikontrol=ref(false)
          const veriler=ref([])
+         const yorumlar=ref([])
       
   const seenItems=ref([{itemisim:""}])
 
@@ -547,6 +558,12 @@ export default {
          const watchinfo = ref(false)
           const titlecheck = ref(true)
 
+          const filmozet=ref()
+         const oyuncular=ref()
+         const turler=ref()
+         const cyili=ref()
+         const fsure=ref()
+
          
 
          const puan=ref(0)
@@ -554,12 +571,21 @@ export default {
          const totalpuan=ref(0)
          const puancount=ref(0)
 
+         let yorumclickcount=0
+
+
 
          const itemID=ref('')
+
+         const yorum=ref('')
 
 
          const showcardV=ref('visible')
          const showtitle=ref('hidden')
+
+         const yorumclick=ref(false)
+
+    
 
       
 
@@ -568,6 +594,158 @@ export default {
                 
 
 })
+
+
+const yorumshow=()=>{
+
+    if (yorumclickcount==0) {
+        firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(5).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+         
+yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss:"link-muted",dislikedcss:"link-muted"})
+         
+         
+        });
+            }else{
+
+                console.log("boşşşş")
+              
+
+            }
+        })
+        
+     yorumclick.value=true
+    }
+
+    yorumclickcount++;
+
+     
+        }
+
+
+                 const likeyorum= (yorum)=>{
+
+
+                     if (yorum.liked==false && yorum.disliked==false) {
+                         
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) + 1
+                  
+                   
+        })
+
+        yorum.like = yorum.like + 1
+        yorum.likedcss="likeselected"
+        yorum.liked=true
+
+                     }else      if (yorum.liked==false && yorum.disliked==true) {
+                         
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) + 1,
+                   dislike:parseInt(yorum.dislike) - 1
+
+                  
+                   
+        })
+
+        yorum.like = yorum.like + 1
+        yorum.dislike = yorum.dislike - 1
+        yorum.disliked=false
+        yorum.dislikedcss="link-muted"
+        yorum.likedcss= "likeselected"
+        yorum.liked=true
+                     }else if (yorum.liked==true && yorum.disliked==false) {
+                         
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) - 1
+                  
+                   
+        })
+
+        yorum.like = yorum.like - 1
+        yorum.likedcss="link-muted"
+
+        yorum.liked=false
+
+                     }
+                         
+
+
+                   
+
+
+
+
+
+                     
+
+
+
+
+
+
+       
+         }
+
+                  const dislikeyorum= (yorum)=>{
+
+
+if (yorum.disliked==false && yorum.liked==false) {
+
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) + 1
+                  
+                   
+        })
+
+        yorum.dislike = yorum.dislike + 1
+        yorum.dislikedcss= "likeselected"
+        yorum.disliked=true
+
+}else if (yorum.disliked==false && yorum.liked==true) {
+                         
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) + 1,
+                   like:parseInt(yorum.like) - 1
+
+                  
+                   
+        })
+
+        yorum.dislike = yorum.dislike + 1
+        yorum.like = yorum.like - 1
+        yorum.liked=false
+        yorum.likedcss="link-muted"
+        yorum.dislikedcss= "likeselected"
+        yorum.disliked=true
+                     }else if (yorum.disliked==true && yorum.liked==false) {
+
+            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) - 1
+                  
+                   
+        })
+
+        yorum.dislike = yorum.dislike - 1
+        yorum.dislikedcss= "link-muted"
+        yorum.disliked=false
+
+}
+
+
+    
+
+
+       
+         }
 
 
          setTimeout(  function(){
@@ -637,6 +815,17 @@ showtitle.value="hidden"
           })
         }
 
+          const enteryorumlar=(el)=>{
+
+          gsap.to(el,{
+            opacity:1,
+            y:0,
+            duration:2,
+            delay:el.dataset.index*0.2,
+            ease:'back'
+          })
+        }
+
 
 
             const ortpuanimation=(el)=>{
@@ -670,20 +859,26 @@ location. reload()
 
      onMounted(async () => {
 
-         const ref = firestoreRef.collection('itemler').doc();
+         const ref = firestoreRef.collection(route.params.Kategori).doc();
 
 
            
-         await firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
+         await firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-           itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
+           itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?start='+doc.data().start+'&end='+doc.data().end+'&autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
+           oyuncular.value = doc.data().oyuncular
+            turler.value = doc.data().turler
+            cyili.value = doc.data().cyili
+            fsure.value = doc.data().fsure
+            filmozet.value = doc.data().filmozet
+
 
 
 
@@ -706,26 +901,25 @@ location. reload()
          
         });
             }else{
-                 firestoreRef.collection('itemler').where('kategori','==',route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
+                 firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
                  .then(snapshot => {
             snapshot.forEach(doc => {
                 itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-            itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
+            itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?start='+doc.data().start+'&end='+doc.data().end+'&autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
 
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
+           oyuncular.value = doc.data().oyuncular
+            turler.value = doc.data().turler
+            cyili.value = doc.data().cyili
+            fsure.value = doc.data().fsure
+            filmozet.value = doc.data().filmozet
 
            
       
 
-
-
-
-
-
-         
           
             });
         })
@@ -743,10 +937,11 @@ location. reload()
 
 
 
-           await firestoreRef.collection('itemler').doc(itemID.value).update({
+           await firestoreRef.collection(route.params.Kategori).doc(itemID.value).update({
 
                    totalpuan: puan.value + totalpuan.value,
-                   puancount: puancount.value + 1
+                   puancount: puancount.value + 1,
+                   puan:parseFloat((puan.value + totalpuan.value) / (puancount.value + 1))
                   
                    
         })
@@ -757,10 +952,31 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
   
          }
 
+               const yorumkayit=async ()=>{
+
+
+       const datayorum = {
+                   kullaniciad:"Haktan Uzun",
+                   yorum:yorum.value,
+                   like:0,
+                   dislike:0,
+                   puan:puan.value
+                 
+};
+
+yorumlar.value.unshift({kullaniciad:"Haktan Uzun",yorum:yorum.value,like:0,dislike:0,likedcss:"link-muted",dislikedcss:"link-muted",liked:false,disliked:false,puan:puan.value})
+
+const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc().set(datayorum);
+
+   yorum.value=""
+
+  
+         }
+
 
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
-          showtitle,doYildizla,watchinfo,titlecheck
+          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet
         }
         
     }
@@ -770,286 +986,67 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 <style scoped>
 
+.ratings{
+    margin-right:1vw;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-   }
-  
-   a {
-    color: #03658c;
-    text-decoration: none;
-   }
-  
-  ul {
-    list-style-type: none;
-  }
-  
-  body {
-    font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
-    background: #dee1e3;
-  }
-  
-  /** ====================
-   * Lista de Comentarios
-   =======================*/
-  .comments-container {
-    margin: 60px auto 15px;
-    width: 768px;
-  }
-  
-  .comments-container h1 {
-    font-size: 36px;
-    color: #283035;
-    font-weight: 400;
-  }
-  
-  .comments-container h1 a {
-    font-size: 18px;
-    font-weight: 700;
-  }
-  
-  .comments-list {
-    margin-top: 30px;
-    position: relative;
-  }
-  
-  /**
-   * Lineas / Detalles
-   -----------------------*/
-  .comments-list:before {
-    content: '';
-    width: 2px;
-    height: 100%;
-    background: #c7cacb;
-    position: absolute;
-    left: 32px;
-    top: 0;
-  }
-  
-  .comments-list:after {
-    content: '';
-    position: absolute;
-    background: #c7cacb;
-    bottom: 0;
-    left: 27px;
-    width: 7px;
-    height: 7px;
-    border: 3px solid #dee1e3;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-  }
-  
-  .reply-list:before, .reply-list:after {display: none;}
-  .reply-list li:before {
-    content: '';
-    width: 60px;
-    height: 2px;
-    background: #c7cacb;
-    position: absolute;
-    top: 25px;
-    left: -55px;
-  }
-  
-  
-  .comments-list li {
-    margin-bottom: 15px;
-    display: block;
-    position: relative;
-  }
-  
-  .comments-list li:after {
-    content: '';
-    display: block;
-    clear: both;
-    height: 0;
-    width: 0;
-  }
-  
-  .reply-list {
-    padding-left: 88px;
-    clear: both;
-    margin-top: 15px;
-  }
-  /**
-   * Avatar
-   ---------------------------*/
-  .comments-list .comment-avatar {
-    width: 65px;
-    height: 65px;
-    position: relative;
-    z-index: 99;
-    float: left;
-    border: 3px solid #FFF;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    overflow: hidden;
-  }
-  
-  .comments-list .comment-avatar img {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .reply-list .comment-avatar {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .comment-main-level:after {
-    content: '';
-    width: 0;
-    height: 0;
-    display: block;
-    clear: both;
-  }
- 
-  .comments-list .comment-box {
-    width: 680px;
-    float: right;
-    position: relative;
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-    box-shadow: 0 1px 1px rgba(0,0,0,0.15);
-  }
-  
-  .comments-list .comment-box:before, .comments-list .comment-box:after {
-    content: '';
-    height: 0;
-    width: 0;
-    position: absolute;
-    display: block;
-    border-width: 10px 12px 10px 0;
-    border-style: solid;
-    border-color: transparent #FCFCFC;
-    top: 8px;
-    left: -11px;
-  }
-  
-  .comments-list .comment-box:before {
-    border-width: 11px 13px 11px 0;
-    border-color: transparent rgba(0,0,0,0.05);
-    left: -12px;
-  }
-  
-  .reply-list .comment-box {
-    width: 610px;
-  }
-  .comment-box .comment-head {
-    background: #FCFCFC;
-    padding: 10px 12px;
-    border-bottom: 1px solid #E5E5E5;
-    overflow: hidden;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-  }
-  
-  .comment-box .comment-head i {
-    float: right;
-    margin-left: 14px;
-    position: relative;
-    top: 2px;
-    color: #A6A6A6;
-    cursor: pointer;
-    -webkit-transition: color 0.3s ease;
-    -o-transition: color 0.3s ease;
-    transition: color 0.3s ease;
-  }
-  
-  .comment-box .comment-head i:hover {
-    color: #03658c;
-  }
-  
-  .comment-box .comment-name {
-    color: #283035;
-    font-size: 14px;
-    font-weight: 700;
-    float: left;
-    margin-right: 10px;
-  }
-  
-  .comment-box .comment-name a {
-    color: #283035;
-  }
-  
-  .comment-box .comment-head span {
-    float: left;
-    color: #999;
-    font-size: 13px;
-    position: relative;
-    top: 1px;
-  }
-  
-  .comment-box .comment-content {
-    background: #FFF;
-    padding: 12px;
-    font-size: 15px;
-    color: #595959;
-    -webkit-border-radius: 0 0 4px 4px;
-    -moz-border-radius: 0 0 4px 4px;
-    border-radius: 0 0 4px 4px;
-  }
-  
-  .comment-box .comment-name.by-author, .comment-box .comment-name.by-author a {color: #03658c;}
-  .comment-box .comment-name.by-author:after {
-    content: 'autor';
-    background: #03658c;
-    color: #FFF;
-    font-size: 12px;
-    padding: 3px 5px;
-    font-weight: 700;
-    margin-left: 10px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-  }
-  
-  /** =====================
-   * Responsive
-   ========================*/
-  @media only screen and (max-width: 766px) {
-    .comments-container {
-      width: 480px;
-    }
-  
-    .comments-list .comment-box {
-      width: 390px;
-    }
-  
-    .reply-list .comment-box {
-      width: 320px;
-    }
-  }
+.ratings i{
+    
+    color:#cecece;
+    font-size:3vw;
+}
+
+.rating-color{
+    color:#DE354C !important;
+}
+
+.review-count{
+    font-weight:400;
+    margin-bottom:2px;
+    font-size:24px !important;
+}
+
+.small-ratings i{
+  color:#cecece;   
+  margin: 0.1vw;
+  cursor: default;
+}
 
 
-  /* Comments END */
-
-
-.textarea{
-    width: 100%;
-    color: #FFF;
-    background: transparent;
- 
-    border-color: #DE354C;
-    outline: none;
-     text-align: center;
-     bottom: 0;
-     right: 3vw;
-     position: relative;
-     text-align: left;
-     border-radius: 6px;
-     margin-left: 1vw;
+#floatingTextarea2{
+    background-color: #181818;
+    color: white;
+        resize: none;
 
 }
+
+#floatingTextarea2:focus {
+    outline: none !important;
+    border:1px solid red;
+    box-shadow: 0 0 10px #181818;
+  }
+
+.yorumcard{
+
+    border: none;
+    outline: none;
+    color: white;
+}
+
+#yorumyapcardbody{
+    background-color: black;
+}
+
+#yorumcardbody{
+    background-color: #181818;
+ 
+}
+
+.link-muted { color: #aaa; text-decoration: none;} .link-muted:hover { color: #DE354C; }
+
+
+.likeselected { color: white; text-decoration: none;} .likeselected:hover { color: #DE354C; }
+
 
 /* .textarea{
     width: 100%;
@@ -1079,8 +1076,8 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 .yorumlar{
     margin-top: 25vh;
-    margin-left:8vw;
-    margin-right:8vw;
+    margin-left:5vw;
+    margin-right:5vw;
 }
 
 
@@ -1436,9 +1433,19 @@ label.star {
   font-size: 1.5vw;
   color: #DE354C;
   transition: all .2s;
-  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px #DE354C;
+
 }
+
+label.staryorum {
+  float: right;
+  padding: 0.1vw;
+  font-size: 1.2vw;
+  color: #DE354C;
+  transition: all .2s;
+
+}
+
+
 
 input.star:checked ~ label.star:before {
   content:'\f005';
@@ -1501,6 +1508,11 @@ label.star:hover{
 }
 
 label.star:before{
+  content:'\f006';
+  font-family: FontAwesome;
+}
+
+label.staryorum:before{
   content:'\f006';
   font-family: FontAwesome;
 }

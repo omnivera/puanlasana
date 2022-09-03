@@ -114,7 +114,7 @@ const routes = [
       },
 
       {
-        path: '/Itemview/:veriID',
+        path: '/Itemview/:kategori/:veriID',
         name: 'Itemview',
         component: Itemview,
        

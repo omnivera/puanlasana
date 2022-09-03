@@ -297,11 +297,29 @@
   <input type="search" autocomplete="off" required  class="form-control" v-model="itemresim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem Resim URL</label>
 </div>
-
+<div class="row">
+    <div class="col-md-6">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off"  class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required class="form-control" v-model="itemvideo" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem Video Kodu</label>
 </div>
+    </div>
+
+        <div class="col-md-3">
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required  class="form-control" v-model="start" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Start</label>
+</div>
+    </div>
+
+        <div class="col-md-3">
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="end" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">End</label>
+</div>
+    </div>
+</div>
+
 
 <div class="form-floating">
   <select class="form-select" required v-model="kategori" id="floatingSelect" aria-label="Floating label select example">
@@ -309,6 +327,51 @@
   </select>
   <label for="floatingSelect">Kategori</label>
 </div>
+<br>
+<div v-if="kategori=='Film'">
+
+
+<div class="form-floating">
+  <textarea class="form-control" maxlength="400" required v-model="filmozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">Film Özeti</label>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-6">
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="oyuncular" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Oyuncular</label>
+</div>
+    </div>
+     <div class="col-md-6">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="turler" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Türler</label>
+</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+ <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="cyili" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Çıkış Yılı</label>
+</div>
+    </div>
+     <div class="col-md-6">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="fsure" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Film Süresi</label>
+</div>
+    </div>
+</div>
+
+</div>
+
+
+
+
+
 
 <br>
 
@@ -387,11 +450,18 @@ export default {
          const itemisim=ref('')
          const itemresim=ref('')
          const itemvideo=ref()
+         const start=ref()
+         const end=ref()
+         const filmozet=ref()
+         const oyuncular=ref()
+         const turler=ref()
+         const cyili=ref()
+         const fsure=ref()
          const itemvideogoster=ref('')
 
          watch ( () => {
 
- itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'
+ itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'
 
 })
 
@@ -463,7 +533,7 @@ export default {
 
 
 
-                await firestoreRef.collection('itemler').where('kategori','==',kategori.value).where('itemisim','==',itemisim.value).limit(1).get()
+                await firestoreRef.collection(kategori.value).where('itemisim','==',itemisim.value).limit(1).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
              
@@ -485,12 +555,19 @@ setTimeout(  function(){
                   itemisim:itemisim.value,
                   itemresim:itemresim.value,
                   itemvideo:itemvideo.value,
+                  start:start.value,
+                  end:end.value,
+                  filmozet:filmozet.value,
+                  oyuncular:oyuncular.value,
+                  turler:turler.value,
+                  cyili:cyili.value,
+                  fsure:fsure.value,
                   totalpuan:0,
                   puancount:0,
                   kategori:kategori.value
 };
 
-const res = firestoreRef.collection('itemler').doc().set(dataitem);
+const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
 
 
 setTimeout(  function(){
@@ -498,6 +575,8 @@ setTimeout(  function(){
 itemisim.value=""
 itemresim.value=""
 itemvideo.value=""
+start.value=""
+end.value=""
 kategori.value=""
 
 
@@ -553,7 +632,8 @@ setTimeout(  function(){
 
 
 
-          return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo,itemvideogoster
+          return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo,itemvideogoster,start,end,
+          oyuncular,turler,cyili,fsure,filmozet
         }
         
     }

@@ -46,7 +46,7 @@
       <div v-for="item in itemler" :key="item.id">
     <li v-if="item.kategori==veri.kisim">
       <mark>{{item.itemisim}}</mark>
-      <small style="color:white"><strong> <vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puan' :duration='1' suffix='' separator=',' decimalSeparator=',' :decimals='1' :autoinit='true' /></strong></small>
+      <small style="color:white"><strong> <vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puan' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='1' :autoinit='true' /></strong></small>
     </li>
 </div>
   </ol>
@@ -276,6 +276,7 @@ background-color: black;
           backface-visibility: hidden;
   -webkit-transform: translateZ(0) scale(1, 1);
           transform: translateZ(0) scale(1, 1);
+          border-bottom: 1px solid white;
 }
 .leaderboard ol li::before {
   content: counter(leaderboard);

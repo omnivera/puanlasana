@@ -88,7 +88,7 @@ export default {
  const arama= ()=>{
           
      
-  firestoreRef.collection(kategori.value).where('itemisim','==',search.value).get()
+  firestoreRef.collection(kategori.value).where('itemisim','>=',search.value).limit(5).get()
         .then(snapshot =>{
 
             if (snapshot.size > 0 ) {

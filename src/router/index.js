@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 
+
+import Login from '../views/auth/Login.vue'
+
 import Anasayfa from '../views/anasayfa.vue'
 
 import Rankings from '../views/Rankings.vue'
@@ -126,6 +129,16 @@ const routes = [
         component: Puanla,
        
       },
+
+
+      {
+        path: '/Login',
+        name: 'Login',
+        component: Login,
+       
+      },
+
+      
 
 
       

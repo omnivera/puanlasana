@@ -50,8 +50,8 @@
         
       </ul>
         <div class="d-flex">
-   
-      <button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-user"></i> Giriş Yap</button>
+       <router-link :to="{name:'Login'} " >  <button class="btn btn-outline-light" type="submit"><i class="fa-solid fa-user"></i> Giriş Yap</button></router-link>
+    
       
     </div>
     </div>

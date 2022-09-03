@@ -1,0 +1,506 @@
+.<template>
+
+
+   <section id="main-landing">
+    <div id="black-ov"></div>
+  
+
+    <div id="main-landing-message" style="margin-top:-6vh">
+        <div class="bigshadow">
+
+<!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+
+<video id="myVideo" muted autoplay  loop>
+  <source src="@/assets/videos/mainvideo.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+
+   </div>
+        <div v-if="register" class="d-flex justify-content-center">
+            
+
+       
+<transition @before-enter="beforeEnter" @enter="enterv2" appear >      
+<div class="card authcard" style="width: 37vw;">
+  <div class="card-body authcardbd">
+      <div class="row text-center">
+ <h2>puanlasana </h2>  <h5 class="card-title">Üye Olsana</h5>
+      </div>
+  
+    <hr>
+     <form @submit.prevent="deneme" autocomplete="off">
+       <div class="row">
+         <div class="col-md-6">
+  <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="regkullaniciadi" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-user"></i> Kullanıcı Adı</label>
+</div>
+         </div>
+
+         <div class="col-md-6">
+<div class="form-floating mb-3">
+  <input type="password" autocomplete="off" required class="form-control" v-model="regparola" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-lock"></i> Parola</label>
+</div>
+         </div>
+       </div>
+  
+
+<div class="form-floating mb-3">
+  <input type="email" autocomplete="off" required class="form-control" v-model="regemail" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-envelope"></i> Email</label>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-floating mb-3">
+  <input type="date" autocomplete="off" required class="form-control" v-model="regdtarih" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Doğum Tarihi</label>
+</div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="form-floating">
+  <select class="form-select" v-model="regcinsiyet" id="floatingSelect" aria-label="Floating label select example">
+   <option selected disabled value="Erkek">Cinsiyet Seçin</option>
+    <option value="Erkek">Erkek</option>
+    <option value="Kız">Kız</option>
+
+  </select>
+  <label for="floatingSelect">Cinsiyet</label>
+</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+     <button type="button" @click="goLogin" id="logbutton"  class=" btn-lg shadow top-right next">Hesabım Var</button>
+
+    </div>
+
+    <div class="col-md-6">
+ 
+    <button type="button" id="logbuttonv2" @click="next" class=" btn-lg shadow top-right next btn-block">Kayıt Ol</button>
+     
+    </div>
+</div>
+     </form>
+   
+  </div>
+</div>
+
+
+
+
+         </transition>  
+
+
+
+       
+   </div>
+
+
+
+<div v-if="login" class="d-flex justify-content-center">
+            
+
+       
+<transition @before-enter="beforeEnter" @enter="enterv2" appear >      
+<div class="card authcard" style="width: 37vw;">
+  <div class="card-body authcardbd">
+      <div class="row text-center">
+ <h2>puanlasana </h2>  <h5 class="card-title">Giriş Yapsana</h5>
+      </div>
+  
+    <hr>
+     <form @submit.prevent="deneme" autocomplete="false">
+    <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="loginkullaniciadi" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-user"></i> Kullanıcı Adı</label>
+</div>
+
+<div class="form-floating mb-3">
+  <input type="password" autocomplete="off" required class="form-control" v-model="loginparola" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-lock"></i> Parola</label>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-6">
+
+     <button type="button" @click="goRegister" id="logbutton" class=" btn-lg shadow top-right next">Hesabım Yok</button>
+
+    </div>
+
+    <div class="col-md-6">
+ 
+    <button type="button" id="logbuttonv2" @click="next" class=" btn-lg shadow top-right next btn-block">Giriş Yap</button>
+     
+    </div>
+</div>
+     </form>
+   
+  </div>
+</div>
+
+
+
+
+         </transition>  
+
+
+
+       
+   </div>
+
+
+  
+ 
+   
+
+
+
+        
+
+
+    </div>
+
+  </section>
+
+
+ 
+
+
+
+  
+
+
+
+
+
+</template>
+
+<script>
+
+import {onMounted,ref} from 'vue'
+import {firestoreRef} from '@/firebase/config'
+import gsap from 'gsap'
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRoute,useRouter} from 'vue-router'
+export default {
+
+
+    mounted() {
+
+  document.getElementById("myVideo").volume = 0.2;
+
+  }, 
+    setup() {
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+
+
+        const veriler=ref([])
+
+        const register=ref(false)
+        const login=ref(true)
+
+        const regkullaniciadi=ref('')
+        const regparola=ref('')
+        const regemail=ref('')
+        const regcinsiyet=ref('')
+        const regdtarih=ref('')
+
+        const loginkullaniciadi=ref('')
+        const loginparola=ref('')
+
+
+            const route=useRoute()
+          const router=useRouter()
+
+
+        
+
+
+         const goLogin= ()=>{
+          
+         
+         register.value=false
+         login.value=true
+
+         loginkullaniciadi.value=""
+         loginparola.value=""
+         
+         
+
+        }
+
+
+        const goRegister= ()=>{
+          
+         
+         register.value=true
+         login.value=false
+
+         regkullaniciadi.value=""
+         regparola.value=""
+         regemail.value=""
+         regdtarih.value=""
+         
+         
+         
+
+        }
+
+       
+
+
+               const beforeEnter=(el)=>{
+          el.style.opacity=0;
+          el.style.transform='translateY(100px)'
+        }
+
+
+
+
+           const enter=(el)=>{
+
+          gsap.to(el,{
+    
+            opacity:0.8,
+            y:0,
+            duration:1,
+            delay:el.dataset.index*0.2,
+
+            
+           
+          })
+        }
+
+
+          const enterv2=(el)=>{
+
+          gsap.to(el,{
+            opacity:0.8,
+            y:0,
+            duration:1.5,
+            delay:el.dataset.index*0.2,
+            ease:'back'
+          })
+        }
+
+            onMounted(async () => {
+
+           
+            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                veriler.value=[]
+                snap.docs.forEach(doc=>{
+                    veriler.value.push({...doc.data(),id:doc.id})
+                })
+            })
+
+         
+        })
+
+        return {veriler,beforeEnter,enter,enterv2,register,login,regdtarih,regcinsiyet,regemail,regkullaniciadi,regparola,goLogin,goRegister
+        }
+        
+    }
+
+}
+</script>
+
+<style scoped>
+
+#logbutton{
+    margin-top: 1.5vh;
+
+    border-color: transparent;
+    background-color: white;
+    font-size: 1vw;
+    color: #DE354C;
+    width: 100%;
+
+ 
+    
+    }
+    
+ /*    #logbutton:hover{
+    background-color: #DE354C;
+    color: white;
+    border-color: transparent;
+    } */
+
+
+    #logbuttonv2{
+    margin-top: 1.5vh;
+
+    border-color: transparent;
+    background-color: #DE354C;
+    font-size: 1vw;
+    color: white;
+    width: 100%;
+ 
+    
+    }
+    
+/*     #logbuttonv2:hover{
+    background-color: white;
+    color: #DE354C;
+    border-color: transparent;
+    }
+ */
+
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+#floatingSelect{
+color: white;
+    background-color: #181818;
+}
+
+#floatingInput{
+color: white;
+    background-color: #181818;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+}
+
+.authcard{
+border: none;
+opacity: 0.8;
+}
+
+.authcardbd{
+    background-color: #181818;
+    opacity: 0.8;
+    color: white;
+  
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+
+@font-face {
+  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
+    format("woff2");
+  font-family: "Meta";
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+
+
+
+
+
+
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+ pointer-events: none;
+  
+  
+}
+
+
+
+
+
+
+main {
+  transition: all 0.5s;
+  -webkit-text-stroke: 4px #d6f4f4;
+  font-variation-settings: "wght" 900, "ital" 0;
+  font-size: 4vw;
+  text-align: center;
+  color: transparent;
+  font-family: "Meta", sans-serif;
+  
+  cursor: pointer;
+}
+
+main:hover {
+  font-variation-settings: "wght" 100, "ital" 0;
+  text-shadow: none;
+}
+
+
+
+
+
+
+
+
+
+
+#main-landing-message {
+
+  padding: 18em 0;
+}
+#main-landing-message h1, h2 {
+   color: #DE354C;
+
+  margin-top: 2vh;
+  font-family: 'Comfortaa', cursive;
+  font-weight: 700;
+   
+  
+
+}
+
+
+
+.view-option:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
+}
+.view-option:nth-child(2) > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  margin: 20px;
+}
+.view-option:nth-child(2) > div:nth-child(2) > div p {
+  opacity: 0.6;
+  font-weight: 300;
+  text-align: center;
+}
+.view-option:nth-child(2) > div:nth-child(2) > div h1 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.view-option:nth-child(2) > div:nth-child(2){
+  display: flex;
+}
+.view-option:nth-child(2) > div:nth-child(2) img{
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+
+
+
+</style>

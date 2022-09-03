@@ -444,8 +444,8 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
-                    <a @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2"><i class="fas fa-thumbs-up me-1"></i>{{yorum.like}}</a>
-                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss"><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
+                    <a @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2" style="cursor:pointer"><i class="fas fa-thumbs-up me-1"></i>{{yorum.like}}</a>
+                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss" style="cursor:pointer"><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
                   </div>
                   <a href="#!" class="link-muted">    
 <div class="small-ratings">
@@ -956,7 +956,7 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 
        const datayorum = {
-                   kullaniciad:"Haktan Uzun",
+                   kullaniciad:"Mert Dallar",
                    yorum:yorum.value,
                    like:0,
                    dislike:0,
@@ -964,7 +964,7 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
                  
 };
 
-yorumlar.value.unshift({kullaniciad:"Haktan Uzun",yorum:yorum.value,like:0,dislike:0,likedcss:"link-muted",dislikedcss:"link-muted",liked:false,disliked:false,puan:puan.value})
+yorumlar.value.unshift({kullaniciad:"Mert Dallar",yorum:yorum.value,like:0,dislike:0,likedcss:"link-muted",dislikedcss:"link-muted",liked:false,disliked:false,puan:puan.value})
 
 const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc().set(datayorum);
 

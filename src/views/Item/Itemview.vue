@@ -331,7 +331,7 @@
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="400" required v-model="filmozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" maxlength="1000" required v-model="filmozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Film Özeti</label>
 </div>
 <br>

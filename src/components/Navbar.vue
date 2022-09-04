@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark navbar-custom">
   <div class="container-fluid">
-     <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">  <span> <img src="@/assets/plogo6.png" style="width:2vw" alt=""> <strong>puanla<span style="color:#DE354C">sana</span> </strong></span>		</router-link>
+     <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">  <span> <img src="@/assets/plogo6.png" style="width:2vw" alt=""> <strong>puanla<span style="color:#DE354C;font-weight:bold">sana</span> </strong></span>		</router-link>
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -66,6 +66,7 @@ export default {
 </script>
 
 <style scoped>
+
 button:hover, button:focus {
   outline: none;
 }

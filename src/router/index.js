@@ -6,7 +6,8 @@ import Login from '../views/auth/Login.vue'
 
 import Anasayfa from '../views/anasayfa.vue'
 
-import Rankings from '../views/Rankings.vue'
+import Rankings from '../views/Rankings/Rankings.vue'
+import SubRankings from '../views/Rankings/SubRankings.vue'
 
 import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 
@@ -85,6 +86,13 @@ const routes = [
         path: '/Rankings',
         name: 'Rankings',
         component: Rankings,
+       
+      },
+
+      {
+        path: '/SubRankings',
+        name: 'SubRankings',
+        component: SubRankings,
        
       },
 

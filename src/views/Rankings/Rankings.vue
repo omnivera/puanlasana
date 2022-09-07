@@ -1,206 +1,108 @@
 .<template>
-  <br />
+ 
   <div>
-    <div class="d-flex justify-content-center">
-      <div class="ilkler">
-        <div class="card">
-          <div class="poster">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-            />
-          </div>
-
-          <div class="details">
-            <h2>
-              <i id="highranknumbers" class="bi bi-1-square-fill"></i> Star Wars: Episode V (1980)
-              <br />
-              <span>Directed by Irvin Kershner</span>
-            </h2>
-            <div class="rating text-center">
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="far fa-star" aria-hidden="true"></i>
-              <span>4/5</span>
-            </div>
-
-            <div class="info">
-              <p>After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader...</p>
-            </div>
-            <div class="cast">
-              <h4>Cast</h4>
-              <ul>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/73414/73414_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/25704/25704_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/554/554_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/8439/8439_v9_ba.jpg" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="poster">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-            />
-          </div>
-
-          <div class="details">
-            <h2>
-              <i id="highranknumbers" class="bi bi-2-square-fill"></i> Star Wars: Episode V (1980)
-              <br />
-              <span>Directed by Irvin Kershner</span>
-            </h2>
-            <div class="rating text-center">
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="far fa-star" aria-hidden="true"></i>
-              <span>4/5</span>
-            </div>
-
-            <div class="info">
-              <p>After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader...</p>
-            </div>
-            <div class="cast">
-              <h4>Cast</h4>
-              <ul>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/73414/73414_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/25704/25704_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/554/554_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/8439/8439_v9_ba.jpg" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="poster">
-            <img
-              src="https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg"
-            />
-          </div>
-
-          <div class="details">
-            <h2>
-              <i id="highranknumbers" class="bi bi-3-square-fill"></i> Star Wars: Episode V (1980)
-              <br />
-              <span>Directed by Irvin Kershner</span>
-            </h2>
-            <div class="rating text-center">
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="fas fa-star" aria-hidden="true"></i>
-              <i class="far fa-star" aria-hidden="true"></i>
-              <span>4/5</span>
-            </div>
-
-            <div class="info">
-              <p>After the Rebels are brutally overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda, while his friends are pursued by Darth Vader...</p>
-            </div>
-            <div class="cast">
-              <h4>Cast</h4>
-              <ul>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/73414/73414_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/25704/25704_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/554/554_v9_bb.jpg" />
-                </li>
-                <li>
-                  <img src="http://www.gstatic.com/tv/thumb/persons/8439/8439_v9_ba.jpg" />
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      
-    </div>
+    
     <br>
+    <div class="patterns">
+  <svg width="100%" height="100%">
+   
+              
+    <rect x="0" y="0" width="100%" height="100%" fill="url(#polka-dots)"> </rect>
+     
+    
+   
+ <text x="50%" y="60%"  text-anchor="middle"  >
+   Sıralamalar
+ </text>
+ </svg>
+</div>
 
+ <div class="d-flex justify-content-center">
+ 
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle dropbtn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    {{kategori}}
+  </button>
+  <ul class="dropdown-menu text-center" style="min-width: 100%;" aria-labelledby="dropdownMenuButton1">
+    <li v-for="veri in veriler" :key="veri.id" @click="kategorisec(veri)"><a class="dropdown-item">{{veri.kisim}}</a></li>
+   
+  </ul>
+</div>
+     </div>
+  
+ <div class="d-flex justify-content-center">
     <div class="row">
-        <table class="container">
-          <thead>
-            <tr>
-              <th>
-                <h1>Sıralama</h1>
-              </th>
-              <th>
-                <h1>İsim</h1>
-              </th>
-              <th>
-                <h1>Clicks</h1>
-              </th>
-              <th>
-                <h1>Average</h1>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>9518</td>
-              <td>6369</td>
-              <td>01:32:50</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>7326</td>
-              <td>10437</td>
-              <td>00:51:22</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>4162</td>
-              <td>5327</td>
-              <td>00:24:34</td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>3654</td>
-              <td>2961</td>
-              <td>00:12:10</td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>2002</td>
-              <td>4135</td>
-              <td>00:46:19</td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>4623</td>
-              <td>3486</td>
-              <td>00:31:52</td>
-            </tr>
-          </tbody>
-        </table>
+
+<div class="container">
+  <div class="row" style="margin-top:-0.4vh">
+
+
+    
+
+   </div>
+   <br>
+  <transition-group @before-enter="beforeEnter" @enter="enterv2" appear >   
+    
+
+  
+    <div v-for="item in itemler" :key="item.id" class="user-card">
+        
+
+      <div class="user-profile">
+      
+        <div ><img class="profile" :src="item.itemresim" alt=""></div>
+    <!--     <div class="last-submit">{{item.itemisim}}</div> -->
+       
+ 
+ </div>
+      <div class="user-stats">
+        <div class="w-clearfix">
+          <h1 class="name">
+            <i v-if="item.rank==1" style="color:gold" class="fas fa-crown"></i>
+            <i v-if="item.rank==2" style="color:silver" class="fas fa-crown"></i>
+            <i v-if="item.rank==3" style="color:#CD7F32" class="fas fa-crown"></i>
+            <span v-if="item.rank>3" style="color:#DE354C"> {{item.rank}}) </span>
+       {{item.itemisim}}
+            </h1>
+          <div class="score w-clearfix" >
+            <h1 class="my-score"><vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puan' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='1' :autoinit='true' /></h1>
+            
+          </div>
+        </div>
+        <div class="progress">
+          <div class="total-progress">
+            <div class="my-progress" :style="'width:'+item.puan*10+'%'" ></div>
+          </div>
+        </div>
+        <div class="meta-stats text-center">
+         
+          <div class="meta-stat ">
+            <h4 class="meta-stat-label">Şirket</h4>
+            <div class="meta-stat-block text-center">
+              <h3 class="meta-stat-num text-center">Deneme</h3>
+            </div>
+          </div>
+          <div class="meta-stat">
+            <h4 class="meta-stat-label">Çıkış Yılı</h4>
+            <div class="meta-stat-block">
+              <h3 class="meta-stat-num">{{item.cyili}}</h3>
+              <h1 class ="meta-stat-total"></h1>
+            </div>
+          </div>
+           <div class="meta-stat">
+            <h4 class="meta-stat-label">Puanlayan Sayısı</h4>
+            <div class="meta-stat-block">
+              <h3 class="meta-stat-num"><vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puancount' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h3>
+              <h1 class ="meta-stat-total text-center"></h1>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
+  </transition-group>
+  </div>
+      </div>
+ </div>
   </div>
 </template>
 
@@ -212,7 +114,7 @@ import Vue3autocounter from "vue3-autocounter";
 import { useRoute, useRouter } from "vue-router";
 export default {
   components: {
-    /* 'vue3-autocounter': Vue3autocounter, */
+    'vue3-autocounter': Vue3autocounter,
   },
 
   setup() {
@@ -222,6 +124,8 @@ export default {
     const videourl = ref(
       "background:url(https://m.media-amazon.com/images/M/MV5BMzY2ODk4NmUtOTVmNi00ZTdkLTlmOWYtMmE2OWVhNTU2OTVkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg) 100% bottom no-repeat;"
     );
+
+    const kategori = ref('');
 
     const route = useRoute();
     const router = useRouter();
@@ -245,18 +149,35 @@ console.log(itemler.value )
       console.log(itemler.value);
     });
 
-    const randompuanla = () => {
-      let random = Math.floor(Math.random() * veriler.value.length);
+   
 
-      router.push({
-        name: "Puanla",
-        params: { Kategori: veriler.value[random].kisim }
-      });
+    const kategorisec = (veri) => {
+      kategori.value=veri.kisim
+
+      itemler.value=[]
+      firestoreRef.collection(kategori.value).orderBy('puan','desc').limit(10).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+            
+              let rank=1
+                  snapshot.forEach(doc => {
+         
+itemler.value.push({...doc.data(),id:doc.id,rank:rank})
+
+rank++
+         
+         
+        });
+            }else{
+
+                console.log("boşşşş")
+              
+
+            }
+        })
     };
 
-    const puanla = Kategori => {
-      router.push({ name: "Puanla", params: { Kategori: Kategori } });
-    };
+    
 
     const beforeEnter = el => {
       el.style.opacity = 0;
@@ -276,25 +197,38 @@ console.log(itemler.value )
       gsap.to(el, {
         opacity: 1,
         y: 0,
-        duration: 1.4,
-        delay: el.dataset.index * 0.2,
+        duration: 3.4,
+        delay: el.dataset.index * 0.3,
         ease: "back"
       });
     };
 
     onMounted(async () => {
-      /*       await firestoreRef.collection('kategoriler').orderBy('click','desc').onSnapshot(snap=>{
+            await firestoreRef.collection('kategoriler').orderBy('click','desc').onSnapshot(snap=>{
                 veriler.value=[]
+                let rank=1
                 snap.docs.forEach(doc=>{
                     veriler.value.push({...doc.data(),id:doc.id})
+                    if (rank==1) {
+                      kategori.value=doc.data().kisim
+                    }
 
+                    rank++
+                    
+                 
+                })
 
-                         firestoreRef.collection(doc.data().kisim).orderBy('puan','desc').limit(5).get()
+                firestoreRef.collection(kategori.value).orderBy('puan','desc').limit(10).get()
+              
         .then(snapshot =>{
             if (snapshot.size > 0) {
+                itemler.value=[]
+              let rank=1
                   snapshot.forEach(doc => {
          
-itemler.value.push({...doc.data(),id:doc.id})
+itemler.value.push({...doc.data(),id:doc.id,rank:rank})
+
+rank++
          
          
         });
@@ -306,310 +240,282 @@ itemler.value.push({...doc.data(),id:doc.id})
             }
         })
 
-                 
-                })
-            }) */
+
+            })
     });
 
     return {
       veriler,
       beforeEnter,
       enter,
-      puanla,
       enterv2,
-      randompuanla,
       itemler,
-      videourl
+      videourl,kategori,kategorisec
     };
   }
 };
 </script>
 
 <style scoped>
-/*	
-	Table Responsive
-	===================
-	Author: https://github.com/pablorgarcia
- */
 
-@charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300, 400, 700);
-
-
-
-h1 {
-  font-size: 3em;
-  font-weight: 300;
-  line-height: 1em;
-  text-align: center;
-  color: #4dc3fa;
+.patterns {
+ height: 20vh;
+ margin-bottom: -5vh;
+ margin-top: -5vh;
 }
 
-h2 {
-  font-size: 1em;
-  font-weight: 300;
-  text-align: center;
-  display: block;
-  line-height: 1em;
-  padding-bottom: 2em;
-  color: #fb667a;
-}
 
-h2 a {
+
+svg text {
+  font-family: Lora;
+  letter-spacing: 10px;
+  stroke: #DE354C;
+  font-size: 5vw;
   font-weight: 700;
-  text-transform: uppercase;
-  color: #fb667a;
-  text-decoration: none;
+  stroke-width: 3;
+ 
+  animation: textAnimate 6s forwards alternate;
+  
 }
 
-.blue {
-  color: #185875;
-}
-.yellow {
-  color: #fff842;
+@keyframes textAnimate {
+  0% {
+    stroke-dasharray: 0 50%;
+    stroke-dashoffset:  20%;
+    fill:white
+
+  }
+  
+  100% {
+    stroke-dasharray: 50% 0;
+    stroke-dashoffstet: -20%;
+    fill: hsla(189, 68%, 75%,0%)
+  }
+  
 }
 
-.container th h1 {
-  font-weight: bold;
-  font-size: 1em;
-  text-align: center;
+
+.dropdown {
+overflow: visible;
+}
+
+.body {
+  font-family: sans-serif;
+}
+
+.custom-select {
+  color: #FFFFFF!important;
+
+ 
+ width: 10vw;
+}
+
+select {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;       /* Remove default arrow */
+    background: transparent url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'><path fill='%23ffffff' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>") right .75rem center/8px 10px no-repeat!important;
+
+}
+
+.dropbtn{
+
+
+  background-color: transparent;
+  border-color: white;
   color: white;
+  width: 12vw;
+ 
+
+  
 }
 
-.container td {
-  font-weight: normal;
-  font-size: 1em;
-  -webkit-box-shadow: 0 2px 2px -2px #0e1119;
-  -moz-box-shadow: 0 2px 2px -2px #0e1119;
-  box-shadow: 0 2px 2px -2px #0e1119;
-}
+
 
 .container {
-  text-align: left;
-  overflow: hidden;
-  width: 80%;
-  margin: 0 auto;
-  display: table;
-  padding: 0 0 8em 0;
+  margin: 48px;
 }
 
-.container td,
-.container th {
-  padding-bottom: 2%;
-  padding-top: 2%;
-  padding-left: 2%;
+.user-card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 65vw;
+  background-color: #181818;
+  margin-bottom: 3vh;
+  
+ position:relative;
+  z-index:30;
+
+
 }
 
-/* Background-color of the odd rows */
-.container tr:nth-child(odd) {
-  background-color: #323c50;
-}
+.user-profile {
 
-/* Background-color of the even rows */
-.container tr:nth-child(even) {
-  background-color: #2c3446;
-}
+  width: 13vw;
 
-.container th {
+ padding-top: 2.8vh;
+  border-right: 1px solid #ddd;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   background-color: #181818;
   text-align: center;
+  
+  
+}
+
+.profile {
+  
+  width: 9vw;
+  height: 15vh;
+  border-radius: 100%;
+  background-color: #ddd;
+  
+}
+
+.last-submit {
+  font-size: 16px;
+  color: #999;
+}
+
+.user-stats {
+  display: inline-block;
+  padding: 1vw;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.w-clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.name {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: -7px;
+  float: left;
+  font-size: 1.8vw;
+  line-height: 42px;
   color: white;
 }
 
-.container td:first-child {
-  color: #fb667a;
+.score {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+  display: flex;
+  float: right;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
 }
 
-.container tr:hover {
-  background-color: #464a52;
-  -webkit-box-shadow: 0 6px 6px -6px #0e1119;
-  -moz-box-shadow: 0 6px 6px -6px #0e1119;
-  box-shadow: 0 6px 6px -6px #0e1119;
-}
-
-.container td:hover {
-  background-color: #fff842;
-  color: #403e10;
-  font-weight: bold;
-  box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
-    #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
-  transform: translate3d(6px, -6px, 0);
-  transition-delay: 0s;
-  transition-duration: 0.4s;
-  transition-property: all;
-  transition-timing-function: line;
-}
-
-@media (max-width: 800px) {
-  .container td:nth-child(4),
-  .container th:nth-child(4) {
-    display: none;
-  }
-}
-
-#highranknumbers {
-  font-size: 1.5vw;
-}
-
-.card {
-  height: 46vh;
-  background: #000;
-  overflow: hidden;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-}
-
-.card .poster {
-  position: relative;
-  overflow: hidden;
-}
-
-.card .poster:before {
-  content: "";
-  position: absolute;
-  bottom: -200px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(0deg, #000 50%, transparent);
-  transition: 0.5s;
-  z-index: 1;
-}
-
-.card:hover .poster:before {
-  bottom: 0;
-}
-
-.card .poster img {
-  width: 100%;
-  transition: 0.5s;
-}
-
-.card:hover .poster img {
-  filter: blur(5px);
-  transform: translateY(-50px);
-}
-
-.details {
-  position: absolute;
-  padding: 1vw;
-  width: 100%;
-  height: 76%;
-  bottom: -20vh;
-  left: 0;
-  box-sizing: border-box;
-  transition: 0.5s;
-  z-index: 2;
-}
-
-.card:hover .details {
-  bottom: 0;
-}
-
-.details h2 {
-  color: #fff;
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-}
-
-.details h2 span {
-  font-size: 14px;
-  color: orange;
-}
-
-.rating {
-  position: relative;
-  padding: 1vh 0;
-}
-
-.rating .fas,
-.rating .far {
-  color: gold;
-  margin-right: 2px;
-  font-size: 16px;
-}
-
-.rating span {
-  color: #fff;
-  padding: 0 5px;
-}
-
-.tags {
-  position: relative;
-  margin-top: 5px;
-}
-
-.tags span {
-  padding: 2px 5px;
-  margin-right: 2px;
-  color: #fff;
+.my-score {
   display: inline-block;
-  border-radius: 4px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+  text-align: right;
 }
 
-.tags span.fantasy {
-  background: mediumpurple;
+.total-score {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: right;
 }
 
-.tags span.mystery {
-  background: mediumturquoise;
+.progress {
+  padding-top: 32px;
+  padding-bottom: 30px;
+  background-color: transparent;
 }
 
-.info {
-  color: #fff;
+.my-progress {
+  width: 80%;
+  height: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  background-color: #DE354C;
 }
 
-.info p {
-  margin: 3vh 0 10px;
+.total-progress {
+  border-radius: 5px;
+  background-color: #ddd;
+  height: 10px;
+  width: 100%;
 }
 
-.cast {
-  position: relative;
-}
-
-.cast h4 {
-  margin: 0;
-  padding: 0;
-  font-size: 20px;
-  color: yellow;
-}
-
-.cast ul {
-  margin: 10px 0 0;
-  padding: 0;
+.meta-stats {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
 }
 
-.cast ul li {
-  list-style: none;
-  width: 35px;
-  height: 35px;
-  background: #fff;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 6px;
-  border: 2px solid #fff;
+.meta-stat {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
 }
 
-.cast ul li img {
-  width: 100%;
+.meta-stat-label {
+  margin-top: 0px;
+  margin-bottom: 16px;
+  color: #999;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
 }
 
-@keyframes fadeUpIn {
-  0% {
-    background-position: 10px;
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
+.meta-stat-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: center;
 }
 
-.ilkler {
-  display: grid;
-  grid-template-columns: 25vw 25vw 25vw;
-  grid-gap: 2vw;
+.meta-stat-num {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: white;
+  font-size: 1.4vw;
+  line-height: 24px;
+  font-weight: 700;
+  
 }
+
+.meta-stat-total {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #DE354C;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+
+
+
 </style>

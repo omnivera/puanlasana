@@ -28,7 +28,7 @@ Your browser does not support the video tag.
       </div>
   
     <hr>
-     <form @submit.prevent="deneme" autocomplete="off">
+     <form @submit.prevent="handleRegister" autocomplete="off">
        <div class="row">
          <div class="col-md-6">
   <div class="form-floating mb-3">
@@ -81,7 +81,7 @@ Your browser does not support the video tag.
 
     <div class="col-md-6">
  
-    <button type="button" id="logbuttonv2" @click="next" class=" btn-lg shadow top-right next btn-block">Kayıt Ol</button>
+    <button type="submit" id="logbuttonv2" class=" btn-lg shadow top-right next btn-block">Kayıt Ol</button>
      
     </div>
 </div>
@@ -102,7 +102,7 @@ Your browser does not support the video tag.
 
 
 
-<div v-if="login" class="d-flex justify-content-center">
+<div v-if="loginkontrol" class="d-flex justify-content-center">
             
 
        
@@ -114,10 +114,10 @@ Your browser does not support the video tag.
       </div>
   
     <hr>
-     <form @submit.prevent="deneme" autocomplete="false">
+     <form @submit.prevent="handleLogin" autocomplete="false">
     <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="loginkullaniciadi" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput"><i class="fa-solid fa-user"></i> Kullanıcı Adı</label>
+  <input type="email" autocomplete="off" required class="form-control" v-model="loginemail" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><i class="fa-solid fa-user"></i> Email</label>
 </div>
 
 <div class="form-floating mb-3">
@@ -136,10 +136,15 @@ Your browser does not support the video tag.
 
     <div class="col-md-6">
  
-    <button type="button" id="logbuttonv2" @click="next" class=" btn-lg shadow top-right next btn-block">Giriş Yap</button>
+    <button  id="logbuttonv2" class=" btn-lg shadow top-right next btn-block">Giriş Yap</button>
      
     </div>
 </div>
+<br>
+<div class="text-center">
+{{hatalogin}}
+</div>
+
      </form>
    
   </div>
@@ -183,12 +188,15 @@ Your browser does not support the video tag.
 </template>
 
 <script>
-
+import useSignup from '@/composables/useSignup'
 import {onMounted,ref} from 'vue'
 import {firestoreRef} from '@/firebase/config'
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
+import moment from 'moment';
+import useLogin from '@/composables/useLogin'
+
 export default {
 
 
@@ -203,12 +211,13 @@ export default {
 gsap.registerPlugin(ScrollTrigger);
 
 
-
+const {hata,signup}=useSignup();
+ const {hatalogin,login}=useLogin();
 
         const veriler=ref([])
 
         const register=ref(false)
-        const login=ref(true)
+        const loginkontrol=ref(true)
 
         const regkullaniciadi=ref('')
         const regparola=ref('')
@@ -216,7 +225,7 @@ gsap.registerPlugin(ScrollTrigger);
         const regcinsiyet=ref('')
         const regdtarih=ref('')
 
-        const loginkullaniciadi=ref('')
+        const loginemail=ref('')
         const loginparola=ref('')
 
 
@@ -224,16 +233,65 @@ gsap.registerPlugin(ScrollTrigger);
           const router=useRouter()
 
 
-        
+          const handleLogin=async ()=>{
+         
+
+
+            
+            const res=await login(loginemail.value,loginparola.value)
+           
+            if(!hatalogin.value){
+
+
+         
+
+                router.push({name:'anasayfa'})
+
+               
+              
+            }
+        }
+
+
+        const handleRegister=async ()=>{
+            const res=await signup(regemail.value,regparola.value,regkullaniciadi.value)
+            if(!hata.value){
+
+              const datauye = {
+                  kullaniciad:regkullaniciadi.value,
+                  parola:regparola.value,
+                  email:regemail.value,
+                  cinsiyet:regcinsiyet.value,
+                  dtarih:moment(regdtarih.value).format('DD/MM/YYYY'),
+                  gtarih:Date.parse(regdtarih.value.toString()),
+                  userimg:"https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png"
+};
+
+const res = firestoreRef.collection('uyeler').doc(regemail.value).set(datauye);
+              
+
+
+                console.log('kullanıcı üye oldu');
+
+                router.push({name:'anasayfa'})
+               
+       
+
+            }
+
+           
+
+                
+        }
 
 
          const goLogin= ()=>{
           
          
          register.value=false
-         login.value=true
+         loginkontrol.value=true
 
-         loginkullaniciadi.value=""
+         loginemail.value=""
          loginparola.value=""
          
          
@@ -245,7 +303,7 @@ gsap.registerPlugin(ScrollTrigger);
           
          
          register.value=true
-         login.value=false
+         loginkontrol.value=false
 
          regkullaniciadi.value=""
          regparola.value=""
@@ -297,17 +355,13 @@ gsap.registerPlugin(ScrollTrigger);
             onMounted(async () => {
 
            
-            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
-                veriler.value=[]
-                snap.docs.forEach(doc=>{
-                    veriler.value.push({...doc.data(),id:doc.id})
-                })
-            })
+           
 
          
         })
 
-        return {veriler,beforeEnter,enter,enterv2,register,login,regdtarih,regcinsiyet,regemail,regkullaniciadi,regparola,goLogin,goRegister
+        return {veriler,beforeEnter,enter,enterv2,register,loginkontrol,regdtarih,regcinsiyet,regemail,regkullaniciadi,regparola,goLogin,goRegister,handleRegister,handleLogin,
+        loginemail,loginparola,hatalogin
         }
         
     }

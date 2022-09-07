@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
 import Home from '../views/Home.vue'
 
 
@@ -22,18 +23,12 @@ import Puanla from '../views/Puanla.vue'
 
 
 
-/* import {authRef} from '../firebase/config'
+import {authRef} from '../firebase/config'
 import getYetki from '@/composables/getYetki'
-const authGiris=(to,from,next)=>{
-  let kullanici=authRef.currentUser
 
-  if(!kullanici){
-    next({name:'Login'})
-  }else{
-    next()
-  }
-}
- */
+
+
+
 
 /* const adminkontrol=async (to,from,next)=>{
 
@@ -70,7 +65,7 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
-   /*  beforeEnter:authGiris, */
+
 
     children:[
       
@@ -80,7 +75,10 @@ const routes = [
         name: 'anasayfa',
         component: Anasayfa,
        
+
       },
+
+      
 
       {
         path: '/Rankings',
@@ -138,36 +136,26 @@ const routes = [
        
       },
 
-
-      {
-        path: '/Login',
-        name: 'Login',
-        component: Login,
-       
-      },
-
-      
-
-
-      
-    
-
      
       
 
 
     ],
+
+    
+
+    
    
     
   },
 
  
-/*   {
-    path: '/login',
+  {
+    path: '/Login',
     name: 'Login',
-    component: Login
-  }, */
-
+    component: Login,
+   
+  },
  
   
 ]

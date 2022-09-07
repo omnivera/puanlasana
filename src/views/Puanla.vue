@@ -396,22 +396,23 @@
         <div class="card yorumcard">
           <div id="yorumyapcardbody" class="card-body p-5">
             <div class="d-flex flex-start w-100">
-              <img class="rounded-circle shadow-1-strong me-3"
-                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp" alt="avatar" width="65"
-                height="65" />
+              <img class="rounded-circle shadow-1-strong me-3"  :src="userimg"  width="65" height="65" />
+                
+                
               <div class="w-100">
-                <h5>Kullanıcı İsmi</h5>
+                 <form @submit.prevent="yorumkayit" autocomplete="false">
+                <h5>{{kullaniciad}}</h5>
 
                 <div class="form-floating">
-  <textarea class="form-control" maxlength="400" v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" required maxlength="400" v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Yorum Yapsana</label>
 </div>
 <br>
    <div class="me-0">
                   
-                  <button @click="yorumkayit" style="float:right" type="button" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button>
+                 <a href="#yorumlar"> <button style="float:right" type="submit" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button></a>
                 </div>
-               
+                 </form>
               </div>
             </div>
           </div>
@@ -431,12 +432,12 @@
       <div v-for="yorum in yorumlar" :key="yorum.id" class="col-md-11 col-lg-9 col-xl-7">
         <div class="d-flex flex-start mb-4">
           <img class="rounded-circle shadow-1-strong me-3"
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar" width="65"
+            :src="yorum.userimg" alt="avatar" width="65"
             height="65" />
           <div  class="card w-100 yorumcard">
             <div id="yorumcardbody" class="card-body p-4">
               <div class="">
-                <h5>{{yorum.kullaniciad}}</h5>
+                <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
                 <p class="small text-muted">{{itemisim}}</p>
                 <p>
                   {{yorum.yorum}}
@@ -504,15 +505,15 @@
 
 <script>
  import {ref,onMounted,watch} from 'vue'
-import {firestoreRef,storageRef} from '@/firebase/config' 
+import {firestoreRef,storageRef,authRef} from '@/firebase/config' 
 
 import { useRoute,useRouter} from 'vue-router'
 import gsap from 'gsap'
 import firebase from 'firebase/app';
 import Vue3autocounter from 'vue3-autocounter';
 /* import LiteYouTubeEmbed from 'vue-lite-youtube-embed' */
-
-
+import moment from 'moment';
+import getUser from "../composables/getUser";
 
 export default {
 
@@ -578,14 +579,26 @@ export default {
          const itemID=ref('')
 
          const yorum=ref('')
-
+const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          const showcardV=ref('visible')
          const showtitle=ref('hidden')
 
          const yorumclick=ref(false)
 
-    
+    const { kullanici } = getUser();
+
+
+    const kullaniciad= ref('')
+    const kullaniciemail= ref('')
+    const userimg= ref('')
+
+
+    authRef.onAuthStateChanged(k=>{
+    kullaniciad.value=k.displayName
+    kullaniciemail.value=k.email
+   
+})
 
       
 
@@ -610,7 +623,29 @@ yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss
         });
             }else{
 
-                console.log("boşşşş")
+                console.log("yorum yok")
+              
+
+            }
+        })
+
+        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+            
+    
+                  snapshot.forEach(doc => {
+         
+
+         kullaniciad.value = doc.data().kullaniciad
+         userimg.value = doc.data().userimg
+
+
+         
+        });
+            }else{
+
+                console.log('uye yok')
               
 
             }
@@ -924,7 +959,11 @@ location. reload()
             });
         })
             }
+
+
         })
+
+      
 
 
          
@@ -956,15 +995,31 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
 
        const datayorum = {
-                   kullaniciad:"Mert Dallar",
+                   kullaniciad:kullaniciad.value,
                    yorum:yorum.value,
                    like:0,
                    dislike:0,
-                   puan:puan.value
+                   puan:puan.value,
+                   userimg:userimg.value,
+                   tarih:moment(tarih.value).format('DD/MM/YYYY'),
+                   gtarih:Date.parse(tarih.value.toString()),
                  
 };
 
-yorumlar.value.unshift({kullaniciad:"Mert Dallar",yorum:yorum.value,like:0,dislike:0,likedcss:"link-muted",dislikedcss:"link-muted",liked:false,disliked:false,puan:puan.value})
+yorumlar.value.unshift({
+  kullaniciad:kullaniciad.value,
+  yorum:yorum.value,
+  like:0,
+  dislike:0,
+  likedcss:"link-muted",
+  dislikedcss:"link-muted",
+  liked:false,
+  disliked:false,
+  puan:puan.value,
+  userimg:userimg.value,
+  tarih:moment(tarih.value).format('DD/MM/YYYY'),
+  gtarih:Date.parse(tarih.value.toString()),
+  })
 
 const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc().set(datayorum);
 
@@ -976,7 +1031,8 @@ const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).col
 
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
-          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet
+          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg
+          
         }
         
     }

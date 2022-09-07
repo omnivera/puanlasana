@@ -33,26 +33,32 @@
 
 
   <transition-group @before-enter="beforeEnter" @enter="enterv2" appear >      
-<div v-for="veri in veriler" :key="veri.id">
-
-<div class="leaderboard">
-  <h1>
-    <svg class="ico-cup">
-      <use xlink:href="#cup"></use>
-    </svg>
-    {{veri.kisim}}
-  </h1>
-  <ol>
-      <div v-for="item in itemler" :key="item.id">
-    <li v-if="item.kategori==veri.kisim">
-      <mark>{{item.itemisim}}</mark>
-      <small style="color:white"><strong> <vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puan' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='1' :autoinit='true' /></strong></small>
-    </li>
-</div>
-  </ol>
-</div>
-
-</div>
+<section id="leaderboard">
+		<nav class="ladder-nav">
+			<div class="ladder-title">
+			<h1>Standings</h1>
+			</div>
+			<div class="ladder-search">
+				<input type="text" id="search-leaderboard" class="live-search-box" placeholder="Search Team, Player..." />
+			</div>
+		</nav>
+		<table id="rankings" class="leaderboard-results" width="100%">
+			<thead>
+				<tr>
+					<th>Rank</th>
+					<th>Team</th>
+					<th>Country</th>
+					<th>P1</th>
+					<th>P2</th>
+          <th>Games Played</th>
+					<th>PTS</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- Load SCRIMcom Leaderboard Ranings -->
+			</tbody>
+		</table>
+	</section>
    </transition-group>  
 
  
@@ -78,7 +84,7 @@ export default {
 
 
     components: {
-    'vue3-autocounter': Vue3autocounter,
+  /*   'vue3-autocounter': Vue3autocounter, */
     
   },
 
@@ -221,220 +227,115 @@ itemler.value.push({...doc.data(),id:doc.id})
 
 <style scoped>
 
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+* {
+  margin:0;
+  padding:0;
+  font-family:Helvetica, Arial, sans-serif;
 }
-
-
-
-/*--------------------
-Leaderboard
---------------------*/
-.leaderboard {
-  
-
-  width: 35vw;
-  height: 36vh;
-background-color: black;
-  border-radius: 10px;
-  box-shadow: 0 7px 30px rgba(62, 9, 11, 0.3);
+body {
+  background:#232323;
 }
-.leaderboard h1 {
-  font-size: 18px;
-  color: #e1e1e1;
-  padding: 10px 10px 0;
-
-  margin-bottom: -1vh;
+input[type=text], textarea, input[type=email], input[type=password], input[type=tel], input[type=url], input[type=search], input[type=date] {
+    padding: 10px;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 24px;
+    color: #555;
+    background-color: #f1f1f1;
+    border: none;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
 }
-.leaderboard h1 svg {
-  width: 25px;
-  height: 26px;
-  position: relative;
-  top: 3px;
-  margin-right: 6px;
-  vertical-align: baseline;
+input[type=text], textarea, input[type=email], input[type=password], input[type=tel], input[type=url], input[type=search], input[type=date], .material.woocommerce-page[data-form-style="default"] input#coupon_code {
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 4px;
+    border: 2px solid rgba(0,0,0,0);
 }
-.leaderboard ol {
-  counter-reset: leaderboard;
-  display: inline;
-  color: black;
-
-
+/* /end Codepen Specific */
+/* Ladder Navigation */
+  #leaderboard {
+      padding:50px;
+  }
+  .ladder-nav {
+      display:flex;
+      flex-wrap:wrap;
+      align-items: center;
+      background:#5055CB;
+      padding:10px 25px;
+      border-radius:10px;
+      border:1px solid #686EF9;
+  }
+  .ladder-title {
+    flex:2;
+  }
+  .ladder-search {
+    flex:1;
+    padding-right:25px;
+  }
+  .ladder-title {
+    font-size:20px;
+    color:#888DFF!important;
+    font-weight:bold;
+    text-transform:uppercase;
+  }
+  .ladder-search input {
+      color:white
+  }
+  .ladder-search input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: #888DFF;
+  }
+  .ladder-search input::-moz-placeholder { /* Firefox 19+ */
+      color: #888DFF;
+  }
+  .ladder-search input:-ms-input-placeholder { /* IE 10+ */
+      color: #888DFF;
+  }
+  .ladder-search input:-moz-placeholder { /* Firefox 18- */
+      color: #888DFF;
+  }
+/* /end Ladder Navigation */
+/* Leaderboard Results */
+.leaderboard-results {
+  text-align:left;
+  border-collapse: collapse;
 }
-.leaderboard ol li {
-    
-  position: relative;
-  z-index: 1;
-  font-size: 0.9vw;
-  counter-increment: leaderboard;
-  padding: 1.5vh 1.5vh 18px 50px;
-  cursor: pointer;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-transform: translateZ(0) scale(1, 1);
-          transform: translateZ(0) scale(1, 1);
-          border-bottom: 1px solid white;
+.leaderboard-results thead th {
+  padding: 25px;
+  color:#747474;
+  font-size:14px;
+  font-weight:bold;
 }
-.leaderboard ol li::before {
-  content: counter(leaderboard);
-  position: absolute;
-  z-index: 2;
-  top: 2vh;
-  left: 15px;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  color: #c24448;
-  background: #fff;
-  border-radius: 20px;
-  text-align: center;
+.leaderboard-results tbody td {
+  padding:15px 25px;
+  background:#1a1a1a;
+  font-size:16px;
+  border-bottom:5px solid #232323;
 }
-.leaderboard ol li mark {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: 18px 10px 18px 50px;
-  margin: 0;
-  background: none;
-  color: #fff;
+.leaderboard-results tbody td:nth-of-type(7) {
+  font-weight:bold;
 }
-.leaderboard ol li mark::before, .leaderboard ol li mark::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  bottom: -11px;
-  left: -9px;
-  border-top: 10px solid #c24448;
-  border-left: 10px solid transparent;
-  -webkit-transition: all .1s ease-in-out;
-  transition: all .1s ease-in-out;
-  opacity: 0;
+.leaderboard-results tbody tr:hover td {
+    background:#1d1d1d;
 }
-.leaderboard ol li mark::after {
-  left: auto;
-  right: -9px;
-  border-left: none;
-  border-right: 10px solid transparent;
+.leaderboard-results tbody tr {
+  color:#747474;
 }
-.leaderboard ol li small {
-  position: relative;
-  z-index: 2;
-  display: block;
-  text-align: right;
+.leaderboard-results tbody tr:first-child {
+  color:#686EF9;
 }
-.leaderboard ol li::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fa6855;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.08);
-  -webkit-transition: all .3s ease-in-out;
-  transition: all .3s ease-in-out;
-  opacity: 0;
+.leaderboard-results tbody span {
+  font-weight:bold;
+  padding:10px 15px;
+  border-radius:50%;
 }
-.leaderboard ol li:nth-child(1) {
-  background: #fa6855;
+.leaderboard-results tbody tr:first-child span {
+  background:#5055CB;
+  color:white;
 }
-.leaderboard ol li:nth-child(1)::after {
-  background: #fa6855;
-}
-.leaderboard ol li:nth-child(2) {
-  background: #e0574f;
-}
-.leaderboard ol li:nth-child(2)::after {
-  background: #e0574f;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
-}
-.leaderboard ol li:nth-child(2) mark::before, .leaderboard ol li:nth-child(2) mark::after {
-  border-top: 6px solid #ba4741;
-  bottom: -7px;
-}
-.leaderboard ol li:nth-child(3) {
-  background: #d7514d;
-}
-.leaderboard ol li:nth-child(3)::after {
-  background: #d7514d;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.11);
-}
-.leaderboard ol li:nth-child(3) mark::before, .leaderboard ol li:nth-child(3) mark::after {
-  border-top: 2px solid #b0433f;
-  bottom: -3px;
-}
-.leaderboard ol li:nth-child(4) {
-  background: #cd4b4b;
-}
-.leaderboard ol li:nth-child(4)::after {
-  background: #cd4b4b;
-  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15);
-}
-.leaderboard ol li:nth-child(4) mark::before, .leaderboard ol li:nth-child(4) mark::after {
-  top: -7px;
-  bottom: auto;
-  border-top: none;
-  border-bottom: 6px solid #a63d3d;
-}
-.leaderboard ol li:nth-child(5) {
-  background: #c24448;
-  border-radius: 0 0 10px 10px;
-}
-.leaderboard ol li:nth-child(5)::after {
-  background: #c24448;
-  box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.12);
-  border-radius: 0 0 10px 10px;
-}
-.leaderboard ol li:nth-child(5) mark::before, .leaderboard ol li:nth-child(5) mark::after {
-  top: -9px;
-  bottom: auto;
-  border-top: none;
-  border-bottom: 8px solid #993639;
-}
-.leaderboard ol li:hover {
-  z-index: 2;
-  overflow: visible;
-}
-.leaderboard ol li:hover::after {
-  opacity: 1;
-  -webkit-transform: scaleX(1.06) scaleY(1.03);
-          transform: scaleX(1.06) scaleY(1.03);
-}
-.leaderboard ol li:hover mark::before, .leaderboard ol li:hover mark::after {
-  opacity: 1;
-  -webkit-transition: all .35s ease-in-out;
-  transition: all .35s ease-in-out;
-}
-
-
-
-/* .list-group-item{
-    background-color: transparent;
-    color: white;
-}
-
-
-.card{
-    background-color: #181818;
-    color: white;
-    width: 33vw;
-    height: 30vh;
-     box-shadow: -5px -5px 25px 5px red, 5px 5px 25px 5px blue;
-} */
-
-
-.rankings{
-    display: grid;
-     grid-template-columns: 3fr 3fr;
-     grid-gap: 3vw;
-   
+.leaderboard-results tbody tr span {
+  background:#262626;
+  color:#747474;
 }
 
 </style>

@@ -393,7 +393,7 @@
 <div class="container text-dark">
     <div class="row d-flex justify-content-center">
       <div class="col-md-8 col-lg-10 col-xl-9">
-        <div class="card yorumcard">
+        <div v-if="!yorumladi" class="card yorumcard">
           <div id="yorumyapcardbody" class="card-body p-5">
             <div class="d-flex flex-start w-100">
               <img class="rounded-circle shadow-1-strong me-3"  :src="userimg"  width="65" height="65" />
@@ -401,7 +401,7 @@
                 
               <div class="w-100">
                  <form @submit.prevent="yorumkayit" autocomplete="false">
-                <h5>{{kullaniciad}}</h5>
+                <h5>{{kullaniciad}} </h5>
 
                 <div class="form-floating">
   <textarea class="form-control" required maxlength="400" v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
@@ -415,17 +415,45 @@
                  </form>
               </div>
             </div>
+            
           </div>
         </div>
+
+   
       
       </div>
+      
+      
     </div>
   </div>
+ 
     </section>
-        <section id="yorumlar" class="mb-5">
+    <div class="ms-auto">
+             <div class="row">
+               
+             </div>
+ 
+           </div>
+
+           <div v-if="yorumladi" class="text-center">
+<div class="checkbox">
+  <div class="check">
+    <div class="line1"></div>
+    <div class="line2"></div>
+  </div>
+  <div class="circle"></div>
+</div>
+<br>
+<p style="color:white">Yorum yaptığınız için teşekkürler</p>
+
+      </div>
+        <section id="yorumlar" class="mt-5">
+           
+         
+
   <transition @before-enter="beforeEnter" @enter="enteryorumlar" appear >      
 <div class="row">
-    
+   
     <div class="container my-2 py-5 text-dark">
     <div class="row d-flex justify-content-center">
         
@@ -579,6 +607,7 @@ export default {
          const itemID=ref('')
 
          const yorum=ref('')
+         const yorumladi=ref(false)
 const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          const showcardV=ref('visible')
@@ -592,6 +621,7 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
     const kullaniciad= ref('')
     const kullaniciemail= ref('')
     const userimg= ref('')
+    const puanladiuser= ref(0)
 
 
     authRef.onAuthStateChanged(k=>{
@@ -612,12 +642,23 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 const yorumshow=()=>{
 
     if (yorumclickcount==0) {
-        firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(5).get()
+         firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(5).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
-         
-yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss:"link-muted",dislikedcss:"link-muted"})
+
+                    if (doc.data().begenenler.includes(kullaniciemail.value)==true) {
+                      yorumlar.value.push({...doc.data(),id:doc.id,liked:true,disliked:false,likedcss:"likeselected",dislikedcss:"link-muted"})
+                    }else if (doc.data().begenmeyenler.includes(kullaniciemail.value)==true) {
+                      yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:true,likedcss:"link-muted",dislikedcss:"likeselected"})
+                    }else if (doc.data().begenenler.includes(kullaniciemail.value)==false && doc.data().begenmeyenler.includes(kullaniciad.value)==false){
+                        yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss:"link-muted",dislikedcss:"link-muted"})
+                    }
+
+
+                    if (kullaniciemail.value==doc.data().kullaniciemail) {
+                      yorumladi.value=true
+                    }
          
          
         });
@@ -629,27 +670,7 @@ yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss
             }
         })
 
-        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
-        .then(snapshot =>{
-            if (snapshot.size > 0) {
-            
-    
-                  snapshot.forEach(doc => {
-         
-
-         kullaniciad.value = doc.data().kullaniciad
-         userimg.value = doc.data().userimg
-
-
-         
-        });
-            }else{
-
-                console.log('uye yok')
-              
-
-            }
-        })
+        
         
      yorumclick.value=true
     }
@@ -667,7 +688,18 @@ yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss
                          
             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
-                   like:parseInt(yorum.like) + 1
+                   like:parseInt(yorum.like) + 1,
+                   begenenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value),
+                   
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) + 1,
+                   begenenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value),
+                   
                   
                    
         })
@@ -676,12 +708,29 @@ yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss
         yorum.likedcss="likeselected"
         yorum.liked=true
 
-                     }else      if (yorum.liked==false && yorum.disliked==true) {
+                     }else  if (yorum.liked==false && yorum.disliked==true) {
                          
             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
                    like:parseInt(yorum.like) + 1,
-                   dislike:parseInt(yorum.dislike) - 1
+                   dislike:parseInt(yorum.dislike) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value),
+                   begenmeyenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value)
+                   
+
+
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) + 1,
+                   dislike:parseInt(yorum.dislike) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value),
+                   begenmeyenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value)
+                   
+
 
                   
                    
@@ -695,9 +744,20 @@ yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss
         yorum.liked=true
                      }else if (yorum.liked==true && yorum.disliked==false) {
                          
-            firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
+             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
-                   like:parseInt(yorum.like) - 1
+                   like:parseInt(yorum.like) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value),
+                   
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   like:parseInt(yorum.like) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value),
+                   
                   
                    
         })
@@ -734,7 +794,16 @@ if (yorum.disliked==false && yorum.liked==false) {
 
             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
-                   dislike:parseInt(yorum.dislike) + 1
+                   dislike:parseInt(yorum.dislike) + 1,
+                   begenmeyenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value)
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) + 1,
+                   begenmeyenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value)
                   
                    
         })
@@ -748,7 +817,20 @@ if (yorum.disliked==false && yorum.liked==false) {
             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
                    dislike:parseInt(yorum.dislike) + 1,
-                   like:parseInt(yorum.like) - 1
+                   like:parseInt(yorum.like) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value),
+                   begenmeyenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value)
+
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) + 1,
+                   like:parseInt(yorum.like) - 1,
+                   begenenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value),
+                   begenmeyenler:firebase.firestore.FieldValue.arrayUnion(kullaniciemail.value)
 
                   
                    
@@ -764,7 +846,16 @@ if (yorum.disliked==false && yorum.liked==false) {
 
             firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorum.id).update({
 
-                   dislike:parseInt(yorum.dislike) - 1
+                   dislike:parseInt(yorum.dislike) - 1,
+                   begenmeyenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value)
+                  
+                   
+        })
+
+        firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorum.id).update({
+
+                   dislike:parseInt(yorum.dislike) - 1,
+                   begenmeyenler:firebase.firestore.FieldValue.arrayRemove(kullaniciemail.value)
                   
                    
         })
@@ -964,7 +1055,35 @@ location. reload()
         })
 
       
+firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+            
+    
+                  snapshot.forEach(doc => {
+         
 
+         kullaniciad.value = doc.data().kullaniciad
+         userimg.value = doc.data().userimg
+         if (doc.data().puanladi==undefined) {
+           puanladiuser.value=0
+         }else{
+         puanladiuser.value=doc.data().puanladi
+         }
+         
+
+        console.log(puanladiuser.value)
+
+
+         
+        });
+            }else{
+
+                console.log('uye yok')
+              
+
+            }
+        })
 
          
         })
@@ -985,6 +1104,28 @@ location. reload()
                    
         })
 
+         await firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+
+                   
+                   puanladi: puanladiuser.value + 1,
+                  
+                  
+                   
+        })
+
+        const dataitem = {
+                   kullaniciad:kullaniciad.value,
+                   kullaniciemail:kullaniciemail.value,
+                   itemisim:itemisim.value,
+                   kategori:kategorigoster.value,
+                   puan:puan.value             
+};
+
+       const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').doc(itemID.value).set(dataitem);
+
+
+        
+
 puanladi.value=true;
 
 ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1))
@@ -993,9 +1134,14 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
                const yorumkayit=async ()=>{
 
+                 yorumladi.value=true
+
+const yorumkod=ref("Y"+Date.parse(new Date()))
 
        const datayorum = {
                    kullaniciad:kullaniciad.value,
+                   kullaniciemail:kullaniciemail.value,
+                   itemisim:itemisim.value,
                    yorum:yorum.value,
                    like:0,
                    dislike:0,
@@ -1003,12 +1149,16 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
                    userimg:userimg.value,
                    tarih:moment(tarih.value).format('DD/MM/YYYY'),
                    gtarih:Date.parse(tarih.value.toString()),
+                   begenenler:[],
+                   begenmeyenler:[]
                  
 };
 
 yorumlar.value.unshift({
   kullaniciad:kullaniciad.value,
+  kullaniciemail:kullaniciemail.value,
   yorum:yorum.value,
+  id:yorumkod.value,
   like:0,
   dislike:0,
   likedcss:"link-muted",
@@ -1019,9 +1169,12 @@ yorumlar.value.unshift({
   userimg:userimg.value,
   tarih:moment(tarih.value).format('DD/MM/YYYY'),
   gtarih:Date.parse(tarih.value.toString()),
+  begenenler:[],
+  begenmeyenler:[]
   })
 
-const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc().set(datayorum);
+const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorumkod.value).set(datayorum);
+const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorumkod.value).set(datayorum);
 
    yorum.value=""
 
@@ -1031,7 +1184,8 @@ const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).col
 
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
-          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg
+          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
+          yorumladi
           
         }
         
@@ -1041,6 +1195,108 @@ const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).col
 </script>
 
 <style scoped>
+
+
+
+.checkbox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 84px;
+  height: 84px;
+  overflow: hidden;
+  margin-left: 47.5%;
+}
+
+
+.check {
+  width: 36px;
+  height: 18px;
+  transform: rotate(-45deg);
+  z-index: 2;
+  overflow: hidden;
+  margin-top: -9px;
+}
+
+.circle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #DE354C;
+  animation-duration: 400ms;
+  animation-name: draw-circle;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+
+.line1 {
+  width: 4px;
+  height: 0;
+  background-color: #fff;
+  animation-name: draw-line1;
+  animation-duration: 160ms;
+  animation-delay: 430ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+
+.line2 {
+  width: 0;
+  height: 4px;
+  margin-top: -4px;
+  background-color: #fff;
+  animation-name: draw-line2;
+  animation-duration: 120ms;
+  animation-delay: 590ms;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+
+@keyframes draw-line1 {
+  0% {
+    height: 0px;
+  }
+
+  100% {
+    height: 18px;
+  }
+}
+
+@keyframes draw-line2 {
+  0% {
+    width: 5px;
+  }
+
+  100% {
+    width: 36px;
+  }
+}
+
+@keyframes draw-circle {
+  0% {
+    width: 0px;
+    height: 0px;
+  }
+  
+  90% {
+    width: 84px;
+    height: 84px;
+  }  
+
+  100% {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+
 
 .ratings{
     margin-right:1vw;

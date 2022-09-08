@@ -117,8 +117,11 @@
               <i class="fa-solid fa-user"></i> {{kullanici.displayName}}
             </button>
 
-            <ul class="dropdown-menu" style="width:100%;" aria-labelledby="dropdownMenuButton1">
-             
+            <ul class="dropdown-menu" style="width:100%;z-index: 1000" aria-labelledby="dropdownMenuButton1">
+             <li class="dropdown-item" @click="goProfile">
+                  <i class="bi bi-person-square"></i> Profil
+                </li>
+
                 <li class="dropdown-item" @click="handleLogout">
                   <i class="fas fa-sign-out-alt"></i> Çıkış Yap
                 </li>
@@ -174,12 +177,17 @@ export default {
     
     });
 
+    const goProfile= ()=>{
+        
+            router.push({name:'Profile'})
+        }
+
       const handleLogout=async ()=>{
             await authRef.signOut()
             router.push({name:'anasayfa'})
         }
 
-    return {kullaniciadi,kullanici,handleLogout};
+    return {kullaniciadi,kullanici,handleLogout,goProfile};
   }
 };
 </script>

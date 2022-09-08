@@ -85,6 +85,10 @@ Your browser does not support the video tag.
      
     </div>
 </div>
+<br>
+<div class="text-center" style="color:#DE354C">
+<strong>{{hata}}</strong>
+</div>
      </form>
    
   </div>
@@ -141,8 +145,8 @@ Your browser does not support the video tag.
     </div>
 </div>
 <br>
-<div class="text-center">
-{{hatalogin}}
+<div class="text-center" style="color:#DE354C">
+<strong>{{hatalogin}}</strong>
 </div>
 
      </form>
@@ -361,7 +365,7 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value).set(datauye);
         })
 
         return {veriler,beforeEnter,enter,enterv2,register,loginkontrol,regdtarih,regcinsiyet,regemail,regkullaniciadi,regparola,goLogin,goRegister,handleRegister,handleLogin,
-        loginemail,loginparola,hatalogin
+        loginemail,loginparola,hatalogin,hata
         }
         
     }

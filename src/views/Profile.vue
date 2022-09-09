@@ -243,15 +243,16 @@
             <div id="yorumcardbody" class="card-body p-4">
               <div class="">
                 <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
-                <p class="small text-muted">{{yorum.itemisim}}</p>
-                <p>
+                <p class="small text-muted">{{yorum.itemisim}} <span v-if="yorum.kategori!=null"> ({{yorum.kategori}})</span> </p>
+                
+                <p class="yorum">
                   {{yorum.yorum}}
                 </p>
 
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center" >
-                    <a  @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2" ><i class="fas fa-thumbs-up me-1"></i>{{yorum.like}}</a>
-                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss" ><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
+                    <a  @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2" ><i class="fas fa-thumbs-up me-1"></i><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorum.like' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></a>
+                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss" ><i class="fas fa-thumbs-down me-1"></i><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorum.dislike' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></a>
                   </div>
                   <a href="#!" class="link-muted">    
 <div class="small-ratings">
@@ -483,6 +484,15 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar
 </script>
 
 <style scoped>
+
+.textarea{
+    width: 100%;
+    color: #FFF;
+    background: transparent;
+    border: none;
+    outline: none;
+     text-align: center;
+}
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
 
@@ -1284,6 +1294,7 @@ background: linear-gradient(to right, #ec2F4B, #009FFF);
   position: static;
   align-items: center;
   justify-content: center;
+  /* box-shadow: -5px -5px 20px 5px red, 5px 5px 20px 5px #DE354C; */
 }
 
 .details {

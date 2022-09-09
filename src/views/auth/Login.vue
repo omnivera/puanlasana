@@ -62,7 +62,6 @@ Your browser does not support the video tag.
     <div class="col-md-6">
         <div class="form-floating">
   <select class="form-select" v-model="regcinsiyet" id="floatingSelect" aria-label="Floating label select example">
-   <option selected disabled value="Erkek">Cinsiyet Seçin</option>
     <option value="Erkek">Erkek</option>
     <option value="Kız">Kız</option>
 
@@ -264,14 +263,14 @@ const {hata,signup}=useSignup();
               const datauye = {
                   kullaniciad:regkullaniciadi.value,
                   parola:regparola.value,
-                  email:regemail.value,
+                  email:regemail.value.toLowerCase(),
                   cinsiyet:regcinsiyet.value,
                   dtarih:moment(regdtarih.value).format('DD/MM/YYYY'),
                   gtarih:Date.parse(regdtarih.value.toString()),
                   userimg:"https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png"
 };
 
-const res = firestoreRef.collection('uyeler').doc(regemail.value).set(datauye);
+const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).set(datauye);
               
 
 

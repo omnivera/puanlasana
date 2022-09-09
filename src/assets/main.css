@@ -294,7 +294,9 @@ td {
  
  
  
- 
+ .yorum{
+  white-space: pre-wrap;overflow: scroll;max-height:20vh;overflow-x: hidden; 
+ }
  
  
  
@@ -313,6 +315,20 @@ td {
    box-shadow: inset 0 0 0 10px;
    
  }
+
+ .yorum::-webkit-scrollbar,
+ .yorum::-webkit-scrollbar-thumb {
+   width: 26px;
+   border-radius: 13px;
+   background-clip: padding-box;
+   border: 10px solid transparent;
+ }
+ 
+ .yorum::-webkit-scrollbar-thumb {        
+   box-shadow: inset 0 0 0 10px;
+ }
+ 
+
 
 
  body::-webkit-scrollbar {

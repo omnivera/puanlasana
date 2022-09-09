@@ -404,7 +404,7 @@
                 <h5>{{kullaniciad}} </h5>
 
                 <div class="form-floating">
-  <textarea class="form-control" required maxlength="400" v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" required maxlength="400"  v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Yorum Yapsana</label>
 </div>
 <br>
@@ -467,7 +467,7 @@
               <div class="">
                 <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
                 <p class="small text-muted">{{itemisim}}</p>
-                <p>
+                <p class="yorum">
                   {{yorum.yorum}}
                 </p>
 
@@ -542,6 +542,7 @@ import Vue3autocounter from 'vue3-autocounter';
 /* import LiteYouTubeEmbed from 'vue-lite-youtube-embed' */
 import moment from 'moment';
 import getUser from "../composables/getUser";
+
 
 export default {
 
@@ -1117,6 +1118,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
                    kullaniciad:kullaniciad.value,
                    kullaniciemail:kullaniciemail.value,
                    itemisim:itemisim.value,
+                   itemID:itemID.value,
                    kategori:kategorigoster.value,
                    puan:puan.value             
 };
@@ -1142,6 +1144,8 @@ const yorumkod=ref("Y"+Date.parse(new Date()))
                    kullaniciad:kullaniciad.value,
                    kullaniciemail:kullaniciemail.value,
                    itemisim:itemisim.value,
+                   itemID:itemID.value,
+                   kategori:kategorigoster.value,
                    yorum:yorum.value,
                    like:0,
                    dislike:0,

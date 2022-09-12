@@ -449,7 +449,7 @@ export default {
 
          const itemisim=ref('')
          const itemresim=ref('')
-         const itemvideo=ref()
+         const itemvideo=ref('')
          const start=ref('')
          const end=ref('')
          const filmozet=ref('')
@@ -550,11 +550,20 @@ setTimeout(  function(){
 
             }else{
 
+              let itemNumber = 1
 
-                         const dataitem = {
+               firestoreRef.collection(kategori.value).orderBy('itemNumber','desc').limit(1).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+             snapshot.forEach(doc => {
+
+
+
+                const dataitem = {
                   itemisim:itemisim.value,
                   itemresim:itemresim.value,
                   itemvideo:itemvideo.value,
+                  itemNumber:doc.data().itemNumber + 1,
                   start:start.value,
                   end:end.value,
                   filmozet:filmozet.value,
@@ -564,10 +573,47 @@ setTimeout(  function(){
                   fsure:fsure.value,
                   totalpuan:0,
                   puancount:0,
-                  kategori:kategori.value
+                  kategori:kategori.value,
+                  watchers:[]
+                  
 };
 
 const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
+
+
+
+
+             })
+               
+
+            }else{
+                const dataitem = {
+                  itemisim:itemisim.value,
+                  itemresim:itemresim.value,
+                  itemvideo:itemvideo.value,
+                  itemNumber:1,
+                  start:start.value,
+                  end:end.value,
+                  filmozet:filmozet.value,
+                  oyuncular:oyuncular.value,
+                  turler:turler.value,
+                  cyili:cyili.value,
+                  fsure:fsure.value,
+                  totalpuan:0,
+                  puancount:0,
+                  kategori:kategori.value,
+                  watchers:[]
+                  
+};
+
+const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
+
+            }
+
+        })
+
+
+                        
 
 
 setTimeout(  function(){
@@ -577,7 +623,7 @@ itemresim.value=""
 itemvideo.value=""
 start.value=""
 end.value=""
-kategori.value=""
+
 
 
       

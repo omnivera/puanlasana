@@ -2,10 +2,11 @@
 
 <div  >
 
+<!-- <div v-if="loading"><Loading/></div> -->
+<div>
+<div class="bigshadow">
 
-<div  class="bigshadow">
-
-<iframe  autofocus id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe v-if="!loading"  autofocus id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -527,7 +528,7 @@
   </transition>
         </section>
   </div>
-
+</div>
 
 </template>
 
@@ -542,7 +543,7 @@ import Vue3autocounter from 'vue3-autocounter';
 /* import LiteYouTubeEmbed from 'vue-lite-youtube-embed' */
 import moment from 'moment';
 import getUser from "../composables/getUser";
-
+import Loading from '@/components/Loading.vue'
 
 export default {
 
@@ -556,7 +557,6 @@ export default {
     setup() {
 
 
-    
 
 
      
@@ -578,6 +578,9 @@ export default {
          const itemresim=ref('')
          const itemisim=ref('')
          const itemvideo=ref('')
+         const itemvideogoster=ref('')
+         const start=ref('')
+         const end=ref('')
 
          const kategorigoster=ref(route.params.Kategori)
 
@@ -621,24 +624,35 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
     const kullaniciad= ref('')
     const kullaniciemail= ref('')
+    const kullaniciuid= ref('')
     const userimg= ref('')
     const puanladiuser= ref(0)
+
+    const loading= ref(true)
+
+ setTimeout(  function(){
+loading.value=false
+
+
+ },500)
 
 
     authRef.onAuthStateChanged(k=>{
     kullaniciad.value=k.displayName
     kullaniciemail.value=k.email
+    kullaniciuid.value=k.uid
    
 })
 
-      
+       setTimeout(  function(){
 
             watch ( () => {
 
-                
+               itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1' 
+
 
 })
-
+ },200)
 
 const yorumshow=()=>{
 
@@ -881,7 +895,7 @@ if (yorum.disliked==false && yorum.liked==false) {
     showtitle.value="visible"
      }
 
-                },3000)
+                },2800)
          
     const doHidden=()=>{
             if (yildizladi.value == false) {
@@ -976,50 +990,59 @@ showtitle.value="hidden"
 
     const next=()=>{
 
-location. reload()
+        firestoreRef.collection(route.params.Kategori).doc(itemID.value).update({
+
+                   
+                   watchers:firebase.firestore.FieldValue.arrayUnion("PAS"+kullaniciuid.value),
+                   
+                  
+                   
+        })
+
+        setTimeout(() => {
+          location. reload()
+        }, 500);
+
+
 
   
         }
 
 
+          const verigetir=async ()=>{
+
+
         
+          }
 
-     onMounted(async () => {
 
-         const ref = firestoreRef.collection(route.params.Kategori).doc();
+           setTimeout(() => {
+          if (sessionStorage.getItem(kullaniciuid.value) !== null) {
+     console.log("var");
+  
+     
+} else {
+console.log("yok");
+
+  
+      firestoreRef.collection(route.params.Kategori).where('watchers','array-contains-any',["PAS"+kullaniciuid.value]).get()
+        .then(snapshot =>{
+           
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+                firestoreRef.collection(route.params.Kategori).doc(doc.id).update({
+
+                   
+                   watchers:firebase.firestore.FieldValue.arrayRemove("PAS"+kullaniciuid.value),
+                   
+                  
+                   
+        })
 
 
            
-         await firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', ref.id).limit(1).get()
-        .then(snapshot =>{
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
-           itemisim.value = doc.data().itemisim
-           itemresim.value = doc.data().itemresim
-           itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?start='+doc.data().start+'&end='+doc.data().end+'&autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
-           totalpuan.value = doc.data().totalpuan
-           puancount.value = doc.data().puancount
-           itemID.value = doc.id
-           oyuncular.value = doc.data().oyuncular
-            turler.value = doc.data().turler
-            cyili.value = doc.data().cyili
-            fsure.value = doc.data().fsure
-            filmozet.value = doc.data().filmozet
 
 
-
-
-
-
- /* for (let i = 0; i < sessionStorage.length; i++) {
-     if (sessionStorage.key(i) == itemisim.value) {
-         return console.log("var")
-     }
-     
- }
-
- sessionStorage.setItem(itemisim.value, itemisim.value);
- return console.log("yok") */
 
 
 
@@ -1027,14 +1050,57 @@ location. reload()
           
          
         });
-            }else{
-                 firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '<', ref.id).limit(1).get()
-                 .then(snapshot => {
-            snapshot.forEach(doc => {
-                itemisim.value = doc.data().itemisim
-           itemresim.value = doc.data().itemresim
-            itemvideo.value = 'https://www.youtube.com/embed/'+doc.data().itemvideo+'?start='+doc.data().start+'&end='+doc.data().end+'&autoplay=1&&mute=1&playlist='+doc.data().itemvideo+'&loop=1&controls=0&modestbranding=1'
+            }
+            
+      
 
+
+        })
+
+sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
+
+      
+}
+        }, 500);
+
+
+
+       
+
+
+     onMounted(async () => {
+
+     
+/* 
+
+         const cityRef = firestoreRef.collection(route.params.Kategori).doc();
+const doc = await cityRef.get();
+if (!doc.exists) {
+  console.log('No such document!');
+} else {
+  console.log('Document data:', doc.data());
+} */
+
+    
+       setTimeout(() => {
+
+
+           firestoreRef.collection(route.params.Kategori)
+          .where('watchers','not-in',["PUA"+kullaniciuid.value,"PAS"+kullaniciuid.value]).limit(1).get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+       
+                    if (localStorage.getItem(doc.id) !== null) {
+                      console.log("var")
+                    }else{
+            itemisim.value = doc.data().itemisim
+           itemresim.value = doc.data().itemresim
+          itemvideo.value=doc.data().itemvideo
+            start.value=doc.data().start
+            end.value=doc.data().end
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
@@ -1044,16 +1110,45 @@ location. reload()
             fsure.value = doc.data().fsure
             filmozet.value = doc.data().filmozet
 
-           
+          
+                    }
       
 
+
+           
+
+
+
+
+
           
-            });
-        })
+          
+         
+        });
             }
+            
+      
 
 
         })
+       }, 600);
+
+    
+ 
+
+          /* await firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', firestoreRef.collection(route.params.Kategori).doc().id).where('puanlayanlar','not-in',[kullaniciuid.value]).limit(1).get() */
+         
+   
+
+
+
+
+
+        
+
+ 
+           
+         
 
       
 firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
@@ -1073,7 +1168,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
          }
          
 
-        console.log(puanladiuser.value)
+
 
 
          
@@ -1114,11 +1209,24 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
                    
         })
 
+
+      await  firestoreRef.collection(route.params.Kategori).doc(itemID.value).update({
+
+                   
+                   watchers:firebase.firestore.FieldValue.arrayUnion("PUA"+kullaniciuid.value),
+                   
+                  
+                   
+        })
+
         const dataitem = {
                    kullaniciad:kullaniciad.value,
                    kullaniciemail:kullaniciemail.value,
                    itemisim:itemisim.value,
+                   itemresim:itemresim.value,
                    itemID:itemID.value,
+                   tarih:moment(tarih.value).format('DD/MM/YYYY'),
+                   gtarih:Date.parse(tarih.value.toString()),
                    kategori:kategorigoster.value,
                    puan:puan.value             
 };
@@ -1127,7 +1235,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
 
         
-
+  localStorage.setItem(itemID.value,itemID.value)
 puanladi.value=true;
 
 ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1))
@@ -1189,7 +1297,7 @@ const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collect
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi
+          yorumladi,loading,itemvideogoster
           
         }
         

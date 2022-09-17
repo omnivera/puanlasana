@@ -6,7 +6,7 @@
 <div>
 <div class="bigshadow">
 
-<iframe   id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
 
 
 
@@ -545,8 +545,6 @@ import moment from 'moment';
 import getUser from "../composables/getUser";
 import Loading from '@/components/Loading.vue'
 
-
-
 export default {
 
       components: {
@@ -559,8 +557,12 @@ export default {
     setup() {
 
 
+if (sessionStorage.getItem('pasladi')==null) {
+          
+          sessionStorage.setItem('pasladi', JSON.stringify([]));
+        }
 
-
+let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
      
         const kategorikontrol=ref(false)
          const veriler=ref([])
@@ -577,12 +579,12 @@ export default {
          const basarili=ref(false)
 
 
-         const itemresim=ref()
-         const itemisim=ref()
-         const itemvideo=ref()
-         const itemvideogoster=ref()
-         const start=ref()
-         const end=ref()
+         const itemresim=ref('')
+         const itemisim=ref('')
+         
+         const itemvideogoster=ref('')
+         const start=ref('')
+         const end=ref('')
 
          const kategorigoster=ref(route.params.Kategori)
 
@@ -623,78 +625,29 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
     const { kullanici } = getUser();
 
-
+  let UIDPUA = ""
     const kullaniciad= ref('')
     const kullaniciemail= ref('')
     const kullaniciuid= ref('')
     const userimg= ref('')
     const puanladiuser= ref(0)
 
+
     const loading= ref(true)
 
 
+   /*  let itemarray= JSON.parse(localStorage.getItem('itemler'))
+    let iteminfo = itemarray.filter((item)=>item.id == route.params.itemID ) 
+    console.log(iteminfo[0].itemvideo) */
 
-            if (sessionStorage.getItem('pasladi')==null) {
-          
-          sessionStorage.setItem('pasladi', JSON.stringify([]));
-        }
+     let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+    
+    const itemvideo=ref()
 
-
-        if (localStorage.getItem('puanladi')==null) {
+    if (localStorage.getItem('puanladi')==null) {
           
           localStorage.setItem('puanladi', JSON.stringify([]));
         }
-
-        
-          let itemarray= JSON.parse(localStorage.getItem('itemler'))
-          itemarray = itemarray.filter((item)=>item.kategori == route.params.Kategori)
-          let puanarray= JSON.parse(localStorage.getItem('puanladi'))
-          let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
-
-          let pool=[]
-
-          let random=0
-
-
-          if (puanarray!=null && pasarray!=null) {
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray!=null && pasarray==null){
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray==null && pasarray!=null){
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else{
-            random = itemarray[Math.floor(Math.random()*itemarray.length)];
-          }
-         
-
-        
-
-
-       
-
-          console.log(pasarray)
-
-
-
-                 
-     /* let puaninfo = puanarray.filter((puan)=>puan.itemID == doc.id) */
-
-
-
-
-
-
-
-
-
-
-
-
-         
 
  setTimeout(  function(){
 loading.value=false
@@ -710,19 +663,15 @@ loading.value=false
    
 })
 
-       
+       setTimeout(  function(){
 
             watch ( () => {
 
-              if (itemvideo.value != "") {
-                 itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1' 
-              }
-
-              
+               itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1' 
 
 
 })
-
+ },200)
 
 const yorumshow=()=>{
 
@@ -1060,129 +1009,21 @@ showtitle.value="hidden"
 
     const next=()=>{
 
+
+
       pasarray.unshift({itemID:itemID.value,itemisim:itemisim.value,kategori:route.params.Kategori})
 
  sessionStorage.setItem('pasladi', JSON.stringify(pasarray))
 
-    
-
         setTimeout(() => {
-          location. reload()
+          router.push({name:'Puanla',params:{Kategori:route.params.Kategori}})
+          
         }, 500);
 
 
 
   
         }
-
-
-    /*     const next=()=>{
-
-      pasarray.unshift({itemID:itemID.value,itemisim:itemisim.value,kategori:route.params.Kategori})
-
- sessionStorage.setItem('pasladi', JSON.stringify(pasarray))
-
-    
-
-        setTimeout(() => {
-        yeni.value=false
-        showcardV.value="fastvisible"
-        yeni.value=true
-        
-        showtitle.value="fasthidden"
-        
-
-
-
-           
-
-
-
-
-                if (sessionStorage.getItem('pasladi')==null) {
-          
-          sessionStorage.setItem('pasladi', JSON.stringify([]));
-        }
-
-
-        if (localStorage.getItem('puanladi')==null) {
-          
-          localStorage.setItem('puanladi', JSON.stringify([]));
-        }
-
-        
-          let itemarray= JSON.parse(localStorage.getItem('itemler'))
-          itemarray = itemarray.filter((item)=>item.kategori == route.params.Kategori)
-          let puanarray= JSON.parse(localStorage.getItem('puanladi'))
-          let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
-
-          let pool=[]
-
-          let random=0
-
-
-          if (puanarray!=null && pasarray!=null) {
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray!=null && pasarray==null){
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray==null && pasarray!=null){
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
-            random = pool[Math.floor(Math.random()*pool.length)];
-          }else{
-            random = itemarray[Math.floor(Math.random()*itemarray.length)];
-          }
-
-
-             firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(),'==',random.id).get()   
-        .then(snapshot =>{
-            
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
-
-
-   
-
-
-             itemvideo.value=doc.data().itemvideo
-            itemisim.value = doc.data().itemisim
-           itemresim.value = doc.data().itemresim
-           totalpuan.value = doc.data().totalpuan
-           puancount.value = doc.data().puancount
-           itemID.value = doc.id
-           oyuncular.value = doc.data().oyuncular
-            turler.value = doc.data().turler
-            cyili.value = doc.data().cyili
-            fsure.value = doc.data().fsure
-            filmozet.value = doc.data().filmozet
-       
-                   
-
-
-           
-
-
-
-
-
-          
-          
-         
-        });
-            }
-            
-      
-
-
-        })
-        }, 500);
-
-
-
-  
-        } */
 
 
           const verigetir=async ()=>{
@@ -1201,7 +1042,7 @@ showtitle.value="hidden"
 console.log("yok");
 
   
- /*      firestoreRef.collection(route.params.Kategori).where('watchers','array-contains-any',[["PAS"+kullaniciuid.value]]).get()
+      firestoreRef.collection(route.params.Kategori).where('watchers','array-contains-any',["PAS"+kullaniciuid.value]).get()
         .then(snapshot =>{
            
             if (snapshot.size > 0) {
@@ -1231,7 +1072,7 @@ console.log("yok");
       
 
 
-        }) */
+        })
 
 sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
@@ -1250,24 +1091,13 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
 
     
-    
-
-      
-    
+      const doc = await firestoreRef.collection(route.params.Kategori).doc(route.params.itemID).get()
 
 
-         await  firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(),'==',random.id).get()   
-        .then(snapshot =>{
-            
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
+     
 
-
-   
-
-
-             itemvideo.value=doc.data().itemvideo
-            itemisim.value = doc.data().itemisim
+           itemvideo.value = doc.data().itemvideo
+           itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
@@ -1277,27 +1107,8 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
             cyili.value = doc.data().cyili
             fsure.value = doc.data().fsure
             filmozet.value = doc.data().filmozet
-       
-                   
 
-
-           
-
-
-
-
-
-          
-          
-         
-        });
-            }
-            
-      
-
-
-        })
-
+     
 
     
  
@@ -1316,8 +1127,8 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
            
          
 
-      setTimeout(() => {
-        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+      
+firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
             
@@ -1346,8 +1157,6 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
             }
         })
-      }, 500);
-
 
          
         })
@@ -1356,6 +1165,8 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
                  const verikayit=async ()=>{
 
+                 
+UIDPUA="PUA"+kullaniciuid.value
 
 
 
@@ -1368,7 +1179,8 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
                    
         })
 
-       firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+
+        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
             
@@ -1398,6 +1210,8 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
             }
         })
 
+      
+
 
     
 
@@ -1419,7 +1233,7 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
  localStorage.setItem('puanladi', JSON.stringify(puanarray)) */
         
-
+  
 puanladi.value=true;
 
 ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1))

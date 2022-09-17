@@ -3,7 +3,7 @@
   <div>
     
     <br>
-    <div class="patterns">
+    <!-- <div class="patterns">
   <svg width="100%" height="100%">
    
               
@@ -12,22 +12,29 @@
     
    
  <text x="50%" y="60%"  text-anchor="middle"  >
-   Sıralamalar
+   Top 10
  </text>
  </svg>
-</div>
+</div> -->
+
+
+<div class="baslik d-flex justify-content-center">
+          <strong>
+             <span class="baslik">Top<span class="kbaslik2">10</span></span> 
+            
+          </strong>
+ </div>
 
  <div class="d-flex justify-content-center">
+
+   <div class="kategoriler">
+
+ <button v-for="veri in veriler" :key="veri.id" :class="veri.katbuttoncss" @click="kategorisec(veri)" type="button" class="btn btn-outline-dark">{{veri.kisim}}</button>
+
+ </div>
+<hr>
  
-<div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle dropbtn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    {{kategori}}
-  </button>
-  <ul class="dropdown-menu text-center" style="min-width: 100%;" aria-labelledby="dropdownMenuButton1">
-    <li v-for="veri in veriler" :key="veri.id" @click="kategorisec(veri)"><a class="dropdown-item">{{veri.kisim}}</a></li>
-   
-  </ul>
-</div>
+
      </div>
   
  <div class="d-flex justify-content-center">
@@ -175,13 +182,24 @@ rank++
 
             }
         })
+
+
+        kategorisec.value=veri.kisim
+
+for (let i = 0; i < veriler.value.length; i++) {
+  veriler.value[i].katbuttoncss="katbutton"
+  
+}
+veri.katbuttoncss="katbuttonhover"
+
+
     };
 
     
 
     const beforeEnter = el => {
       el.style.opacity = 0;
-      el.style.transform = "translateY(100px)";
+      el.style.transform = "translateY(0px)";
     };
 
     const enter = el => {
@@ -197,21 +215,35 @@ rank++
       gsap.to(el, {
         opacity: 1,
         y: 0,
-        duration: 3.4,
-        delay: el.dataset.index * 0.3,
+        duration: 1.5,
+        delay: el.dataset.index * 0.2,
         ease: "back"
       });
     };
+
+
+    const kategorisecti= (kategori)=>{
+
+
+
+
+
+}
 
     onMounted(async () => {
             await firestoreRef.collection('kategoriler').orderBy('click','desc').onSnapshot(snap=>{
                 veriler.value=[]
                 let rank=1
                 snap.docs.forEach(doc=>{
-                    veriler.value.push({...doc.data(),id:doc.id})
+                  
                     if (rank==1) {
                       kategori.value=doc.data().kisim
+                        veriler.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbuttonhover"})
+                    }else{
+                 veriler.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbutton"})
                     }
+
+                     
 
                     rank++
                     
@@ -258,6 +290,68 @@ rank++
 
 <style scoped>
 
+
+.baslik {
+  color: white;
+  font-size: 2.7vw;
+  margin-bottom: 1vh;
+  margin-top: 1.1vh;
+  letter-spacing: 0.3vw;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslik {
+  color: #DE354C;
+  font-size: 1.9vw;
+  margin-bottom: 1.3vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslik2 {
+  color: #DE354C;
+  font-size: 3vw;
+  margin-bottom: 1.3vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kategoriler{
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+  margin-bottom: -2vh;
+}
+
+.katbutton{
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  margin-left: 12px;
+  transition: all .2s ease-in-out;
+}
+
+.katbuttonhover{
+  background-color: #ffffff;
+  color: black;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  margin-left: 12px;
+  transition: all .2s ease-in-out;
+}
+
+.katbutton:hover{
+  background-color: #181818;
+  transform: scale(1.1);
+  
+}
+
+
+
 .patterns {
  height: 20vh;
  margin-bottom: -5vh;
@@ -269,8 +363,8 @@ rank++
 svg text {
   font-family: Lora;
   letter-spacing: 10px;
-  stroke: #DE354C;
-  font-size: 5vw;
+  stroke: white;
+  font-size: 4vw;
   font-weight: 700;
   stroke-width: 3;
  
@@ -282,14 +376,14 @@ svg text {
   0% {
     stroke-dasharray: 0 50%;
     stroke-dashoffset:  20%;
-    fill:white
+    fill:#DE354C
 
   }
   
   100% {
     stroke-dasharray: 50% 0;
     stroke-dashoffstet: -20%;
-    fill: hsla(189, 68%, 75%,0%)
+    fill: black
   }
   
 }
@@ -346,8 +440,15 @@ select {
   margin-bottom: 3vh;
   
  position:relative;
-  z-index:30;
+ 
+  transition: all .2s ease-in-out;
 
+
+}
+
+.user-card:hover {
+
+transform: scale(1);
 
 }
 
@@ -361,6 +462,7 @@ select {
   border-bottom-left-radius: 8px;
   background-color: #181818;
   text-align: center;
+  
   
   
 }

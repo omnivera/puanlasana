@@ -34,21 +34,13 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
-            <router-link :to="{name:'Kategoriler'} ">
-              <a class="nav-link" aria-current="page" href="#">
-                <button class="btn btn-outline-light" type="submit">
-                  <i class="fa-solid fa-cubes"></i> Kategoriler
-                </button>
-              </a>
-            </router-link>
-          </li>
+          
 
           <li class="nav-item">
             <router-link :to="{name:'Rankings'} ">
               <a class="nav-link" aria-current="page" href="#">
                 <button class="btn btn-outline-light" type="submit">
-                  <i class="fa-solid fa-ranking-star"></i> Sıralamalar
+                  <i class="fa-solid fa-ranking-star"></i> Top 10
                 </button>
               </a>
             </router-link>
@@ -64,7 +56,7 @@
             </router-link>
           </li>
 
-          <li class="nav-item">
+          <li v-if="kullaniciemail=='mert@gmail.com' || kullaniciemail=='haktanuzun@gmail.com' " class="nav-item">
             <router-link :to="{name:'Kategoriekle'} ">
               <a class="nav-link" aria-current="page" href="#">
                 <button class="btn btn-outline-light" type="submit">
@@ -74,7 +66,7 @@
             </router-link>
           </li>
 
-          <div class="dropdown nav-link">
+          <div v-if="kullaniciemail=='mert@gmail.com' || kullaniciemail=='haktanuzun@gmail.com' " class="dropdown nav-link">
             <button
               class="btn btn-outline-light dropdown-toggle"
               id="dropdownMenuButton1"
@@ -152,21 +144,30 @@ export default {
     const router = useRouter();
     const route = useRoute();
     const { kullanici } = getUser();
-    const kullaniciadi = ref("");
+    const kullaniciad = ref("");
+    const kullaniciemail = ref("");
     const adminkontrol = ref("");
- let kullaniciemail = ""
+
   
  watch ( () => {
 
 
 })
 
+
  
 
     onMounted(async () => {
 
+     
+
       
 
+await authRef.onAuthStateChanged(k=>{
+    kullaniciad.value=k.displayName
+    kullaniciemail.value=k.email
+   
+})
 
    
 
@@ -187,7 +188,7 @@ export default {
             router.push({name:'anasayfa'})
         }
 
-    return {kullaniciadi,kullanici,handleLogout,goProfile};
+    return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail};
   }
 };
 </script>

@@ -1,515 +1,101 @@
 .<template>
 
 
-   
+   <section id="main-landing">
+    <div id="black-ov"></div>
+  
 
-<div>
-<!--   <div class="header">
-      <div class="header__left">
-        <i id="menu" class="material-icons">menu</i>
-        <img
-          src="https://www.youtube.com/about/static/svgs/icons/brand-resources/YouTube-logo-full_color_light.svg?cache=72a5d9c"
-          alt=""
-        />
-      </div>
+    <div id="main-landing-message" style="margin-top:-3vh">
+        <div class="bigshadow">
 
-      <div class="header__search">
-        <form action="">
-          <input type="text" placeholder="Search" />
-          <button><i class="material-icons">search</i></button>
-        </form>
-      </div>
+<!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
-      <div class="header__icons">
-        <i class="material-icons display-this">search</i>
-        <i class="material-icons">videocam</i>
-        <i class="material-icons">apps</i>
-        <i class="material-icons">notifications</i>
-        <i class="material-icons display-this">account_circle</i>
-      </div>
-    </div> -->
-    <!-- Header Ends -->
+<video id="myVideo" muted autoplay  loop>
+  <source src="@/assets/videos/mainvideo3.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
 
-    <!-- Main Body Starts -->
-    <div class="mainBody">
-      <!-- Sidebar Starts -->
-     <!--  <div class="sidebar">
-        <div class="sidebar__categories">
-          <div v-for="kategori in kategoriler" :key="kategori.id" class="sidebar__category text-white">
-            <i class="fas fa-dice-d6"></i>
-            <span style="text-align:center">{{kategori.kisim}}</span>
-          </div>
-          
-        </div>
-     
-      </div> -->
-      <!-- Sidebar Ends -->
+   </div>
+        <div class="d-flex justify-content-center">
+            
 
-      <div class="col-md-2"></div>
+       
+<transition @before-enter="beforeEnter" @enter="enterv2" appear >      
+     <img @click="randompuanla" data-bs-toggle="tooltip" data-bs-placement="top" title="Puanlamak için tıkla" src="@/assets/plogo6.png" style="width:13vw;" alt="">
+         </transition>  
 
-      <div class="col-md-8">
-        <!-- Videos Section -->
-      <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-      <div class="videos">
-        <h1>Recommended</h1>
 
-        <div class="videos__container">
-          
-          <!-- Single Video starts -->
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://m.media-amazon.com/images/M/MV5BMzY2ODk4NmUtOTVmNi00ZTdkLTlmOWYtMmE2OWVhNTU2OTVkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>
-                  Spiderman 2
-                </h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-          <!-- Single Video Ends -->
 
-          <!-- Single Video starts -->
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>Build A Password Generator with React JS - Beginners Tutorial</h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-          <!-- Single Video Ends -->
+       
+   </div>
 
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Bella Ciao Full Song | La Casa De Papel | Money Heist | Netflix India</h3>
-                <a href="">Netflix</a>
-                <span>10M Views • 11 Months Ago</span>
-              </div>
-            </div>
-          </div>
+<div class="row">
 
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
-                <a href=""> Chispa Motivation</a>
-                <span>10M Views • 1 Month Ago</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Javascript Fundamentals</h3>
-                <a href="">Coding Addict</a>
-                <span>179K • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
+         <div class="d-flex justify-content-center">
+  <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+      <h1>puanlasana</h1>
+      
+        </transition> 
 
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build 15 JavaScript Projects - Vanilla JavaScript Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>470K Views • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build Real Time Face Detection With JavaScript</h3>
-                <a href=""> Web Dev Simplified </a>
-                <span>875K Views • 1 Year Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>AWS Basics for Beginners - Full Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>36K Views • 1 Day Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/PpXUTUXU7Qc/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>
-                  Top 5 Programming Languages to Learn in 2021 | Best Programming Languages to Learn
-                </h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>Build A Password Generator with React JS - Beginners Tutorial</h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Bella Ciao Full Song | La Casa De Papel | Money Heist | Netflix India</h3>
-                <a href="">Netflix</a>
-                <span>10M Views • 11 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
-                <a href=""> Chispa Motivation</a>
-                <span>10M Views • 1 Month Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Javascript Fundamentals</h3>
-                <a href="">Coding Addict</a>
-                <span>179K • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build 15 JavaScript Projects - Vanilla JavaScript Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>470K Views • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build Real Time Face Detection With JavaScript</h3>
-                <a href=""> Web Dev Simplified </a>
-                <span>875K Views • 1 Year Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>AWS Basics for Beginners - Full Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>36K Views • 1 Day Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/PpXUTUXU7Qc/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>
-                  Top 5 Programming Languages to Learn in 2021 | Best Programming Languages to Learn
-                </h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
-              </div>
-              <div class="title">
-                <h3>Build A Password Generator with React JS - Beginners Tutorial</h3>
-                <a href="">FutureCoders</a>
-                <span>10M Views • 3 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Bella Ciao Full Song | La Casa De Papel | Money Heist | Netflix India</h3>
-                <a href="">Netflix</a>
-                <span>10M Views • 11 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
-                <a href=""> Chispa Motivation</a>
-                <span>10M Views • 1 Month Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Javascript Fundamentals</h3>
-                <a href="">Coding Addict</a>
-                <span>179K • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build 15 JavaScript Projects - Vanilla JavaScript Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>470K Views • 8 Months Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>Build Real Time Face Detection With JavaScript</h3>
-                <a href=""> Web Dev Simplified </a>
-                <span>875K Views • 1 Year Ago</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="video">
-            <div class="video__thumbnail">
-              <img src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg" alt="" />
-            </div>
-            <div class="video__details">
-              <div class="author">
-                <img
-                  src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
-                  alt=""
-                />
-              </div>
-              <div class="title">
-                <h3>AWS Basics for Beginners - Full Course</h3>
-                <a href=""> freeCodeCamp.org </a>
-                <span>36K Views • 1 Day Ago</span>
-              </div>
-            </div>
-          </div> 
-        </div>
-      </div>
-      </transition>
-      </div>
 
       
+         </div>
+
+         </div>
+
+         <div class="row">
+
+
+         <div class="d-flex justify-content-center">
+            
+
+            <div class="row g-2">
+
+                <div class="col">
+
+    <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+     <button type="button" id="mainbutton" @click="randompuanla" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> <br> Puanlasana</button>
+      </transition> 
+
+                </div>
+
+
+                <div class="col">
+                     <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+              <button type="button" id="mainbutton" @click="kategorigit" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> <br> Kategoriler</button>
+  
+     </transition> 
+                </div>
+
+
+
+            </div>
+
+    
+
+            
+  
+             </div>
+         </div>
+ 
+   
+
+
+
+        
+
+
     </div>
-</div>
+
+  </section>
+
+
+ 
+
+
+
+  
 
 
 
@@ -526,55 +112,104 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
 export default {
 
+
+    mounted() {
+
+  document.getElementById("myVideo").volume = 0.2;
+
+  }, 
     setup() {
 
-      const kategoriler = ref([])
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 
 
-    const beforeEnter = el => {
-      el.style.opacity = 0;
-      el.style.transform = "translateY(100px)";
-    };
-
-    const enter = el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        delay: el.dataset.index * 0.2
-      });
-    };
-
-    const enterv2 = el => {
-      gsap.to(el, {
-        opacity: 1,
-        y: 0,
-        duration: 2,
-        delay: el.dataset.index * 0.3,
-        ease: "back"
-      });
-    };
+        const veriler=ref([])
 
 
+            const route=useRoute()
+          const router=useRouter()
 
-      onMounted(async () => {
+
+           const randompuanla= ()=>{
+
+
+               let random = Math.floor(Math.random() * veriler.value.length);
+          
+         
+         router.push({name:'Puanla',params:{Kategori:veriler.value[random].kisim}})
+         
+
+        }
+
+
+         const puanla= (Kategori)=>{
+          
+         
+         router.push({name:'Puanla',params:{Kategori:Kategori}})
+         
+
+        }
+
+          const kategorigit= (Kategori)=>{
+          
+         
+         router.push({name:'Kategoriler'})
+         
+
+        }
+
+
+               const beforeEnter=(el)=>{
+          el.style.opacity=0;
+          el.style.transform='translateY(100px)'
+        }
+
+
+
+
+           const enter=(el)=>{
+
+          gsap.to(el,{
+    
+            opacity:1,
+            y:0,
+            duration:1,
+            delay:el.dataset.index*0.2,
+
+            
+           
+          })
+        }
+
+
+          const enterv2=(el)=>{
+
+          gsap.to(el,{
+            opacity:1,
+            y:0,
+            duration:1.5,
+            delay:el.dataset.index*0.2,
+            ease:'back'
+          })
+        }
+
+            onMounted(async () => {
 
            
-            await firestoreRef.collection('kategoriler').orderBy('click','desc').onSnapshot(snap=>{
-                kategoriler.value=[]
+            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                veriler.value=[]
                 snap.docs.forEach(doc=>{
-                    kategoriler.value.push({...doc.data(),id:doc.id})
+                    veriler.value.push({...doc.data(),id:doc.id})
                 })
             })
 
          
         })
 
-
-
-        return {kategoriler,beforeEnter,enter,enterv2
+        return {veriler,beforeEnter,enter,puanla,enterv2,randompuanla,kategorigit
         }
         
     }
@@ -584,257 +219,308 @@ export default {
 
 <style scoped>
 
+@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@font-face {
+  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
+    format("woff2");
+  font-family: "Meta";
+  font-style: normal;
+  font-weight: normal;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
+
+
+
+@keyframes switch {
+    0% { opacity: 0;filter: blur(10px); transform:scale(7)}
+   
+
+
+    100% { transform:scale(1); filter: blur(0);}
 }
 
-/* header */
 
-.material-icons {
-  color: rgb(96, 96, 96);
+@keyframes MoveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-  padding: 15px;
+@-webkit-keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
 }
 
-.header__left {
-  display: flex;
-  align-items: center;
+@keyframes action {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
 }
 
-.header__left img {
-  width: 100px;
-  margin-left: 15px;
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+ pointer-events: none;
+  
+  
 }
 
-.header i {
-  padding: 0 7px;
+img {
+  display: block;
+  cursor: pointer;
+ -webkit-animation: action 1s infinite  alternate;
+    animation: action 1s infinite  alternate;
+    
+    
+}
+
+
+.baslik{
+      font-variation-settings: "wght" 900, "ital" 0;
+      color: #DE354C;
+      font-size:2.3vw ;
+
+}
+
+main {
+  transition: all 0.5s;
+  -webkit-text-stroke: 4px #d6f4f4;
+  font-variation-settings: "wght" 900, "ital" 0;
+  font-size: 4vw;
+  text-align: center;
+  color: transparent;
+  font-family: "Meta", sans-serif;
+  
   cursor: pointer;
 }
 
-.header__search form {
-  border: 1px solid #ddd;
-  height: 35px;
-  margin: 0;
-  padding: 0;
-  display: flex;
+main:hover {
+  font-variation-settings: "wght" 100, "ital" 0;
+  text-shadow: none;
 }
 
-.header__search input {
-  width: 500px;
-  padding: 10px;
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  height: 100%;
+
+h1{
+    font-size: 3vw;
+    color: #DE354C;
 }
 
-.header__search button {
-  padding: 0;
+/* GLOBAL STYLES */
+body {
   margin: 0;
-  height: 100%;
-  border: none;
-  border-radius: 0;
+  font-family: sans-serif;
+   overflow: hidden
 }
 
-/* Sidebar */
-.mainBody {
-  height: calc(100vh - 70px);
-  display: flex;
-  overflow-y: scroll;
-  background-color: black;
+
+h1, h2, p {
+  margin: 0;
+ 
+
+  
+}
+a {
+  display: block;
+}
+
+.option {
+ 
+  
+  align-items: center;
+  height: 91px;
+  width: 460px;
+  color: #FFF;
+  padding: 40px 0;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.option:hover {
+  opacity: 1;
+}
+
+.option svg {
+  margin-bottom: 5px;
+  fill: #FFF;
+}
+.option p {
+  font-weight: 600;
+}
+/* ================= */
+/* SECTION MAIN LANDING */
+#main-landing {
+ /*  background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg'); */
+  padding: 20px 40px;
+  position: relative;
+ background-size: cover;
+ height: 95vh;
+  overflow: hidden
  
 }
 
-.sidebar {
-  height: 100%;
-  width: 230px;
-  background-color: black;
-  overflow-y: scroll;
-  border-right: 1px solid #454545;
 
-
+/* HEADER */
+/* logo */
+#brand svg {
+  width: 180px;
+  height: auto;
 }
 
-.sidebar__categories {
+/* MAIN LANDING MESSAGE */
+/* black gradient overlay */
+#black-ov {
+  position: absolute;
+  height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  background: linear-gradient(to right,#000000de, #00000029);
+  left: 0;
+  top: 0;
+}
+
+
+
+#main-landing-message {
+
+  padding: 18em 0;
+}
+#main-landing-message h1, h2 {
+  color: #FFF;
+
+  margin-top: 2vh;
+  font-family: 'Comfortaa', cursive;
+  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -4px 10px rgba(255,255,255,0.3);
+  
+
+}
+#main-landing-message > h1 {
+  font-size: 6em;
   margin-bottom: 15px;
-  margin-top: 15px;
-  text-align: center;
   
 }
-
-.sidebar__category {
+#main-landing-message > h2 {
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+#main-landing-message > a {
+ 
+  font-size: 15px;
+  padding: 12px 26px;
+  letter-spacing: 1px;
+}
+#option-select-view {
+  background: #000;
+}
+/* SELECT OPTIONS */
+#option-select-clickable-options {
+  background-color: #141414;
   display: flex;
-  align-items: center;
-  padding: 12px 25px;
-  
-}
-
-.sidebar__category span {
-  margin-left: 15px;
-    color: white;
-}
-
-.sidebar__category:hover {
-  background: #DE354C;
-  color: black;
-  cursor: pointer;
-}
-
-.sidebar::-webkit-scrollbar {
-  display: none;
-}
-
-hr {
-  height: 1px;
-  background-color: #e5e5e5;
-  border: none;
-}
-
-/* videos */
-
-.videos {
-  background-color: black;
-  width: 100%;
-  height: 100%;
-  padding: 15px 15px;
-
-
-
-}
-
-.videos__container {
-  display: flex;
-  flex-direction: row;
   justify-content: space-around;
-  flex-wrap: wrap;
-  
+  padding: 0 10em;
+  border-bottom: 2px solid #2d2d2d;
 }
 
-.video {
-  width: 20vw;
+/* VIEW OPTIONS */
+.view-option {
+  padding: 3em 14em;
+}
+.view-option > div > a {
 
-  margin-bottom: 30px;
-  transition: all .2s ease-in-out;
+  font-size: 15px;
+  padding: 12px 26px;
+  letter-spacing: 1px;
 }
 
-.video:hover {
- background-color: #181818;
-transform: scale(1.1);
-
+.view-option a {
+  padding: 16px 30px !important;
+  min-width: 268.5px;
+  min-height: 49px;
+  max-height: 49px;
 }
-
-.video__thumbnail {
-  width: 100%;
-  height: 310px;
-  cursor: pointer;
+.view-option:nth-child(1) > div:nth-child(1) {
+  margin-top: 4em;
 }
-
-.video__thumbnail img {
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
+.view-option > div > h1 {
+  color: #FFF;
+  font-weight: 300;
 }
-
-.author img {
-  object-fit: cover;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
+.view-option:nth-child(1) > div > h1 {
+  margin-bottom: 20px;
+  font-size: 2em;
 }
-
-.video__details {
-  display: flex;
-  margin-top: 10px;
-  cursor: pointer;
-   padding-left: 15px;
- padding-right: 15px;
- padding-bottom: 10px;
-}
-
-.title {
-  display: flex;
+.view-option:nth-child(2) {
   flex-direction: column;
 }
 
-.title h3 {
-    color: white;
-  line-height: 20px;
-  font-size: 16px;
-  margin-bottom: 6px;
+.view-option:nth-child(2) > div:nth-child(1) {
+  display: flex;
+  justify-content: space-between;
 }
-
-.title a,
-span {
-  text-decoration: none;
-  color: rgb(96, 96, 96);
-  font-size: 14px;
+.view-option:nth-child(2) > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  margin: 20px;
 }
-
-h1 {
-  font-size: 20px;
+.view-option:nth-child(2) > div:nth-child(2) > div p {
+  opacity: 0.6;
+  font-weight: 300;
+  text-align: center;
+}
+.view-option:nth-child(2) > div:nth-child(2) > div h1 {
+  font-size: 1.2em;
   margin-bottom: 10px;
-  color: rgb(3, 3, 3);
+  text-align: center;
+}
+.view-option:nth-child(2) > div:nth-child(2){
+  display: flex;
+}
+.view-option:nth-child(2) > div:nth-child(2) img{
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-@media (max-width: 425px) {
-  .header__search {
-    display: none;
-  }
-
-  .header__icons .material-icons {
-    display: none;
-  }
-
-  .header__icons .display-this {
-    display: inline;
-  }
-
-  .sidebar {
-    display: none;
-  }
+.view-option:nth-child(3) {
+  flex-direction: column;
+}
+.view-option:nth-child(3) > div:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-option:nth-child(3) > div:nth-child(1) h1 {
+  margin-right: 40px;
 }
 
-@media (max-width: 768px) {
-  .header__search {
-    display: none;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .show-sidebar {
-    display: inline;
-    position: fixed;
-    top: 4.4rem;
-    height: auto;
-  }
+.view-option:nth-child(3) > div:nth-child(1) h1 {
+  margin-right: 40px;
 }
 
-@media (max-width: 941px) {
-  .header__search input {
-    width: 300px;
-  }
+.view-option:nth-child(3) table {
+  color: #FFF;
 }
+/* .view-option:nth-child(2) > div > h1 {
+  margin-bottom: 20px;
+  font-size: 2.4em;
+} */
+
+
+.kategoriler{
+    display: grid;
+     grid-template-columns: 5fr 2fr 5fr 2fr;
+     grid-gap: 4vw;
+   
+}
+
 
 </style>

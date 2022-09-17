@@ -2,7 +2,7 @@
 
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -537,8 +537,6 @@ location. reload()
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
             itemvideo.value = doc.data().itemvideo
-            start.value = doc.data().start
-            end.value = doc.data().end
             oyuncular.value = doc.data().oyuncular
             turler.value = doc.data().turler
             cyili.value = doc.data().cyili

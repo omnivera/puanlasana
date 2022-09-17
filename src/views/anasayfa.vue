@@ -1,101 +1,89 @@
 .<template>
 
 
-   <section id="main-landing">
-    <div id="black-ov"></div>
-  
-
-    <div id="main-landing-message" style="margin-top:-3vh">
-        <div class="bigshadow">
-
-<!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-
-<video id="myVideo" muted autoplay  loop>
-  <source src="@/assets/videos/mainvideo3.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video>
-
-   </div>
-        <div class="d-flex justify-content-center">
-            
-
-       
-<transition @before-enter="beforeEnter" @enter="enterv2" appear >      
-     <img @click="randompuanla" data-bs-toggle="tooltip" data-bs-placement="top" title="Puanlamak için tıkla" src="@/assets/plogo6.png" style="width:13vw;" alt="">
-         </transition>  
-
-
-
-       
-   </div>
-
-<div class="row">
-
-
-         <div class="d-flex justify-content-center">
-  <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-      <h1>puanlasana</h1>
-      
-        </transition> 
-
-
-      
-         </div>
-
-         </div>
-
-         <div class="row">
-
-
-         <div class="d-flex justify-content-center">
-            
-
-            <div class="row g-2">
-
-                <div class="col">
-
-    <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-     <button type="button" id="mainbutton" @click="randompuanla" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fas fa-trophy"></i> <br> Puanlasana</button>
-      </transition> 
-
-                </div>
-
-
-                <div class="col">
-                     <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-              <button type="button" id="mainbutton" @click="kategorigit" class="btn btn-outline-primary btn-lg  p-3 mb-5 rounded"><i class="fa-solid fa-cubes"></i> <br> Kategoriler</button>
-  
-     </transition> 
-                </div>
-
-
-
-            </div>
-
-    
-
-            
-  
-             </div>
-         </div>
- 
    
 
+<div class="mainscroll">
+<br>
 
-
-        
-
-
-    </div>
-
-  </section>
-
-
- 
-
-
+  <div class="row d-flex justify-content-center mt-2">
 
   
+    <div class="baslik d-flex justify-content-center">
+          <strong>
+            puanla<span class="kbaslik">sana</span>
+            
+          </strong>
+ </div>
+
+  <div id="search"> <input id="searchinput" type="search" autocomplete="off" placeholder="Arama yapsana..." v-model="search" /> <button id="button"><i style="color:White" class="fa fa-search" ></i></button></div>
+     
+  </div>
+ 
+ <div class="kategoriler">
+
+ <button v-for="kategori in kategoriler" :key="kategori.id" :class="kategori.katbuttoncss" @click="kategorisecti(kategori)" type="button" class="btn btn-outline-dark">{{kategori.kisim}}</button>
+
+ </div>
+<hr>
+    <!-- Header Ends -->
+
+
+
+    <!-- Main Body Starts -->
+    <div class="mainBody">
+      <!-- Sidebar Starts -->
+     <!--  <div class="sidebar">
+        <div class="sidebar__categories">
+          <div v-for="kategori in kategoriler" :key="kategori.id" class="sidebar__category text-white">
+            <i class="fas fa-dice-d6"></i>
+            <span style="text-align:center">{{kategori.kisim}}</span>
+          </div>
+          
+        </div>
+     
+      </div> -->
+      <!-- Sidebar Ends -->
+
+      <div class="col-md-2"></div>
+
+      <div class="col-md-8">
+        <!-- Videos Section -->
+      <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
+      <div class="videos">
+        <h1>Recommended</h1>
+
+        <div class="videos__container">
+          
+          <!-- Single Video starts -->
+          <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" class="video">
+            <div class="video__thumbnail">
+              <img :src="item.itemresim" alt="" />
+            </div>
+            <div class="video__details">
+           <!--    <div class="author">
+                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
+              </div> -->
+              <div class="title">
+                <h3>
+                  {{item.itemisim}}
+                </h3>
+                <a href="">{{item.kategori}}</a>
+                <!-- <span>10M Views • 3 Months Ago</span> -->
+              </div>
+            </div>
+          </div>
+          <!-- Single Video Ends -->
+
+          <!-- Single Video starts -->
+        </div>
+      </div>
+      </transition>
+      </div>
+
+      
+    </div>
+</div>
 
 
 
@@ -105,111 +93,362 @@ Your browser does not support the video tag.
 
 <script>
 
-import {onMounted,ref} from 'vue'
-import {firestoreRef} from '@/firebase/config'
+import {onMounted,ref,watch,computed} from 'vue'
+import {firestoreRef,storageRef,authRef} from '@/firebase/config' 
 import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
+import firebase from 'firebase/app';
 export default {
 
-
-    mounted() {
-
-  document.getElementById("myVideo").volume = 0.2;
-
-  }, 
     setup() {
 
+      const kategoriler = ref([])
+      const itemler = ref([])
+      const puanlar = ref([])
+      const kullaniciad= ref('')
+    const kullaniciemail= ref('')
+    const kullaniciuid= ref('')
 
-gsap.registerPlugin(ScrollTrigger);
+    const search= ref('')
+    const kategorisec= ref('Tümü')
+    const route=useRoute()
+    const router=useRouter()
 
-
-
-
-        const veriler=ref([])
-
-
-            const route=useRoute()
-          const router=useRouter()
-
-
-           const randompuanla= ()=>{
-
-
-               let random = Math.floor(Math.random() * veriler.value.length);
-          
-         
-         router.push({name:'Puanla',params:{Kategori:veriler.value[random].kisim}})
-         
-
-        }
-
-
-         const puanla= (Kategori)=>{
-          
-         
-         router.push({name:'Puanla',params:{Kategori:Kategori}})
-         
-
-        }
-
-          const kategorigit= (Kategori)=>{
-          
-         
-         router.push({name:'Kategoriler'})
-         
-
-        }
-
-
-               const beforeEnter=(el)=>{
-          el.style.opacity=0;
-          el.style.transform='translateY(100px)'
-        }
-
-
-
-
-           const enter=(el)=>{
-
-          gsap.to(el,{
     
-            opacity:1,
-            y:0,
-            duration:1,
-            delay:el.dataset.index*0.2,
 
+
+
+     if (sessionStorage.getItem('pasladi')==null) {
+          
+          sessionStorage.setItem('pasladi', JSON.stringify([]));
+        }
+
+
+        if (localStorage.getItem('puanladi')==null) {
+          
+          localStorage.setItem('puanladi', JSON.stringify([]));
+        }
+
+          if (localStorage.getItem('itemler')==null) {
+          
+          localStorage.setItem('itemler', JSON.stringify([]));
+        }
+
+        if (localStorage.getItem('kategoriler')==null) {
+          localStorage.setItem('kategoriler', JSON.stringify([]));
+        }
+
+        
+ 
+        
+        
+
+
+const kategorisecti= (kategori)=>{
+
+kategorisec.value=kategori.kisim
+
+for (let i = 0; i < kategoriler.value.length; i++) {
+  kategoriler.value[i].katbuttoncss="katbutton"
+  
+}
+kategori.katbuttoncss="katbuttonhover"
+
+
+
+}
+
+
+watch(() => {
+
+  
+    
+    });
+
+    authRef.onAuthStateChanged(k=>{
+    kullaniciad.value=k.displayName
+    kullaniciemail.value=k.email
+    kullaniciuid.value=k.uid
+   
+})
+
+
+    const goPuanla= (item)=>{
+
+router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
+
+
+}
+
+
+    function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
+    const aramaitem=computed(()=>{
+
+         
+
+          shuffle(itemler.value);
+
+          if (kategorisec.value=="Tümü") {
+             return itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase())  ) 
+          }
+
+          
+         return itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase()) && tablo.kategori == kategorisec.value ) 
+        })
+
+
+
+
+    const beforeEnter = el => {
+      el.style.opacity = 0;
+      el.style.transform = "translateY(100px)";
+    };
+
+    const enter = el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: el.dataset.index * 0.2
+      });
+    };
+
+    const enterv2 = el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 20,
+        duration: 2,
+        delay: el.dataset.index * 0.3,
+        ease: "back"
+      });
+    };
+
+
+
+      onMounted(async () => {
+
+      
+
+    await firestoreRef.collection('iteminfo').get()
+        .then(snapshot =>{
             
-           
-          })
-        }
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
 
+                  
+console.log(JSON.parse(localStorage.getItem('itemler')).length - 1)
+                 
 
-          const enterv2=(el)=>{
+       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length - 1) {
 
-          gsap.to(el,{
-            opacity:1,
-            y:0,
-            duration:1.5,
-            delay:el.dataset.index*0.2,
-            ease:'back'
-          })
-        }
+         setTimeout(() => {
 
-            onMounted(async () => {
-
-           
-            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
-                veriler.value=[]
+console.log("veritabanı")
+       
+       firestoreRef.collection('kategoriler').orderBy('click','desc').onSnapshot(snap=>{
+                kategoriler.value=[]
                 snap.docs.forEach(doc=>{
-                    veriler.value.push({...doc.data(),id:doc.id})
+                    kategoriler.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbutton"})
+
+                       
+         firestoreRef.collection(doc.data().kisim).get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemvideo:doc.data().itemvideo,kategori:doc.data().kategori,id:doc.id})
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
+
+          
+          
                 })
+                kategoriler.value.unshift({kisim:"Tümü",katbuttoncss:"katbuttonhover"})
             })
+}, 700);
+
+           
+        
+
+
+setTimeout(() => {
+  localStorage.setItem('itemler', JSON.stringify(itemler.value));
+  localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
+}, 1500);
+         
+       }else{
+           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+
+          let pool=[]
+
+          let random=0
+
+
+          if (puanarray!=null) {
+            let itemarray = JSON.parse(localStorage.getItem('itemler'));
+            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
+            itemler.value  =  pool
+          }else{
+            itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
+          }
+
+          
+     
+       kategoriler.value  =  JSON.parse(localStorage.getItem('kategoriler'));
+       }
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
+
+
+
+
+
+
+
+// puanları alma
+
+
+          await firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+                  
+
+                 
+
+       if (doc.data().puanladi != JSON.parse(localStorage.getItem('puanladi')).length) {
+
+         setTimeout(() => {
+
+
+       
+console.log("veritabanı uye")
+
+                       
+         firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+       puanlar.value.push({itemisim:doc.data().itemisim,itemID:doc.data().itemID})
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
+
+          
+           
+}, 700);
+
+           
+        
+
+
+setTimeout(() => {
+  localStorage.setItem('puanladi', JSON.stringify(puanlar.value));
+  
+}, 1500);
+         
+       }else{
+           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+
+    
+
+/* 
+          if (puanarray!=null) {
+            let itemarray = JSON.parse(localStorage.getItem('itemler'));
+            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
+            itemler.value  =  pool
+          }else{
+            itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
+          } */
+
+          
+     
+       }
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
+
+
+
+
+
+          sessionStorage.clear()
 
          
         })
 
-        return {veriler,beforeEnter,enter,puanla,enterv2,randompuanla,kategorigit
+
+
+        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla
         }
         
     }
@@ -219,308 +458,356 @@ gsap.registerPlugin(ScrollTrigger);
 
 <style scoped>
 
-@import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
-@font-face {
-  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
-    format("woff2");
-  font-family: "Meta";
-  font-style: normal;
-  font-weight: normal;
-}
-
-
-
-
-@keyframes switch {
-    0% { opacity: 0;filter: blur(10px); transform:scale(7)}
-   
-
-
-    100% { transform:scale(1); filter: blur(0);}
-}
-
-
-@keyframes MoveUpDown {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
-@-webkit-keyframes action {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-
-@keyframes action {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-
-
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
- pointer-events: none;
-  
-  
-}
-
-img {
-  display: block;
-  cursor: pointer;
- -webkit-animation: action 1s infinite  alternate;
-    animation: action 1s infinite  alternate;
-    
-    
-}
-
-
-.baslik{
-      font-variation-settings: "wght" 900, "ital" 0;
-      color: #DE354C;
-      font-size:2.3vw ;
-
-}
-
-main {
-  transition: all 0.5s;
-  -webkit-text-stroke: 4px #d6f4f4;
-  font-variation-settings: "wght" 900, "ital" 0;
-  font-size: 4vw;
-  text-align: center;
-  color: transparent;
-  font-family: "Meta", sans-serif;
-  
-  cursor: pointer;
-}
-
-main:hover {
-  font-variation-settings: "wght" 100, "ital" 0;
-  text-shadow: none;
-}
-
-
-h1{
-    font-size: 3vw;
-    color: #DE354C;
-}
-
-/* GLOBAL STYLES */
-body {
-  margin: 0;
-  font-family: sans-serif;
-   overflow: hidden
-}
-
-
-h1, h2, p {
-  margin: 0;
  
 
+.baslik {
+  color: white;
+  font-size: 1.8vw;
+  margin-bottom: 1.3vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslik {
+  color: #DE354C;
+  font-size: 1.8vw;
+  margin-bottom: 1.3vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+
+
+
+
+
+#searchinput{
+  background-color: black;
+  color: white;
+   transition: all .2s ease-in-out;
   
 }
-a {
-  display: block;
-}
 
-.option {
- 
-  
-  align-items: center;
-  height: 91px;
-  width: 460px;
-  color: #FFF;
-  padding: 40px 0;
-  opacity: 0.5;
-  cursor: pointer;
-}
-.option:hover {
-  opacity: 1;
-}
-
-.option svg {
-  margin-bottom: 5px;
-  fill: #FFF;
-}
-.option p {
-  font-weight: 600;
-}
-/* ================= */
-/* SECTION MAIN LANDING */
-#main-landing {
- /*  background-image: url('http://s3-us-west-2.amazonaws.com/techvibes/wp-content/uploads/2017/04/24135159/Netflix-Background.jpg'); */
-  padding: 20px 40px;
-  position: relative;
- background-size: cover;
- height: 95vh;
-  overflow: hidden
- 
-}
-
-
-/* HEADER */
-/* logo */
-#brand svg {
-  width: 180px;
-  height: auto;
-}
-
-/* MAIN LANDING MESSAGE */
-/* black gradient overlay */
-#black-ov {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(to right,#000000de, #00000029);
-  left: 0;
-  top: 0;
-}
-
-
-
-#main-landing-message {
-
-  padding: 18em 0;
-}
-#main-landing-message h1, h2 {
-  color: #FFF;
-
-  margin-top: 2vh;
-  font-family: 'Comfortaa', cursive;
-  text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px rgba(255,255,255,0.3);
-  
-
-}
-#main-landing-message > h1 {
-  font-size: 6em;
-  margin-bottom: 15px;
+#search{
+  width:50%;
+   background-color: black;
+  color: white;
+  border: 1px solid white;
+   transition: all .2s ease-in-out;
   
 }
-#main-landing-message > h2 {
-  font-weight: 300;
-  margin-bottom: 1em;
-}
-#main-landing-message > a {
- 
-  font-size: 15px;
-  padding: 12px 26px;
-  letter-spacing: 1px;
-}
-#option-select-view {
-  background: #000;
-}
-/* SELECT OPTIONS */
-#option-select-clickable-options {
-  background-color: #141414;
-  display: flex;
-  justify-content: space-around;
-  padding: 0 10em;
-  border-bottom: 2px solid #2d2d2d;
+
+#searchinput:hover{
+  background-color: black;
+  color: white;
+  transform: scale(1);
+  
 }
 
-/* VIEW OPTIONS */
-.view-option {
-  padding: 3em 14em;
-}
-.view-option > div > a {
-
-  font-size: 15px;
-  padding: 12px 26px;
-  letter-spacing: 1px;
+#search:hover{
+  width:50%;
+   background-color: black;
+  color: white;
+  border: 1px solid white;
+  transform: scale(1.1);
+  
 }
 
-.view-option a {
-  padding: 16px 30px !important;
-  min-width: 268.5px;
-  min-height: 49px;
-  max-height: 49px;
+.arainput{
+  font-size: 2vw;
+  background-color: black;
+  color: white;
 }
-.view-option:nth-child(1) > div:nth-child(1) {
-  margin-top: 4em;
-}
-.view-option > div > h1 {
-  color: #FFF;
-  font-weight: 300;
-}
-.view-option:nth-child(1) > div > h1 {
-  margin-bottom: 20px;
-  font-size: 2em;
-}
-.view-option:nth-child(2) {
-  flex-direction: column;
-}
-
-.view-option:nth-child(2) > div:nth-child(1) {
-  display: flex;
-  justify-content: space-between;
-}
-.view-option:nth-child(2) > div:nth-child(2) > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  margin: 20px;
-}
-.view-option:nth-child(2) > div:nth-child(2) > div p {
-  opacity: 0.6;
-  font-weight: 300;
-  text-align: center;
-}
-.view-option:nth-child(2) > div:nth-child(2) > div h1 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  text-align: center;
-}
-.view-option:nth-child(2) > div:nth-child(2){
-  display: flex;
-}
-.view-option:nth-child(2) > div:nth-child(2) img{
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.view-option:nth-child(3) {
-  flex-direction: column;
-}
-.view-option:nth-child(3) > div:nth-child(1) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.view-option:nth-child(3) > div:nth-child(1) h1 {
-  margin-right: 40px;
-}
-
-.view-option:nth-child(3) > div:nth-child(1) h1 {
-  margin-right: 40px;
-}
-
-.view-option:nth-child(3) table {
-  color: #FFF;
-}
-/* .view-option:nth-child(2) > div > h1 {
-  margin-bottom: 20px;
-  font-size: 2.4em;
-} */
-
 
 .kategoriler{
-    display: grid;
-     grid-template-columns: 5fr 2fr 5fr 2fr;
-     grid-gap: 4vw;
-   
+  display: flex;
+  justify-content: center;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
+.katbutton{
+  background-color: transparent;
+  color: white;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  margin-left: 12px;
+  transition: all .2s ease-in-out;
+}
+
+.katbuttonhover{
+  background-color: #ffffff;
+  color: black;
+  padding: 10px;
+  padding-left: 17px;
+  padding-right: 17px;
+  margin-left: 12px;
+  transition: all .2s ease-in-out;
+}
+
+.katbutton:hover{
+  background-color: #181818;
+  transform: scale(1.1);
+  
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* header */
+
+.material-icons {
+  color: rgb(96, 96, 96);
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  padding: 15px;
+  z-index: -1;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__left img {
+  width: 100px;
+  margin-left: 15px;
+}
+
+.header i {
+  padding: 0 7px;
+  cursor: pointer;
+}
+
+.header__search form {
+  border: 1px solid #ddd;
+  height: 35px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.header__search input {
+  width: 500px;
+  padding: 10px;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  height: 100%;
+}
+
+.header__search button {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
+/* Sidebar */
+.mainBody {
+  height: calc(100vh - 70px);
+  display: flex;
+  margin-top: -1vh;
+  background-color: black;
+ 
+}
+
+.sidebar {
+  height: 100%;
+  width: 230px;
+  background-color: black;
+  overflow-y: scroll;
+  border-right: 1px solid #454545;
+
+
+}
+
+.sidebar__categories {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  text-align: center;
+  
+}
+
+.sidebar__category {
+  display: flex;
+  align-items: center;
+  padding: 12px 25px;
+  
+}
+
+.sidebar__category span {
+  margin-left: 15px;
+    color: white;
+}
+
+.sidebar__category:hover {
+  background: #DE354C;
+  color: black;
+  cursor: pointer;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+hr {
+  height: 1px;
+  background-color: #e5e5e5;
+  border: none;
+}
+
+/* videos */
+
+.videos {
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  padding: 15px 15px;
+
+
+
+}
+
+.videos__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  
+}
+
+.video {
+  width: 20vw;
+
+  margin-bottom: 30px;
+  transition: all .2s ease-in-out;
+  color: white;
+}
+
+.video:hover {
+ background-color: #181818;
+transform: scale(1.1);
+font-weight: 500;
+
+}
+
+
+
+.video__thumbnail {
+  width: 100%;
+  height: 47vh;
+  cursor: pointer;
+}
+
+.video__thumbnail img {
+  object-fit:fill;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.author img {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.video__details {
+  display: flex;
+  margin-top: 10px;
+  cursor: pointer;
+   padding-left: 15px;
+ padding-right: 15px;
+ padding-bottom: 10px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.title h3 {
+   
+  line-height: 20px;
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.title a,
+span {
+  text-decoration: none;
+  color: rgb(96, 96, 96);
+  font-size: 14px;
+}
+
+h1 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: rgb(3, 3, 3);
+}
+
+@media (max-width: 425px) {
+  .header__search {
+    display: none;
+  }
+
+  .header__icons .material-icons {
+    display: none;
+  }
+
+  .header__icons .display-this {
+    display: inline;
+  }
+
+  .sidebar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header__search {
+    display: none;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .show-sidebar {
+    display: inline;
+    position: fixed;
+    top: 4.4rem;
+    height: auto;
+  }
+}
+
+@media (max-width: 941px) {
+  .header__search input {
+    width: 300px;
+  }
+}
 
 </style>

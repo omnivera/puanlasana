@@ -23,6 +23,7 @@ import Itemview from '../views/Item/Itemview.vue'
 
 
 import Puanla from '../views/Puanla.vue'
+import Puanlas from '../views/Puanlas.vue'
 
 
 
@@ -76,18 +77,18 @@ const routes = [
       {
         path: '/',
         name: 'anasayfa',
-        component: Anasayfa2,
+        component: Anasayfa,
        
 
       },
         
-      {
+ /*      {
         path: '/a',
         name: 'anasayfa2',
         component: Anasayfa2,
        
 
-      },
+      }, */
 
       {
         path: '/Profile',
@@ -152,6 +153,13 @@ const routes = [
         path: '/Puanla/:Kategori',
         name: 'Puanla',
         component: Puanla,
+       
+      },
+
+      {
+        path: '/Puanlas/:Kategori/:itemID',
+        name: 'Puanlas',
+        component: Puanlas,
        
       },
 

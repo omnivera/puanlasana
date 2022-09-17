@@ -480,6 +480,9 @@ export default {
             const progressStyle=ref('width:0%')
         const progressVisible=ref(false)
 
+
+        const itemcount=ref(0)
+
  const kategorisec= ()=>{
           
            kategorikontrol.value=true
@@ -550,65 +553,52 @@ setTimeout(  function(){
 
             }else{
 
-              let itemNumber = 1
+             const dataitem = {
+                  itemisim:itemisim.value,
+                  itemresim:itemresim.value,
+                  itemvideo:itemvideogoster.value,
+                  filmozet:filmozet.value,
+                  oyuncular:oyuncular.value,
+                  turler:turler.value,
+                  cyili:cyili.value,
+                  fsure:fsure.value,
+                  totalpuan:0,
+                  puancount:0,
+                  kategori:kategori.value,
+                  watchers:{deneme:""}
+                  
+};
 
-               firestoreRef.collection(kategori.value).orderBy('itemNumber','desc').limit(1).get()
+const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
+
+
+ firestoreRef.collection('iteminfo').get()
         .then(snapshot =>{
+            
             if (snapshot.size > 0) {
-             snapshot.forEach(doc => {
+                  snapshot.forEach(doc => {
 
+            
+      
+ firestoreRef.collection('iteminfo').doc('eHjkoM7nWcs8ya8kQTmX').update({
 
-
-                const dataitem = {
-                  itemisim:itemisim.value,
-                  itemresim:itemresim.value,
-                  itemvideo:itemvideo.value,
-                  itemNumber:doc.data().itemNumber + 1,
-                  start:start.value,
-                  end:end.value,
-                  filmozet:filmozet.value,
-                  oyuncular:oyuncular.value,
-                  turler:turler.value,
-                  cyili:cyili.value,
-                  fsure:fsure.value,
-                  totalpuan:0,
-                  puancount:0,
-                  kategori:kategori.value,
-                  watchers:[]
+                   itemcount: doc.data().itemcount + 1,
+                   
+                   
+                   
                   
-};
-
-const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
-
+                   
+        })
 
 
-
-             })
-               
-
-            }else{
-                const dataitem = {
-                  itemisim:itemisim.value,
-                  itemresim:itemresim.value,
-                  itemvideo:itemvideo.value,
-                  itemNumber:1,
-                  start:start.value,
-                  end:end.value,
-                  filmozet:filmozet.value,
-                  oyuncular:oyuncular.value,
-                  turler:turler.value,
-                  cyili:cyili.value,
-                  fsure:fsure.value,
-                  totalpuan:0,
-                  puancount:0,
-                  kategori:kategori.value,
-                  watchers:[]
-                  
-};
-
-const res = firestoreRef.collection(kategori.value).doc().set(dataitem);
-
+          
+          
+         
+        });
             }
+            
+      
+
 
         })
 

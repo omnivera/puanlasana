@@ -168,7 +168,7 @@
 
       <div class="user-profile">
       
-        <div ><img class="profile" :src="item.itemresim" alt=""></div>
+        <div ><img class="profilecard" :src="item.itemresim" alt=""></div>
     <!--     <div class="last-submit">{{item.itemisim}}</div> -->
        
  
@@ -192,28 +192,12 @@
             <div class="my-progress" :style="'width:'+item.puan*10+'%'" ></div>
           </div>
         </div>
-        <div class="meta-stats text-center">
+        <div class="meta-stats text-right">
          
           <div class="meta-stat ">
-            <h4 class="meta-stat-label">Şirket</h4>
-            <div class="meta-stat-block text-center">
-              <h3 class="meta-stat-num text-center">Deneme</h3>
-            </div>
+            <button type="button" class="btn btn-outline-danger">Güncelle</button>
           </div>
-          <div class="meta-stat">
-            <h4 class="meta-stat-label">Çıkış Yılı</h4>
-            <div class="meta-stat-block">
-              <h3 class="meta-stat-num">{{item.cyili}}</h3>
-              <h1 class ="meta-stat-total"></h1>
-            </div>
-          </div>
-           <div class="meta-stat">
-            <h4 class="meta-stat-label">Puanlayan Sayısı</h4>
-            <div class="meta-stat-block">
-              <h3 class="meta-stat-num"><vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puancount' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h3>
-              <h1 class ="meta-stat-total text-center"></h1>
-            </div>
-          </div>
+       
         </div>
       </div>
     </div>
@@ -404,7 +388,7 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar
          
         })
 
-        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow
+        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler
         }
         
     }
@@ -413,6 +397,196 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar
 </script>
 
 <style scoped>
+
+
+
+
+
+.user-card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 65vw;
+  background-color: #181818;
+  margin-bottom: 3vh;
+  
+ position:relative;
+  z-index:30;
+
+
+}
+
+.user-profile {
+
+  width: 13vw;
+
+ padding-top: 2.8vh;
+  border-right: 1px solid #ddd;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  background-color: #181818;
+  text-align: center;
+  
+  
+}
+
+.profilecard {
+  
+  width: 9vw;
+  height: 15vh;
+  border-radius: 100%;
+  background-color: #ddd;
+  
+}
+
+.last-submit {
+  font-size: 16px;
+  color: #999;
+}
+
+.user-stats {
+  display: inline-block;
+  padding: 1vw;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.w-clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.name {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: -7px;
+  float: left;
+  font-size: 1.8vw;
+  line-height: 42px;
+  color: white;
+}
+
+.score {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+  display: flex;
+  float: right;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+.my-score {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.total-score {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.progress {
+  padding-top: 32px;
+  padding-bottom: 30px;
+  background-color: transparent;
+}
+
+.my-progress {
+  width: 80%;
+  height: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  background-color: #DE354C;
+}
+
+.total-progress {
+  border-radius: 5px;
+  background-color: #ddd;
+  height: 10px;
+  width: 100%;
+}
+
+.meta-stats {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.meta-stat {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.meta-stat-label {
+  margin-top: 0px;
+  margin-bottom: 16px;
+  color: #999;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.meta-stat-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: center;
+}
+
+.meta-stat-num {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: white;
+  font-size: 1.4vw;
+  line-height: 24px;
+  font-weight: 700;
+  
+}
+
+.meta-stat-total {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #DE354C;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+
+
+
+
+
+
 
 
 

@@ -190,7 +190,7 @@
 
                 <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
- <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fas fa-backward"></i> Kategoriler</button>
+ <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
         
              </transition>
 </div>
@@ -208,17 +208,17 @@
  
                      
                      
- <div class="d-flex align-items-center">
+
                    
-<br>
-
-<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorum Yapsana</button></a>
 
 
+<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorumlar</button></a>
 
 
 
-      </div>   
+
+
+    
 
 
  </transition> 
@@ -636,10 +636,6 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
     const loading= ref(true)
 
 
-   /*  let itemarray= JSON.parse(localStorage.getItem('itemler'))
-    let iteminfo = itemarray.filter((item)=>item.id == route.params.itemID ) 
-    console.log(iteminfo[0].itemvideo) */
-
      let puanarray= JSON.parse(localStorage.getItem('puanladi'))
     
     const itemvideo=ref()
@@ -648,6 +644,10 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
           
           localStorage.setItem('puanladi', JSON.stringify([]));
         }
+
+
+
+    
 
  setTimeout(  function(){
 loading.value=false
@@ -667,13 +667,17 @@ loading.value=false
 
             watch ( () => {
 
-               itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1' 
+          /*      itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'  */
 
 
 })
  },200)
 
 const yorumshow=()=>{
+
+
+    
+
 
     if (yorumclickcount==0) {
          firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(5).get()
@@ -711,6 +715,8 @@ const yorumshow=()=>{
 
     yorumclickcount++;
 
+
+ 
      
         }
 
@@ -908,13 +914,7 @@ if (yorum.disliked==false && yorum.liked==false) {
          }
 
 
-         setTimeout(  function(){
-     if (yildizladi.value == false) {
-    showcardV.value="hidden"
-    showtitle.value="visible"
-     }
-
-                },2800)
+      
          
     const doHidden=()=>{
             if (yildizladi.value == false) {
@@ -1123,9 +1123,26 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
         
 
- 
+ let puaninfo = puanarray.filter((puan)=>puan.itemID.includes(doc.id) ) 
+
+if (puaninfo.length == 0) {
+    setTimeout(  function(){
+     if (yildizladi.value == false) {
+    showcardV.value="hidden"
+    showtitle.value="visible"
+     }
+
+                },2800)
+}
+  
+
+ if (puaninfo.length > 0) {
+     puanladi.value=true
+     puan.value=puaninfo[0].puan
+     ortpuan.value = parseFloat((totalpuan.value) / (puancount.value))
+ }
            
-         
+          
 
       
 firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
@@ -1229,9 +1246,9 @@ UIDPUA="PUA"+kullaniciuid.value
 
        const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').doc(itemID.value).set(dataitem);
 
-/* puanarray.unshift({itemID:itemID.value,itemisim:itemisim.value,kategori:route.params.Kategori})
+puanarray.unshift({itemisim:itemisim.value,itemID:itemID.value,kategori:route.params.Kategori,puan:puan.value})
 
- localStorage.setItem('puanladi', JSON.stringify(puanarray)) */
+ localStorage.setItem('puanladi', JSON.stringify(puanarray))
         
   
 puanladi.value=true;

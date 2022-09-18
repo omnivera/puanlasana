@@ -1,7 +1,4 @@
-.<template>
-
-
-   
+<template>
 
 <div class="mainscroll">
 <br>
@@ -11,7 +8,7 @@
   
     <div class="baslik d-flex justify-content-center">
           <strong>
-            puanla<span class="kbaslik">sana</span>
+            İtem<span class="kbaslik"> Düzenle</span>
             
           </strong>
  </div>
@@ -85,21 +82,20 @@
     </div>
 </div>
 
-
-
-
-
 </template>
 
 <script>
-
-import {onMounted,ref,watch,computed} from 'vue'
+ import {ref,onMounted,computed,watch} from 'vue'
 import {firestoreRef,storageRef,authRef} from '@/firebase/config' 
-import gsap from 'gsap'
-import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
-import firebase from 'firebase/app';
+
+import gsap from 'gsap'
+/* import { useRoute,useRouter} from 'vue-router' */
+
+
 export default {
+
+    
 
     setup() {
 
@@ -176,7 +172,7 @@ watch(() => {
 
     const goPuanla= (item)=>{
 
-router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
+router.push({name:'Itemview',params:{kategori:item.kategori,veriID:item.id}})
 
 
 }
@@ -348,16 +344,100 @@ setTimeout(() => {
 
 
 
+// puanları alma
+
+
+          await firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+                  
+
+                 
+
+       if (doc.data().puanladi != JSON.parse(localStorage.getItem('puanladi')).length) {
+
+         setTimeout(() => {
+
+
+       
+console.log("veritabanı uye")
+
+                       
+         firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+       puanlar.value.push({itemisim:doc.data().itemisim,itemID:doc.data().itemID})
+      
 
 
 
-     
+          
+          
+         
+        });
+            }
+            
+      
 
 
+        })
 
+          
+           
+}, 700);
 
-
+           
         
+
+
+setTimeout(() => {
+  localStorage.setItem('puanladi', JSON.stringify(puanlar.value));
+  
+}, 1500);
+         
+       }else{
+           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+
+    
+
+/* 
+          if (puanarray!=null) {
+            let itemarray = JSON.parse(localStorage.getItem('itemler'));
+            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
+            itemler.value  =  pool
+          }else{
+            itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
+          } */
+
+          
+     
+       }
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
+
+
+
+
+
+          sessionStorage.clear()
 
          
         })
@@ -372,358 +452,9 @@ setTimeout(() => {
 }
 </script>
 
-<style scoped>
+<style scoped src="@/assets/mainmenu.css">
 
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
- 
-
-.baslik {
-  color: white;
-  font-size: 1.8vw;
-  margin-bottom: 1.3vh;
-
-  font-family: "Comfortaa", cursive;
-}
-
-.kbaslik {
-  color: #DE354C;
-  font-size: 1.8vw;
-  margin-bottom: 1.3vh;
-
-  font-family: "Comfortaa", cursive;
-}
-
-
-
-
-
-
-#searchinput{
-  background-color: black;
-  color: white;
-   transition: all .2s ease-in-out;
-  
-}
-
-#search{
-  width:50%;
-   background-color: black;
-  color: white;
-  border: 1px solid white;
-   transition: all .2s ease-in-out;
-  
-}
-
-#searchinput:hover{
-  background-color: black;
-  color: white;
-  transform: scale(1);
-  
-}
-
-#search:hover{
-  width:50%;
-   background-color: black;
-  color: white;
-  border: 1px solid white;
-  transform: scale(1.1);
-  
-}
-
-.arainput{
-  font-size: 2vw;
-  background-color: black;
-  color: white;
-}
-
-.kategoriler{
-  display: flex;
-  justify-content: center;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-}
-
-.katbutton{
-  background-color: transparent;
-  color: white;
-  padding: 10px;
-  padding-left: 17px;
-  padding-right: 17px;
-  margin-left: 12px;
-  transition: all .2s ease-in-out;
-}
-
-.katbuttonhover{
-  background-color: #ffffff;
-  color: black;
-  padding: 10px;
-  padding-left: 17px;
-  padding-right: 17px;
-  margin-left: 12px;
-  transition: all .2s ease-in-out;
-}
-
-.katbutton:hover{
-  background-color: #181818;
-  transform: scale(1.1);
-  
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-}
-
-/* header */
-
-.material-icons {
-  color: rgb(96, 96, 96);
-}
-
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 70px;
-  padding: 15px;
-  z-index: -1;
-}
-
-.header__left {
-  display: flex;
-  align-items: center;
-}
-
-.header__left img {
-  width: 100px;
-  margin-left: 15px;
-}
-
-.header i {
-  padding: 0 7px;
-  cursor: pointer;
-}
-
-.header__search form {
-  border: 1px solid #ddd;
-  height: 35px;
-  margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-.header__search input {
-  width: 500px;
-  padding: 10px;
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  height: 100%;
-}
-
-.header__search button {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  border: none;
-  border-radius: 0;
-}
-
-/* Sidebar */
-.mainBody {
-  height: calc(100vh - 70px);
-  display: flex;
-  margin-top: -1vh;
-  background-color: black;
- 
-}
-
-.sidebar {
-  height: 100%;
-  width: 230px;
-  background-color: black;
-  overflow-y: scroll;
-  border-right: 1px solid #454545;
-
-
-}
-
-.sidebar__categories {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-  margin-top: 15px;
-  text-align: center;
-  
-}
-
-.sidebar__category {
-  display: flex;
-  align-items: center;
-  padding: 12px 25px;
-  
-}
-
-.sidebar__category span {
-  margin-left: 15px;
-    color: white;
-}
-
-.sidebar__category:hover {
-  background: #DE354C;
-  color: black;
-  cursor: pointer;
-}
-
-.sidebar::-webkit-scrollbar {
-  display: none;
-}
-
-hr {
-  height: 1px;
-  background-color: #e5e5e5;
-  border: none;
-}
-
-/* videos */
-
-.videos {
-  background-color: black;
-  width: 100%;
-  height: 100%;
-  padding: 15px 15px;
-
-
-
-}
-
-.videos__container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  
-}
-
-.video {
-  width: 20vw;
-
-  margin-bottom: 30px;
-  transition: all .2s ease-in-out;
-  color: white;
-}
-
-.video:hover {
- background-color: #181818;
-transform: scale(1.1);
-font-weight: 500;
-
-}
-
-
-
-.video__thumbnail {
-  width: 100%;
-  height: 47vh;
-  cursor: pointer;
-}
-
-.video__thumbnail img {
-  object-fit:fill;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
-}
-
-.author img {
-  object-fit: cover;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  margin-right: 10px;
-}
-
-.video__details {
-  display: flex;
-  margin-top: 10px;
-  cursor: pointer;
-   padding-left: 15px;
- padding-right: 15px;
- padding-bottom: 10px;
-}
-
-.title {
-  display: flex;
-  flex-direction: column;
-}
-
-.title h3 {
-   
-  line-height: 20px;
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-.title a,
-span {
-  text-decoration: none;
-  color: rgb(96, 96, 96);
-  font-size: 14px;
-}
-
-h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: rgb(3, 3, 3);
-}
-
-@media (max-width: 425px) {
-  .header__search {
-    display: none;
-  }
-
-  .header__icons .material-icons {
-    display: none;
-  }
-
-  .header__icons .display-this {
-    display: inline;
-  }
-
-  .sidebar {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .header__search {
-    display: none;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .show-sidebar {
-    display: inline;
-    position: fixed;
-    top: 4.4rem;
-    height: auto;
-  }
-}
-
-@media (max-width: 941px) {
-  .header__search input {
-    width: 300px;
-  }
-}
 
 </style>

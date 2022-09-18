@@ -190,7 +190,7 @@
 
                 <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
- <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fas fa-backward"></i> Kategoriler</button>
+ <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
         
              </transition>
 </div>
@@ -212,7 +212,7 @@
                    
 <br>
 
-<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorum Yapsana</button></a>
+<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorumlar</button></a>
 
 
 
@@ -656,18 +656,22 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
           let random=0
 
 
-          if (puanarray!=null && pasarray!=null) {
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
+          if (puanarray.length > 0 && pasarray.length > 0) {
+            pool= itemarray.filter(({id}) => !puanarray.some(puan => puan.itemID == id))
+            pool= pool.filter(({id}) => !pasarray.some(puan => puan.itemID == id))
             random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray!=null && pasarray==null){
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
+            console.log("puanarray.length > 0 && pasarray.length > 0")
+          }else if (puanarray.length > 0 && pasarray.length==0){
+            pool= itemarray.filter(({id}) => !puanarray.some(puan => puan.itemID == id))
             random = pool[Math.floor(Math.random()*pool.length)];
-          }else if (puanarray==null && pasarray!=null){
-            pool = itemarray.filter((elem) => !pasarray.find(({ itemID }) => elem.id === itemID));
+            console.log("puanarray.length > 0 && pasarray.length==0")
+          }else if (puanarray.length==0 && pasarray.length > 0){
+            pool= itemarray.filter(({id}) => !pasarray.some(puan => puan.itemID == id))
             random = pool[Math.floor(Math.random()*pool.length)];
-          }else{
+            console.log("puanarray.length==0 && pasarray.length > 0")
+          }else if(puanarray.length == 0 && pasarray.length == 0){
             random = itemarray[Math.floor(Math.random()*itemarray.length)];
+            console.log("puanarray.length == 0 && pasarray.length == 0")
           }
          
 

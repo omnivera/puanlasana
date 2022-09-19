@@ -10,6 +10,8 @@ import Profile from '../views/Profile.vue'
 import Anasayfa from '../views/anasayfa.vue'
 import Anasayfa2 from '../views/anasayfa2.vue'
 
+import About from '../views/About.vue'
+
 import Rankings from '../views/Rankings/Rankings.vue'
 import SubRankings from '../views/Rankings/SubRankings.vue'
 
@@ -78,6 +80,14 @@ const routes = [
         path: '/',
         name: 'anasayfa',
         component: Anasayfa,
+       
+
+      },
+
+      {
+        path: '/About',
+        name: 'About',
+        component: About,
        
 
       },

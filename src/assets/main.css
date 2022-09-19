@@ -42,7 +42,7 @@ border-color: transparent;
 
 
 #yorumlabutton{
-    margin-top: 1.5vh;
+    margin-top: 2.5vh;
 
     border-color: transparent;
     background-color: white;
@@ -65,7 +65,7 @@ border-color: transparent;
     
         border-color: transparent;
         background-color: #DE354C;
-        font-size: 1vw;
+        font-size: 1rem;
         color: white;
         border-radius: 6px;
         padding: 0.7vw;

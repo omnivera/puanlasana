@@ -47,7 +47,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link :to="{name:'anasayfa'} ">
+            <router-link :to="{name:'About'} ">
               <a class="nav-link" aria-current="page" href="#">
                 <button class="btn btn-outline-light" type="submit">
                   <i class="fa-solid fa-address-card"></i> Hakkımızda
@@ -194,6 +194,11 @@ await authRef.onAuthStateChanged(k=>{
 </script>
 
 <style scoped>
+
+.dropdown-item{
+
+  cursor: pointer;
+}
 button:hover,
 button:focus {
   outline: none;

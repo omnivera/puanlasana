@@ -57,9 +57,31 @@
           
           <!-- Single Video starts -->
           <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" class="video">
-            <div class="video__thumbnail">
+            <div  v-if="item.puanladi==false" class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
+             
+      
+            
+
+
+
+
             </div>
+
+            <div  v-if="item.puanladi==true" class="video__thumbnail">
+           
+             
+      
+            
+
+   <img :src="item.itemresim" class="puanladi" alt="" />
+  <div class="centered my-auto">
+     <img src="@/assets/plogo6.png" style="width:4vw" alt />
+    </div>
+
+
+            </div>
+
             <div class="video__details">
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
@@ -311,15 +333,31 @@ setTimeout(() => {
        }else{
            let puanarray= JSON.parse(localStorage.getItem('puanladi'))
 
-          let pool=[]
+          let puanlananlar=[]
+          let puanlanmayanlar=[]
 
           let random=0
 
 
           if (puanarray!=null) {
             let itemarray = JSON.parse(localStorage.getItem('itemler'));
-            /* pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID)); */
-            itemler.value  =  itemarray
+            puanlananlar = itemarray.filter(({id}) => puanarray.some(puan => puan.itemID == id))
+            puanlanmayanlar = itemarray.filter(({id}) => !puanarray.some(puan => puan.itemID == id))
+
+           puanlananlar.forEach(element => {
+             element.puanladi=true
+           });
+
+            puanlanmayanlar.forEach(element => {
+             element.puanladi=false
+           });
+           
+
+          let merged =  [...new Set([...puanlananlar, ...puanlanmayanlar])];
+
+            itemler.value  =  merged
+
+            console.log(puanlanmayanlar)
           }else{
             itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
           }
@@ -377,7 +415,7 @@ console.log("veritabanı uye")
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
 
-       puanlar.value.push({itemisim:doc.data().itemisim,itemID:doc.data().itemID,kategori:doc.data().kategori,puan:doc.data().puan})
+       puanlar.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemID:doc.data().itemID,kategori:doc.data().kategori,puan:doc.data().puan})
       
 
 

@@ -432,7 +432,7 @@
 <script>
  import {ref,onMounted,watch} from 'vue'
 import {firestoreRef,storageRef} from '@/firebase/config' 
-
+import moment from 'moment';
 /* import { useRoute,useRouter} from 'vue-router' */
 
 
@@ -458,6 +458,7 @@ export default {
          const cyili=ref('')
          const fsure=ref('')
          const itemvideogoster=ref('')
+         const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          watch ( () => {
 
@@ -557,6 +558,8 @@ setTimeout(  function(){
                   itemisim:itemisim.value,
                   itemresim:itemresim.value,
                   itemvideo:itemvideogoster.value,
+                  tarih:moment(tarih.value).format('DD/MM/YYYY'),
+                  gtarih:Date.parse(tarih.value.toString()),
                   filmozet:filmozet.value,
                   oyuncular:oyuncular.value,
                   turler:turler.value,

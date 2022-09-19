@@ -19,7 +19,7 @@
           <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
           <p>Puanladı</p>
         </div>
-        <div class="col-4">
+        <div @click="goYorumlar" class="col-4">
           <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
           <p>Yorumlar</p>
         </div>
@@ -194,9 +194,9 @@
         </div>
         <div class="meta-stats text-right">
          
-          <div class="meta-stat ">
+         <!--  <div class="meta-stat ">
             <button type="button" class="btn btn-outline-danger">Güncelle</button>
-          </div>
+          </div> -->
        
         </div>
       </div>
@@ -251,6 +251,17 @@ components: {
     const puanlarshow= ref(false)
     const yorumlarshow= ref(true)
 
+
+    if (localStorage.getItem('puanladi')==null) {
+          
+          localStorage.setItem('puanladi', JSON.stringify([]));
+        }
+        
+        if (localStorage.getItem('yorumlar')==null) {
+          
+          localStorage.setItem('yorumlar', JSON.stringify([]));
+        }
+
  setTimeout(  function(){
 loading.value=false
 
@@ -286,6 +297,13 @@ loading.value=false
       });
     };
 
+    const goYorumlar=()=>{
+
+puanlarshow.value=false
+yorumlarshow.value=true
+
+    }
+
 const goPuanla=()=>{
 
 puanlarshow.value=true
@@ -293,32 +311,18 @@ yorumlarshow.value=false
 
 
 
-firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').orderBy('gtarih','desc').get()
-        .then(snapshot =>{
-            if (snapshot.size > 0) {
-            
-    
-                  snapshot.forEach(doc => {
 
 
 
-  itemler.value.push({...doc.data(),id:doc.id})
-
-         
-        });
-            }else{
-
-                console.log('uye yok')
-              
-
-            }
-        })
 
   
         }
 
 
             onMounted(async () => {
+
+
+           
 
            
          setTimeout(  function(){
@@ -336,17 +340,79 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar'
 
 
 
+
+         //puanları alma
+
+
+         if (doc.data().puanladi != JSON.parse(localStorage.getItem('puanladi')).length) {
+
+         setTimeout(() => {
+
+
+       
+console.log("veritabanı puanlar")
+
+                       
+         firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemID:doc.data().itemID,kategori:doc.data().kategori,puan:doc.data().puan})
+      
+
+
+
+          
+          
          
         });
-            }else{
-
-                console.log('uye yok')
-              
-
             }
+            
+      
+
+
         })
 
-firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').orderBy('gtarih','desc').get()
+          
+           
+}, 700);
+
+           
+        
+
+
+setTimeout(() => {
+  localStorage.setItem('puanladi', JSON.stringify(itemler.value));
+  
+}, 1500);
+         
+       }else{
+           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+
+       itemler.value=puanarray
+
+          
+     
+       }
+
+
+
+
+                //yorumları alma ----------------
+
+
+         if (doc.data().yorumcount != JSON.parse(localStorage.getItem('yorumlar')).length) {
+
+         setTimeout(() => {
+
+
+       
+console.log("veritabanı yorum")
+
+                       
+     firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').orderBy('gtarih','desc').get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
             
@@ -377,6 +443,44 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar
             }
         })
 
+          
+           
+}, 700);
+
+           
+        
+
+
+setTimeout(() => {
+  localStorage.setItem('yorumlar', JSON.stringify(yorumlar.value));
+  
+}, 1500);
+         
+       }else{
+         
+           let yorumarray= JSON.parse(localStorage.getItem('yorumlar'))
+           yorumcount.value=yorumarray.length
+
+       yorumlar.value=yorumarray
+
+          
+     
+       }
+
+
+
+         
+        });
+            }else{
+
+                console.log('uye yok')
+              
+
+            }
+        })
+
+
+
 
                 },1000)
 
@@ -388,7 +492,7 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar
          
         })
 
-        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler
+        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler,goYorumlar
         }
         
     }

@@ -405,7 +405,7 @@
                 <h5>{{kullaniciad}} </h5>
 
                 <div class="form-floating">
-  <textarea class="form-control" required maxlength="400"  v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea autofocus class="form-control" required maxlength="400"  v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">Yorum Yapsana</label>
 </div>
 <br>
@@ -631,6 +631,7 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
     const kullaniciuid= ref('')
     const userimg= ref('')
     const puanladiuser= ref(0)
+    const yorumcountuser= ref(0)
 
 
     const loading= ref(true)
@@ -680,7 +681,7 @@ const yorumshow=()=>{
 
 
     if (yorumclickcount==0) {
-         firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(5).get()
+         firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').limit(10).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
@@ -1246,7 +1247,7 @@ UIDPUA="PUA"+kullaniciuid.value
 
        const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').doc(itemID.value).set(dataitem);
 
-puanarray.unshift({itemisim:itemisim.value,itemID:itemID.value,kategori:route.params.Kategori,puan:puan.value})
+puanarray.unshift({itemisim:itemisim.value,itemresim:itemresim.value,itemID:itemID.value,kategori:route.params.Kategori,puan:puan.value})
 
  localStorage.setItem('puanladi', JSON.stringify(puanarray))
         
@@ -1302,6 +1303,44 @@ yorumlar.value.unshift({
 
 const res = firestoreRef.collection(route.params.Kategori).doc(itemID.value).collection('yorumlar').doc(yorumkod.value).set(datayorum);
 const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').doc(yorumkod.value).set(datayorum);
+
+
+firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+            
+    
+                  snapshot.forEach(doc => {
+         
+
+         if (doc.data().yorumcount==undefined) {
+           firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+
+                   
+                   yorumcount: 1,
+                  
+                  
+                   
+        })
+         }else{
+             firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+
+                   
+                   yorumcount: doc.data().yorumcount + 1,
+                  
+                  
+                   
+        })
+         }
+         
+
+
+
+
+         
+        });
+            }
+        })
 
    yorum.value=""
 
@@ -1453,7 +1492,7 @@ const res2 = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collect
 
 
 #floatingTextarea2{
-    background-color: #181818;
+    background-color: black;
     color: white;
         resize: none;
 
@@ -1659,12 +1698,12 @@ margin-top:4vh;
      
     
    
-    box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;
+    box-shadow: -5px -5px 30px 5px #DE354C;
     
 }
 
 #infocard{
-    box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;
+    box-shadow: -5px -5px 30px 5px #DE354C;
       background: #181818;
       border-radius: 6px;
     

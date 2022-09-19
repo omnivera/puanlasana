@@ -82,7 +82,7 @@ document.documentElement.scrollTop = 0;
 position: fixed;
 bottom: 20px;
 right: 20px;
-
+display: none;
 
 }
 </style>

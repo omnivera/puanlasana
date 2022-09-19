@@ -20,7 +20,7 @@
 
 <div class="baslik d-flex justify-content-center">
           <strong>
-             <span class="baslik">Hakkı<span class="kbaslik2">mızda</span></span> 
+             <span class="baslik">Hakkı<span class="kbaslik">mızda</span></span> 
             
           </strong>
  </div>
@@ -32,7 +32,7 @@
 
 <div class="container">
   <div class="row" style="margin-top:-1vh">
-
+<transition @before-enter="beforeEnter" @enter="enterv2" appear > 
       <div class="about">
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste inventore impedit sequi iure voluptas, maiores aspernatur eius laudantium. Ipsam illum inventore iure aperiam consectetur velit doloribus quos aliquam ratione? Deserunt!
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dolorem incidunt repellendus error velit deserunt quasi? Odit nesciunt ea aliquam quae delectus incidunt, qui eaque fugit blanditiis modi, quo quisquam.
@@ -42,13 +42,55 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat soluta esse, pos
 
       </div>
 
+</transition>
+
 
    </div>
    <br>
 
+
+  
+
   </div>
       </div>
  </div>
+
+<transition @before-enter="beforeEnter" @enter="enterv2" appear > 
+
+  <div class="bot-left">
+       <h2 class="altbaslik">Yazılım Geliştirici</h2>
+       <div class="d-flex justify-content-center">
+       <p class="altsubbaslik">Mert Dallar</p>
+       </div>
+   </div>
+
+</transition>
+
+<transition @before-enter="beforeEnter" @enter="enterv2" appear > 
+
+     <div class="bot-right">
+       <h2 class="altbaslik">Website Editörü</h2>
+       <div class="d-flex justify-content-center">
+       <p class="altsubbaslik">Haktan Uzun</p>
+       </div>
+       
+   </div>
+</transition>
+
+<footer class="footer">
+    <hr>
+    <div class="">
+       <strong>
+             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
+            
+          </strong>
+       
+   </div> 
+</footer>
+
+  
+
+
   </div>
 </template>
 
@@ -65,10 +107,33 @@ export default {
 
   setup() {
   
+   const beforeEnter = el => {
+      el.style.opacity = 0;
+      el.style.transform = "translateY(100px)";
+    };
+
+    const enter = el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: el.dataset.index * 0.2
+      });
+    };
+
+    const enterv2 = el => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 20,
+        duration: 2,
+        delay: el.dataset.index * 0.3,
+        ease: "back"
+      });
   
+    }
 
     return {
-     
+     beforeEnter,enter,enterv2
     };
   }
 };
@@ -77,8 +142,49 @@ export default {
 <style scoped>
 
 
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 2vh;
+  width: 100%;
+
+  text-align: center;
+}
+
+
+.bot-left{
+    bottom: 15vh;
+    left: 7vw;
+    position:absolute;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.bot-right{
+    bottom: 15vh;
+    right: 7vw;
+    position: absolute;
+
+  font-family: "Comfortaa", cursive;
+}
+
+
+
+.bot-center{
+   position: fixed;
+  left: 50%;
+  bottom:3.5vh;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+
+  font-family: "Comfortaa", cursive;
+}
+
+
 .about{
-    padding: 3.2vw;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-top: 2vh;
     color: white;
 }
 
@@ -101,11 +207,20 @@ export default {
   font-family: "Comfortaa", cursive;
 }
 
-.kbaslik2 {
+
+
+
+.altbaslik {
   color: #DE354C;
-  font-size: 1.9vw;
+  font-size: 1.7vw;
 
 
+  font-family: "Comfortaa", cursive;
+}
+
+.altsubbaslik {
+  color: white;
+  font-size: 1vw;
   font-family: "Comfortaa", cursive;
 }
 

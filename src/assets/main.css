@@ -2,7 +2,42 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
 
+hr {
+  height: 1px;
+  background-color: #e5e5e5;
+  border: none;
+}
 
+
+
+.footer {
+  position: relative;
+  left: 0;
+  bottom: 2vh;
+  width: 100%;
+  background-color: transparent;
+  
+  text-align: center;
+}
+
+
+.baslikfooter {
+  color: white;
+  font-size: 1.3vw;
+  
+  margin-top: 1.6vh;
+  letter-spacing: 0.3vw;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslikfooter {
+  color: #DE354C;
+  font-size: 1.3vw;
+  margin-bottom: 1.2vh;
+
+  font-family: "Comfortaa", cursive;
+}
 
 .card{
   

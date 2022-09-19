@@ -76,7 +76,7 @@
 
    <img :src="item.itemresim" class="puanladi" alt="" />
   <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:4vw" alt />
+     <img src="@/assets/plogo6.png" style="width:5vw" alt />
     </div>
 
 
@@ -105,6 +105,7 @@
 
       
     </div>
+    
 </div>
 
 

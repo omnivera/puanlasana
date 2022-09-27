@@ -527,12 +527,14 @@ setTimeout(() => {
 
   width: 13vw;
 
- padding-top: 2.8vh;
+ padding-top: 2vh;
+  padding-bottom: 2vh;
   border-right: 1px solid #ddd;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   background-color: #181818;
   text-align: center;
+  
   
   
 }
@@ -543,6 +545,7 @@ setTimeout(() => {
   height: 15vh;
   border-radius: 100%;
   background-color: #ddd;
+  
   
 }
 

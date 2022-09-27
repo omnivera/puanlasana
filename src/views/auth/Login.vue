@@ -16,7 +16,7 @@ Your browser does not support the video tag.
 </video>
 
    </div>
-        <div v-if="register" class="d-flex justify-content-center">
+        <div v-if="register" class="center">
             
 
        
@@ -24,7 +24,12 @@ Your browser does not support the video tag.
 <div class="card authcard" style="width: 37vw;">
   <div class="card-body authcardbd">
       <div class="row text-center">
- <h2>puanlasana </h2>  <h5 class="card-title">Üye Olsana</h5>
+<strong>
+             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
+            
+          </strong> 
+          <br>
+     
       </div>
   
     <hr>
@@ -105,7 +110,7 @@ Your browser does not support the video tag.
 
 
 
-<div v-if="loginkontrol" class="d-flex justify-content-center">
+<div v-if="loginkontrol" class="center">
             
 
        
@@ -113,7 +118,11 @@ Your browser does not support the video tag.
 <div class="card authcard" style="width: 37vw;">
   <div class="card-body authcardbd">
       <div class="row text-center">
- <h2>puanlasana </h2>  <h5 class="card-title">Giriş Yapsana</h5>
+ <strong>
+             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
+            
+          </strong> 
+          
       </div>
   
     <hr>
@@ -247,8 +256,10 @@ const {hata,signup}=useSignup();
 
 
          
+router.push({name:'anasayfa'})
 
-                router.push({name:'anasayfa'})
+
+             
 
                
               
@@ -374,6 +385,36 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
 
 <style scoped>
 
+
+.baslikfooter {
+  color: white;
+  font-size: 1.7vw;
+  
+  
+  margin-top: 1.6vh;
+
+  letter-spacing: 0.3vw;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslikfooter {
+  color: #DE354C;
+  font-size: 1.7vw;
+  margin-bottom: 1.2vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
 #logbutton{
     margin-top: 1.5vh;
 
@@ -426,6 +467,29 @@ color: white;
 #floatingInput{
 color: white;
     background-color: #181818;
+    caret-color: #DE354C;
+    
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: #DE354C;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #DE354C;
+  outline: 0 none;
 }
 
 input:-webkit-autofill,
@@ -439,10 +503,12 @@ input:-webkit-autofill:active {
 .authcard{
 border: none;
 opacity: 0.8;
+background-color: black;
+
 }
 
 .authcardbd{
-    background-color: #181818;
+    background-color: black;
     opacity: 0.8;
     color: white;
   

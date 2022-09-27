@@ -5,8 +5,8 @@
 <!-- <div v-if="loading"><Loading/></div> -->
 <div>
 <div class="bigshadow">
+<iframe  id="myVideo" :src="itemvideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe   id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -337,7 +337,7 @@
                   <div class="row">
                   
                       <p class="aciklama">
-                          {{filmozet}}
+                          {{ozet}}
                  </p>
                        </div>
 
@@ -345,15 +345,18 @@
 
                   <div class="row">
                       <div class="col-md-6">
-                      <h5 class="redtitle">Oyuncular</h5>
+                      <h5 class="redtitle">
+                        <span v-if="kategorigoster=='Film' || kategorigoster=='Dizi'">Oyuncular</span>
+                        <span v-if="kategorigoster=='Oyun'">Platformlar</span>
+                        </h5>
                       <hr class="">
-                      <p>{{oyuncular}}</p>
+                      <p>{{info1}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Türler</h5>
                       <hr>
-                      <p>{{turler}}</p>
+                      <p>{{info2}}</p>
 
                       </div>
                      
@@ -369,9 +372,12 @@
                       </div>
 
                         <div class="col-md-6">
-                      <h5 class="redtitle">Film Süresi</h5>
+                      <h5 class="redtitle">
+                        <span v-if="kategorigoster=='Film'">Film Süresi</span>
+                        <span v-if="kategorigoster=='Dizi'">Sezon</span>
+                        <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
-                      <p>{{fsure}}</p>
+                      <p>{{info3}}</p>
 
                       </div>
                      

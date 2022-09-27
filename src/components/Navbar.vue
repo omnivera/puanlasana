@@ -149,10 +149,7 @@ export default {
     const adminkontrol = ref("");
 
   
- watch ( () => {
-
-
-})
+ 
 
 
  
@@ -184,8 +181,17 @@ await authRef.onAuthStateChanged(k=>{
         }
 
       const handleLogout=async ()=>{
+        sessionStorage.clear()
+         localStorage.setItem('puanladi', JSON.stringify([]));
+      
             await authRef.signOut()
-            router.push({name:'anasayfa'})
+          
+        
+            setTimeout(() => {
+            router.go({name:'anasayfa'})
+         
+        }, 600);
+       
         }
 
     return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail};

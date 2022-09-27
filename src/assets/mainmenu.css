@@ -5,7 +5,9 @@
 
 
  .puanladi{
+     
      opacity: 0.4;
+     background-color: #181818;
  }
 
 
@@ -337,6 +339,7 @@ font-weight: 500;
   height: 100%;
   width: 100%;
   cursor: pointer;
+  
 }
 
 .author img {

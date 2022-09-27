@@ -250,10 +250,10 @@ router.push({name:'Itemview',params:{kategori:item.kategori,veriID:item.id}})
                   snapshot.forEach(doc => {
 
                   
-console.log(JSON.parse(localStorage.getItem('itemler')).length - 1)
+console.log(JSON.parse(localStorage.getItem('itemler')).length)
                  
 
-       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length - 1) {
+       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length) {
 
          setTimeout(() => {
 

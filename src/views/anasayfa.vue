@@ -57,7 +57,7 @@
           
           <!-- Single Video starts -->
           <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" class="video">
-            <div  v-if="item.puanladi==false" class="video__thumbnail">
+            <div  v-if="item.puanladi==false || item.puanladi==null" class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
              
       
@@ -139,6 +139,40 @@ export default {
     const route=useRoute()
     const router=useRouter()
 
+
+    watch(() => {
+
+      
+
+
+
+
+  
+
+     
+            let puanlananlar = []
+            let puanlanmayanlar = []
+
+            puanlananlar = itemler.value.filter(({id}) => puanlar.value.some(puan => puan.itemID == id))
+            puanlanmayanlar = itemler.value.filter(({id}) => !puanlar.value.some(puan => puan.itemID == id))
+
+           puanlananlar.forEach(element => {
+             element.puanladi=true
+             
+           });
+
+            puanlanmayanlar.forEach(element => {
+             element.puanladi=false
+           });
+           
+
+          let merged =  [...new Set([...puanlananlar, ...puanlanmayanlar])];
+
+            itemler.value  =  merged
+
+      
+    });
+
     
 
 
@@ -184,11 +218,7 @@ kategori.katbuttoncss="katbuttonhover"
 }
 
 
-watch(() => {
 
-  
-    
-    });
 
     authRef.onAuthStateChanged(k=>{
     kullaniciad.value=k.displayName
@@ -277,11 +307,11 @@ router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
 
-                  
-console.log(JSON.parse(localStorage.getItem('itemler')).length - 1)
                  
 
-       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length - 1) {
+                 
+
+       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length) {
            console.log("veritabanı")
          setTimeout(() => {
 
@@ -332,7 +362,7 @@ setTimeout(() => {
 }, 1500);
          
        }else{
-           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
+            puanlar.value= JSON.parse(localStorage.getItem('puanladi'))
 
           let puanlananlar=[]
           let puanlanmayanlar=[]
@@ -340,13 +370,14 @@ setTimeout(() => {
           let random=0
 
 
-          if (puanarray!=null) {
-            let itemarray = JSON.parse(localStorage.getItem('itemler'));
-            puanlananlar = itemarray.filter(({id}) => puanarray.some(puan => puan.itemID == id))
-            puanlanmayanlar = itemarray.filter(({id}) => !puanarray.some(puan => puan.itemID == id))
+          if (puanlar.value!=null) {
+            itemler.value = JSON.parse(localStorage.getItem('itemler'));
+            puanlananlar = itemler.value.filter(({id}) => puanlar.value.some(puan => puan.itemID == id))
+            puanlanmayanlar = itemler.value.filter(({id}) => !puanlar.value.some(puan => puan.itemID == id))
 
            puanlananlar.forEach(element => {
              element.puanladi=true
+             
            });
 
             puanlanmayanlar.forEach(element => {
@@ -358,7 +389,7 @@ setTimeout(() => {
 
             itemler.value  =  merged
 
-            console.log(puanlanmayanlar)
+          
           }else{
             itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
           }
@@ -447,17 +478,6 @@ setTimeout(() => {
          
        }else{
            let puanarray= JSON.parse(localStorage.getItem('puanladi'))
-
-    
-
-/* 
-          if (puanarray!=null) {
-            let itemarray = JSON.parse(localStorage.getItem('itemler'));
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            itemler.value  =  pool
-          }else{
-            itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
-          } */
 
           
      

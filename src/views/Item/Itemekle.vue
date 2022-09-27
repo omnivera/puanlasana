@@ -288,6 +288,14 @@
       </div>
       <div class="modal-body">
           <form @submit.prevent="verikayit" autocomplete="false">
+            <div class="form-floating">
+  <select class="form-select" required v-model="kategori" id="floatingSelect" aria-label="Floating label select example">
+ <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
+  </select>
+  <label for="floatingSelect">Kategori</label>
+</div>
+
+<br>
             <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem İsmi</label>
@@ -307,61 +315,102 @@
 
         <div class="col-md-3">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required  class="form-control" v-model="start" id="floatingInput" placeholder="name@example.com">
+  <input type="number" autocomplete="off" required  class="form-control" v-model="start" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Start</label>
 </div>
     </div>
 
         <div class="col-md-3">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="end" id="floatingInput" placeholder="name@example.com">
+  <input type="number" autocomplete="off" required class="form-control" v-model="end" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">End</label>
 </div>
     </div>
 </div>
 
-
-<div class="form-floating">
-  <select class="form-select" required v-model="kategori" id="floatingSelect" aria-label="Floating label select example">
- <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
-  </select>
-  <label for="floatingSelect">Kategori</label>
+<div class="row">
+  <div class="col-md-6">
+<div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="sirket" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Şirket</label>
 </div>
+  </div>
+
+  <div class="col-md-6">
+<div class="form-floating mb-3">
+  <input type="number" autocomplete="off" required class="form-control" v-model="cyili" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Çıkış Yılı</label>
+</div>
+  </div>
+  
+</div>
+
+
+
 <br>
-<div v-if="kategori=='Film'">
+
+<div v-if="kategori=='Film' || kategori=='Dizi'">
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="1000" required v-model="filmozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-  <label for="floatingTextarea2">Film Özeti</label>
+  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">{{kategori}} Özeti</label>
 </div>
 <br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="oyuncular" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info1" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Oyuncular</label>
 </div>
     </div>
-     <div class="col-md-6">
+     <div class="col-md-4">
          <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="turler" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Türler</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info2" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Tür</label>
+</div>
+    </div>
+
+       <div class="col-md-4">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info3" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><span v-if="kategori=='Film'">Film Süresi</span> <span v-if="kategori=='Dizi'">Sezon</span> </label>
 </div>
     </div>
 </div>
 
+
+
+</div>
+
+
+
+<div v-if="kategori=='Oyun'">
+
+
+<div class="form-floating">
+  <textarea class="form-control" maxlength="1000" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">{{kategori}} Özeti</label>
+</div>
+<br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="cyili" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Çıkış Yılı</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info1" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Platformlar</label>
 </div>
     </div>
-     <div class="col-md-6">
+     <div class="col-md-4">
          <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="fsure" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Film Süresi</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info2" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Tür</label>
+</div>
+    </div>
+
+       <div class="col-md-4">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info3" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">{{kategori}} Süresi</label>
 </div>
     </div>
 </div>
@@ -452,11 +501,12 @@ export default {
          const itemvideo=ref('')
          const start=ref('')
          const end=ref('')
-         const filmozet=ref('')
-         const oyuncular=ref('')
-         const turler=ref('')
+         const sirket=ref('')
          const cyili=ref('')
-         const fsure=ref('')
+         const ozet=ref('')
+         const info1=ref('')
+         const info2=ref('')
+         const info3=ref('')
          const itemvideogoster=ref('')
          const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
@@ -560,15 +610,18 @@ setTimeout(  function(){
                   itemvideo:itemvideogoster.value,
                   tarih:moment(tarih.value).format('DD/MM/YYYY'),
                   gtarih:Date.parse(tarih.value.toString()),
-                  filmozet:filmozet.value,
-                  oyuncular:oyuncular.value,
-                  turler:turler.value,
+                  ozet:ozet.value,
+                  sirket:sirket.value,
                   cyili:cyili.value,
-                  fsure:fsure.value,
+                  info1:info1.value,
+                  info2:info2.value,
+                  info3:info3.value,
                   totalpuan:0,
                   puancount:0,
                   kategori:kategori.value,
-                  watchers:{deneme:""}
+                  start:start.value,
+                  end:end.value
+                  
                   
 };
 
@@ -672,7 +725,7 @@ setTimeout(  function(){
 
 
           return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo,itemvideogoster,start,end,
-          oyuncular,turler,cyili,fsure,filmozet
+          info1,info2,cyili,info3,ozet,sirket
         }
         
     }

@@ -33,14 +33,23 @@
 <div class="container">
   <div class="row" style="margin-top:-1vh">
 <transition @before-enter="beforeEnter" @enter="enterv2" appear > 
-      <div class="about">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste inventore impedit sequi iure voluptas, maiores aspernatur eius laudantium. Ipsam illum inventore iure aperiam consectetur velit doloribus quos aliquam ratione? Deserunt!
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos dolorem incidunt repellendus error velit deserunt quasi? Odit nesciunt ea aliquam quae delectus incidunt, qui eaque fugit blanditiis modi, quo quisquam.
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus, suscipit natus! Dolore aliquid pariatur cupiditate rerum corrupti ducimus, eum quod eaque sed id facere tempore sunt perferendis possimus neque esse?
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat soluta esse, possimus reiciendis suscipit molestias eligendi minima hic sequi explicabo tenetur vero ipsam quaerat voluptatum! Voluptatum earum iure minima reiciendis.
-    
+      <p class="about">
+<strong>Sitemizin Özellikleri / Site Amacı / Sizi Bekleyen Site</strong>
 
-      </div>
+<br>
+Siteyi oluştururken amacımız her insanın bir film, dizi, oyun ve benzeri ürünler hakkında kendi düşüncelerini yorum yaparak ve
+ puanlayarak beyan edecek, tasarımı hoş ve kullanımı kolay olan bir yer oluşturmaktı. Bu amacı gerçekleştirebilmek için diğer sitelerden farklı olarak kullanıcıları kritik/kullanıcı veya benzeri ayrımlar yapmıyoruz, sadece bir ürüne odaklanmak yerine farklı farklı, örnek olarak dizi, oyun, film, vb. ürünler verilebilir, ürünlere yer veriyoruz. Sitemizde bulunan bir başka özellik ise sıralamalardır, burada insanların en fazla beğendiği ürünlerinin puanını, kaç insanın oy verdiğini, çıkış yılı ve ürünün sahibini görebilirsiniz.  Bununla birlikte siteye günlük yeni ürünler ilave edildiğinden dolayı sürekli bakabileceğiniz bir ürün olacaktır.
+<br>
+<br>
+<br>
+<strong>İletişim</strong>
+<br>
+Bize  <span class="vurgu">info@puanlasana.com</span> mail adresi üzerinden siteyle ilgili sorularınızı, problemlerinizi, eklenmesini istediğiniz kategori veya yeni özellik önerilerinizi ve eleştirilerinizi paylaşabilirsiniz. En kısa zamanda attığınız mailleri değerlendirmeye çalışacağız şimdiden anlayışınız için teşekkür ederiz.
+
+Umarım sitemiz ile ilgili kısa bilgilendirmemiz yardımcı olmuştur. <span class="vurgu">İyi puanlamalar dileriz.</span> 
+
+
+      </p>
 
 </transition>
 
@@ -142,6 +151,11 @@ export default {
 <style scoped>
 
 
+.vurgu{
+    color: #DE354C;
+}
+
+
 .footer {
   position: fixed;
   left: 0;
@@ -186,6 +200,7 @@ export default {
     padding-right: 15vw;
     padding-top: 2vh;
     color: white;
+  
 }
 
 

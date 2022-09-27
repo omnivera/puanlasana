@@ -6,7 +6,7 @@
 <div>
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="autoplay;" allowfullscreen></iframe>
+<iframe  id="myVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -337,7 +337,7 @@
                   <div class="row">
                   
                       <p class="aciklama">
-                          {{filmozet}}
+                          {{ozet}}
                  </p>
                        </div>
 
@@ -345,15 +345,18 @@
 
                   <div class="row">
                       <div class="col-md-6">
-                      <h5 class="redtitle">Oyuncular</h5>
+                      <h5 class="redtitle">
+                        <span v-if="kategorigoster=='Film' || kategorigoster=='Dizi'">Oyuncular</span>
+                        <span v-if="kategorigoster=='Oyun'">Platformlar</span>
+                        </h5>
                       <hr class="">
-                      <p>{{oyuncular}}</p>
+                      <p>{{info1}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Türler</h5>
                       <hr>
-                      <p>{{turler}}</p>
+                      <p>{{info2}}</p>
 
                       </div>
                      
@@ -369,9 +372,12 @@
                       </div>
 
                         <div class="col-md-6">
-                      <h5 class="redtitle">Film Süresi</h5>
+                      <h5 class="redtitle">
+                        <span v-if="kategorigoster=='Film'">Film Süresi</span>
+                        <span v-if="kategorigoster=='Dizi'">Sezon</span>
+                        <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
-                      <p>{{fsure}}</p>
+                      <p>{{info3}}</p>
 
                       </div>
                      
@@ -595,11 +601,12 @@ let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
          const watchinfo = ref(false)
           const titlecheck = ref(true)
 
-          const filmozet=ref()
-         const oyuncular=ref()
-         const turler=ref()
+          const ozet=ref()
+         const info1=ref()
+         const info2=ref()
          const cyili=ref()
-         const fsure=ref()
+         const sirket= ref('')
+         const info3=ref()
 
          
 
@@ -637,6 +644,12 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
     const loading= ref(true)
 
 
+
+
+
+
+
+
      let puanarray= JSON.parse(localStorage.getItem('puanladi'))
     
     const itemvideo=ref()
@@ -664,15 +677,7 @@ loading.value=false
    
 })
 
-       setTimeout(  function(){
-
-            watch ( () => {
-
-          /*      itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'  */
-
-
-})
- },200)
+   
 
 const yorumshow=()=>{
 
@@ -1034,52 +1039,7 @@ showtitle.value="hidden"
           }
 
 
-           setTimeout(() => {
-          if (sessionStorage.getItem(kullaniciuid.value) !== null) {
-     console.log("var");
-  
-     
-} else {
-console.log("yok");
-
-  
-      firestoreRef.collection(route.params.Kategori).where('watchers','array-contains-any',["PAS"+kullaniciuid.value]).get()
-        .then(snapshot =>{
-           
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
-                firestoreRef.collection(route.params.Kategori).doc(doc.id).update({
-
-                   
-                   watchers:firebase.firestore.FieldValue.arrayRemove("PAS"+kullaniciuid.value),
-                   
-                  
-                   
-        })
-
-
-           
-
-
-
-
-
-          
-          
-         
-        });
-            }
-            
-      
-
-
-        })
-
-sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
-
-      
-}
-        }, 500);
+       
 
 
 
@@ -1093,25 +1053,28 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
     
       const doc = await firestoreRef.collection(route.params.Kategori).doc(route.params.itemID).get()
+          let iframe = document.getElementById('myVideo')
 
 
      
-
+           iframe.src = doc.data().itemvideo
            itemvideo.value = doc.data().itemvideo
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
            itemID.value = doc.id
-           oyuncular.value = doc.data().oyuncular
-            turler.value = doc.data().turler
+            info1.value = doc.data().info1
+            info2.value = doc.data().info2
             cyili.value = doc.data().cyili
-            fsure.value = doc.data().fsure
-            filmozet.value = doc.data().filmozet
+            sirket.value = doc.data().sirket
+            info3.value = doc.data().info3
+            ozet.value = doc.data().ozet
 
      
 
-    
+  
+
  
 
           /* await firestoreRef.collection(route.params.Kategori).where(firebase.firestore.FieldPath.documentId(), '>=', firestoreRef.collection(route.params.Kategori).doc().id).where('puanlayanlar','not-in',[kullaniciuid.value]).limit(1).get() */
@@ -1350,8 +1313,8 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
-          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster
+          showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,info1,info2,cyili,info3,ozet,kullaniciad,userimg,kullaniciemail,
+          yorumladi,loading,itemvideogoster,sirket
           
         }
         

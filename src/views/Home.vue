@@ -84,6 +84,7 @@ bottom: 20px;
 right: 20px;
 display: none;
 z-index: 999;
+background-color: #DE354C;
 
 }
 </style>

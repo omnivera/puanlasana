@@ -226,7 +226,7 @@
 <br>
 
  
-<button type="button" id="yorumlabutton" @click="guncelle" class=" btn-lg shadow "><i class="fas fa-edit"></i> Güncelle</button>
+
 
 
 
@@ -287,6 +287,15 @@
         <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+          <form @submit.prevent="guncelle" autocomplete="false">
+            <div class="form-floating">
+  <select class="form-select" required v-model="kategorigoster" id="floatingSelect" aria-label="Floating label select example">
+ <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
+  </select>
+  <label for="floatingSelect">Kategori</label>
+</div>
+
+<br>
             <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem İsmi</label>
@@ -306,67 +315,161 @@
 
         <div class="col-md-3">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required  class="form-control" v-model="start" id="floatingInput" placeholder="name@example.com">
+  <input type="number" autocomplete="off" required  class="form-control" v-model="start" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Start</label>
 </div>
     </div>
 
         <div class="col-md-3">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="end" id="floatingInput" placeholder="name@example.com">
+  <input type="number" autocomplete="off" required class="form-control" v-model="end" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">End</label>
 </div>
     </div>
 </div>
 
-
-<div class="form-floating">
-  <select class="form-select" required v-model="kategorigoster" id="floatingSelect" aria-label="Floating label select example">
- <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
-  </select>
-  <label for="floatingSelect">Kategori</label>
+<div class="row">
+  <div class="col-md-6">
+<div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="sirket" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Şirket</label>
 </div>
+  </div>
+
+  <div class="col-md-6">
+<div class="form-floating mb-3">
+  <input type="number" autocomplete="off" required class="form-control" v-model="cyili" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Çıkış Yılı</label>
+</div>
+  </div>
+  
+</div>
+
+
+
 <br>
-<div v-if="kategorigoster=='Film'">
+
+<div v-if="kategorigoster=='Film' || kategorigoster=='Dizi'">
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="1000" required v-model="filmozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-  <label for="floatingTextarea2">Film Özeti</label>
+  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">{{kategorigoster}} Özeti</label>
 </div>
 <br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="oyuncular" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info1" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Oyuncular</label>
 </div>
     </div>
-     <div class="col-md-6">
+     <div class="col-md-4">
          <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="turler" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Türler</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info2" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Tür</label>
+</div>
+    </div>
+
+       <div class="col-md-4">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info3" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput"><span v-if="kategorigoster=='Film'">Film Süresi</span> <span v-if="kategorigoster=='Dizi'">Sezon</span> </label>
 </div>
     </div>
 </div>
 
+
+
+</div>
+
+
+
+<div v-if="kategorigoster=='Oyun'">
+
+
+<div class="form-floating">
+  <textarea class="form-control" maxlength="1000" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <label for="floatingTextarea2">{{kategorigoster}} Özeti</label>
+</div>
+<br>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
  <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="cyili" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Çıkış Yılı</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info1" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Platformlar</label>
 </div>
     </div>
-     <div class="col-md-6">
+     <div class="col-md-4">
          <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required class="form-control" v-model="fsure" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Film Süresi</label>
+  <input type="search" autocomplete="off" required class="form-control" v-model="info2" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Tür</label>
+</div>
+    </div>
+
+       <div class="col-md-4">
+         <div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="info3" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">{{kategorigoster}} Süresi</label>
 </div>
     </div>
 </div>
 
 </div>
+
+
+
+
+
+
+<br>
+
+<div class="d-flex justify-content-center"><button type="submit"   class=" btn-lg shadow "><i class="fas fa-edit"></i> Güncelle</button></div>
+
+          </form>
+           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>
+
+  <div v-if="basarili"  role="alert">
+
+       <br>
+
+
+    <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+    <strong>Kayıt Başarılı!</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+
+ <div v-if="basarisiz"  role="alert">
+
+       <br>
+
       
+
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div>
+    <strong>Kayıt Başarısız!</strong> "{{itemisim}}" isminde bir item zaten var!
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+
       </div>
      
     </div>
@@ -399,6 +502,7 @@ export default {
 
 
     
+ 
 
 
      
@@ -416,16 +520,19 @@ export default {
          const basarili=ref(false)
 
 
+         const sirket=ref('')
+
+
          const itemresim=ref('')
          const itemisim=ref('')
          const itemvideo=ref('')
-         const start=ref()
-         const end=ref()
-         const filmozet=ref()
-         const oyuncular=ref()
-         const turler=ref()
+         const start=ref('')
+         const end=ref('')
+         const ozet=ref()
+         const info1=ref()
+         const info2=ref()
          const cyili=ref()
-         const fsure=ref()
+         const info3=ref()
          const itemvideogoster=ref('')
 
          const kategorigoster=ref(route.params.kategori)
@@ -440,6 +547,10 @@ export default {
          const ortpuan=ref(0)
          const totalpuan=ref(0)
          const puancount=ref(0)
+
+               let itemarray = JSON.parse(localStorage.getItem('itemler'));
+/*        itemarray = itemarray.filter((item)=>item.id == route.params.veriID) */
+       
 
 
          const itemID=ref('')
@@ -537,11 +648,15 @@ location. reload()
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
             itemvideo.value = doc.data().itemvideo
-            oyuncular.value = doc.data().oyuncular
-            turler.value = doc.data().turler
+            info1.value = doc.data().info1
+            info2.value = doc.data().info2
             cyili.value = doc.data().cyili
-            fsure.value = doc.data().fsure
-            filmozet.value = doc.data().filmozet
+            info3.value = doc.data().info3
+            ozet.value = doc.data().ozet
+            sirket.value = doc.data().sirket
+
+            start.value = doc.data().start
+            end.value = doc.data().end
 
            kategorigoster.value = doc.data().kategori
 
@@ -570,6 +685,24 @@ location. reload()
                  const guncelle=async ()=>{
 
 
+                   for (let i = 0; i < itemarray.length; i++) {
+                     if (itemarray[i].id==route.params.veriID) {
+                   itemarray[i].itemisim = itemisim.value
+                   itemarray[i].itemresim = itemresim.value
+                   itemarray[i].itemvideo = itemvideo.value
+                   itemarray[i].kategori = kategorigoster.value
+
+                     }
+                     
+                   }
+
+                    localStorage.setItem('itemler', JSON.stringify(itemarray))
+
+
+                   console.log(itemarray)
+
+
+
 
 
            await firestoreRef.collection(route.params.kategori).doc(itemID.value).update({
@@ -580,16 +713,29 @@ location. reload()
                    kategori: kategorigoster.value,
                    start:start.value,
                    end:end.value,
-                   filmozet:filmozet.value,
-                   oyuncular:oyuncular.value,
-                   turler:turler.value,
+                   ozet:ozet.value,
+                   info1:info1.value,
+                   info2:info2.value,
                    cyili:cyili.value,
-                   fsure:fsure.value
+                   info3:info3.value,
+                   sirket:sirket.value
                    
                    
                   
                    
         })
+
+basarili.value=true
+        setTimeout(  function(){
+
+
+
+
+      basarili.value=false
+
+
+
+},1000)
 
 
 
@@ -603,7 +749,7 @@ location. reload()
 
 
           return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,
-          itemvideogoster,oyuncular,turler,cyili,fsure,filmozet,start,end
+          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili
         }
         
     }

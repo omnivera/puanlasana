@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">
         <span>
-          <img src="@/assets/plogo6.png" style="width:2vw" alt />
+          <img src="@/assets/plogo6.png" style="width:36px" alt />
           <strong>
             puanla<span style="color:#DE354C;font-weight:bold">sana</span>
             
@@ -216,7 +216,7 @@ button:focus {
 
 span {
   color: white;
-  font-size: 1.1vw;
+  font-size: 1.2rem;
 
   font-family: "Comfortaa", cursive;
 }

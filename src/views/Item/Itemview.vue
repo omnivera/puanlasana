@@ -2,7 +2,7 @@
 
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 
 
@@ -534,6 +534,7 @@ export default {
          const cyili=ref()
          const info3=ref()
          const itemvideogoster=ref('')
+         const itemvideokod=ref('')
 
          const kategorigoster=ref(route.params.kategori)
 
@@ -647,7 +648,7 @@ location. reload()
                 
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-            itemvideo.value = doc.data().itemvideo
+            itemvideo.value = doc.data().itemvideokod
             info1.value = doc.data().info1
             info2.value = doc.data().info2
             cyili.value = doc.data().cyili
@@ -709,7 +710,8 @@ location. reload()
 
                    itemisim: itemisim.value,
                    itemresim: itemresim.value,
-                   itemvideo: itemvideo.value,
+                   itemvideo:itemvideogoster.value,
+                   itemvideokod:itemvideo.value,
                    kategori: kategorigoster.value,
                    start:start.value,
                    end:end.value,
@@ -749,7 +751,7 @@ basarili.value=true
 
 
           return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,
-          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili
+          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili,itemvideokod
         }
         
     }

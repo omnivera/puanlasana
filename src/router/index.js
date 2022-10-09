@@ -20,12 +20,14 @@ import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 import Kategoriler from '../views/Kategoriler.vue'
 
 import Itemekle from '../views/Item/Itemekle.vue'
+import Itemekle2 from '../views/Item/Itemekle2.vue'
 import Itemduzenle from '../views/Item/Itemduzenle.vue'
 import Itemview from '../views/Item/Itemview.vue'
 
 
 import Puanla from '../views/Puanla.vue'
 import Puanlas from '../views/Puanlas.vue'
+
 
 
 
@@ -172,6 +174,8 @@ const routes = [
         component: Puanlas,
        
       },
+
+    
 
      
       

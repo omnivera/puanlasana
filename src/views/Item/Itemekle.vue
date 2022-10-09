@@ -608,6 +608,7 @@ setTimeout(  function(){
                   itemisim:itemisim.value,
                   itemresim:itemresim.value,
                   itemvideo:itemvideogoster.value,
+                  itemvideokod:itemvideo.value,
                   tarih:moment(tarih.value).format('DD/MM/YYYY'),
                   gtarih:Date.parse(tarih.value.toString()),
                   ozet:ozet.value,

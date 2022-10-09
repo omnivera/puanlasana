@@ -188,9 +188,9 @@
 
          <div class="col ms-auto mt-auto mb-0">
 
-                <div v-if="puanladi">
+                <div v-if="true">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
- <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
+ <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow  top-left altbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
         
              </transition>
 </div>
@@ -202,23 +202,23 @@
 
    
 
-    <div class="col-6 d-flex justify-content-center">
-         <div v-if="puanladi">
+    <div class="col ms-auto mt-auto mb-0">
+         <div v-if="true">
          <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
                      
                      
- <div class="d-flex align-items-center">
+
                    
-<br>
-
-<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorumlar</button></a>
 
 
+<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow altbutton center-btm"><i class="fas fa-comments"></i> Yorumlar</button></a>
 
 
 
-      </div>   
+
+
+  
 
 
  </transition> 
@@ -279,7 +279,7 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
-    <button id="yorumlabutton" class="shadow next" @click="next"><i class="fa fa-play"></i>Devam</button>
+    <button id="yorumlabutton" class="btn-lg shadow top-right next" @click="next"><i class="fa fa-play"></i>Devam</button>
              </transition>
 </div>
 
@@ -303,7 +303,7 @@
 
 
  
-<button type="button" id="yorumlabutton" @click="next" class=" btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
+<button type="button" id="pasbtn" @click="next" class="btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
 
 
 
@@ -1003,6 +1003,7 @@ showtitle.value="hidden"
 
 
           const doYildizla=(sayi)=>{
+            if (kullaniciemail.value != "") {
         puan.value = sayi
         yildizladi.value = true
         showcardV.value="visible"
@@ -1010,6 +1011,9 @@ showtitle.value="hidden"
         doVisible()
 
         verikayit()
+            }else{
+              router.push({name:'Login'})
+            }
 
         }
 
@@ -1438,6 +1442,11 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
 
                const yorumkayit=async ()=>{
 
+
+                 if (kullaniciemail.value!="") {
+                   
+                
+
                  yorumladi.value=true
 
 const yorumkod=ref("Y"+Date.parse(new Date()))
@@ -1522,6 +1531,11 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
    yorum.value=""
 
+ }else{
+    router.push({name:'Login'})
+ }
+
+
   
          }
 
@@ -1539,6 +1553,14 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 </script>
 
 <style scoped>
+
+
+.center-btm{
+  position: absolute;
+  transform: translate(-50%, -50%);
+ bottom: -0.8vh;
+ 
+}
 
 
 
@@ -1842,7 +1864,7 @@ outline: none;
 
 .top-left{
    position: absolute;
-    bottom: 2.8vh;
+    bottom: 1.8vh;
     left: 0.7vw;
     
 }
@@ -1932,6 +1954,19 @@ h4{
   border-radius: 6px;
   position: relative;
   overflow: hidden;
+  z-index: 2;
+}
+
+
+.altbutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+ 
   z-index: 2;
 }
 

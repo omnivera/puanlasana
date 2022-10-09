@@ -6,9 +6,16 @@
 <div>
 <div class="bigshadow">
 
-<iframe  id="myVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video id="myVideo" autoplay muted loop width="320" height="240" >
+  <source  src="https://drive.google.com/uc?export=download&id=19hDOay4fFilO0xnSwrgn_X4DgzyHtbyX" type="video/mp4">
 
+</video>
 
+<!-- <iframe src="https://player.vimeo.com/video/758465713?h=c9a69bc961&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Y2Mate.is - Aquaman - Official Trailer 1 - Now Playing In Theaters-WDkg3h8PCVU-720p-1654834192928"></iframe> -->
+
+<!-- 
+ <iframe id="myVideo"  src="https://drive.google.com/file/d/19hDOay4fFilO0xnSwrgn_X4DgzyHtbyX/preview?autoplay=1"  allow="autoplay"></iframe> -->
+ 
 
    </div>
  
@@ -188,9 +195,9 @@
 
          <div class="col ms-auto mt-auto mb-0">
 
-                <div v-if="puanladi">
+                <div v-if="true">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
- <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow normalbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
+ <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow  top-left altbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
         
              </transition>
 </div>
@@ -202,8 +209,8 @@
 
    
 
-    <div class="col-6 d-flex justify-content-center">
-         <div v-if="puanladi">
+    <div class="col ms-auto mt-auto mb-0 ">
+      
          <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
                      
@@ -212,7 +219,8 @@
                    
 
 
-<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow normalbutton"><i class="fas fa-comments"></i> Yorumlar</button></a>
+<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow altbutton center-btm"><i class="fas fa-comments"></i> Yorumlar</button></a>
+
 
 
 
@@ -222,7 +230,13 @@
 
 
  </transition> 
-         </div>
+
+<button type="button" @click="toggleMute" id="mutebtn" class="shadow mutebutton top-right3">
+  <i v-if="mutecheck" class="fas fa-volume-up"></i>
+  <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
+  </button>
+
+       
 
               <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
@@ -279,7 +293,7 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
-    <button id="yorumlabutton" class="shadow next" @click="next"><i class="fa fa-play"></i>Devam</button>
+    <button id="pasbtn" class="btn-lg shadow top-right next" @click="next"><i class="fa fa-play"></i>Devam</button>
              </transition>
 </div>
 
@@ -303,7 +317,7 @@
 
 
  
-<button type="button" id="yorumlabutton" @click="next" class=" btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
+<button type="button" id="pasbtn" @click="next" class=" btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
 
 
 
@@ -551,10 +565,12 @@ import moment from 'moment';
 import getUser from "../composables/getUser";
 import Loading from '@/components/Loading.vue'
 
+
 export default {
 
       components: {
-    'vue3-autocounter': Vue3autocounter,
+    'vue3-autocounter': Vue3autocounter
+   
     
   },
 
@@ -643,9 +659,16 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
     const loading= ref(true)
 
+const mutecheck=ref(false)
 
 
 
+const toggleMute=()=>{
+  let video=document.getElementById("myVideo");
+
+  video.muted = !video.muted;
+  mutecheck.value= !mutecheck.value
+}
 
 
 
@@ -665,6 +688,10 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
  setTimeout(  function(){
 loading.value=false
+
+ 
+
+  
 
 
  },1200)
@@ -948,6 +975,10 @@ showtitle.value="hidden"
 
 
           const doYildizla=(sayi)=>{
+
+           
+
+            if (kullaniciemail.value != "") {
         puan.value = sayi
         yildizladi.value = true
         showcardV.value="visible"
@@ -955,6 +986,10 @@ showtitle.value="hidden"
         doVisible()
 
         verikayit()
+            }else{
+              router.push({name:'Login'})
+            }
+      
 
         }
 
@@ -1048,16 +1083,19 @@ showtitle.value="hidden"
 
      onMounted(async () => {
 
+  
+
      
 
 
     
       const doc = await firestoreRef.collection(route.params.Kategori).doc(route.params.itemID).get()
+
           let iframe = document.getElementById('myVideo')
 
 
-     
-           iframe.src = doc.data().itemvideo
+         
+           
            itemvideo.value = doc.data().itemvideo
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
@@ -1151,6 +1189,10 @@ UIDPUA="PUA"+kullaniciuid.value
 
 
 
+
+
+
+
            await firestoreRef.collection(route.params.Kategori).doc(itemID.value).update({
 
                    totalpuan: puan.value + totalpuan.value,
@@ -1222,6 +1264,9 @@ ortpuan.value = parseFloat((puan.value + totalpuan.value) / (puancount.value + 1
          }
 
                const yorumkayit=async ()=>{
+
+
+                         if (kullaniciemail.value!="") {
 
                  yorumladi.value=true
 
@@ -1307,6 +1352,10 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
    yorum.value=""
 
+    }else{
+       router.push({name:'Login'})
+    }
+
   
          }
 
@@ -1314,7 +1363,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,info1,info2,cyili,info3,ozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,sirket
+          yorumladi,loading,itemvideogoster,sirket,toggleMute,mutecheck
           
         }
         
@@ -1604,6 +1653,14 @@ outline: none;
   transform: translate(-50%, -50%);
 }
 
+
+.center-btm{
+  position: absolute;
+  transform: translate(-50%, -50%);
+ bottom: -0.8vh;
+ 
+}
+
 .center-bottom{
   position: absolute;
   top: 77%;
@@ -1618,6 +1675,14 @@ outline: none;
     
 }
 
+
+.top-right3{
+   position: absolute;
+    top: 5.8vh;
+    right: 0.4vw;
+    
+}
+
 .top-right{
    position: absolute;
     bottom: 1.8vh;
@@ -1627,7 +1692,7 @@ outline: none;
 
 .top-left{
    position: absolute;
-    bottom: 2.8vh;
+    bottom: 1.8vh;
     left: 0.7vw;
     
 }
@@ -1674,11 +1739,12 @@ margin-top:4vh;
 }
 
 #myVideo {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
+   width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
  pointer-events: none;
   
   
@@ -1717,6 +1783,32 @@ h4{
   border-radius: 6px;
   position: relative;
   overflow: hidden;
+  z-index: 2;
+}
+
+.altbutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+ 
+  z-index: 2;
+}
+
+
+.mutebutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 0.8rem 0.5rem;
+  border-radius: 6px;
+  align-items: center;
+    justify-content: center;
   z-index: 2;
 }
 

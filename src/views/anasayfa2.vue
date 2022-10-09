@@ -10,10 +10,10 @@
 
 <!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 
-<video id="myVideo" muted autoplay  loop>
+<!-- <video id="myVideo" muted autoplay  loop>
   <source src="@/assets/videos/mainvideo3.mp4" type="video/mp4">
 Your browser does not support the video tag.
-</video>
+</video> -->
 
    </div>
         <div class="d-flex justify-content-center">

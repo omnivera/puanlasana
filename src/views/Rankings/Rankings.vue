@@ -32,10 +32,12 @@
  <button v-for="veri in veriler" :key="veri.id" :class="veri.katbuttoncss" @click="kategorisec(veri)" type="button" class="btn btn-outline-dark">{{veri.kisim}}</button>
 
  </div>
-<hr>
+
  
 
      </div>
+     <br>
+     <hr>
   
  <div class="d-flex justify-content-center">
     <div class="row">
@@ -52,8 +54,10 @@
     
 
   
-    <div v-for="item in itemler" :key="item.id" class="user-card">
+    <div v-for="item in itemler" :key="item.id" class="deneme">
         
+<div class="user-card">
+
 
       <div class="user-profile">
       
@@ -86,7 +90,7 @@
           <div class="meta-stat ">
             <h4 class="meta-stat-label">Şirket</h4>
             <div class="meta-stat-block text-center">
-              <h3 class="meta-stat-num text-center">Deneme</h3>
+              <h3 class="meta-stat-num text-center">{{item.sirket}}</h3>
             </div>
           </div>
           <div class="meta-stat">
@@ -96,15 +100,16 @@
               <h1 class ="meta-stat-total"></h1>
             </div>
           </div>
-           <div class="meta-stat">
+         <!--   <div class="meta-stat">
             <h4 class="meta-stat-label">Puanlayan Sayısı</h4>
             <div class="meta-stat-block">
               <h3 class="meta-stat-num"><vue3-autocounter ref='counter' :startAmount='0' :endAmount='item.puancount' :duration='1.5' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h3>
               <h1 class ="meta-stat-total text-center"></h1>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
+    </div>
     </div>
   </transition-group>
   </div>
@@ -302,6 +307,12 @@ rank++
 
 <style scoped>
 
+hr {
+  height: 1px;
+  background-color: #e5e5e5;
+  border: none;
+  margin-bottom: -2vh;
+}
 
 .baslik {
   color: white;
@@ -344,6 +355,7 @@ rank++
   padding-right: 17px;
   margin-left: 12px;
   transition: all .2s ease-in-out;
+  border-radius: 20px;
 }
 
 .katbuttonhover{
@@ -354,6 +366,7 @@ rank++
   padding-right: 17px;
   margin-left: 12px;
   transition: all .2s ease-in-out;
+  border-radius: 20px;
 }
 
 .katbutton:hover{
@@ -448,32 +461,34 @@ select {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-  background-color: #181818;
-  margin-bottom: 3vh;
+  background-color: black;
+  margin-bottom: 4vh;
+  height: 21vh;
+  box-shadow: 0 0 7px 3px #DE354C;
   
  position:relative;
+ border-radius: 20px;
  
   transition: all .2s ease-in-out;
 
 
 }
 
+
+
 .user-card:hover {
 
-transform: scale(1);
+transform: scale(1.1);
 
 }
 
 .user-profile {
 
-  width: 13vw;
-
- padding-top: 2.8vh;
-  border-right: 1px solid #ddd;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  background-color: #181818;
+  width: 10vw;
+ border-radius: 20px;
+   background-color: transparent;
   text-align: center;
+
   
   
   
@@ -481,10 +496,15 @@ transform: scale(1);
 
 .profile {
   
-  width: 9vw;
-  height: 15vh;
-  border-radius: 100%;
-  background-color: #ddd;
+
+height: 21vh;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: transparent;
+ 
+
+ 
   
 }
 
@@ -540,6 +560,7 @@ transform: scale(1);
   line-height: 32px;
   font-weight: 600;
   text-align: right;
+  
 }
 
 .total-score {
@@ -591,8 +612,8 @@ transform: scale(1);
 }
 
 .meta-stat-label {
-  margin-top: 0px;
-  margin-bottom: 16px;
+  margin-top: 0.3vh;
+  margin-bottom:1vh;
   color: #999;
   font-size: 16px;
   line-height: 16px;

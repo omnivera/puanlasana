@@ -5,8 +5,11 @@
 <!-- <div v-if="loading"><Loading/></div> -->
 <div>
 <div class="bigshadow">
-<iframe  id="myVideo" :src="itemvideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  
+<video v-if="itemvideo!=''" id="myVideo" autoplay muted loop width="320" height="240" >
+  <source  :src="'https://drive.google.com/uc?export=download&id='+itemvideo" type="video/mp4">
 
+</video>
 
 
 
@@ -50,7 +53,7 @@
  <div class="d-flex justify-content-center">
                    
 <div id="showcard" :class="showcardV"  class="card text-center" >
-    <img :src="itemresim" class="img-fluid" style="height:58vh"  alt="" srcset="">
+    <img :src="itemresim" data-bs-toggle="modal" data-bs-target="#filminfo" class="img-fluid showcardimg"  alt="" srcset="">
   <div class="card-body">
 
 
@@ -66,7 +69,7 @@
 
 
 <h2 style="margin-top:1vh">{{itemisim}}</h2>
- <h6 class="card-subtitle  mt-2 text-muted">Kategori: {{kategorigoster}}</h6>
+ <h6 class="card-subtitle  mt-2 text-muted">{{kategorigoster}}</h6>
 </div>
 
 
@@ -151,7 +154,7 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >
 
-         <div id="infocard" class="card">
+         <div id="infocard2" class="card">
   <div class="card-body shadow-lg rounded">
        
     <h4>Ortalama Puan</h4>
@@ -204,24 +207,29 @@
 
     <div class="col ms-auto mt-auto mb-0">
          <div v-if="true">
-         <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
-                     
+ 
                      
 
                    
 
-
-<a href="#yorumyap"><button type="button" @click="yorumshow" id="yorumlabutton" class="shadow altbutton center-btm"><i class="fas fa-comments"></i> Yorumlar</button></a>
-
-
-
+ <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
+  <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
+  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlbtn"><i class="fas fa-comments"></i>Yorumlar</button></a>
+  <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
+  <i v-if="mutecheck" class="fas fa-volume-up"></i>
+  <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
+  </button>
+</div>
 
 
   
 
 
- </transition> 
+
+
+
+
          </div>
 
               <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
@@ -329,7 +337,7 @@
       <div class="modal-body">
           <div class="row text-left">
               <div class="col-md-4">
-                  <img :src="itemresim" class="img-fluid" style="height:50vh"  alt="" srcset="">
+                  <img :src="itemresim" class="img-fluid" style="height:50vh;border-radius:20px"  alt="" srcset="">
 
               </div>
               <div class="col-md-8">
@@ -411,14 +419,15 @@
                 <h5>{{kullaniciad}} </h5>
 
                 <div class="form-floating">
-  <textarea class="form-control" required maxlength="400"  v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" required maxlength="400"  v-model="yorum" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 130px"></textarea>
   <label for="floatingTextarea2">Yorum Yapsana</label>
 </div>
 <br>
    <div class="me-0">
                   
-                 <a href="#yorumlar"> <button style="float:right" type="submit" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button></a>
-                </div>
+                 <a v-if="puanladi" href="#yorumlar"> <button  style="float:right" type="submit" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button></a>
+                 <a v-if="!puanladi" href="#yorumlar"> <button  style="float:right;" type="button" @click="backtotop" id="yorumlabuttonv2dis" class="shadow"><i class="fas fa-star"></i> Yorum yapmak için puanla</button></a>
+             </div>
                  </form>
               </div>
             </div>
@@ -585,7 +594,7 @@ export default {
 
          const itemresim=ref()
          const itemisim=ref()
-         const itemvideo=ref()
+         const itemvideo=ref('')
          const itemvideogoster=ref()
          const start=ref()
          const end=ref()
@@ -602,10 +611,10 @@ export default {
           const filmozet=ref()
          const oyuncular=ref()
          const turler=ref()
-         const cyili=ref()
+        
          const fsure=ref()
 
-         
+      
 
          const puan=ref(0)
          const ortpuan=ref(0)
@@ -624,6 +633,22 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          const showcardV=ref('visible')
          const showtitle=ref('hidden')
+
+
+ const backtotop= ()=>{
+
+
+   window.scrollTo(0,0);
+
+
+}
+
+         const ozet=ref()
+         const info1=ref()
+         const info2=ref()
+         const cyili=ref()
+         const sirket= ref('')
+         const info3=ref()
 
          const yorumclick=ref(false)
 
@@ -651,6 +676,11 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
           localStorage.setItem('puanladi', JSON.stringify([]));
         }
 
+
+  if (localStorage.getItem('mutecheck')==null) {
+          
+          localStorage.setItem('mutecheck', true);
+        }
         
           let itemarray= JSON.parse(localStorage.getItem('itemler'))
           itemarray = itemarray.filter((item)=>item.kategori == route.params.Kategori)
@@ -694,11 +724,34 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
      /* let puaninfo = puanarray.filter((puan)=>puan.itemID == doc.id) */
 
 
+const mutecheck=ref(false)
 
 
+const toggleMute=()=>{
+  let video=document.getElementById("myVideo");
+
+  video.muted = !video.muted;
+  localStorage.setItem("mutecheck", video.muted);
+  mutecheck.value= !mutecheck.value
+}
+
+const startVideo=(start,end)=>{
+  let video=document.getElementById("myVideo");
+
+  if (localStorage.getItem("mutecheck") == "true") {
+    video.muted = true;
+     mutecheck.value = false;
+  }
+
+    if (localStorage.getItem("mutecheck")=="false") {
+      video.muted = false;
+    mutecheck.value = true;
+  }
 
 
+  video.currentTime = start;
 
+}
 
 
 
@@ -725,7 +778,18 @@ loading.value=false
             watch ( () => {
 
               if (itemvideo.value != "") {
-                 itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1' 
+                setTimeout(() => {
+                  startVideo(start.value,end.value)
+                }, 700);
+
+                 setTimeout(  function(){
+     if (yildizladi.value == false) {
+    showcardV.value="hidden"
+    showtitle.value="visible"
+     }
+
+                },3000)
+ 
               }
 
               
@@ -969,13 +1033,7 @@ if (yorum.disliked==false && yorum.liked==false) {
          }
 
 
-         setTimeout(  function(){
-     if (yildizladi.value == false) {
-    showcardV.value="hidden"
-    showtitle.value="visible"
-     }
-
-                },2800)
+        
          
     const doHidden=()=>{
             if (yildizladi.value == false) {
@@ -1285,12 +1343,15 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
            itemresim.value = doc.data().itemresim
            totalpuan.value = doc.data().totalpuan
            puancount.value = doc.data().puancount
+           start.value = doc.data().start
+           end.value = doc.data().end
            itemID.value = doc.id
-           oyuncular.value = doc.data().oyuncular
-            turler.value = doc.data().turler
+            info1.value = doc.data().info1
+            info2.value = doc.data().info2
             cyili.value = doc.data().cyili
-            fsure.value = doc.data().fsure
-            filmozet.value = doc.data().filmozet
+            sirket.value = doc.data().sirket
+            info3.value = doc.data().info3
+            ozet.value = doc.data().ozet
        
                    
 
@@ -1543,7 +1604,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster
+          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop
           
         }
         
@@ -1555,12 +1616,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 <style scoped>
 
 
-.center-btm{
-  position: absolute;
-  transform: translate(-50%, -50%);
- bottom: -0.8vh;
- 
-}
+
 
 
 
@@ -1692,9 +1748,10 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
 
 #floatingTextarea2{
-    background-color: #181818;
+    background-color: black;
     color: white;
         resize: none;
+        border-radius: 20px;
 
 }
 
@@ -1783,6 +1840,7 @@ overflow-x: hidden;
     background-color: #181818;
     color: white;
     opacity: 0.8;
+    border-radius: 20px;
 
 }
 
@@ -1885,15 +1943,15 @@ outline: none;
 
 #showcard{
 
-      background: #181818;
-      border-radius: 6px;
+      background: black;
+      border-radius: 20px;
      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 
 margin-top:4vh;
 
-
-    width:30vw;
+ cursor: pointer;
+    width:27vw;
 
      
     
@@ -1904,8 +1962,20 @@ margin-top:4vh;
 
 #infocard{
     box-shadow: -5px -5px 30px 5px #DE354C;
-      background: #181818;
-      border-radius: 6px;
+      background-color: black;
+      border-top-right-radius: 20px;
+      border-bottom-right-radius: 20px;
+      left: -5px;
+
+}
+
+
+#infocard2{
+    box-shadow: -5px -5px 30px 5px #DE354C;
+      background-color: black;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px;
+      right: -5px;
     
 
 }
@@ -2120,8 +2190,8 @@ input.star{
 
 label.star {
   float: right;
-  padding: 0.5vw;
-  font-size: 1.5vw;
+  padding: 0.4vw;
+  font-size: 1.4vw;
   color: #DE354C;
   transition: all .2s;
 
@@ -2146,52 +2216,52 @@ input.star:checked ~ label.star:before {
 
 
 input.star-10:checked ~ label.star:before {
-  color:#8000ff;
-  text-shadow: 0 0 20px #bf00ff;
+  color: #DE354C;
+  text-shadow: 0 0 20px #DE354C;
 }
 
 
 
 input.star-9:checked ~ label.star:before {
-  color: #0000ff;
+ color: #DE354C;
 }
 
 
 input.star-8:checked ~ label.star:before {
-  color: #00ff40;
+ color: #DE354C;
 }
 input.star-7:checked ~ label.star:before {
-  color: #00ff40;
+  color: #DE354C;
 }
 input.star-6:checked ~ label.star:before {
-  color: #00ff40;
+ color: #DE354C;
 }
 
 
 input.star-5:checked ~ label.star:before {
-  color: #ffbf00;
+ color: #DE354C;
 }
 input.star-5:checked ~ label.star:before {
-  color: #ffbf00;
+color: #DE354C;
 }
 input.star-4:checked ~ label.star:before {
-  color: #ffbf00;
+  color: #DE354C;
 }
 
 
 
 input.star-3:checked ~ label.star:before {
-  color: #ff8000;
+  color: #DE354C;
 }
 
 input.star-2:checked ~ label.star:before {
-  color: #ff8000;
+ color: #DE354C;
 }
 
 
 
 input.star-1:checked ~ label.star:before {
-  color: #ff0000;
+  color: #DE354C;
 }
 
 label.star:hover{

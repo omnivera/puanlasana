@@ -422,7 +422,7 @@ console.log("veritabanı yorum")
                   snapshot.forEach(doc => {
 
                       yorumcount.value++
-                      begeniler.value=begeniler.value + doc.data().like
+                      begeniler.value+= parseInt(doc.data().like)
 
 
          
@@ -462,8 +462,13 @@ setTimeout(() => {
          
            let yorumarray= JSON.parse(localStorage.getItem('yorumlar'))
            yorumcount.value=yorumarray.length
+           yorumarray.forEach(element => {
+             begeniler.value+= parseInt(element.like)
+           });
+           
 
        yorumlar.value=yorumarray
+
 
           
      
@@ -514,24 +519,29 @@ setTimeout(() => {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-  background-color: #181818;
-  margin-bottom: 3vh;
+  background-color: black;
+  margin-bottom: 4vh;
+
+ box-shadow: 0 0 7px 2px #DE354C;
   
  position:relative;
   z-index:30;
+ border-radius: 20px;
+  transition: all .2s ease-in-out;
+}
 
+.user-card:hover {
+
+transform: scale(1.1);
 
 }
 
 .user-profile {
 
-  width: 13vw;
+  width: 10vw;
+border-radius: 20px;
 
- padding-top: 2vh;
-  padding-bottom: 2vh;
-  border-right: 1px solid #ddd;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+
   background-color: #181818;
   text-align: center;
   
@@ -541,13 +551,17 @@ setTimeout(() => {
 
 .profilecard {
   
-  width: 9vw;
-  height: 15vh;
-  border-radius: 100%;
+object-fit:fill;
+height: 20vh;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   background-color: #ddd;
+
   
   
 }
+
 
 .last-submit {
   font-size: 16px;
@@ -1108,6 +1122,7 @@ body {
     border: none;
     outline: none;
     color: white;
+
 }
 
 #yorumyapcardbody{
@@ -1116,6 +1131,7 @@ body {
 
 #yorumcardbody{
     background-color: #181818;
+  
  
 }
 
@@ -1141,8 +1157,8 @@ body {
 
 .header {
   min-height: 35vh;
-  background: #009FFF;
-background: linear-gradient(to right, #ec2F4B, #009FFF);
+  background-color: black;
+  box-shadow: 0px 0px 25px 0px #DE354C;
   color: white;
   clip-path: ellipse(100vw 60vh at 50% 50%);
   display: flex;

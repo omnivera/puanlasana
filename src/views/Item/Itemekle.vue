@@ -2,8 +2,10 @@
 
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video v-if="itemvideo!=''"  id="myVideo" autoplay muted loop width="320" height="240" >
+  <source :src="itemvideogoster"   type="video/mp4">
 
+</video>
 
 
    </div>
@@ -141,6 +143,10 @@
 
 
     <div class="col ms-auto mt-auto mb-0">
+       <button type="button" @click="toggleMute" id="mutebtn" class="shadow mutebutton top-right3">
+  <i v-if="mutecheck" class="fas fa-volume-up"></i>
+  <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
+  </button>
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >
 
@@ -263,6 +269,9 @@
 
 
     <div class="col ms-auto  mb-0">
+
+      
+
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >   
  
@@ -512,7 +521,7 @@ export default {
 
          watch ( () => {
 
- itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'
+ itemvideogoster.value = "https://drive.google.com/uc?export=download&id="+itemvideo.value
 
 })
 
@@ -533,6 +542,22 @@ export default {
 
 
         const itemcount=ref(0)
+        const mutecheck=ref(false)
+
+               const toggleMute=()=>{
+  let video=document.getElementById("myVideo");
+
+  video.muted = !video.muted;
+  mutecheck.value= !mutecheck.value
+}
+
+
+           const load = ref(false)
+
+         setTimeout(() => {
+           load.value=true
+         }, 1000);
+
 
  const kategorisec= ()=>{
           
@@ -607,8 +632,7 @@ setTimeout(  function(){
              const dataitem = {
                   itemisim:itemisim.value,
                   itemresim:itemresim.value,
-                  itemvideo:itemvideogoster.value,
-                  itemvideokod:itemvideo.value,
+                  itemvideo:itemvideo.value,
                   tarih:moment(tarih.value).format('DD/MM/YYYY'),
                   gtarih:Date.parse(tarih.value.toString()),
                   ozet:ozet.value,
@@ -726,7 +750,7 @@ setTimeout(  function(){
 
 
           return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo,itemvideogoster,start,end,
-          info1,info2,cyili,info3,ozet,sirket
+          info1,info2,cyili,info3,ozet,sirket,toggleMute,mutecheck
         }
         
     }

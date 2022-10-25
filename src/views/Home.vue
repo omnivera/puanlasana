@@ -85,6 +85,15 @@ right: 20px;
 display: none;
 z-index: 999;
 background-color: #DE354C;
+border-radius: 50%;
 
+}
+
+@media only screen and (max-width: 980px) {  
+html, body {
+
+  display: none;
+ 
+ }
 }
 </style>

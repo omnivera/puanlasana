@@ -8,12 +8,10 @@
     <div id="main-landing-message" style="margin-top:-6vh">
         <div class="bigshadow">
 
-<!-- <iframe  id="myVideo" src='https://www.youtube.com/embed/G5uKQuYSgEI?autoplay=1&mute=1&playlist=G5uKQuYSgEI&loop=1&controls=0&modestbranding=1&cc_load_policy=0' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+<video  id="myVideo" autoplay muted loop  >
+  <source :src="'https://drive.google.com/uc?export=download&id=19hDOay4fFilO0xnSwrgn_X4DgzyHtbyX'" type="video/mp4">
 
-<!-- <video id="myVideo" muted autoplay  loop>
-  <source src="@/assets/videos/mainvideo3.mp4" type="video/mp4">
-Your browser does not support the video tag.
-</video> -->
+</video>
 
    </div>
         <div v-if="register" class="center">
@@ -112,7 +110,7 @@ Your browser does not support the video tag.
 
 <div v-if="loginkontrol" class="center">
             
-
+<!-- <div class="g-recaptcha" data-sitekey="6Lc_MYUiAAAAAG1bAdvSlvXWXUcipt6MGeCeo2Q8"></div> -->
        
 <transition @before-enter="beforeEnter" @enter="enterv2" appear >      
 <div class="card authcard" style="width: 37vw;">
@@ -423,6 +421,7 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     font-size: 1vw;
     color: #DE354C;
     width: 100%;
+    border-radius: 20px;
 
  
     
@@ -443,6 +442,7 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     font-size: 1vw;
     color: white;
     width: 100%;
+    border-radius: 20px;
  
     
     }
@@ -504,6 +504,7 @@ input:-webkit-autofill:active {
 border: none;
 opacity: 0.8;
 background-color: black;
+border-radius: 20px;
 
 }
 
@@ -511,6 +512,7 @@ background-color: black;
     background-color: black;
     opacity: 0.8;
     color: white;
+    border-radius: 20px;
   
 }
 

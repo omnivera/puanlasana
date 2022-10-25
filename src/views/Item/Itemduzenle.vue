@@ -313,8 +313,8 @@ setTimeout(() => {
 
           if (puanarray!=null) {
             let itemarray = JSON.parse(localStorage.getItem('itemler'));
-            pool = itemarray.filter((elem) => !puanarray.find(({ itemID }) => elem.id === itemID));
-            itemler.value  =  pool
+      
+            itemler.value  =  itemarray
           }else{
             itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
           }

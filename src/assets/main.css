@@ -1,6 +1,135 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
+
+.showcardimg{
+  height:55vh;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.center-btm{
+  position: absolute;
+  transform: translate(-50%, -50%);
+ bottom: -1.9vh;
+ 
+}
+
+
+.contbutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 1rem 1rem;
+
+ 
+  z-index: 2;
+}
+
+.altbutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+ 
+  z-index: 2;
+}
+
+.cleft{
+  border-radius: 20px;
+ 
+ }
+
+.cmid{
+ border-radius: 0;
+
+}
+
+.cright{
+  border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+
+ }
+
+#controlbtn{
+  margin-top: 2.5vh;
+
+  border-color: transparent;
+  background-color: transparent;
+  font-size: 1vw;
+  color: white;
+  border: 1px solid white;
+  
+  font-family: "Comfortaa", cursive;
+
+  
+  }
+
+  #controlbtn i{
+  
+    margin-left: -0.1vw;
+ 
+    
+    }
+  
+  #controlbtn:hover{
+  background-color: white;
+  color: black;
+  border-color: transparent;
+  }
+
+
+  #controlyanbtn{
+    margin-top: 2.5vh;
+  
+    border-color: transparent;
+    background-color: transparent;
+    font-size: 1vw;
+    color: white;
+    border: 1px solid white;
+    
+    font-family: "Comfortaa", cursive;
+  
+    
+    }
+  
+  
+    
+    #controlyanbtn:hover{
+    background-color: white;
+    color: black;
+    border-color: transparent;
+    }
+
+
+.mutebutton {
+  background-color: black;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 1.2vw;
+  padding: 0.8rem 0.2rem;
+  border-radius: 50%;
+  align-items: center;
+    justify-content: center;
+  z-index: 2;
+}
+
+.top-right3{
+  position: absolute;
+   top: 7vh;
+   right: 1.2vw;
+   
+}
+
+.grecaptcha-badge { visibility: hidden; }
+
 video{
   width: 100vw;
   height: 100vh;
@@ -86,13 +215,14 @@ border-color: transparent;
 
 
 #yorumlabutton{
-    margin-top: 2.5vh;
+  
 
     border-color: transparent;
     background-color: transparent;
     font-size: 1vw;
     color: white;
     border: 1px solid white;
+    border-radius: 20px;
     font-family: "Comfortaa", cursive;
  
     
@@ -147,7 +277,7 @@ border-color: transparent;
 
     #pasbtn{
       margin-top: 2.5vh;
-  
+      border-radius: 20px;
       border-color: transparent;
       background-color: transparent;
       font-size: 1vw;
@@ -180,20 +310,59 @@ border-color: transparent;
         margin-top: 0.7vh;
     
         border-color: transparent;
-        background-color: #DE354C;
+        border-radius: 20px;
+        background-color: transparent;
+        border: 1px solid white;
         font-size: 1rem;
         color: white;
-        border-radius: 6px;
-        padding: 0.7vw;
+        
+        padding: 1rem 1.5rem;
      
         
         }
+
+        #yorumlabuttonv2 i{
+    
+          margin-left: -0.1vw;
+       
+          
+          }
         
         #yorumlabuttonv2:hover{
         background-color: white;
-        color: #DE354C;
+        color: black;
         border-color: transparent;
         }
+
+
+
+        #yorumlabuttonv2dis{
+          margin-top: 0.7vh;
+      
+          border-color: transparent;
+          border-radius: 20px;
+          background-color: transparent;
+          border: 1px solid white;
+          font-size: 1rem;
+          color: #DE354C;
+          
+          padding: 1rem 1.5rem;
+       
+          
+          }
+  
+          #yorumlabuttonv2dis i{
+      
+            margin-left: -0.1vw;
+         
+            
+            }
+          
+          #yorumlabuttonv2dis:hover{
+          background-color: white;
+          color: #DE354C;
+          border-color: transparent;
+          }
 
 
 

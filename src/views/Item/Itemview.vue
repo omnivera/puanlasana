@@ -2,9 +2,10 @@
 
 <div class="bigshadow">
 
-<iframe id="myVideo" :src="itemvideogoster" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<video v-if="itemvideo!=''" id="myVideo" autoplay muted loop width="320" height="240" >
+  <source :src="'https://drive.google.com/uc?export=download&id='+itemvideo"   type="video/mp4">
 
-
+</video>
 
    </div>
  
@@ -135,12 +136,18 @@
 
 
  </transition> 
+
+ 
     </div>
 
 
 
 
     <div class="col ms-auto mt-auto mb-0">
+      <button type="button" @click="toggleMute" id="mutebtn" class="shadow mutebutton top-right3">
+  <i v-if="mutecheck" class="fas fa-volume-up"></i>
+  <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
+  </button>
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enter" appear >
 
@@ -534,7 +541,7 @@ export default {
          const cyili=ref()
          const info3=ref()
          const itemvideogoster=ref('')
-         const itemvideokod=ref('')
+        const mutecheck=ref(false)
 
          const kategorigoster=ref(route.params.kategori)
 
@@ -542,7 +549,11 @@ export default {
          const puanladi = ref(false)
          const yildizladi = ref(false)
 
-         
+         const load = ref(false)
+
+         setTimeout(() => {
+           load.value=true
+         }, 500);
 
          const puan=ref(0)
          const ortpuan=ref(0)
@@ -559,27 +570,18 @@ export default {
 
             watch ( () => {
 
- itemvideogoster.value = 'https://www.youtube.com/embed/'+itemvideo.value+'?start='+start.value+'&end='+end.value+'&autoplay=1&&mute=1&playlist='+itemvideo.value+'&loop=1&controls=0&modestbranding=1'
-
 })
 
 
 
 
-            onMounted(async () => {
+        
+         const toggleMute=()=>{
+  let video=document.getElementById("myVideo");
 
-           
-            await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
-                veriler.value=[]
-                snap.docs.forEach(doc=>{
-                    veriler.value.push({...doc.data(),id:doc.id})
-                })
-            })
-
-         
-        })
-
-         
+  video.muted = !video.muted;
+  mutecheck.value= !mutecheck.value
+}
 
 
 
@@ -640,7 +642,12 @@ location. reload()
 
 
 
-
+     await firestoreRef.collection('kategoriler').onSnapshot(snap=>{
+                veriler.value=[]
+                snap.docs.forEach(doc=>{
+                    veriler.value.push({...doc.data(),id:doc.id})
+                })
+            })
            
          const doc = await firestoreRef.collection(route.params.kategori).doc(route.params.veriID).get()
       
@@ -648,7 +655,7 @@ location. reload()
                 
            itemisim.value = doc.data().itemisim
            itemresim.value = doc.data().itemresim
-            itemvideo.value = doc.data().itemvideokod
+            itemvideo.value = doc.data().itemvideo
             info1.value = doc.data().info1
             info2.value = doc.data().info2
             cyili.value = doc.data().cyili
@@ -670,7 +677,7 @@ location. reload()
 
 
 
-          
+              console.log(itemvideo.value)
           
          
  
@@ -680,6 +687,8 @@ location. reload()
 
          
         })
+
+    
 
 
 
@@ -710,8 +719,7 @@ location. reload()
 
                    itemisim: itemisim.value,
                    itemresim: itemresim.value,
-                   itemvideo:itemvideogoster.value,
-                   itemvideokod:itemvideo.value,
+                   itemvideo:itemvideo.value,
                    kategori: kategorigoster.value,
                    start:start.value,
                    end:end.value,
@@ -751,7 +759,7 @@ basarili.value=true
 
 
           return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,
-          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili,itemvideokod
+          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili,load,toggleMute,mutecheck
         }
         
     }

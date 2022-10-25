@@ -205,9 +205,14 @@ await authRef.onAuthStateChanged(k=>{
 
   cursor: pointer;
 }
-button:hover,
+
+button{
+   border-radius: 20px;
+}
+
 button:focus {
   outline: none;
+ box-shadow: 0 0 10px #181818;
 }
 
 .navbar.scrolled {

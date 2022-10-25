@@ -56,8 +56,9 @@
         <div class="videos__container">
           
           <!-- Single Video starts -->
-          <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" class="video">
-            <div  v-if="item.puanladi==false || item.puanladi==null" class="video__thumbnail">
+          <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" >
+            <div v-if="item.puanladi==false || item.puanladi==null" class="video">
+            <div   class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
              
       
@@ -68,21 +69,9 @@
 
             </div>
 
-            <div  v-if="item.puanladi==true" class="video__thumbnail">
-           
-             
-      
-            
+        
 
-   <img :src="item.itemresim" class="puanladi" alt="" />
-  <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:5vw" alt />
-    </div>
-
-
-            </div>
-
-            <div class="video__details">
+            <div class="video__details" >
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
               </div> -->
@@ -95,9 +84,52 @@
               </div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+ <div  v-if="item.puanladi==true" class="videop">
+           
+
+            <div  class="video__thumbnail">
+           
+             
+      
+            
+
+   <img :src="item.itemresim" class="puanladi"  alt="" />
+  <div class="centered my-auto">
+     <img src="@/assets/plogo6.png" style="width:5vw" alt />
+    </div>
+
+
+            </div>
+
+            <div class="video__details" >
+           <!--    <div class="author">
+                <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
+              </div> -->
+              <div class="title">
+                <h3>
+                  {{item.itemisim}}
+                </h3>
+                <a href="">{{item.kategori}}</a>
+                <!-- <span>10M Views • 3 Months Ago</span> -->
+              </div>
+            </div>
+          </div>
+
+
+          
           <!-- Single Video Ends -->
 
           <!-- Single Video starts -->
+          </div>
         </div>
       </div>
       </transition>

@@ -67,17 +67,130 @@
 
 <br>
            <div class="row">
-<div class="card text-center shadow rounded" style="width: 47rem; height:42vh">
+<div class="card text-center shadow rounded" style="width: 47rem; height:auto">
   <div class="card-body">
     <h5 class="card-title">Kategori Bilgileri</h5>
 <br>
 <form @submit.prevent="veriguncelle" autocomplete="false">
     <div class="form-floating mb-3">
-  <input type="search" autocomplete="off" required maxlength="20" class="form-control" v-model="guncellekisim" id="floatingInput" placeholder="name@example.com">
+  <input type="search" autocomplete="off" required maxlength="20" disabled class="form-control" v-model="guncellekisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Kategori İsmi</label>
 </div>
+
+
+<br>
+<h5 class="card-title"> <strong>{{guncellekisim}}</strong> Alt Kategoriler</h5>
+
+
+
+    <div class="table-title">
+
+</div>
+
+<div class="fixTableHead" style=" height: auto">
+<table class="table-fill">
+<thead>
+<tr>
+
+<th class="text-center" style="width:19vw">Alt Kategori İsmi</th>
+<th class="text-center">Sil</th>
+
+</tr>
+</thead>
+<tbody class="table-hover">
+
+    
+
+
+
+<tr v-for="(veri,index) in altkategoriler" :key="veri.id" >
+
+
+
+
+
+<td class="text-left">  <div >
+  <div >
+  <input type="search" autocomplete="off"  class="form-control" v-model="veri.altkatad" id="exampleFormControlInput1" >
+</div>
+</div>
+</td>
+
+
+
+ 
+
+
+
+<td class="text-center" style="width:2vw">
+ 
+  <button  @click="satirsil(index)" type="button" class="btn btn-outline-danger" :disabled=silbtnkontrol   style="width:auto; height:auto; "><i class="fas fa-minus text-center"></i></button>
+  
+ 
+</td>
+
+
+
+
+</tr>
+
+<div class="modal fade" id="stokara" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered ">
+    <div id="stokara" class="modal-content text-center" >
+  
+      <div class="modal-body text-center">
+
+         <div class="position-relative">
+   <div id="search"> <input id="input" type="search" autocomplete="off"   placeholder="Ürün Ara" v-model="search"  @keyup="stoklistkontrol()" autofocus/> <button id="button"><i class="fa fa-search" ></i></button>
+        
+</div>
+<div v-if="yazdıcinsi" id="autolist" class="list-group">
+  <a v-for="veri in bulunanlarcinsi" :key="veri.id" href="#" @click="stoksec(veri)" data-bs-dismiss="modal" class="list-group-item list-group-item-action" aria-current="true">
+    {{veri.cinsi}}
+  </a>
+ 
+ 
+
+</div>
+
+  </div>
+
+
+    
+      
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+</tbody>
+</table>
+<br>
+
+</div>
+
 <div class="row">
-    <div class="col-md-6">
+
+  <div class="container">
+
+ 
+   
+<button id="omnibuttonsatir" type="button" @click="satirekle" class="w-25 mb-2 btn btn-md rounded-4 btn-outline-secondary"  >Satır Ekle</button>
+ </div>
+</div>
+
+
+<br>
+<div class="row">
+    <div class="col-md-12">
         <div class="d-grid gap-2">
 
  <button type="submit" id="guncellebutton" class="btn btn-outline-primary btn-lg btn-block">Güncelle</button>
@@ -85,15 +198,7 @@
 
     </div>
 
-     <div class="col-md-6">
-
-               <div class="d-grid gap-2">
-
-  <button type="button" @click="veriduzenle(veri)"  data-bs-toggle="modal" data-bs-target="#uyari" id="silbutton" class="btn btn-outline-primary btn-lg btn-block">Sil</button>
-</div>
-        
-
-    </div>
+   
 
 </div>
 
@@ -164,7 +269,7 @@
  <thead>
 <tr>
 <th class="text-center">Kategori İsmi</th>
-<!-- <th class="text-center">Düzelt/Sil</th> -->
+<th class="text-center">Düzelt/Sil</th>
 </tr>
 </thead>
 <tbody class="table-hover">
@@ -173,7 +278,7 @@
 <td >{{veri.kisim}}</td>
 
 
-<!-- <td  style="width:3vw;">
+<td  style="width:3vw;">
   
 
      <div class="btn-group" role="group" aria-label="Basic outlined example">
@@ -192,7 +297,7 @@
 
 
 
-</td> -->
+</td>
 
 </tr>
 
@@ -236,7 +341,7 @@
 </template>
 
 <script>
-import {onMounted,ref} from 'vue'
+import {onMounted,ref,computed} from 'vue'
 import {firestoreRef} from '@/firebase/config'
 
 /* import { useRoute,useRouter} from 'vue-router' */
@@ -257,11 +362,14 @@ export default {
   const gbasarisiz=ref(false)
 
         const veriler=ref([])
+        const altkategoriler=ref([{altkatad:""}])
 
         const kisim=ref('')
         const kisimgoster=ref('')
         const guncellekisim=ref('')
         const veriID=ref('')
+
+        const altkatcontrol=ref('')
 
 
 
@@ -270,6 +378,29 @@ export default {
           
             guncellekisim.value=veri.kisim
             veriID.value=veri.id
+
+   altkategoriler.value=[]
+        firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+             
+                  snapshot.forEach(doc => {
+                  
+
+                   altkategoriler.value.push({...doc.data(),id:doc.id})
+         
+        });
+
+        altkatcontrol.value="var"
+            }else{
+
+               altkatcontrol.value="yeni"
+
+                console.log("yok")
+              
+
+            }
+        })
        
 
         }
@@ -279,15 +410,34 @@ export default {
 
 
             await firestoreRef.collection('kategoriler').doc(veriID.value).delete()
-          
-
-
-
-
 
              
         }
 
+
+  const satirekle= ()=>{
+          
+            altkategoriler.value.push({altkatad:""})
+        }
+
+          const satirsil= (index)=>{
+          
+            altkategoriler.value.splice(index,1)
+        }
+
+          const silbtnkontrol=computed(()=>{
+
+     
+            if (altkategoriler.value.length==1) {
+              return true
+            }
+              
+
+
+        return  false
+        
+        
+        })
 
 
            onMounted(async () => {
@@ -370,7 +520,60 @@ kisim.value=""
 
 
                   const veriguncelle=async ()=>{
-                      let kayitkontrol = false
+
+
+
+       await firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+        firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(doc.id).delete()
+         
+        });
+
+
+            }else{
+
+             
+
+                console.log("yok")
+              
+
+            }
+        })
+
+setTimeout(() => {
+    altkategoriler.value.forEach(veri=>{
+
+    const data = {
+                   altkatad:veri.altkatad,
+                   
+                 
+};
+
+const res = firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(veri.altkatad).set(data);
+}, 1000);
+
+    
+               
+
+              
+             })
+
+ 
+
+  
+
+
+
+
+
+
+
+
+
+                   /*    let kayitkontrol = false
 
                              for(let i = 0;i < veriler.value.length; i++ ) {
 
@@ -378,8 +581,6 @@ kisim.value=""
                     if (guncellekisim.value==veriler.value[i].kisim) {
                         kayitkontrol=true
                     }
-
-
 
                 }
 
@@ -410,7 +611,6 @@ setTimeout(  function(){
                     kisimgoster.value=guncellekisim.value
 
 
-
 setTimeout(  function(){
 
     gbasarisiz.value=false
@@ -418,17 +618,13 @@ setTimeout(  function(){
                 },3000)
 
 
-                }
-
-        
-        
-
-
+                } */
   
          }
 
 
-          return {kisim,verikayit,veriler,veriduzenle,guncellekisim,veriguncelle,verisil,basarili,basarisiz,kisimgoster,gbasarili,gbasarisiz
+          return {kisim,verikayit,veriler,veriduzenle,guncellekisim,veriguncelle,verisil,basarili,basarisiz,kisimgoster,gbasarili,gbasarisiz,altkategoriler,satirekle,satirsil,
+          silbtnkontrol
         }
         
     }

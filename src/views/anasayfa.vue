@@ -25,6 +25,12 @@
  <button v-for="kategori in kategoriler" :key="kategori.id" :class="kategori.katbuttoncss" @click="kategorisecti(kategori)" type="button" class="btn btn-outline-dark">{{kategori.kisim}}</button>
 
  </div>
+<hr v-if="kategorisec!='Tümü'" >
+  <div v-if="kategorisec!='Tümü'" class="kategoriler">
+
+ <button v-for="altkategori in altkategoriler" :key="altkategori.id" :class="altkategori.katbuttoncss" @click="altkategorisecti(altkategori)" type="button" class="btn btn-outline-dark">{{altkategori.altkatad}}</button>
+
+ </div>
 <hr>
     <!-- Header Ends -->
 
@@ -160,6 +166,7 @@ export default {
     setup() {
 
       const kategoriler = ref([])
+      const altkategoriler = ref([])
       const itemler = ref([])
       const puanlar = ref([])
       const kullaniciad= ref('')
@@ -168,6 +175,7 @@ export default {
 
     const search= ref('')
     const kategorisec= ref('Tümü')
+    const altkategorisec= ref('Tümü')
     const route=useRoute()
     const router=useRouter()
 
@@ -239,11 +247,35 @@ const kategorisecti= (kategori)=>{
 
 kategorisec.value=kategori.kisim
 
+
+
+          
+
 for (let i = 0; i < kategoriler.value.length; i++) {
   kategoriler.value[i].katbuttoncss="katbutton"
   
 }
 kategori.katbuttoncss="katbuttonhover"
+
+
+
+}
+
+
+
+
+
+
+const altkategorisecti= (altkategori)=>{
+
+altkategorisec.value=altkategori.altkatad
+
+
+for (let i = 0; i < altkategoriler.value.length; i++) {
+  altkategoriler.value[i].katbuttoncss="katbutton"
+  
+}
+altkategori.katbuttoncss="katbuttonhover"
 
 
 
@@ -294,6 +326,12 @@ router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
 
           if (kategorisec.value=="Tümü") {
              return itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase())  ) 
+          }else{
+
+            if (altkategorisec.value=="Tümü") {
+             itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase()) && tablo.kategori == kategorisec.value)
+          }
+
           }
 
           
@@ -377,20 +415,49 @@ router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
 
         })
 
+     let kategori = doc.data().kisim
+          
+      firestoreRef.collection('kategoriler').doc(kategori).collection('altkategoriler').get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+              
+             
+                  snapshot.forEach(doc => {
+                  
+
+                   altkategoriler.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbutton",kategori:kategori})
+         
+        });
+
+
+            }else{
+
+         
+
+                console.log("yok")
+              
+
+            }
+        })
+
           
           
                 })
                 kategoriler.value.unshift({kisim:"Tümü",katbuttoncss:"katbuttonhover"})
             })
+
+
+   
 }, 700);
 
            
-        
+    
 
 
 setTimeout(() => {
   localStorage.setItem('itemler', JSON.stringify(itemler.value));
   localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
+  localStorage.setItem('altkategoriler', JSON.stringify(altkategoriler.value));
 }, 1500);
          
        }else{
@@ -429,6 +496,7 @@ setTimeout(() => {
           
      
        kategoriler.value  =  JSON.parse(localStorage.getItem('kategoriler'));
+       altkategoriler.value  =  JSON.parse(localStorage.getItem('altkategoriler'));
        }
       
 
@@ -540,7 +608,7 @@ setTimeout(() => {
 
 
 
-        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla
+        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti
         }
         
     }

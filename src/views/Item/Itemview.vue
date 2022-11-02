@@ -302,6 +302,14 @@
   <label for="floatingSelect">Kategori</label>
 </div>
 
+
+<!--      <div class="form-floating">
+  <select class="form-select" required v-model="kategorigoster" id="floatingSelect" aria-label="Floating label select example">
+ <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
+  </select>
+  <label for="floatingSelect">Alt Kategoriler</label>
+</div> -->
+
 <br>
             <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">

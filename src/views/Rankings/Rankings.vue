@@ -461,7 +461,7 @@ select {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-  background-color: black;
+   background-color: #0f0f0f;
   margin-bottom: 4vh;
   height: 21vh;
   box-shadow: 0 0 7px 3px #DE354C;

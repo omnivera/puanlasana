@@ -60,7 +60,7 @@
             <router-link :to="{name:'Kategoriekle'} ">
               <a class="nav-link" aria-current="page" href="#">
                 <button class="btn btn-outline-light" type="submit">
-                  <i class="fa-solid fa-folder-plus"></i> Kategori Ekle
+                  <i class="fa-solid fa-folder-plus"></i> Kategoriler
                 </button>
               </a>
             </router-link>
@@ -201,13 +201,36 @@ await authRef.onAuthStateChanged(k=>{
 
 <style scoped>
 
+
+
+.dropdown-menu{
+  background-color: #181818;
+  color: white;
+}
+
 .dropdown-item{
 
   cursor: pointer;
+ color: white;
+}
+
+.dropdown-item:hover{
+
+  background-color: #272727;
+ color: white;
 }
 
 button{
    border-radius: 20px;
+   transition: all .2s ease-in-out;
+   font-size: 1rem;
+}
+
+button:hover{
+    background-color: #272727;
+ color: white;
+ 
+   transform: scale(1.05);
 }
 
 button:focus {

@@ -69,17 +69,16 @@
            <div class="row">
 <div class="card text-center shadow rounded" style="width: 47rem; height:auto">
   <div class="card-body">
-    <h5 class="card-title">Kategori Bilgileri</h5>
-<br>
+    <h5 class="card-title"> <strong>{{guncellekisim}}</strong></h5>
 <form @submit.prevent="veriguncelle" autocomplete="false">
-    <div class="form-floating mb-3">
+  <!--   <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required maxlength="20" disabled class="form-control" v-model="guncellekisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">Kategori İsmi</label>
-</div>
+</div> -->
 
 
-<br>
-<h5 class="card-title"> <strong>{{guncellekisim}}</strong> Alt Kategoriler</h5>
+
+
 
 
 
@@ -100,10 +99,7 @@
 <tbody class="table-hover">
 
     
-
-
-
-<tr v-for="(veri,index) in altkategoriler" :key="veri.id" >
+<tr v-for="(veri,index) in altkategorilerold" :key="veri.id" >
 
 
 
@@ -111,7 +107,7 @@
 
 <td class="text-left">  <div >
   <div >
-  <input type="search" autocomplete="off"  class="form-control" v-model="veri.altkatad" id="exampleFormControlInput1" >
+  <input type="search" style="background:green;color:white" autocomplete="off"  class="form-control" v-model="veri.altkatad" id="exampleFormControlInput1" >
 </div>
 </div>
 </td>
@@ -124,7 +120,39 @@
 
 <td class="text-center" style="width:2vw">
  
-  <button  @click="satirsil(index)" type="button" class="btn btn-outline-danger" :disabled=silbtnkontrol   style="width:auto; height:auto; "><i class="fas fa-minus text-center"></i></button>
+  <button  @click="altkatsil(veri,index)" type="button" class="btn btn-outline-danger"    style="width:auto; height:auto; "><i class="fas fa-window-close"></i></button>
+  
+ 
+</td>
+
+
+
+
+</tr>
+
+
+<tr v-for="(veri,index) in altkategoriler" :key="veri.id" >
+
+
+
+
+
+<td class="text-left">  <div >
+  <div >
+  <input type="search" autocomplete="off" style="background:yellow;"  class="form-control" v-model="veri.altkatad" id="exampleFormControlInput1" >
+</div>
+</div>
+</td>
+
+
+
+ 
+
+
+
+<td class="text-center" style="width:2vw">
+ 
+  <button  @click="satirsil(index)" type="button" class="btn btn-outline-danger"    style="width:auto; height:auto; "><i class="fas fa-minus text-center"></i></button>
   
  
 </td>
@@ -189,11 +217,27 @@
 
 
 <br>
+
+   <div v-if="gbasarili"  role="alert">
+
+       <br>
+
+
+    <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+  <div>
+    <strong>Güncelleme Başarılı!</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</div>
+</div>
+
+<br>
 <div class="row">
     <div class="col-md-12">
         <div class="d-grid gap-2">
 
- <button type="submit" id="guncellebutton" class="btn btn-outline-primary btn-lg btn-block">Güncelle</button>
+ <button type="submit" :disabled="guncellekisim==''" id="guncellebutton" class="btn btn-outline-primary btn-lg btn-block">Güncelle</button>
 </div>
 
     </div>
@@ -215,19 +259,7 @@
     <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
   </symbol>
 </svg> -->
-   <div v-if="gbasarili"  role="alert">
 
-       <br>
-
-
-    <div class="alert alert-success d-flex align-items-center alert-dismissible fade show" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-  <div>
-    <strong>Güncelleme Başarılı!</strong> 
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-</div>
-</div>
 
 
 
@@ -362,7 +394,8 @@ export default {
   const gbasarisiz=ref(false)
 
         const veriler=ref([])
-        const altkategoriler=ref([{altkatad:""}])
+        const altkategorilerold=ref([])
+        const altkategoriler=ref([])
 
         const kisim=ref('')
         const kisimgoster=ref('')
@@ -379,15 +412,17 @@ export default {
             guncellekisim.value=veri.kisim
             veriID.value=veri.id
 
-   altkategoriler.value=[]
+   altkategorilerold.value=[]
+    altkategoriler.value=[]
         firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
-             
+
                   snapshot.forEach(doc => {
                   
 
-                   altkategoriler.value.push({...doc.data(),id:doc.id})
+                   altkategorilerold.value.push({...doc.data(),id:doc.id})
+              
          
         });
 
@@ -414,6 +449,41 @@ export default {
              
         }
 
+
+  const altkatsil=async (altkat,index)=>{
+
+
+            await firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(altkat.id).delete()
+             altkategorilerold.value.splice(index,1)
+
+               firestoreRef.collection('iteminfo').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
+
+            
+      
+ firestoreRef.collection('iteminfo').doc('eHjkoM7nWcs8ya8kQTmX').update({
+
+                   altkategoricount: doc.data().altkategoricount - 1 ,
+          
+                  
+                   
+        })
+
+          
+         
+        });
+            }
+            
+      
+
+
+        }) 
+
+             
+        }
 
   const satirekle= ()=>{
           
@@ -523,28 +593,34 @@ kisim.value=""
 
 
 
-       await firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').get()
-        .then(snapshot =>{
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
 
-        firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(doc.id).delete()
-         
-        });
+   
 
 
-            }else{
+  altkategorilerold.value.forEach(veri=>{
 
-             
 
-                console.log("yok")
-              
+ firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(veri.id).update({
 
-            }
+                  altkatad:veri.altkatad,
+                   
+                   
+                   
+                  
+                   
         })
 
-setTimeout(() => {
+
+
+});
+
+
+
+
+
+        
     altkategoriler.value.forEach(veri=>{
+
 
     const data = {
                    altkatad:veri.altkatad,
@@ -552,49 +628,52 @@ setTimeout(() => {
                  
 };
 
-const res = firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(veri.altkatad).set(data);
-}, 1000);
+const res = firestoreRef.collection('kategoriler').doc(veriID.value).collection('altkategoriler').doc(veri.id).set(data);
+
+});
 
     
-               
+
+
+
+       
 
               
-             })
+         
 
  
 
   
+     firestoreRef.collection('iteminfo').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
 
+            
+      
+ firestoreRef.collection('iteminfo').doc('eHjkoM7nWcs8ya8kQTmX').update({
 
-
-
-
-
-
-
-
-                   /*    let kayitkontrol = false
-
-                             for(let i = 0;i < veriler.value.length; i++ ) {
-
-
-                    if (guncellekisim.value==veriler.value[i].kisim) {
-                        kayitkontrol=true
-                    }
-
-                }
-
-
-
-                      if (kayitkontrol==false) {
-         
-
-                        await firestoreRef.collection('kategoriler').doc(veriID.value).update({
-
-                   kisim:guncellekisim.value,
+                   altkategoricount: doc.data().altkategoricount + altkategoriler.value.length ,
+                   
+                   
+                   
                   
                    
         })
+
+
+          
+          
+         
+        });
+            }
+    
+        }) 
+
+
+
+
 
 gbasarili.value=true
 
@@ -604,27 +683,12 @@ setTimeout(  function(){
     gbasarili.value=false
 
                 },3000)
-
-                }else{
-
-                    gbasarisiz.value=true
-                    kisimgoster.value=guncellekisim.value
-
-
-setTimeout(  function(){
-
-    gbasarisiz.value=false
-
-                },3000)
-
-
-                } */
   
          }
 
 
           return {kisim,verikayit,veriler,veriduzenle,guncellekisim,veriguncelle,verisil,basarili,basarisiz,kisimgoster,gbasarili,gbasarisiz,altkategoriler,satirekle,satirsil,
-          silbtnkontrol
+          silbtnkontrol,altkategorilerold,altkatsil
         }
         
     }

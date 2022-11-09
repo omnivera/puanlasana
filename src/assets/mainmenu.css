@@ -43,7 +43,14 @@ input::placeholder {
 }
 
 
-
+@keyframes createBox {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 
 #search {
     -webkit-box-align: center;
@@ -59,6 +66,7 @@ input::placeholder {
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     border-radius: 20px;
+    animation: createBox 1s;
    
 }
 
@@ -107,7 +115,7 @@ input::placeholder {
 
 
 #searchinput{
-  background-color: black;
+  background-color: #181818;
   color: white;
    transition: all .2s ease-in-out;
   
@@ -115,9 +123,9 @@ input::placeholder {
 
 #search{
   width:50%;
-   background-color: black;
+   background-color: #0f0f0f;
   color: white;
-  border: 1.5px solid white;
+  border: 1.5px solid #454545;
    transition: all .2s ease-in-out;
   
 }
@@ -332,8 +340,9 @@ hr {
   margin-bottom: 30px;
   transition: all .2s ease-in-out;
   color: white;
-  box-shadow: 0 0 10px 5px #181818;
- 
+  box-shadow: 0 0 3px 1px #454545;
+  background-color: #0f0f0f;
+  z-index: 1;
 
 }
 
@@ -343,23 +352,26 @@ hr {
   margin-bottom: 30px;
   transition: all .2s ease-in-out;
   color: white;
-  box-shadow: 0 0 7px 2px #DE354C;
+  box-shadow: 0 0 3px 2px #DE354C;
+  background-color: #0f0f0f;
+  
 
 }
 
 .video:hover {
  background-color: #181818;
-transform: scale(1.1);
+transform: scale(1.085);
 font-weight: 500;
-z-index: 999;
+
+
 
 }
 
 .videop:hover {
   background-color: #181818;
- transform: scale(1.1);
+ transform: scale(1.08);
  font-weight: 500;
- z-index: 999;
+
  }
 
 
@@ -375,16 +387,21 @@ z-index: 999;
 
 
 
+
+
 .video__thumbnail img {
   object-fit:fill;
   height: 100%;
   width: 100%;
   cursor: pointer;
+  z-index: 1;
 
 
   
   
 }
+
+
 
 
 
@@ -404,25 +421,43 @@ z-index: 999;
  padding-right: 15px;
  padding-bottom: 10px;
  height: 8vh;
+ z-index: 1;
+ position: relative;
 }
+
+
 
 .title {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .title h3 {
    
-  line-height: 20px;
-  font-size: 16px;
+  line-height: 1.2vw;
+  font-size: 0.95vw;
   margin-bottom: 6px;
+}
+.addlist{
+  position: absolute;
+    bottom: 1.25vh;
+    right: 1vw;
+    font-size: 1.25vw;
+    color: rgb(96, 96, 96);
+    transition: all .2s ease-in-out;
+}
+
+.addlist:hover{
+ color: #DE354C;
+ transform: scale(1.2);
 }
 
 .title a,
 span {
   text-decoration: none;
   color: rgb(96, 96, 96);
-  font-size: 14px;
+  font-size: 0.9vw;
 }
 
 h1 {
@@ -430,6 +465,9 @@ h1 {
   margin-bottom: 10px;
   color: rgb(3, 3, 3);
 }
+
+
+
 
 @media (max-width: 425px) {
   .header__search {

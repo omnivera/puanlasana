@@ -56,7 +56,7 @@
   
     <div v-for="item in itemler" :key="item.id" class="deneme">
         
-<div class="user-card">
+<div class="user-card" @click="goPuanla(item)">
 
 
       <div class="user-profile">
@@ -117,16 +117,7 @@
  </div>
   </div>
   
-  <footer class="footer">
-    <hr>
-    <div class="">
-       <strong>
-             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
-            
-          </strong>
-       
-   </div> 
-</footer>
+ 
 
 </template>
 
@@ -173,7 +164,12 @@ console.log(itemler.value )
       console.log(itemler.value);
     });
 
-   
+     const goPuanla= (item)=>{
+
+router.push({name:'Puanlas',params:{Kategori:item.kategori,itemID:item.id}})
+
+
+}
 
     const kategorisec = (veri) => {
       kategori.value=veri.kisim
@@ -299,7 +295,7 @@ rank++
       enter,
       enterv2,
       itemler,
-      videourl,kategori,kategorisec
+      videourl,kategori,kategorisec,goPuanla
     };
   }
 };
@@ -464,12 +460,13 @@ select {
    background-color: #0f0f0f;
   margin-bottom: 4vh;
   height: 21vh;
-  box-shadow: 0 0 7px 3px #DE354C;
+  box-shadow: 0 0 5px 3px #454545;
   
  position:relative;
  border-radius: 20px;
  
   transition: all .2s ease-in-out;
+  cursor: pointer;
 
 
 }

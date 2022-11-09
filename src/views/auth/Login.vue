@@ -1,5 +1,7 @@
 .<template>
 
+<div v-if="loading"><Loading/></div>
+<div v-if="!loading">
 
    <section id="main-landing">
     <div id="black-ov"></div>
@@ -8,10 +10,10 @@
     <div id="main-landing-message" style="margin-top:-6vh">
         <div class="bigshadow">
 
-<video  id="myVideo" autoplay muted loop  >
+<!-- <video  id="myVideo" autoplay muted loop  >
   <source :src="'https://drive.google.com/uc?export=download&id=19hDOay4fFilO0xnSwrgn_X4DgzyHtbyX'" type="video/mp4">
 
-</video>
+</video> -->
 
    </div>
         <div v-if="register" class="center">
@@ -193,7 +195,7 @@
 
 
 
-
+</div>
 
 </template>
 
@@ -212,7 +214,7 @@ export default {
 
     mounted() {
 
-  document.getElementById("myVideo").volume = 0.2;
+  /* document.getElementById("myVideo").volume = 0.2; */
 
   }, 
     setup() {
@@ -356,7 +358,7 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
           const enterv2=(el)=>{
 
           gsap.to(el,{
-            opacity:0.8,
+            opacity:1,
             y:0,
             duration:1.5,
             delay:el.dataset.index*0.2,
@@ -427,11 +429,11 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     
     }
     
- /*    #logbutton:hover{
-    background-color: #DE354C;
+    #logbutton:hover{
+    background-color: #454545;
     color: white;
     border-color: transparent;
-    } */
+    }
 
 
     #logbuttonv2{
@@ -447,12 +449,12 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     
     }
     
-/*     #logbuttonv2:hover{
-    background-color: white;
-    color: #DE354C;
+    #logbuttonv2:hover{
+    background-color: #454545;
+    color: white;
     border-color: transparent;
     }
- */
+
 
 
 ::-webkit-calendar-picker-indicator {
@@ -503,13 +505,14 @@ input:-webkit-autofill:active {
 .authcard{
 border: none;
 opacity: 0.8;
-background-color: black;
+background-color: #0f0f0f;
 border-radius: 20px;
+box-shadow: 0 0 5px 3px #454545;
 
 }
 
 .authcardbd{
-    background-color: black;
+    background-color: #0f0f0f;
     opacity: 0.8;
     color: white;
     border-radius: 20px;

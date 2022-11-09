@@ -8,18 +8,26 @@
 <section class="profile sticky-top" style="z-index: 999">
   <header class="header">
     <div class="details">
-      <img :src="userimg" alt=""  class="profile-pic">
+      <img :src="userimg" alt="" data-bs-toggle="modal" data-bs-target="#profilepicedit"  class="profile-pic">
       <h1 class="heading">{{kullaniciad}}</h1>
       <div class="location">
         
    
       </div>
       <div class="stats">
-          <div @click="goPuanla" class="col-4">
+          <div v-if="!puanlarshow" @click="goPuanla" class="col-4">
           <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
           <p>Puanladı</p>
         </div>
-        <div @click="goYorumlar" class="col-4">
+         <div v-if="puanlarshow" @click="goPuanla" class="col-4" style="color:#DE354C">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Puanladı</p>
+        </div>
+        <div v-if="!yorumlarshow" @click="goYorumlar" class="col-4">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Yorumlar</p>
+        </div>
+        <div v-if="yorumlarshow" @click="goYorumlar" class="col-4" style="color:#DE354C">
           <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
           <p>Yorumlar</p>
         </div>
@@ -207,7 +215,53 @@
  </div>
 
 
-
+<div class="modal fade"  id="profilepicedit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg scrollable">
+    <div class="modal-content profilepiceditmodal">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Profil Resmi</h5> 
+         
+          
+        <i data-bs-dismiss="modal"  class="fa-solid fa-circle-xmark top-right2 close-btn"></i>
+      </div>
+      <div class="modal-body text-center">
+        <div class="row">
+          <div class="col-md-3">
+           <img :src="userimg" alt=""  class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt="" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt=""  class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt=""   class="profile-pic">
+          </div>
+        </div>
+<br>
+<br>
+         <div class="row">
+          <div class="col-md-3">
+           <img :src="userimg" alt="" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt="" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt=""  class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img :src="userimg" alt=""  class="profile-pic">
+          </div>
+        </div>
+          
+           
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 
 
@@ -510,7 +564,11 @@ setTimeout(() => {
 <style scoped>
 
 
-
+.profilepiceditmodal{
+  background-color: #0f0f0f;
+  color: white;
+  border-radius: 20px;
+}
 
 
 .user-card {
@@ -519,10 +577,10 @@ setTimeout(() => {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-  background-color: black;
+  background-color: #0f0f0f;
   margin-bottom: 4vh;
 
- box-shadow: 0 0 7px 2px #DE354C;
+ box-shadow: 0 0 7px 2px #454545;
   
  position:relative;
   z-index:30;
@@ -1157,8 +1215,8 @@ body {
 
 .header {
   min-height: 35vh;
-  background-color: black;
-  box-shadow: 0px 0px 25px 0px #DE354C;
+  background-color: #0f0f0f;
+  box-shadow: 0px 0px 25px 0px #454545;
   color: white;
   clip-path: ellipse(100vw 60vh at 50% 50%);
   display: flex;
@@ -1179,6 +1237,12 @@ body {
   object-fit: center;
   border-radius: 50%;
   border: 2px solid #fff;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.profile-pic:hover {
+   transform: scale(1.1);
 }
 
 .location p {
@@ -1199,6 +1263,12 @@ body {
   width: 10rem;
   text-align: center;
   cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.stats .col-4:hover {
+  transform: scale(1.05);
+  color: #DE354C;
 }
 
 .heading {

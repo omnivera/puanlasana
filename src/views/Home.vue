@@ -13,6 +13,17 @@
   <div >
     <router-view />
   </div>
+
+ <!--   <footer class="footer">
+    <hr>
+    <div class="">
+       <strong>
+             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
+            
+          </strong>
+       
+   </div> 
+</footer> -->
   
 </template>
 
@@ -78,6 +89,11 @@ document.documentElement.scrollTop = 0;
 </script>
 
 <style >
+
+
+
+
+
 #btn-back-to-top {
 position: fixed;
 bottom: 20px;

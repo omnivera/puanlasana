@@ -2,6 +2,93 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
 
+#showcard{
+
+  background-color: #0f0f0f;
+  border-radius: 20px;
+ border: none;
+
+margin-top:4vh;
+
+
+width:27vw;
+
+
+
+
+box-shadow: 0 0 7px 3px #454545;
+
+}
+
+#showcard img{
+cursor: pointer;
+}
+
+#infocard{
+box-shadow: 0 0 7px 3px #454545;
+  background-color: #0f0f0f;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  left: -5px;
+  width: 22vw;
+
+}
+
+
+#infocard2{
+box-shadow: 0 0 7px 3px #454545;
+  background-color: #0f0f0f;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  right: -35px;
+  width: 22vw;
+
+
+}
+
+
+.baslikfooter {
+  color: white;
+  font-size: 1.3vw;
+  
+  margin-top: 1.6vh;
+  letter-spacing: 0.3vw;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.kbaslikfooter {
+  color: #DE354C;
+  font-size: 1.3vw;
+  margin-bottom: 1.2vh;
+
+  font-family: "Comfortaa", cursive;
+}
+
+.footer {
+  position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+  text-align: center;
+}
+
+.point{
+  color: white;
+  font-size: 2.7rem;
+}
+.pointcircle{
+  background: #0f0f0f;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    text-align: center;
+    box-shadow: 0 0 7px 3px #DE354C;
+    opacity: 0.8;
+   
+}
+
 .showcardimg{
   height:55vh;
   border-top-left-radius: 20px;
@@ -21,8 +108,8 @@
   border: none;
   color: #000;
   font-weight: bold;
-  font-size: 1.2vw;
-  padding: 1rem 1rem;
+  font-size: 1.1vw;
+  padding: 0.2rem 0;
 
  
   z-index: 2;
@@ -41,15 +128,29 @@
   border-radius: 20px;
  
   z-index: 2;
+  opacity: 0.2;
 }
 
 .cleft{
   border-radius: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vh;
+  height: 9vh;
+  border-radius: 50%;
+  
  
  }
 
 .cmid{
- border-radius: 0;
+border-color: transparent;
+border-radius: 0;
+margin: 0.9vw;
+margin-top: 2vh;
+height: 9vh;
+border-radius: 50%;
+ align-items: center;
+  justify-content: center;
 
 }
 
@@ -57,19 +158,27 @@
   border-radius: 20px;
   align-items: center;
   justify-content: center;
+  margin-top: 2vh;
+height: 9vh;
+border-radius: 50%;
 
  }
 
 #controlbtn{
-  margin-top: 2.5vh;
+  margin-top: 2.9vh;
 
   border-color: transparent;
-  background-color: transparent;
+  background-color: #0f0f0f;
   font-size: 1vw;
+ 
   color: white;
-  border: 1px solid white;
+  border: 0.85px solid #454545;
+  margin-top: 2vh;
+height: 9vh;
+border-radius: 50%;
   
   font-family: "Comfortaa", cursive;
+  opacity: 0.75;
 
   
   }
@@ -82,22 +191,28 @@
     }
   
   #controlbtn:hover{
-  background-color: white;
-  color: black;
+  background-color: #272727;
+  color: white;
   border-color: transparent;
   }
 
 
   #controlyanbtn{
-    margin-top: 2.5vh;
+    margin-top: -3.5vh;
   
     border-color: transparent;
-    background-color: transparent;
-    font-size: 1vw;
+    background-color: #0f0f0f;
+    font-size: 1.05vw;
     color: white;
-    border: 1px solid white;
+    border: 1px solid #454545;
     
     font-family: "Comfortaa", cursive;
+    opacity: 0.75;
+    width: 4vw;
+  height: 4vw;
+  
+
+border-radius: 50%;
   
     
     }
@@ -105,9 +220,9 @@
   
     
     #controlyanbtn:hover{
-    background-color: white;
-    color: black;
-    border-color: transparent;
+      background-color: #272727;
+      color: white;
+    
     }
 
 
@@ -151,34 +266,8 @@ hr {
 
 
 
-.footer {
-  position: relative;
-  left: 0;
-  bottom: 2vh;
-  width: 100%;
-  background-color: transparent;
-  
-  text-align: center;
-}
 
 
-.baslikfooter {
-  color: white;
-  font-size: 1.3vw;
-  
-  margin-top: 1.6vh;
-  letter-spacing: 0.3vw;
-
-  font-family: "Comfortaa", cursive;
-}
-
-.kbaslikfooter {
-  color: #DE354C;
-  font-size: 1.3vw;
-  margin-bottom: 1.2vh;
-
-  font-family: "Comfortaa", cursive;
-}
 
 .card{
   
@@ -220,13 +309,14 @@ border-color: transparent;
 #yorumlabutton{
   
 
-    border-color: transparent;
-    background-color: transparent;
+    
+    background-color: #0f0f0f;
     font-size: 1vw;
     color: white;
-    border: 1px solid white;
+    border: 0.8px solid #454545;
     border-radius: 20px;
     font-family: "Comfortaa", cursive;
+  
  
     
     }
@@ -239,8 +329,8 @@ border-color: transparent;
       }
     
     #yorumlabutton:hover{
-    background-color: white;
-    color: black;
+      background-color: #272727;
+      color: white;
     border-color: transparent;
     }
 
@@ -282,18 +372,18 @@ border-color: transparent;
       margin-top: 2.5vh;
       border-radius: 20px;
       border-color: transparent;
-      background-color: transparent;
+      background-color: #0f0f0f;
       font-size: 1vw;
       color: white;
-      border: 1px solid white;
+      border: 0.8px solid #454545;
       font-family: "Comfortaa", cursive;
    
       
       }
       
       #pasbtn:hover{
-        background-color: white;
-    color: black;
+        background-color: #272727;
+        color: white;
       border-color: transparent;
 
       }
@@ -314,12 +404,12 @@ border-color: transparent;
     
         border-color: transparent;
         border-radius: 20px;
-        background-color: transparent;
-        border: 1px solid white;
+        background-color: #DE354C;
+        
         font-size: 1rem;
         color: white;
         
-        padding: 1rem 1.5rem;
+        padding: 0.8rem 1.3rem;
      
         
         }
@@ -332,8 +422,8 @@ border-color: transparent;
           }
         
         #yorumlabuttonv2:hover{
-        background-color: white;
-        color: black;
+          background-color: #454545;
+        color: white;
         border-color: transparent;
         }
 
@@ -344,12 +434,12 @@ border-color: transparent;
       
           border-color: transparent;
           border-radius: 20px;
-          background-color: transparent;
-          border: 1px solid white;
+          background-color: #DE354C;
+      
           font-size: 1rem;
-          color: #DE354C;
+          color: white;
           
-          padding: 1rem 1.5rem;
+          padding: 0.8rem 1.3rem;
        
           
           }
@@ -362,8 +452,8 @@ border-color: transparent;
             }
           
           #yorumlabuttonv2dis:hover{
-          background-color: white;
-          color: #DE354C;
+          background-color: #454545;
+          color: white;
           border-color: transparent;
           }
 

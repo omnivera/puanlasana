@@ -192,8 +192,8 @@
          <div class="col ms-auto mt-auto mb-0">
 
                 <div v-if="true">
-             <transition @before-enter="beforeEnter" @enter="enter" appear >   
- <button type="button" id="yorumlabutton" @click="anasayfagit" class=" btn-lg shadow  top-left altbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
+             <transition @before-enter="beforeEnter" @enter="enterbtn" appear >   
+ <button type="button" id="yorumlabutton" style="opacity: 0.8;" @click="anasayfagit" class=" btn-lg shadow  top-left altbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
         
              </transition>
 </div>
@@ -215,7 +215,8 @@
 
  <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
   <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
-  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlbtn"><i class="fas fa-comments"></i>Yorumlar</button></a>
+  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-comments"></i></button></a>
+  <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
   <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
   <i v-if="mutecheck" class="fas fa-volume-up"></i>
   <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
@@ -232,34 +233,39 @@
 
          </div>
 
+         <div v-if="starhover && yildizladi==false" class="center pointcircle d-flex justify-content-center" >
+  <div class="center">
+<span class="point" style="z-index:999">{{point}}</span>
+  </div>
+
+</div>
+
               <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
-       
     <span @click="watchinfo=true" class="bigtitle">{{itemisim}}</span>
     <br>
-
     <div class="stars">
 <form action="">
-    <input :disabled="puanladi" @click="doYildizla(10)" class="star star-10"  id="star-10" type="radio" name="star"/>
-  <label class="star star-10" for="star-10"></label>
-    <input :disabled="puanladi" @click="doYildizla(9)" class="star star-9" id="star-9" type="radio" name="star"/>
-  <label class="star star-9" for="star-9"></label>
-    <input :disabled="puanladi" @click="doYildizla(8)" class="star star-8" id="star-8" type="radio" name="star"/>
-  <label class="star star-8" for="star-8"></label>
-    <input :disabled="puanladi" @click="doYildizla(7)" class="star star-7" id="star-7" type="radio" name="star"/>
-  <label class="star star-7" for="star-7"></label>
+    <input :disabled="puanladi" @click="doYildizla(10)"  class="star star-10"  id="star-10" type="radio" name="star"/>
+  <label class="star star-10" for="star-10"  @mouseover="dostarhover(10)" @mouseleave="undostarhover" ></label>
+    <input :disabled="puanladi" @click="doYildizla(9)"  class="star star-9" id="star-9" type="radio" name="star"/>
+  <label class="star star-9" for="star-9"  @mouseover="dostarhover(9)" @mouseleave="undostarhover" ></label>
+    <input :disabled="puanladi" @click="doYildizla(8)"  class="star star-8" id="star-8" type="radio" name="star"/>
+  <label class="star star-8" for="star-8"  @mouseover="dostarhover(8)" @mouseleave="undostarhover" ></label>
+    <input :disabled="puanladi" @click="doYildizla(7)"  class="star star-7" id="star-7" type="radio" name="star"/>
+  <label class="star star-7" for="star-7"  @mouseover="dostarhover(7)" @mouseleave="undostarhover" ></label>
   <input :disabled="puanladi" @click="doYildizla(6)" class="star star-6" id="star-6" type="radio" name="star"/>
-  <label class="star star-6" for="star-6"></label>
-  <input :disabled="puanladi" @click="doYildizla(5)" class="star star-5" id="star-5" type="radio" name="star"/>
-  <label class="star star-5" for="star-5"></label>
+  <label class="star star-6" for="star-6"  @mouseover="dostarhover(6)" @mouseleave="undostarhover" ></label>
+  <input :disabled="puanladi" @click="doYildizla(5)"  class="star star-5" id="star-5" type="radio" name="star"/>
+  <label class="star star-5" for="star-5"  @mouseover="dostarhover(5)" @mouseleave="undostarhover" ></label>
   <input :disabled="puanladi" @click="doYildizla(4)" class="star star-4" id="star-4" type="radio" name="star"/>
-  <label class="star star-4" for="star-4"></label>
-  <input :disabled="puanladi" @click="doYildizla(3)" class="star star-3" id="star-3" type="radio" name="star"/>
-  <label class="star star-3" for="star-3"></label>
+  <label class="star star-4" for="star-4"  @mouseover="dostarhover(4)" @mouseleave="undostarhover" ></label>
+  <input :disabled="puanladi" @click="doYildizla(3)"  class="star star-3" id="star-3" type="radio" name="star"/>
+  <label class="star star-3" for="star-3"  @mouseover="dostarhover(3)" @mouseleave="undostarhover" ></label>
   <input :disabled="puanladi" @click="doYildizla(2)" class="star star-2" id="star-2" type="radio" name="star"/>
-  <label class="star star-2" for="star-2"></label>
-  <input :disabled="puanladi" @click="doYildizla(1)" class="star star-1" id="star-1" type="radio" name="star"/>
-  <label class="star star-1" for="star-1"></label>
+  <label class="star star-2" for="star-2"  @mouseover="dostarhover(2)" @mouseleave="undostarhover" ></label>
+  <input :disabled="puanladi" @click="doYildizla(1)"  class="star star-1" id="star-1" type="radio" name="star"/>
+  <label class="star star-1" for="star-1"  @mouseover="dostarhover(1)" @mouseleave="undostarhover" ></label>
 </form>
 </div>
 
@@ -285,9 +291,9 @@
 
     <div class="col ms-auto  mb-0">
         <div v-if="puanladi">
-             <transition @before-enter="beforeEnter" @enter="enter" appear >   
+             <transition @before-enter="beforeEnter" @enter="enterbtn" appear >   
  
-    <button id="yorumlabutton" class="btn-lg shadow top-right next" @click="next"><i class="fa fa-play"></i>Devam</button>
+    <button id="yorumlabutton" style="opacity: 0.8;" class="btn-lg shadow top-right next" @click="next"><i class="fa fa-play"></i>Devam</button>
              </transition>
 </div>
 
@@ -303,7 +309,7 @@
 
   </div>
         <div v-if="!yildizladi && !puanladi">
-         <transition @before-enter="beforeEnter" @enter="enter" appear >   
+         <transition @before-enter="beforeEnter" @enter="enterbtn" appear >   
  
                      
 
@@ -311,7 +317,7 @@
 
 
  
-<button type="button" id="pasbtn" @click="next" class="btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
+<button type="button" id="pasbtn" style="opacity: 0.8;" @click="next" class="btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
 
 
 
@@ -660,8 +666,29 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
     const kullaniciuid= ref('')
     const userimg= ref('')
     const puanladiuser= ref(0)
+    const starhover = ref(false)
+    const point = ref(0)
 
     const loading= ref(true)
+
+
+     const dostarhover= (a)=>{
+
+
+   starhover.value=true
+   point.value=a
+   
+
+
+}
+
+ const undostarhover= ()=>{
+
+
+   starhover.value=false
+
+
+}
 
 
 
@@ -1091,6 +1118,17 @@ showtitle.value="hidden"
 
           gsap.to(el,{
             opacity:1,
+            y:0,
+            duration:1.2,
+            delay:el.dataset.index*0.2,
+            ease:'back'
+          })
+        }
+
+         const enterbtn=(el)=>{
+
+          gsap.to(el,{
+            opacity:0.75,
             y:0,
             duration:1.2,
             delay:el.dataset.index*0.2,
@@ -1604,7 +1642,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop
+          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop,starhover,dostarhover,undostarhover,point,enterbtn
           
         }
         
@@ -1748,10 +1786,13 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
 
 #floatingTextarea2{
-    background-color: black;
-    color: white;
+  
+     color: white;
         resize: none;
         border-radius: 20px;
+         height: 130px;
+         border: 0.8px solid #454545;
+  background:#0f0f0f;
 
 }
 
@@ -1915,14 +1956,14 @@ outline: none;
 
 .top-right{
    position: absolute;
-    bottom: 1.8vh;
+    bottom: 3vh;
     right: 0.7vw;
     
 }
 
 .top-left{
    position: absolute;
-    bottom: 1.8vh;
+    bottom: 3vh;
     left: 0.7vw;
     
 }
@@ -1941,44 +1982,7 @@ outline: none;
 
 
 
-#showcard{
 
-      background: black;
-      border-radius: 20px;
-     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
-
-margin-top:4vh;
-
- cursor: pointer;
-    width:27vw;
-
-     
-    
-   
-    box-shadow: -5px -5px 30px 5px #DE354C;
-    
-}
-
-#infocard{
-    box-shadow: -5px -5px 30px 5px #DE354C;
-      background-color: black;
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
-      left: -5px;
-
-}
-
-
-#infocard2{
-    box-shadow: -5px -5px 30px 5px #DE354C;
-      background-color: black;
-      border-top-left-radius: 20px;
-      border-bottom-left-radius: 20px;
-      right: -5px;
-    
-
-}
 
 #myVideo {
   position: absolute;
@@ -2011,7 +2015,7 @@ color: white;
 
 h4{
   color: #DE354C;  
-  font-size: 1.7vw;
+  font-size: 1.5vw;
 }
 
 .normalbutton {
@@ -2182,6 +2186,7 @@ body {
 div.stars{
  
   display: inline-block;
+  margin-bottom: 0.5vh;
 }
 
 input.star{
@@ -2194,6 +2199,7 @@ label.star {
   font-size: 1.4vw;
   color: #DE354C;
   transition: all .2s;
+  cursor: pointer;
 
 }
 

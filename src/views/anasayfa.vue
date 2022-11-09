@@ -16,7 +16,7 @@
           </strong>
  </div>
 
-  <div id="search"> <input id="searchinput" type="search" autocomplete="off" placeholder="Arama yapsana..." v-model="search" /> <button id="button"><i style="color:White" class="fa fa-search" ></i></button></div>
+  <div id="search"> <input id="searchinput" type="search" autocomplete="off" placeholder="Arama yapsana..." v-model="search" /> <button id="button"><i style="color:#454545" class="fa fa-search" ></i></button></div>
      
   </div>
  
@@ -86,8 +86,12 @@
                   {{item.itemisim}}
                 </h3>
                 <a href="">{{item.kategori}}</a>
+               
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
+             <!--  <div class="addlist">
+                 <i title="Listeme Ekle"  class="fas fa-plus"></i>
+              </div> -->
             </div>
           </div>
 
@@ -127,6 +131,9 @@
                 <a href="">{{item.kategori}}</a>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
+             <!--   <div  class="addlist">
+                 <i  title="Listeme Ekle" class="fas fa-plus"></i>
+              </div> -->
             </div>
           </div>
 
@@ -252,14 +259,21 @@ const kategorisecti= (kategori)=>{
 kategorisec.value=kategori.kisim
 
 
+altkategorisec.value=altkategoriler.value[0].altkatad
+altkategoriler.value[0].katbuttoncss="katbuttonhover"
 
-          
+ for (let i = 1; i < altkategoriler.value.length; i++) {
+  altkategoriler.value[i].katbuttoncss="katbutton"
+  
+}         
 
 for (let i = 0; i < kategoriler.value.length; i++) {
   kategoriler.value[i].katbuttoncss="katbutton"
   
 }
 kategori.katbuttoncss="katbuttonhover"
+
+
 
 
 
@@ -485,6 +499,8 @@ const aramaaltkategori=computed(()=>{
                 })
                 kategoriler.value.unshift({kisim:"Tümü",katbuttoncss:"katbuttonhover"})
                 altkategoriler.value.unshift({altkatad:"Tümü",katbuttoncss:"katbuttonhover"})
+
+
           
             })
 
@@ -497,6 +513,35 @@ const aramaaltkategori=computed(()=>{
 
 
 setTimeout(() => {
+     puanlar.value= JSON.parse(localStorage.getItem('puanladi'))
+
+          let puanlananlar=[]
+          let puanlanmayanlar=[]
+
+          let random=0
+
+
+          if (puanlar.value!=null) {
+          
+            puanlananlar = itemler.value.filter(({id}) => puanlar.value.some(puan => puan.itemID == id))
+            puanlanmayanlar = itemler.value.filter(({id}) => !puanlar.value.some(puan => puan.itemID == id))
+
+           puanlananlar.forEach(element => {
+             element.puanladi=true
+             
+           });
+
+            puanlanmayanlar.forEach(element => {
+             element.puanladi=false
+           });
+           
+
+          let merged =  [...new Set([...puanlananlar, ...puanlanmayanlar])];
+
+            itemler.value  =  merged
+
+          
+          }
   localStorage.setItem('itemler', JSON.stringify(itemler.value));
   localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
   localStorage.setItem('altkategoriler', JSON.stringify(altkategoriler.value));

@@ -86,16 +86,7 @@ Umarım sitemiz ile ilgili kısa bilgilendirmemiz yardımcı olmuştur. <span cl
    </div>
 </transition>
 
-<footer class="footer">
-    <hr>
-    <div class="">
-       <strong>
-             <span class="baslikfooter">puanla<span class="kbaslikfooter">sana</span></span> 
-            
-          </strong>
-       
-   </div> 
-</footer>
+
 
   
 

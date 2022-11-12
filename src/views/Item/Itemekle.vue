@@ -358,7 +358,7 @@
 
 <br>
 
-<div v-if="kategori=='Film' || kategori=='Dizi'">
+<div v-if="kategori=='Film' || kategori=='Dizi' || kategori=='Anime'">
 
 
 <div class="form-floating">
@@ -370,7 +370,7 @@
     <div class="col-md-4">
  <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required class="form-control" v-model="info1" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Oyuncular</label>
+  <label for="floatingInput"><span v-if="kategori=='Film' || kategori=='Dizi'">Oyuncular</span> <span v-if="kategori=='Anime'">Ana Karakterler</span> </label>
 </div>
     </div>
      <div class="col-md-4">
@@ -383,7 +383,7 @@
        <div class="col-md-4">
          <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required class="form-control" v-model="info3" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput"><span v-if="kategori=='Film'">Film Süresi</span> <span v-if="kategori=='Dizi'">Sezon</span> </label>
+  <label for="floatingInput"><span v-if="kategori=='Film'">Film Süresi</span> <span v-if="kategori=='Dizi'">Sezon</span> <span v-if="kategori=='Anime'">Sezon / Bölüm</span> </label>
 </div>
     </div>
 </div>

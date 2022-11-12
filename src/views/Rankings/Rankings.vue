@@ -460,7 +460,7 @@ select {
    background-color: #0f0f0f;
   margin-bottom: 4vh;
   height: 21vh;
-  box-shadow: 0 0 5px 3px #454545;
+  box-shadow: 0 0 3px 1px #454545;
   
  position:relative;
  border-radius: 20px;

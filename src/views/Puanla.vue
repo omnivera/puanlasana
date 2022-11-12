@@ -216,7 +216,8 @@
  <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
   <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
   <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-comments"></i></button></a>
-  <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
+  <button v-if="!listemcheck" type="button"  @click="addlist" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
+  <button v-if="listemcheck" type="button"  @click="deleteList" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-check"></i></button>
   <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
   <i v-if="mutecheck" class="fas fa-volume-up"></i>
   <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
@@ -607,7 +608,7 @@ export default {
 
          const kategorigoster=ref(route.params.Kategori)
 
-
+         const listemcheck=ref(false)
          const puanladi = ref(false)
          const yildizladi = ref(false)
 
@@ -639,6 +640,64 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          const showcardV=ref('visible')
          const showtitle=ref('hidden')
+
+
+         let listemcount 
+
+
+              const addlist= ()=>{
+
+            
+
+
+            listemcheck.value=true
+
+
+
+     const datalist = {
+
+       itemisim:itemisim.value,
+       itemresim:itemresim.value,
+       info2:info2.value,
+       kategori:kategorigoster.value,
+       id:itemID.value
+
+
+
+
+                  
+                 
+};
+
+
+let listarray = JSON.parse(localStorage.getItem('listem'))
+
+listarray.unshift(datalist)
+
+
+
+   localStorage.setItem('listem', JSON.stringify(listarray));
+
+
+
+const res = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').doc(itemID.value).set(datalist);
+
+ 
+
+
+}
+
+
+
+          const deleteList= ()=>{
+
+listemcheck.value=false
+
+const res = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').doc(itemID.value).delete();
+
+
+
+}
 
 
  const backtotop= ()=>{
@@ -1396,7 +1455,15 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
 
            
 
+let listem = JSON.parse(localStorage.getItem('listem'))
+     
+ listemcount = listem.filter((liste)=>liste.id.includes(doc.id))
 
+
+
+if (listemcount.length > 0) {
+  listemcheck.value=true
+}
 
 
 
@@ -1642,7 +1709,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop,starhover,dostarhover,undostarhover,point,enterbtn
+          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop,starhover,dostarhover,undostarhover,point,enterbtn,addlist,deleteList,listemcheck
           
         }
         

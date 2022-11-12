@@ -216,8 +216,9 @@
 
  <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
   <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
-  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-comments"></i></button></a>
-  <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
+  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  class="fas fa-comments"></i></button></a>
+  <button v-if="!listemcheck" type="button"  @click="addlist" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
+  <button v-if="listemcheck" type="button"  @click="deleteList" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-check"></i></button>
   <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
   <i v-if="mutecheck" class="fas fa-volume-up"></i>
   <i v-if="!mutecheck" class="fas fa-volume-mute"></i>
@@ -335,7 +336,7 @@
     <div class="modal-content infomodal">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <i v-if="kategorigoster=='Film' || kategorigoster=='Dizi'" class="bi bi-film"></i> 
+          <i v-if="kategorigoster=='Film' || kategorigoster=='Dizi' || kategorigoster=='Anime' " class="bi bi-film"></i> 
           <i v-if="kategorigoster=='Oyun'" class="fa-solid fa-gamepad"></i>
           {{itemisim}}
           </h5> 
@@ -363,6 +364,7 @@
                       <h5 class="redtitle">
                         <span v-if="kategorigoster=='Film' || kategorigoster=='Dizi'">Oyuncular</span>
                         <span v-if="kategorigoster=='Oyun'">Platformlar</span>
+                        <span v-if="kategorigoster=='Anime'">Ana Karakterler</span>
                         </h5>
                       <hr class="">
                       <p>{{info1}}</p>
@@ -390,6 +392,7 @@
                       <h5 class="redtitle">
                         <span v-if="kategorigoster=='Film'">Film Süresi</span>
                         <span v-if="kategorigoster=='Dizi'">Sezon</span>
+                        <span v-if="kategorigoster=='Anime'">Sezon / Bölüm</span>
                         <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
                       <p>{{info3}}</p>
@@ -586,11 +589,20 @@ if (sessionStorage.getItem('pasladi')==null) {
           sessionStorage.setItem('pasladi', JSON.stringify([]));
         }
 
+
+        if (localStorage.getItem('listem')==null) {
+          
+          localStorage.setItem('listem', JSON.stringify([]));
+        }
+
 let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
      
         const kategorikontrol=ref(false)
          const veriler=ref([])
          const yorumlar=ref([])
+
+      
+         const listemcheck=ref(false)
       
   const seenItems=ref([{itemisim:""}])
 
@@ -638,6 +650,71 @@ let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
          const point=ref(0)
 
          let yorumclickcount=0
+
+let listarray = JSON.parse(localStorage.getItem('listem'))
+          const addlist= ()=>{
+
+            
+
+
+            listemcheck.value=true
+
+
+
+     const datalist = {
+
+       itemisim:itemisim.value,
+       itemresim:itemresim.value,
+       info2:info2.value,
+       kategori:kategorigoster.value,
+       id:itemID.value
+
+
+
+
+                  
+                 
+};
+
+
+
+
+listarray.unshift(datalist)
+
+
+
+   localStorage.setItem('listem', JSON.stringify(listarray));
+
+
+
+const res = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').doc(itemID.value).set(datalist);
+
+ 
+
+
+}
+
+
+
+          const deleteList= ()=>{
+
+listemcheck.value=false
+
+const res = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').doc(itemID.value).delete();
+
+ for (let i = 0; i < listarray.length; i++) {
+                     if (listarray[i].id==itemID.value) {
+                    listarray.splice(i,1)
+
+                     }
+                     
+                   }
+
+                    localStorage.setItem('listem', JSON.stringify(listarray))
+
+
+
+}
 
  const backtotop= ()=>{
 
@@ -688,6 +765,7 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
 
     const loading= ref(true)
+    let listemcount 
 
 const mutecheck=ref(false)
 
@@ -696,6 +774,8 @@ const mutecheck=ref(false)
           
           localStorage.setItem('mutecheck', true);
         }
+
+        
 
 
 const toggleMute=()=>{
@@ -1189,7 +1269,16 @@ showtitle.value="hidden"
             info3.value = doc.data().info3
             ozet.value = doc.data().ozet
 
+           
+let listem = JSON.parse(localStorage.getItem('listem'))
      
+ listemcount = listem.filter((liste)=>liste.id.includes(doc.id))
+
+
+
+if (listemcount.length > 0) {
+  listemcheck.value=true
+}
 
   
     let puaninfo = puanarray.filter((puan)=>puan.itemID.includes(doc.id) ) 
@@ -1463,7 +1552,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,info1,info2,cyili,info3,ozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,sirket,toggleMute,mutecheck,backtotop,enterbtn,starhover,dostarhover,undostarhover,point
+          yorumladi,loading,itemvideogoster,sirket,toggleMute,mutecheck,backtotop,enterbtn,starhover,dostarhover,undostarhover,point,addlist,listemcheck,deleteList
           
         }
         

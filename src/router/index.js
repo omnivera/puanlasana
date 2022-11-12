@@ -6,6 +6,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 
 import Profile from '../views/Profile.vue'
+import Listem from '../views/Listem.vue'
 
 import Anasayfa from '../views/anasayfa.vue'
 import Anasayfa2 from '../views/anasayfa2.vue'
@@ -20,7 +21,7 @@ import Kategoriekle from '../views/kategori/Kategoriekle.vue'
 import Kategoriler from '../views/Kategoriler.vue'
 
 import Itemekle from '../views/Item/Itemekle.vue'
-import Itemekle2 from '../views/Item/Itemekle2.vue'
+
 import Itemduzenle from '../views/Item/Itemduzenle.vue'
 import Itemview from '../views/Item/Itemview.vue'
 
@@ -106,6 +107,14 @@ const routes = [
         path: '/Profile',
         name: 'Profile',
         component: Profile,
+       
+
+      },
+
+      {
+        path: '/Listem',
+        name: 'Listem',
+        component: Listem,
        
 
       },

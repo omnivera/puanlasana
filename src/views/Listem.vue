@@ -11,7 +11,7 @@
   
     <div class="baslik d-flex justify-content-center">
           <strong>
-            puanla<span class="kbaslik">sana</span>
+            Lis<span class="kbaslik">tem</span>
             
           </strong>
  </div>
@@ -176,7 +176,6 @@ export default {
       const altkategoriler = ref([])
       const itemler = ref([])
       const puanlar = ref([])
-      const listem = ref([])
       const kullaniciad= ref('')
     const kullaniciemail= ref('')
     const kullaniciuid= ref('')
@@ -236,12 +235,7 @@ export default {
           localStorage.setItem('puanladi', JSON.stringify([]));
         }
 
-          if (localStorage.getItem('itemler')==null) {
-          
-          localStorage.setItem('itemler', JSON.stringify([]));
-        }
-
-         if (localStorage.getItem('listem')==null) {
+          if (localStorage.getItem('listem')==null) {
           
           localStorage.setItem('listem', JSON.stringify([]));
         }
@@ -416,9 +410,11 @@ const aramaaltkategori=computed(()=>{
 
       onMounted(async () => {
 
-      
 
-    await firestoreRef.collection('iteminfo').get()
+    setTimeout(() => {
+        
+
+         firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
         .then(snapshot =>{
             
             if (snapshot.size > 0) {
@@ -428,10 +424,20 @@ const aramaaltkategori=computed(()=>{
 
                  
 
-       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length || doc.data().kategoricount != JSON.parse(localStorage.getItem('kategoriler')).length -1 || doc.data().altkategoricount != JSON.parse(localStorage.getItem('altkategoriler')).length -1) {
-           console.log("veritabanı")
+       if (doc.data().listcount != JSON.parse(localStorage.getItem('listem')).length) {
+           console.log("veritabanı liste")
 
-        
+       /*     firestoreRef.collection('iteminfo').doc(doc.id).update({
+
+                   itemcount: JSON.parse(localStorage.getItem('listem')).length,
+                   kategoricount: JSON.parse(localStorage.getItem('kategoriler')).length,
+                   altkategoricount: JSON.parse(localStorage.getItem('altkategoriler')).length,
+                   
+                   
+                   
+                  
+                   
+        }) */
 
          setTimeout(() => {
 
@@ -443,27 +449,7 @@ const aramaaltkategori=computed(()=>{
                     kategoriler.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbutton"})
 
                        
-         firestoreRef.collection(doc.data().kisim).get()
-        .then(snapshot =>{
-            
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
-
-       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemvideo:doc.data().itemvideo,kategori:doc.data().kategori,info2:doc.data().info2,id:doc.id})
-      
-
-
-
-          
-          
-         
-        });
-            }
-            
-      
-
-
-        })
+       
 
      let kategori = doc.data().kisim
           
@@ -506,7 +492,27 @@ const aramaaltkategori=computed(()=>{
 
            
     
+  firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').get()
+        .then(snapshot =>{
+            
+            if (snapshot.size > 0) {
+                  snapshot.forEach(doc => {
 
+       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemvideo:doc.data().itemvideo,kategori:doc.data().kategori,info2:doc.data().info2,id:doc.id})
+      
+
+
+
+          
+          
+         
+        });
+            }
+            
+      
+
+
+        })
 
 setTimeout(() => {
      puanlar.value= JSON.parse(localStorage.getItem('puanladi'))
@@ -538,9 +544,16 @@ setTimeout(() => {
 
           
           }
-  localStorage.setItem('itemler', JSON.stringify(itemler.value));
+  localStorage.setItem('listem', JSON.stringify(itemler.value));
   localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
   localStorage.setItem('altkategoriler', JSON.stringify(altkategoriler.value));
+
+   firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+
+                   listcount: JSON.parse(localStorage.getItem('listem')).length,
+          
+                   
+        })
 }, 1500);
          
        }else{
@@ -553,7 +566,7 @@ setTimeout(() => {
 
 
           if (puanlar.value!=null) {
-            itemler.value = JSON.parse(localStorage.getItem('itemler'));
+            itemler.value = JSON.parse(localStorage.getItem('listem'));
             puanlananlar = itemler.value.filter(({id}) => puanlar.value.some(puan => puan.itemID == id))
             puanlanmayanlar = itemler.value.filter(({id}) => !puanlar.value.some(puan => puan.itemID == id))
 
@@ -573,7 +586,7 @@ setTimeout(() => {
 
           
           }else{
-            itemler.value  =  JSON.parse(localStorage.getItem('itemler'));
+            itemler.value  =  JSON.parse(localStorage.getItem('listem'));
           }
 
           
@@ -597,6 +610,9 @@ setTimeout(() => {
         })
 
 
+    }, 500);
+
+
 
 
 
@@ -610,69 +626,6 @@ setTimeout(() => {
             
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
-
-
-
-                    if (doc.data().listcount != JSON.parse(localStorage.getItem('listem')).length) {
-
-         setTimeout(() => {
-
-  
-       
-console.log("veritabanı liste")
-
-                       
-         firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').get()
-        .then(snapshot =>{
-            
-            if (snapshot.size > 0) {
-                  snapshot.forEach(doc => {
-
-       listem.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,id:doc.id,kategori:doc.data().kategori})
-      
-
-
-
-          
-          
-         
-        });
-            }
-            
-      
-
-
-        })
-
-          
-           
-}, 700);
-
-           
-        
-
-
-setTimeout(() => {
-  localStorage.setItem('listem', JSON.stringify(listem.value));
-  
-   firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
-
-                   listcount: JSON.parse(localStorage.getItem('listem')).length,
-          
-                   
-        })
-  
-}, 1500);
-         
-       }else{
-           let listearray= JSON.parse(localStorage.getItem('listem'))
-
-          
-     
-       }
-
-
-                    
 
                   
 
@@ -719,8 +672,6 @@ console.log("veritabanı uye")
 
 setTimeout(() => {
   localStorage.setItem('puanladi', JSON.stringify(puanlar.value));
-
-  
   
 }, 1500);
          

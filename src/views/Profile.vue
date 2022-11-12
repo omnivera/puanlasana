@@ -1215,8 +1215,8 @@ body {
 
 .header {
   min-height: 35vh;
-  background-color: #0f0f0f;
-  box-shadow: 0px 0px 25px 0px #454545;
+  background-color: black;
+  border-bottom: 1px solid #454545;
   color: white;
   clip-path: ellipse(100vw 60vh at 50% 50%);
   display: flex;

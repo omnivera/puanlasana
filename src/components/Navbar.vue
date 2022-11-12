@@ -113,6 +113,9 @@
              <li class="dropdown-item" @click="goProfile">
                   <i class="bi bi-person-square"></i> Profil
                 </li>
+                <li class="dropdown-item" @click="goList">
+                  <i class="fas fa-list-ul"></i> Listem
+                </li>
 
                 <li class="dropdown-item" @click="handleLogout">
                   <i class="fas fa-sign-out-alt"></i> Çıkış Yap
@@ -180,6 +183,11 @@ await authRef.onAuthStateChanged(k=>{
             router.push({name:'Profile'})
         }
 
+          const goList= ()=>{
+        
+            router.push({name:'Listem'})
+        }
+
       const handleLogout=async ()=>{
         sessionStorage.clear()
          localStorage.setItem('puanladi', JSON.stringify([]));
@@ -194,7 +202,7 @@ await authRef.onAuthStateChanged(k=>{
        
         }
 
-    return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail};
+    return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail,goList};
   }
 };
 </script>

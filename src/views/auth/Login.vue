@@ -278,7 +278,8 @@ router.push({name:'anasayfa'})
                   cinsiyet:regcinsiyet.value,
                   dtarih:moment(regdtarih.value).format('DD/MM/YYYY'),
                   gtarih:Date.parse(regdtarih.value.toString()),
-                  userimg:"https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png"
+                  userimg:"https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png",
+                  listcount:0
 };
 
 const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).set(datauye);

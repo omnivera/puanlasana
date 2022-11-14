@@ -51,9 +51,9 @@
       </div> -->
       <!-- Sidebar Ends -->
 
-      <div class="col-md-2"></div>
+      <div class="col-md-1"></div>
 
-      <div class="col-md-8">
+      <div class="col-md-10">
         <!-- Videos Section -->
       <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
       <div class="videos">
@@ -114,7 +114,7 @@
 
    <img :src="item.itemresim" class="puanladi"  alt="" />
   <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:5vw" alt />
+     <img src="@/assets/plogo6.png" style="width:5.5rem" alt />
     </div>
 
 
@@ -147,7 +147,7 @@
       </div>
       </transition>
       </div>
-
+<div class="col-md-1"></div>
       
     </div>
     
@@ -654,13 +654,15 @@ console.log("veritabanı liste")
 
 setTimeout(() => {
   localStorage.setItem('listem', JSON.stringify(listem.value));
-  
+
+setTimeout(() => {
    firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
 
                    listcount: JSON.parse(localStorage.getItem('listem')).length,
           
                    
-        })
+        }) 
+}, 500);
   
 }, 1500);
          

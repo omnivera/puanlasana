@@ -80,12 +80,12 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
               <router-link :to="{name:'Itemekle'} " class="dropdown-item">
                 <li>
-                  <i class="fa-solid fa-file-circle-plus"></i> İtem Ekle
+                <span> <i class="fa-solid fa-file-circle-plus"></i> İtem Ekle</span> 
                 </li>
               </router-link>
               <router-link :to="{name:'Itemduzenle'} " class="dropdown-item">
                 <li>
-                  <i class="fa-solid fa-file-pen"></i> İtem Düzenle
+                <span>  <i class="fa-solid fa-file-pen"></i> İtem Düzenle </span>
                 </li>
               </router-link>
             </ul>
@@ -100,25 +100,26 @@
 
           <div v-if="kullanici" class="dropdown nav-link">
             <button
-              class="btn btn-outline-light dropdown-toggle"
+              class="btn btn-outline-light"
               id="dropdownMenuButton1"
               data-bs-toggle="dropdown"
               aria-expanded="false"
               type="submit"
             >
-              <i class="fa-solid fa-user"></i> {{kullanici.displayName}}
+             <img v-if="userimg!=''" :src="userimg"  class="profile-pic-nav">{{kullanici.displayName}}
             </button>
 
             <ul class="dropdown-menu" style="width:100%;z-index: 1000" aria-labelledby="dropdownMenuButton1">
              <li class="dropdown-item" @click="goProfile">
-                  <i class="bi bi-person-square"></i> Profil
+                <span > <i class="bi bi-person-square"></i> Profil</span> 
                 </li>
                 <li class="dropdown-item" @click="goList">
-                  <i class="fas fa-list-ul"></i> Listem
+                 <span> <i class="fas fa-list-ul"></i> Listem</span>
                 </li>
+                <hr>
 
                 <li class="dropdown-item" @click="handleLogout">
-                  <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+               <span>  <i class="fas fa-sign-out-alt"></i> Çıkış Yap</span> 
                 </li>
            
          
@@ -150,6 +151,7 @@ export default {
     const kullaniciad = ref("");
     const kullaniciemail = ref("");
     const adminkontrol = ref("");
+    const userimg = ref("");
 
   
  
@@ -169,7 +171,35 @@ await authRef.onAuthStateChanged(k=>{
    
 })
 
-   
+      setTimeout(  function(){
+        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+            
+    
+                  snapshot.forEach(doc => {
+         
+
+        
+         userimg.value = doc.data().userimg
+        
+     
+
+
+         
+        });
+            }else{
+
+                console.log('uye yok')
+              
+
+            }
+        })
+
+
+
+
+                },1300)
 
  
       /* const { admin } = await getYetki(adminmi.email);
@@ -202,7 +232,7 @@ await authRef.onAuthStateChanged(k=>{
        
         }
 
-    return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail,goList};
+    return {kullaniciad,kullanici,handleLogout,goProfile,kullaniciemail,goList,userimg};
   }
 };
 </script>
@@ -210,17 +240,39 @@ await authRef.onAuthStateChanged(k=>{
 <style scoped>
 
 
+hr{
+  margin: 5px 0;
+}
+
 
 .dropdown-menu{
-  background-color: #181818;
+  background-color: #0f0f0f;
   color: white;
+  border: 1px solid #272727;
+  padding: 0;
+   
+}
+
+.dropdown-item i{
+margin-right: 0.7rem;
+}
+
+.dropdown-item span{
+display: table-cell; vertical-align: middle;
+font-size: 0.9rem;
 }
 
 .dropdown-item{
 
+
+
   cursor: pointer;
  color: white;
+ display: table; overflow: hidden;
+ height: 3rem;
+
 }
+
 
 .dropdown-item:hover{
 
@@ -252,7 +304,7 @@ button:focus {
 
 span {
   color: white;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 
   font-family: "Comfortaa", cursive;
 }

@@ -2,6 +2,76 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
 
+.likeordis{
+  background-color: #0f0f0f;
+  border-radius: 20px;
+  padding: 0.4rem 0.8rem;
+  display: flex;
+  justify-content: center;
+
+  font-size: 0.9rem;
+  color: white;
+}
+
+
+.yorumkat{
+  background-color: #0f0f0f;
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid #454545;
+  font-size: 0.9rem;
+  color: #aaa;
+  transition: all .2s ease-in-out;
+ 
+}
+
+.yorumkat:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+  color: white;
+ 
+}
+
+
+.profile-pic-nav {
+  height: 2rem;
+  width: 2rem;
+  object-fit: center;
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  margin-right: 0.4vw;
+}
+
+
+.profile-pic {
+  height: 6rem;
+  width: 6rem;
+  object-fit: center;
+  border-radius: 50%;
+
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.profile-pic:hover {
+   transform: scale(1.1);
+}
+
+.infomodal{
+  background-color: #0f0f0f;
+  color: white;
+  opacity: 0.8;
+  border-radius: 20px;
+
+}
+
+.close-btn{
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
 #showcard{
 
   background-color: #0f0f0f;
@@ -98,7 +168,7 @@ box-shadow: 0 0 7px 3px #454545;
 .center-btm{
   position: absolute;
   transform: translate(-50%, -50%);
- bottom: -1.9vh;
+ bottom: -0.7rem;
  
 }
 
@@ -202,14 +272,14 @@ border-radius: 50%;
   
     border-color: transparent;
     background-color: #0f0f0f;
-    font-size: 1.05vw;
+    font-size: 1.2rem;
     color: white;
     border: 1px solid #454545;
     
     font-family: "Comfortaa", cursive;
     opacity: 0.75;
-    width: 4vw;
-  height: 4vw;
+    width: 4.3rem;
+  height: 4.3rem;
   
 
 border-radius: 50%;
@@ -311,7 +381,7 @@ border-color: transparent;
 
     
     background-color: #0f0f0f;
-    font-size: 1vw;
+    font-size: 1.05rem;
     color: white;
     border: 0.8px solid #454545;
     border-radius: 20px;
@@ -373,7 +443,7 @@ border-color: transparent;
       border-radius: 20px;
       border-color: transparent;
       background-color: #0f0f0f;
-      font-size: 1vw;
+      font-size: 1.05rem;
       color: white;
       border: 0.8px solid #454545;
       font-family: "Comfortaa", cursive;

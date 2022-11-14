@@ -63,14 +63,19 @@
             <div id="yorumcardbody" class="card-body p-4">
               <div class="">
                 <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
-                <p class="small text-muted">{{yorum.itemisim}} <span v-if="yorum.kategori!=null"> ({{yorum.kategori}})</span> </p>
+                <span class="yorumkat" @click="goItem(yorum)">{{yorum.itemisim}}</span> 
+                 <span v-if="yorum.kategori!=null" class="yorumkat" style="margin-left:0.7rem">{{yorum.kategori}}</span> 
+
+<hr>
+               
+      
                 
                 <p class="yorum">
                   {{yorum.yorum}}
                 </p>
 
                 <div class="d-flex justify-content-between align-items-center">
-                  <div class="d-flex align-items-center" >
+                  <div class="d-flex align-items-center likeordis" >
                     <a  @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2" ><i class="fas fa-thumbs-up me-1"></i><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorum.like' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></a>
                     <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss" ><i class="fas fa-thumbs-down me-1"></i><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorum.dislike' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></a>
                   </div>
@@ -225,38 +230,58 @@
         <i data-bs-dismiss="modal"  class="fa-solid fa-circle-xmark top-right2 close-btn"></i>
       </div>
       <div class="modal-body text-center">
+        <br>
         <div class="row">
           <div class="col-md-3">
-           <img :src="userimg" alt=""  class="profile-pic">
+           <img src="https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png" data-bs-dismiss="modal" @click="editphoto('https://images.squarespace-cdn.com/content/v1/61e79efa49cf0769cacf9ecb/1643603781122-89TALSSE9Q02G3XQJJ1R/placeholder-1.png')"  class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt="" class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/4625/4625428.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/4625/4625428.png')" class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt=""  class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/1864/1864460.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/1864/1864460.png')" class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt=""   class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/3038/3038602.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/3038/3038602.png')"  class="profile-pic">
           </div>
         </div>
+<br>
 <br>
 <br>
          <div class="row">
           <div class="col-md-3">
-           <img :src="userimg" alt="" class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/2171/2171990.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/2171/2171990.png')" class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt="" class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/3227/3227013.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/3227/3227013.png')" class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt=""  class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/8348/8348132.png" data-bs-dismiss="modal"  @click="editphoto('https://cdn-icons-png.flaticon.com/512/8348/8348132.png')" class="profile-pic">
           </div>
            <div class="col-md-3">
-           <img :src="userimg" alt=""  class="profile-pic">
+           <img src="https://cdn-icons-png.flaticon.com/512/1864/1864386.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/1864/1864386.png')" class="profile-pic">
           </div>
         </div>
-          
+          <br>
+          <br>
+          <br>
+
+          <div class="row">
+          <div class="col-md-3">
+           <img src="https://cdn-icons-png.flaticon.com/512/4140/4140037.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/4140/4140037.png')" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img src="https://cdn-icons-png.flaticon.com/512/8884/8884131.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/8884/8884131.png')" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img src="https://cdn-icons-png.flaticon.com/512/8910/8910807.png" data-bs-dismiss="modal"  @click="editphoto('https://cdn-icons-png.flaticon.com/512/8910/8910807.png')" class="profile-pic">
+          </div>
+           <div class="col-md-3">
+           <img src="https://cdn-icons-png.flaticon.com/512/219/219969.png" data-bs-dismiss="modal" @click="editphoto('https://cdn-icons-png.flaticon.com/512/219/219969.png')" class="profile-pic">
+          </div>
+        </div>
            
+           <br>
       </div>
       
     </div>
@@ -301,6 +326,9 @@ components: {
     const yorumcount= ref(0)
     const begeniler= ref(0)
     const puanladi= ref(0)
+
+    const route=useRoute()
+    const router=useRouter()
 
 
     const loading= ref(true)
@@ -353,6 +381,13 @@ loading.value=false
       });
     };
 
+
+      const goItem=(yorum)=>{
+
+router.push({name:'Puanlas',params:{Kategori:yorum.kategori,itemID:yorum.itemID}})
+
+    }
+
     const goYorumlar=()=>{
 
 puanlarshow.value=false
@@ -366,8 +401,29 @@ puanlarshow.value=true
 yorumlarshow.value=false
 
 
+  
+        }
 
 
+        const editphoto=(imgurl)=>{
+
+
+          userimg.value=imgurl
+
+
+
+
+firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+
+                   userimg:userimg.value
+                   
+                  
+                   
+        })
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
 
 
 
@@ -553,7 +609,7 @@ setTimeout(() => {
          
         })
 
-        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler,goYorumlar
+        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler,goYorumlar,editphoto,goItem
         }
         
     }
@@ -1231,19 +1287,7 @@ body {
   margin-top: 6vh;
 }
 
-.profile-pic {
-  height: 6rem;
-  width: 6rem;
-  object-fit: center;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  cursor: pointer;
-  transition: all .2s ease-in-out;
-}
 
-.profile-pic:hover {
-   transform: scale(1.1);
-}
 
 .location p {
   display: inline-block;

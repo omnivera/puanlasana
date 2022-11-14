@@ -9,6 +9,7 @@
 <video v-if="itemvideo!=''" id="myVideo" autoplay muted loop  >
   <source :src="'https://drive.google.com/uc?export=download&id='+itemvideo" type="video/mp4">
 
+
 </video>
 
 <!-- <iframe src="https://player.vimeo.com/video/758465713?h=c9a69bc961&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Y2Mate.is - Aquaman - Official Trailer 1 - Now Playing In Theaters-WDkg3h8PCVU-720p-1654834192928"></iframe> -->
@@ -500,7 +501,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="d-flex align-items-center">
                     <a @click="likeyorum(yorum)"  :class="yorum.likedcss" class="me-2" style="cursor:pointer"><i class="fas fa-thumbs-up me-1"></i>{{yorum.like}}</a>
-                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss" style="cursor:pointer"><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
+                    <a @click="dislikeyorum(yorum)"  :class="yorum.dislikedcss"  style="cursor:pointer"><i class="fas fa-thumbs-down me-1"></i>{{yorum.dislike}}</a>
                   </div>
                   <a href="#!" class="link-muted">    
 <div class="small-ratings">
@@ -1745,10 +1746,10 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
  
 }
 
-.link-muted { color: #aaa; text-decoration: none;} .link-muted:hover { color: #DE354C; }
+.link-muted { color: #aaa; text-decoration: none;   transition: all .2s ease-in-out;} .link-muted:hover { color: #DE354C; transform: scale(1.05);}
 
 
-.likeselected { color: white; text-decoration: none;} .likeselected:hover { color: #DE354C; }
+.likeselected { color: white; text-decoration: none;   transition: all .2s ease-in-out;} .likeselected:hover { color: #DE354C; transform: scale(1.05);}
 
 
 
@@ -1787,13 +1788,7 @@ overflow-x: hidden;
 }
 
 
-.infomodal{
-    background-color: #181818;
-    color: white;
-    opacity: 0.8;
-    border-radius: 20px;
 
-}
 
 
 
@@ -1920,7 +1915,7 @@ outline: none;
 }
 
 .bigtitle{
-font-size: 2.9vw;
+font-size: 2.9rem;
 color: white;
 cursor: text;
 text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
@@ -1929,13 +1924,13 @@ text-shadow: 2px 7px 5px rgba(0,0,0,0.3),
 }
 
 h1{
-font-size: 2.1vw;
+font-size: 2.1rem;
 color: white;
 cursor: text;
 }
 
 h2{
-font-size: 1.8vw;
+font-size: 1.6rem;
 color: white;
 cursor: pointer;
 }

@@ -547,13 +547,15 @@ setTimeout(() => {
   localStorage.setItem('listem', JSON.stringify(itemler.value));
   localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
   localStorage.setItem('altkategoriler', JSON.stringify(altkategoriler.value));
-
+setTimeout(() => {
    firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
 
                    listcount: JSON.parse(localStorage.getItem('listem')).length,
           
                    
-        })
+        }) 
+}, 500);
+   
 }, 1500);
          
        }else{

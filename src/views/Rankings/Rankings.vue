@@ -459,7 +459,7 @@ select {
   width: 65vw;
    background-color: #0f0f0f;
   margin-bottom: 4vh;
-  height: 21vh;
+  height: 12.5rem;
   box-shadow: 0 0 3px 1px #454545;
   
  position:relative;
@@ -481,7 +481,7 @@ transform: scale(1.1);
 
 .user-profile {
 
-  width: 10vw;
+  width: 10rem;
  border-radius: 20px;
    background-color: transparent;
   text-align: center;
@@ -494,7 +494,7 @@ transform: scale(1.1);
 .profile {
   
 
-height: 21vh;
+height: 12.5rem;
   width: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -530,7 +530,7 @@ height: 21vh;
   margin-top: 0px;
   margin-bottom: -7px;
   float: left;
-  font-size: 1.8vw;
+  font-size: 1.8rem;
   line-height: 42px;
   color: white;
 }
@@ -553,9 +553,9 @@ height: 21vh;
   margin-bottom: 0px;
   float: right;
   color: #DE354C;
-  font-size: 32px;
-  line-height: 32px;
-  font-weight: 600;
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 500;
   text-align: right;
   
 }
@@ -609,10 +609,10 @@ height: 21vh;
 }
 
 .meta-stat-label {
-  margin-top: 0.3vh;
+  margin-top: 0.4rem;
   margin-bottom:1vh;
   color: #999;
-  font-size: 16px;
+  font-size: 0.9rem;
   line-height: 16px;
   font-weight: 400;
 }
@@ -632,9 +632,9 @@ height: 21vh;
   margin-top: 0px;
   margin-bottom: 0px;
   color: white;
-  font-size: 1.4vw;
+  font-size: 1.2rem;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 500;
   
 }
 

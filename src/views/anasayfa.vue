@@ -81,18 +81,30 @@
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
               </div> -->
+              <div class="row">
+
+            
               <div class="title">
                 <h3>
                   {{item.itemisim}}
                 </h3>
-                <a href="">{{item.kategori}}</a>
+               
                
                 <!-- <span>10M Views • 3 Months Ago</span> -->
+                <div class="d-flex justify-content-center">
+                    <div class="itemkat" >{{item.kategori}}</div>
+                </div>
               </div>
+
+       
+                </div>
+                
+            
              <!--  <div class="addlist">
                  <i title="Listeme Ekle"  class="fas fa-plus"></i>
               </div> -->
             </div>
+           
           </div>
 
 
@@ -114,7 +126,7 @@
 
    <img :src="item.itemresim" class="puanladi"  alt="" />
   <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:5.5rem" alt />
+     <img src="@/assets/plogo6.png" style="width:5.2rem" alt />
     </div>
 
 
@@ -128,9 +140,12 @@
                 <h3>
                   {{item.itemisim}}
                 </h3>
-                <a href="">{{item.kategori}}</a>
+                <div class="d-flex justify-content-center">
+                    <div class="itemkat" >{{item.kategori}}</div>
+                </div>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
+              
              <!--   <div  class="addlist">
                  <i  title="Listeme Ekle" class="fas fa-plus"></i>
               </div> -->
@@ -142,7 +157,11 @@
           <!-- Single Video Ends -->
 
           <!-- Single Video starts -->
+       <!--    <br>
+           <hr>
+           <br> -->
           </div>
+         
         </div>
       </div>
       </transition>

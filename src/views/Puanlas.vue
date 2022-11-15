@@ -50,16 +50,16 @@
 
    
 
-    <div class="col-6 d-flex justify-content-center">
-         <transition @before-enter="beforeEnter" @enter="enter" appear >   
+    <div class="col-6">
+         <transition >   
  
                      
                      
- <div class="d-flex justify-content-center">
+ <div class="centershow">
                    
 <div id="showcard" :class="showcardV"   class="card text-center" >
     <img :src="itemresim" data-bs-toggle="modal" data-bs-target="#filminfo" class="img-fluid showcardimg"   alt="" srcset="">
-  <div class="card-body">
+  <div  class="card-body">
 
 
       <div class="row d-flex justify-content-center">
@@ -73,8 +73,8 @@
 
 
 
-<h2 style="margin-top:1vh">{{itemisim}}</h2>
- <h6 class="card-subtitle  mt-2 text-muted">{{kategorigoster}}</h6>
+<h2 style="margin-top:0.1rem">{{itemisim}}</h2>
+ <h6 class="card-subtitle  mt-1 ">{{kategorigoster}}</h6>
 </div>
 
 
@@ -218,6 +218,8 @@
  <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
   <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
   <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  class="fas fa-comments"></i></button></a>
+  <button v-if="showcardV=='visible'"  type="button"  @click="showcardV='hidden';showtitle='visible'" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fa-solid fa-chevron-down"></i></button>
+  <button v-if="showcardV=='hidden'"  type="button"  @click="showcardV='visible';showtitle='hidden'" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fa-solid fa-chevron-up"></i></button>
   <button v-if="!listemcheck" type="button"  @click="addlist" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
   <button v-if="listemcheck" type="button"  @click="deleteList" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-check"></i></button>
   <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
@@ -237,13 +239,13 @@
 </div>
        
 
-              <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
+              <div v-if="titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
        
     <span @click="watchinfo=true" class="bigtitle">{{itemisim}}</span>
     <br>
 
-    <div class="stars" >
+    <div v-if="!puanladi" class="stars" >
 <form action="">
     <input :disabled="puanladi" @click="doYildizla(10)"  class="star star-10"  id="star-10" type="radio" name="star"/>
   <label class="star star-10" for="star-10"  @mouseover="dostarhover(10)" @mouseleave="undostarhover" ></label>
@@ -267,14 +269,39 @@
   <label class="star star-1" for="star-1"  @mouseover="dostarhover(1)" @mouseleave="undostarhover" ></label>
 </form>
 </div>
+<div v-if="puanladi" class="show-ratings" >
+               <i v-if="puan > 0" class="fa fa-star rating-color"></i> 
+                <i v-if="puan == 0"  class="fa fa-star"></i>
+                <i v-if="puan > 1" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 1"  class="fa fa-star"></i>
+                <i v-if="puan > 2" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 2"  class="fa fa-star"></i>
+                <i v-if="puan > 3" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 3"  class="fa fa-star"></i>
+                <i v-if="puan > 4" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 4"  class="fa fa-star"></i>
+                <i v-if="puan > 5" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 5"  class="fa fa-star"></i>
+                <i v-if="puan > 6" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 6"  class="fa fa-star"></i>
+                <i v-if="puan > 7" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 7"  class="fa fa-star"></i>
+                <i v-if="puan > 8" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 8"  class="fa fa-star"></i>
+                <i v-if="puan > 9" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 9"  class="fa fa-star"></i>
+
+</div>
 
 <br>
 
-<button class="upbutton"   data-bs-toggle="modal" data-bs-target="#filminfo"><i  class="bi bi-chevron-up"></i></button>
+<!-- <button class="upbutton" @click="showcardV='visible';showtitle='hidden'"><i  class="bi bi-chevron-up"></i></button> -->
+
     
     
      
   </div>
+  <!-- <button v-if="!yildizladi" class="clsbutton" @click="showcardV='hidden';showtitle='visible'"><i  class="bi bi-chevron-down"></i></button> -->
 </div>
 
 <br>
@@ -787,8 +814,9 @@ const toggleMute=()=>{
   mutecheck.value= !mutecheck.value
 }
 
-const startVideo=(start,end)=>{
+const startVideo=(start)=>{
   let video=document.getElementById("myVideo");
+
  if (localStorage.getItem("mutecheck") == "true") {
     video.muted = true;
      mutecheck.value = false;
@@ -1297,8 +1325,8 @@ if (listemcount.length > 0) {
               if (itemvideo.value != "") {
                 setTimeout(() => {
                   
-                   startVideo(doc.data().start,doc.data().end)
-                }, 700);
+                   startVideo(doc.data().start)
+                }, 600);
 
 
 if (puaninfo.length == 0) {
@@ -1675,12 +1703,13 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
 .ratings{
     margin-right:1vw;
+  
 }
 
 .ratings i{
     
     color:#cecece;
-    font-size:3vw;
+    
 }
 
 .rating-color{
@@ -1693,10 +1722,13 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
     font-size:24px !important;
 }
 
+
+
 .small-ratings i{
   color:#cecece;   
   margin: 0.1vw;
   cursor: default;
+  
 }
 
 
@@ -1803,18 +1835,7 @@ overflow-x: hidden;
 }
 
 
-.upbutton{
-font-size: 3vw;
 
-background-color: transparent;
-border-color: transparent;
-color: white;
-margin-top: -3vh;
-text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px rgba(255,255,255,0.3);
-outline: none;
-   
-}
 
 
 .upbutton:hover{
@@ -1867,14 +1888,14 @@ outline: none;
 
 .top-right{
    position: absolute;
-    bottom: 2.8vh;
+    bottom: 2.5vh;
     right: 0.7vw;
     
 }
 
 .top-left{
    position: absolute;
-    bottom: 2.8vh;
+    bottom: 2.5vh;
     left: 0.7vw;
     
 }
@@ -1914,14 +1935,7 @@ outline: none;
   
 }
 
-.bigtitle{
-font-size: 2.9rem;
-color: white;
-cursor: text;
-text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px rgba(255,255,255,0.3);
- 
-}
+
 
 h1{
 font-size: 2.1rem;
@@ -1932,7 +1946,7 @@ cursor: text;
 h2{
 font-size: 1.6rem;
 color: white;
-cursor: pointer;
+
 }
 
 h4{

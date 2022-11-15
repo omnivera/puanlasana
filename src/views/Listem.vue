@@ -51,9 +51,9 @@
       </div> -->
       <!-- Sidebar Ends -->
 
-      <div class="col-md-2"></div>
+      <div class="col-md-1"></div>
 
-      <div class="col-md-8">
+      <div class="col-md-10">
         <!-- Videos Section -->
       <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
       <div class="videos">
@@ -77,7 +77,7 @@
 
         
 
-            <div class="video__details" >
+          <div class="video__details" >
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
               </div> -->
@@ -85,12 +85,14 @@
                 <h3>
                   {{item.itemisim}}
                 </h3>
-                <a href="">{{item.kategori}}</a>
-               
+                <div class="d-flex justify-content-center">
+                    <div class="itemkat" >{{item.kategori}}</div>
+                </div>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
-             <!--  <div class="addlist">
-                 <i title="Listeme Ekle"  class="fas fa-plus"></i>
+              
+             <!--   <div  class="addlist">
+                 <i  title="Listeme Ekle" class="fas fa-plus"></i>
               </div> -->
             </div>
           </div>
@@ -128,7 +130,9 @@
                 <h3>
                   {{item.itemisim}}
                 </h3>
-                <a href="">{{item.kategori}}</a>
+                 <div class="d-flex justify-content-center">
+                    <div class="itemkat" >{{item.kategori}}</div>
+                </div>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
              <!--   <div  class="addlist">
@@ -147,7 +151,7 @@
       </div>
       </transition>
       </div>
-
+<div class="col-md-1"></div>
       
     </div>
     

@@ -46,7 +46,7 @@
    
 
     <div class="col-6 d-flex justify-content-center">
-         <transition @before-enter="beforeEnter" @enter="enter" appear >   
+         <transition >   
  
                      
                      
@@ -69,7 +69,7 @@
 
 
 <h2 style="margin-top:1vh">{{itemisim}}</h2>
- <h6 class="card-subtitle  mt-2 text-muted">{{kategorigoster}}</h6>
+ <h6 class="card-subtitle  mt-1">{{kategorigoster}}</h6>
 </div>
 
 
@@ -215,7 +215,9 @@
 
  <div class="btn-group center-btm" role="group" aria-label="Basic outlined example">
   <button type="button" data-bs-toggle="modal" data-bs-target="#filminfo" class="btn btn-outline-primary shadow-none contbutton cleft" id="controlyanbtn"><i class="bi bi-info-circle-fill"></i></button>
-  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-comments"></i></button></a>
+  <a href="#yorumyap" > <button type="button"  @click="yorumshow" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  class="fas fa-comments"></i></button></a>
+  <button v-if="showcardV=='visible'"  type="button"  @click="showcardV='hidden';showtitle='visible'" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fa-solid fa-chevron-down"></i></button>
+  <button v-if="showcardV=='hidden'"  type="button"  @click="showcardV='visible';showtitle='hidden'" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fa-solid fa-chevron-up"></i></button>
   <button v-if="!listemcheck" type="button"  @click="addlist" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i  title="Listeme Ekle" class="fas fa-plus"></i></button>
   <button v-if="listemcheck" type="button"  @click="deleteList" class="btn btn-outline-primary shadow-none contbutton cmid" id="controlyanbtn"><i class="fas fa-check"></i></button>
   <button type="button" @click="toggleMute" class="btn btn-outline-primary shadow-none contbutton cright" id="controlyanbtn"> 
@@ -241,7 +243,7 @@
 
 </div>
 
-              <div v-if="yildizladi==false && titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
+              <div v-if="titlecheck==true" class="card center-bottom" style="background-color:transparent;border-color:transparent;margin-bottom:3vh" >
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
     <span @click="watchinfo=true" class="bigtitle">{{itemisim}}</span>
     <br>
@@ -272,7 +274,7 @@
 
 <br>
 
-<button class="upbutton"   data-bs-toggle="modal" data-bs-target="#filminfo"><i  class="bi bi-chevron-up"></i></button>
+
     
     
      
@@ -821,7 +823,7 @@ const toggleMute=()=>{
   mutecheck.value= !mutecheck.value
 }
 
-const startVideo=(start,end)=>{
+const startVideo=(start)=>{
   let video=document.getElementById("myVideo");
 
   if (localStorage.getItem("mutecheck") == "true") {
@@ -865,8 +867,8 @@ loading.value=false
 
               if (itemvideo.value != "") {
                 setTimeout(() => {
-                  startVideo(start.value,end.value)
-                }, 700);
+                  startVideo(start.value)
+                }, 600);
 
                  setTimeout(  function(){
      if (yildizladi.value == false) {
@@ -2023,14 +2025,14 @@ outline: none;
 
 .top-right{
    position: absolute;
-    bottom: 3vh;
+    bottom: 2.5vh;
     right: 0.7vw;
     
 }
 
 .top-left{
    position: absolute;
-    bottom: 3vh;
+    bottom: 2.5vh;
     left: 0.7vw;
     
 }
@@ -2062,13 +2064,7 @@ outline: none;
   
 }
 
-.bigtitle{
-font-size: 2.9vw;
-color: white;
-text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
-    0px -4px 10px rgba(255,255,255,0.3);
- 
-}
+
 
 h1{
 font-size: 2.1vw;

@@ -306,7 +306,7 @@ import { useRoute,useRouter} from 'vue-router'
 import {authRef} from '../firebase/config'
 import getUser from "../composables/getUser";
 import Vue3autocounter from 'vue3-autocounter';
-import Loading from '@/components/Loading.vue'
+import Loading from '@/components/Loading3.vue'
 export default {
 
 components: {

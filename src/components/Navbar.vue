@@ -119,7 +119,7 @@
                 <hr>
 
                 <li class="dropdown-item" @click="handleLogout">
-               <span>  <i class="fas fa-sign-out-alt"></i> Çıkış Yap</span> 
+               <span> <a href="/" style="text-decoration:none;color:white"><i class="fas fa-sign-out-alt"></i> Çıkış Yap</a> </span> 
                 </li>
            
          
@@ -221,14 +221,12 @@ await authRef.onAuthStateChanged(k=>{
       const handleLogout=async ()=>{
         sessionStorage.clear()
          localStorage.setItem('puanladi', JSON.stringify([]));
-      
-            await authRef.signOut()
-          
+         localStorage.setItem('listem', JSON.stringify([]));
+          authRef.signOut()
+            
+ 
         
-            setTimeout(() => {
-            router.go({name:'anasayfa'})
-         
-        }, 600);
+          
        
         }
 

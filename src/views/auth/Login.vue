@@ -420,10 +420,11 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     margin-top: 1.5vh;
 
     border-color: transparent;
-    background-color: white;
+    background-color: #454545;
     font-size: 1vw;
-    color: #DE354C;
+    color: white;
     width: 100%;
+    border: 1px solid #454545;
     border-radius: 20px;
 
  
@@ -431,8 +432,8 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     }
     
     #logbutton:hover{
-    background-color: #454545;
-    color: white;
+    background-color: white;
+    color: #111111;
     border-color: transparent;
     }
 
@@ -451,8 +452,8 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
     }
     
     #logbuttonv2:hover{
-    background-color: #454545;
-    color: white;
+    background-color: white;
+    color: #111111;
     border-color: transparent;
     }
 
@@ -465,12 +466,14 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
 #floatingSelect{
 color: white;
     background-color: #181818;
+    border-radius: 10px;
 }
 
 #floatingInput{
 color: white;
     background-color: #181818;
     caret-color: #DE354C;
+    border-radius: 10px;
     
 }
 
@@ -506,14 +509,15 @@ input:-webkit-autofill:active {
 .authcard{
 border: none;
 opacity: 0.8;
-background-color: #0f0f0f;
+background-color: #111111;
 border-radius: 20px;
-box-shadow: 0 0 5px 3px #454545;
+border: 1.5px solid #181818;
+
 
 }
 
 .authcardbd{
-    background-color: #0f0f0f;
+    background-color: #111111;
     opacity: 0.8;
     color: white;
     border-radius: 20px;

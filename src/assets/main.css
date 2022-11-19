@@ -1,6 +1,29 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
+
+.top-right{
+  position: absolute;
+   bottom: 2.2vh;
+   right: 1vw;
+   
+}
+
+.top-left{
+  position: absolute;
+   bottom: 2.2vh;
+   left: 1vw;
+   
+}
+
+
+.center{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .centershow{
 
   display: flex;
@@ -34,7 +57,7 @@
   margin: 0.1vw;
   margin-top: 0.6vw;
   cursor: default;
-  font-size:1.3vw;
+  font-size:1.4vw;
   margin-right:1vw;
 
   
@@ -241,8 +264,9 @@ height: 54vh;
 
 .center-btm{
   position: absolute;
+  top: 94%;
+  left: 50%;
   transform: translate(-50%, -50%);
- bottom: -0.7rem;
  
 }
 
@@ -252,10 +276,7 @@ height: 54vh;
   border: none;
   color: #000;
   font-weight: bold;
-  font-size: 1.1vw;
   padding: 0.2rem 0;
-
- 
   z-index: 2;
 }
 
@@ -342,18 +363,18 @@ border-radius: 50%;
 
 
   #controlyanbtn{
-    margin-top: -5vh;
+    
   
     border-color: transparent;
     background-color: #0f0f0f;
-    font-size: 1vw;
+    font-size: 1.1rem;
     color: white;
     border: 1px solid #454545;
     
     font-family: "Comfortaa", cursive;
     opacity: 0.75;
-    width: 3.7vw;
-  height: 3.7vw;
+    width: 3.8rem;
+  height: 3.8rem;
   
 
 border-radius: 50%;

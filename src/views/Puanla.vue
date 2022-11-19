@@ -79,54 +79,6 @@
    </div>
 
 
-<div v-show="yildizladi" class="">
-
-
-
-   <div class="stars">
-<form action="">
-    <input :disabled="puanladi" @click="doYildizla(10)" class="star star-10"  id="star-10" type="radio" name="star"/>
-  <label class="star star-10" for="star-10"></label>
-    <input :disabled="puanladi" @click="doYildizla(9)" class="star star-9" id="star-9" type="radio" name="star"/>
-  <label class="star star-9" for="star-9"></label>
-    <input :disabled="puanladi" @click="doYildizla(8)" class="star star-8" id="star-8" type="radio" name="star"/>
-  <label class="star star-8" for="star-8"></label>
-    <input :disabled="puanladi" @click="doYildizla(7)" class="star star-7" id="star-7" type="radio" name="star"/>
-  <label class="star star-7" for="star-7"></label>
-  <input :disabled="puanladi" @click="doYildizla(6)" class="star star-6" id="star-6" type="radio" name="star"/>
-  <label class="star star-6" for="star-6"></label>
-  <input :disabled="puanladi" @click="doYildizla(5)" class="star star-5" id="star-5" type="radio" name="star"/>
-  <label class="star star-5" for="star-5"></label>
-  <input :disabled="puanladi" @click="doYildizla(4)" class="star star-4" id="star-4" type="radio" name="star"/>
-  <label class="star star-4" for="star-4"></label>
-  <input :disabled="puanladi" @click="doYildizla(3)" class="star star-3" id="star-3" type="radio" name="star"/>
-  <label class="star star-3" for="star-3"></label>
-  <input :disabled="puanladi" @click="doYildizla(2)" class="star star-2" id="star-2" type="radio" name="star"/>
-  <label class="star star-2" for="star-2"></label>
-  <input :disabled="puanladi" @click="doYildizla(1)" class="star star-1" id="star-1" type="radio" name="star"/>
-  <label class="star star-1" for="star-1"></label>
-</form>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-</div>
 
 
 
@@ -193,7 +145,7 @@
 
                 <div v-if="true">
              <transition @before-enter="beforeEnter" @enter="enterbtn" appear >   
- <button type="button" id="yorumlabutton" style="opacity: 0.8;" @click="anasayfagit" class=" btn-lg shadow  top-left altbutton"><i class="fa-solid fa-house"></i> Ana Sayfa</button>
+ <button type="button" id="controlyanbtn"  @click="anasayfagit" class=" btn-lg shadow  top-left contbutton"><i class="fa-solid fa-house"></i></button>
         
              </transition>
 </div>
@@ -247,7 +199,7 @@
   <div :class="showtitle" class="card-body " style="background-color:transparent;border-color:transparent; ">
     <span @click="watchinfo=true" class="bigtitle">{{itemisim}}</span>
     <br>
-    <div class="stars">
+    <div v-if="!puanladi" class="stars">
 <form action="">
     <input :disabled="puanladi" @click="doYildizla(10)"  class="star star-10"  id="star-10" type="radio" name="star"/>
   <label class="star star-10" for="star-10"  @mouseover="dostarhover(10)" @mouseleave="undostarhover" ></label>
@@ -270,6 +222,30 @@
   <input :disabled="puanladi" @click="doYildizla(1)"  class="star star-1" id="star-1" type="radio" name="star"/>
   <label class="star star-1" for="star-1"  @mouseover="dostarhover(1)" @mouseleave="undostarhover" ></label>
 </form>
+</div>
+
+<div v-if="puanladi" class="show-ratings" >
+               <i v-if="puan > 0" class="fa fa-star rating-color"></i> 
+                <i v-if="puan == 0"  class="fa fa-star"></i>
+                <i v-if="puan > 1" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 1"  class="fa fa-star"></i>
+                <i v-if="puan > 2" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 2"  class="fa fa-star"></i>
+                <i v-if="puan > 3" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 3"  class="fa fa-star"></i>
+                <i v-if="puan > 4" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 4"  class="fa fa-star"></i>
+                <i v-if="puan > 5" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 5"  class="fa fa-star"></i>
+                <i v-if="puan > 6" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 6"  class="fa fa-star"></i>
+                <i v-if="puan > 7" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 7"  class="fa fa-star"></i>
+                <i v-if="puan > 8" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 8"  class="fa fa-star"></i>
+                <i v-if="puan > 9" class="fa fa-star rating-color"></i>
+                <i v-if="puan <= 9"  class="fa fa-star"></i>
+
 </div>
 
 <br>
@@ -296,7 +272,7 @@
         <div v-if="puanladi">
              <transition @before-enter="beforeEnter" @enter="enterbtn" appear >   
  
-    <button id="yorumlabutton" style="opacity: 0.8;" class="btn-lg shadow top-right next" @click="next"><i class="fa fa-play"></i>Devam</button>
+      <button id="controlyanbtn" class="btn-lg shadow top-right contbutton" @click="next"><i class="fa fa-play"></i></button>
              </transition>
 </div>
 
@@ -320,7 +296,7 @@
 
 
  
-<button type="button" id="pasbtn" style="opacity: 0.8;" @click="next" class="btn-lg shadow top-right next"><i class="fas fa-fast-forward"></i> Pas Geç</button>
+<button type="button" id="controlyanbtn" @click="next"  class=" btn-lg shadow top-right contbutton"><i class="fas fa-fast-forward"></i></button>
 
 
 
@@ -1152,9 +1128,7 @@ showtitle.value="hidden"
             if (kullaniciemail.value != "") {
         puan.value = sayi
         yildizladi.value = true
-        showcardV.value="visible"
-        showtitle.value="hidden"
-        doVisible()
+       
 
         verikayit()
             }else{
@@ -2023,19 +1997,7 @@ outline: none;
     
 }
 
-.top-right{
-   position: absolute;
-    bottom: 2.5vh;
-    right: 0.7vw;
-    
-}
 
-.top-left{
-   position: absolute;
-    bottom: 2.5vh;
-    left: 0.7vw;
-    
-}
 
   
 
@@ -2249,7 +2211,7 @@ body {
 div.stars{
  
   display: inline-block;
-  margin-bottom: 0.5vh;
+  margin-top: -1vh;
 }
 
 input.star{

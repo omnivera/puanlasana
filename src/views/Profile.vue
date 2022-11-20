@@ -633,10 +633,10 @@ setTimeout(() => {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-  background-color: #0f0f0f;
-  margin-bottom: 4vh;
+  background-color: #121312;
+  margin-bottom: 3vh;
 
- box-shadow: 0 0 7px 2px #454545;
+
   
  position:relative;
   z-index:30;

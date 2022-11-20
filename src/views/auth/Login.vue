@@ -465,15 +465,17 @@ const res = firestoreRef.collection('uyeler').doc(regemail.value.toLowerCase()).
 
 #floatingSelect{
 color: white;
-    background-color: #181818;
+    background-color: #272727;
     border-radius: 10px;
+    border-color: transparent;
 }
 
 #floatingInput{
 color: white;
-    background-color: #181818;
+    background-color: #272727;
     caret-color: #DE354C;
     border-radius: 10px;
+    border-color: transparent;
     
 }
 
@@ -508,17 +510,17 @@ input:-webkit-autofill:active {
 
 .authcard{
 border: none;
-opacity: 0.8;
+opacity: 1;
 background-color: #111111;
 border-radius: 20px;
-border: 1.5px solid #181818;
+
 
 
 }
 
 .authcardbd{
     background-color: #111111;
-    opacity: 0.8;
+    opacity: 1;
     color: white;
     border-radius: 20px;
   

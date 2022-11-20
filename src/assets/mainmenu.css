@@ -65,7 +65,7 @@ input::placeholder {
     -webkit-box-pack: justify;
     justify-content: space-between;
     margin: 0.5em 0;
-    padding: 0.5em 0.5em 0.5em 1em;
+    padding: 0.55em 0.55em 0.55em 1em;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
     border-radius: 20px;
@@ -126,15 +126,15 @@ input::placeholder {
 
 #search{
   width:50%;
-   background-color: #0f0f0f;
+   background-color: #121312;
   color: white;
-  border: 1.5px solid #454545;
+
    transition: all .2s ease-in-out;
   
 }
 
 #searchinput:hover{
-  background-color: black;
+  background-color: #181818;
   color: white;
   transform: scale(1);
   
@@ -142,7 +142,7 @@ input::placeholder {
 
 #search:hover{
   width:50%;
-   background-color: black;
+  background-color: #181818;
   color: white;
   
   transform: scale(1.1);
@@ -163,26 +163,29 @@ input::placeholder {
 }
 
 .katbutton{
-  background-color: transparent;
+  background-color: #181818;
   color: white;
-  padding: 0.5rem 1.3rem;
+  padding: 0.4rem 1.4rem;
   margin-left: 12px;
   transition: all .2s ease-in-out;
-  border-radius: 20px;
+  border-radius: 10px;
+  border-color: transparent;
+  font-size: 0.9rem;
  
 }
 
 .katbuttonhover{
   background-color: #ffffff;
   color: black;
-  padding: 0.5rem 1.3rem;
+  padding: 0.4rem 1.3rem;
   margin-left: 12px;
   transition: all .2s ease-in-out;
-  border-radius: 20px;
+  border-radius: 10px;
+
 }
 
 .katbutton:hover{
-  background-color: #181818;
+  background-color: #272727;
   transform: scale(1.1);
   
 }
@@ -368,7 +371,7 @@ hr {
 }
 
 .video:hover {
- background-color: #0f0f0f;
+ background-color: #181818;
 transform: scale(1.075);
 font-weight: 500;
 
@@ -377,7 +380,7 @@ font-weight: 500;
 }
 
 .videop:hover {
-  background-color: #0f0f0f;
+  background-color: #181818;
  transform: scale(1.075);
  font-weight: 500;
 

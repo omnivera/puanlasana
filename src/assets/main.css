@@ -1,20 +1,31 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap");
 
+.platform{
 
-.top-right{
-  position: absolute;
-   bottom: 2.2vh;
-   right: 1vw;
-   
+background-color: #181818;
+border-radius: 25px;
+padding: 0.4rem 0.7rem;
+padding-right: 1.3rem;
+transition: all .2s ease-in-out;
+margin-right: 1.5rem;
+cursor: pointer;
+margin-top: 1rem;
+
+
+
+
 }
 
-.top-left{
-  position: absolute;
-   bottom: 2.2vh;
-   left: 1vw;
-   
+.platform:hover {
+  transform: scale(1.06);
 }
+
+.modalimg{
+  height: 34rem;
+  border-radius: 20px;
+}
+
 
 
 .center{
@@ -120,10 +131,25 @@
  
 }
 
+.platform-pic {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 3.2rem;
+  width: 3.2rem;
+
+
+  margin-right: 0.3rem;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+
+}
+
+
+
 
 .profile-pic-nav {
-  height: 2rem;
-  width: 2rem;
+  height: 1.7rem;
+  width: 1.7rem;
   object-fit: center;
   border-radius: 50%;
 
@@ -152,6 +178,7 @@
   color: white;
   opacity: 0.8;
   border-radius: 20px;
+  height: 40rem;
 
 }
 
@@ -162,7 +189,9 @@
 
 #showcard{
 
-  background-color: #0f0f0f;
+  border-color: transparent;
+  background-color: #121312;
+  
   border-radius: 20px;
  border: none;
 margin-top: 6vh;
@@ -173,7 +202,8 @@ z-index: 999;
 
 
 width:26vw;
-border: 1px solid #272727;
+
+
 
 
 
@@ -188,8 +218,10 @@ height: 54vh;
 }
 
 #infocard{
-  border: 1px solid #272727;
-  background-color: #0f0f0f;
+  
+  border-color: transparent;
+  background-color: #121312;
+  opacity: 0.75;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   left: -1rem;
@@ -201,8 +233,9 @@ height: 54vh;
 
 
 #infocard2{
-  border: 1px solid #272727;
-  background-color: #0f0f0f;
+  border-color: transparent;
+  background-color: #121312;
+  opacity: 0.75;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   right: -1rem;
@@ -366,10 +399,10 @@ border-radius: 50%;
     
   
     border-color: transparent;
-    background-color: #0f0f0f;
-    font-size: 1.1rem;
+    background-color: #121312;
+    font-size: 1.2rem;
     color: white;
-    border: 1px solid #454545;
+    
     
     font-family: "Comfortaa", cursive;
     opacity: 0.75;

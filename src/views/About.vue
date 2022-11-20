@@ -31,7 +31,7 @@
     <div class="row">
 
 <div class="container">
-  <div class="row" style="margin-top:-1vh">
+  <div class="row">
 <transition @before-enter="beforeEnter" @enter="enterv2" appear > 
       <p class="about">
 <strong>Sitemizin Özellikleri / Site Amacı / Sizi Bekleyen Site</strong>
@@ -158,16 +158,16 @@ export default {
 
 
 .bot-left{
-    bottom: 15vh;
-    left: 7vw;
+    bottom: 10vh;
+    left: 6vw;
     position:absolute;
 
   font-family: "Comfortaa", cursive;
 }
 
 .bot-right{
-    bottom: 15vh;
-    right: 7vw;
+    bottom: 10vh;
+    right: 6vw;
     position: absolute;
 
   font-family: "Comfortaa", cursive;
@@ -191,6 +191,7 @@ export default {
     padding-right: 15vw;
     padding-top: 2vh;
     color: white;
+    font-size: 1.1rem;
   
 }
 
@@ -218,7 +219,7 @@ export default {
 
 .altbaslik {
   color: #DE354C;
-  font-size: 1.7vw;
+  font-size: 1.5rem;
 
 
   font-family: "Comfortaa", cursive;
@@ -226,7 +227,7 @@ export default {
 
 .altsubbaslik {
   color: white;
-  font-size: 1vw;
+  font-size: 1rem;
   font-family: "Comfortaa", cursive;
 }
 

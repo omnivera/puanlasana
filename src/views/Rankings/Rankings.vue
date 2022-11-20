@@ -344,29 +344,29 @@ hr {
 }
 
 .katbutton{
-  background-color: transparent;
+  background-color: #181818;
   color: white;
-  padding: 10px;
-  padding-left: 17px;
-  padding-right: 17px;
+  padding: 0.4rem 1.4rem;
   margin-left: 12px;
   transition: all .2s ease-in-out;
-  border-radius: 20px;
+  border-radius: 10px;
+  border-color: transparent;
+  font-size: 0.9rem;
+ 
 }
 
 .katbuttonhover{
   background-color: #ffffff;
   color: black;
-  padding: 10px;
-  padding-left: 17px;
-  padding-right: 17px;
+  padding: 0.4rem 1.3rem;
   margin-left: 12px;
   transition: all .2s ease-in-out;
-  border-radius: 20px;
+  border-radius: 10px;
+
 }
 
 .katbutton:hover{
-  background-color: #181818;
+  background-color: #272727;
   transform: scale(1.1);
   
 }
@@ -457,10 +457,10 @@ select {
   display: -ms-flexbox;
   display: flex;
   width: 65vw;
-   background-color: #0f0f0f;
-  margin-bottom: 4vh;
+   background-color: #121312;
+  margin-bottom: 3vh;
   height: 12.5rem;
-  box-shadow: 0 0 3px 1px #454545;
+  
   
  position:relative;
  border-radius: 20px;

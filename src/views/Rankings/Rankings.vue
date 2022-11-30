@@ -36,8 +36,8 @@
  
 
      </div>
-     <br>
-     <hr>
+     
+  
   
  <div class="d-flex justify-content-center">
     <div class="row">
@@ -210,11 +210,10 @@ veri.katbuttoncss="katbuttonhover"
 
     
 
-    const beforeEnter = el => {
+     const beforeEnter = el => {
       el.style.opacity = 0;
-      el.style.transform = "translateY(0px)";
+      el.style.transform = "translateY(70px)";
     };
-
     const enter = el => {
       gsap.to(el, {
         opacity: 1,

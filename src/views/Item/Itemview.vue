@@ -57,8 +57,8 @@
 
 
 <h2 style="margin-top:2vh" class="text-center"><input class="textarea" type="text" v-model="itemisim"></h2>
- <h6 class="card-subtitle  mt-1 text-muted">
-     <select class="textarea form-select" v-model="kategorigoster" aria-label="Default select example">
+ <h6 class=" mt-1 text-muted">
+     <select class="textarea form-select text-center"  v-model="kategorigoster" aria-label="Default select example">
   <option v-for="veri in veriler" :key="veri.id" v-bind:value="veri.kisim" >{{veri.kisim}}</option>
 </select></h6>
 </div>
@@ -288,12 +288,12 @@
 
 <div class="modal fade" id="visualview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content infoedit">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">İtem Bilgileri</h5>
         <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
           <form @submit.prevent="guncelle" autocomplete="false">
             <div class="form-floating">
   <select class="form-select" required v-model="kategorigoster" id="floatingSelect" aria-label="Floating label select example">
@@ -311,15 +311,24 @@
 </div> -->
 
 <br>
-            <div class="form-floating mb-3">
+<div class="row">
+  <div class="col-md-6">
+   <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required maxlength="55" class="form-control" v-model="itemisim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem İsmi</label>
 </div>
+  </div>
 
+  <div class="col-md-6">
  <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required  class="form-control" v-model="itemresim" id="floatingInput" placeholder="name@example.com">
   <label for="floatingInput">İtem Resim URL</label>
 </div>
+  </div>
+</div>
+         
+
+
 <div class="row">
     <div class="col-md-6">
  <div class="form-floating mb-3">
@@ -357,18 +366,29 @@
   <label for="floatingInput">Çıkış Yılı</label>
 </div>
   </div>
+
+
+ 
   
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+<div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="platformlar" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Platformlar</label>
+</div>
+  </div>
+
+</div>
 
 
-<br>
 
 <div v-if="kategorigoster=='Film' || kategorigoster=='Dizi' || kategorigoster=='Anime'">
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 10rem"></textarea>
   <label for="floatingTextarea2">{{kategorigoster}} Özeti</label>
 </div>
 <br>
@@ -439,7 +459,7 @@
 
 <br>
 
-<div class="d-flex justify-content-center"><button type="submit"   class=" btn-lg shadow "><i class="fas fa-edit"></i> Güncelle</button></div>
+<div class="d-flex justify-content-center"><button type="submit"  id="guncelbtn"  class=" btn-lg shadow "><i class="fas fa-edit"></i>Güncelle</button></div>
 
           </form>
            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -475,8 +495,8 @@
 
       
 
-  <div class="alert alert-danger d-flex align-items-center" role="alert">
-  <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+  <div class="alert alert-danger d-flex align-items-center uyari" role="alert">
+  <svg class="bi flex-shrink-0 me-2" width="2rem" height="2rem" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
   <div>
     <strong>Kayıt Başarısız!</strong> "{{itemisim}}" isminde bir item zaten var!
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -548,6 +568,7 @@ export default {
          const info2=ref()
          const cyili=ref()
          const info3=ref()
+         const platformlar=ref()
          const itemvideogoster=ref('')
         const mutecheck=ref(false)
 
@@ -668,6 +689,7 @@ location. reload()
             info2.value = doc.data().info2
             cyili.value = doc.data().cyili
             info3.value = doc.data().info3
+            platformlar.value = doc.data().platformlar
             ozet.value = doc.data().ozet
             sirket.value = doc.data().sirket
 
@@ -736,7 +758,8 @@ location. reload()
                    info2:info2.value,
                    cyili:cyili.value,
                    info3:info3.value,
-                   sirket:sirket.value
+                   sirket:sirket.value,
+                   platformlar:platformlar.value
                    
                    
                   
@@ -767,7 +790,7 @@ basarili.value=true
 
 
           return {veriler,guncelle,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,
-          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili,load,toggleMute,mutecheck
+          itemvideogoster,info1,info2,cyili,info3,ozet,start,end,sirket,basarili,load,toggleMute,mutecheck,platformlar
         }
         
     }
@@ -776,6 +799,69 @@ basarili.value=true
 </script>
 
 <style scoped>
+
+
+
+.btn-close{
+  background-color: transparent;
+  color: white;
+}
+
+
+#floatingTextarea2{
+  background-color: #272727;
+  color: white;
+
+}
+
+
+#floatingSelect{
+  background-color: #272727;
+  color: white;
+}
+
+#floatingInput{
+  background-color: #272727;
+  color: white;
+}
+
+#guncelbtn{
+  margin-top: 2.9vh;
+
+  border-color: transparent;
+  background-color: #0f0f0f;
+  font-size: 0.9rem;
+ padding: 1rem 1.2rem;
+  color: white;
+  border: 0.85px solid #454545;
+  margin-top: -1vh;
+border-radius: 20px;
+  
+  font-family: "Comfortaa", cursive;
+
+
+  
+  }
+
+
+    #guncelbtn i{
+  
+    margin-left: -0.1vw;
+ 
+    
+    }
+
+      #guncelbtn:hover{
+  background-color: #272727;
+  color: white;
+  border-color: transparent;
+  }
+
+.infoedit{
+  background-color: #0f0f0f;
+  color: white;
+  border-radius: 20px;
+}
 
 
 .textarea{
@@ -1075,6 +1161,7 @@ textarea.review{
   border: none;
   width: 100%;
   max-width: 100%;
+  
   height: 100px;
   padding: 10px;
   box-sizing: border-box;

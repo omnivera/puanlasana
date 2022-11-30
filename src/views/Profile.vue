@@ -1233,18 +1233,23 @@ body {
 
 .yorumcard{
 
-    border: none;
-    outline: none;
+  
     color: white;
+     border-radius: 20px;
+      background-color: black;
 
 }
 
 #yorumyapcardbody{
     background-color: black;
+    border: none;
 }
 
 #yorumcardbody{
     background-color: #181818;
+  
+     border-radius: 20px;
+     
   
  
 }

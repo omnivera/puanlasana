@@ -31,7 +31,7 @@
  <button v-for="altkategori in aramaaltkategori" :key="altkategori.id" :class="altkategori.katbuttoncss"  @click="altkategorisecti(altkategori)" type="button" class="btn btn-outline-dark">{{altkategori.altkatad}}</button>
 
  </div>
-<hr>
+
     <!-- Header Ends -->
 
 
@@ -62,9 +62,9 @@
         <div class="videos__container">
           
           <!-- Single Video starts -->
-          <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" >
+          <div v-for="item in aramaitem" :key="item.id"  >
             <div v-if="item.puanladi==false || item.puanladi==null" class="video">
-            <div   class="video__thumbnail">
+            <div  @click="goPuanla(item)" class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
              
       
@@ -77,7 +77,7 @@
 
         
 
-          <div class="video__details" >
+          <div class="video__details" style="cursor:auto">
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
               </div> -->
@@ -90,9 +90,32 @@
                 </div>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
+
+
+                    <div  class="dropdown">
+            <button
+              class="btn deletlist"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              type="submit"
+            >
+          <i class="fa-solid fa-ellipsis"></i>
+            </button>
+
+            <ul class="dropdown-menu"  style="z-index: 1000" aria-labelledby="dropdownMenuButton1">
+             <li @click="deleteList(item)" class="dropdown-item" >
+                <span > <i class="fa-solid fa-trash"></i>Listeden Kaldır</span> 
+                </li>
               
-             <!--   <div  class="addlist">
-                 <i  title="Listeme Ekle" class="fas fa-plus"></i>
+           
+         
+              
+            </ul>
+          </div>
+              
+           <!--   <div @click="deleteList(item)" class="addlist">
+                 <i class="fa-solid fa-ellipsis"></i>
               </div> -->
             </div>
           </div>
@@ -108,7 +131,7 @@
  <div  v-if="item.puanladi==true" class="videop">
            
 
-            <div  class="video__thumbnail">
+            <div @click="goPuanla(item)" class="video__thumbnail">
            
              
       
@@ -116,13 +139,13 @@
 
    <img :src="item.itemresim" class="puanladi"  alt="" />
   <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:5vw" alt />
+     <img src="@/assets/plogo6.png" style="width:5.1vw" alt />
     </div>
 
 
             </div>
 
-            <div class="video__details" >
+            <div class="video__details" style="cursor:auto">
            <!--    <div class="author">
                 <img src="http://aninex.com/images/srvc/web_de_icon.png" alt="" />
               </div> -->
@@ -135,9 +158,27 @@
                 </div>
                 <!-- <span>10M Views • 3 Months Ago</span> -->
               </div>
-             <!--   <div  class="addlist">
-                 <i  title="Listeme Ekle" class="fas fa-plus"></i>
-              </div> -->
+                     <div  class="dropdown">
+            <button
+              class="btn deletlist"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              type="submit"
+            >
+          <i class="fa-solid fa-ellipsis"></i>
+            </button>
+
+            <ul class="dropdown-menu"  style="z-index: 1000" aria-labelledby="dropdownMenuButton1">
+             <li @click="deleteList(item)" class="dropdown-item" >
+                <span > <i class="fa-solid fa-trash"></i>Listeden Kaldır</span> 
+                </li>
+              
+           
+         
+              
+            </ul>
+          </div>
             </div>
           </div>
 
@@ -252,10 +293,38 @@ export default {
           localStorage.setItem('altkategoriler', JSON.stringify([]));
         }
 
-        
+        let listarray = JSON.parse(localStorage.getItem('listem'))
  
         
         
+          const deleteList= (item)=>{
+
+
+
+const res = firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('Liste').doc(item.id).delete();
+
+ for (let i = 0; i < listarray.length; i++) {
+                     if (listarray[i].id==item.id) {
+                    listarray.splice(i,1)
+
+                     }
+                     
+                   }
+
+
+                    for (let i = 0; i < itemler.value.length; i++) {
+                     if (itemler.value[i].id==item.id) {
+                    itemler.value.splice(i,1)
+
+                     }
+                     
+                   }
+
+                    localStorage.setItem('listem', JSON.stringify(listarray))
+
+
+
+}
 
 
 const kategorisecti= (kategori)=>{
@@ -713,7 +782,7 @@ setTimeout(() => {
 
 
 
-        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti,aramaaltkategori
+        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti,aramaaltkategori,deleteList
         }
         
     }

@@ -4,8 +4,8 @@
       <router-link :to="{name:'anasayfa'}" class="navbar-brand mb-0 h1">
         <span>
           <img src="@/assets/plogo6.png" style="width:36px" alt />
-          <strong>
-            puanla<span style="color:#DE354C;font-weight:bold">sana</span>
+          <strong style="letter-spacing:0.1rem">
+            puanla<span style="color:#DE354C;font-weight:bold;">sana</span>
             
           </strong>
         </span>

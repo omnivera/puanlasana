@@ -2,6 +2,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
 
+.dropdown-menu{
+  background-color: #0f0f0f;
+  color: white;
+  border: 1px solid #272727;
+
+  
+   
+}
+
+.dropdown-item i{
+margin-right: 0.7rem;
+}
+
+.dropdown-item span{
+display: table-cell; vertical-align: middle;
+font-size: 0.8rem;
+padding-left: 1.2rem;
+
+
+}
+
+.dropdown-item{
+
+
+
+  cursor: pointer;
+ color: white;
+ display: table; overflow: hidden;
+ height: 3rem;
+
+
+}
+
+
+.dropdown-item:hover{
+
+  background-color: #272727;
+ color: white;
+}
 
 input::placeholder {
     
@@ -18,7 +57,10 @@ input::placeholder {
      
  }
 
+ .puanladimg{
 
+  width: 2rem;
+ }
 
 
  .centered {
@@ -307,8 +349,8 @@ body {
 }
 
 hr {
-  height: 1px;
-  background-color: #e5e5e5;
+  height: 2px;
+  background-color: #454545;
   border: none;
 }
 
@@ -339,7 +381,7 @@ hr {
 }
 
 .video {
-  width: 20rem;
+  width: 19.5rem;
  background-color: #121312;
   margin-bottom: 30px;
   transition: all .2s ease-in-out;
@@ -356,7 +398,7 @@ hr {
 }
 
 .videop {
-  width: 20rem;
+  width: 19.5rem;
   background-color: #121312;
   margin-bottom: 2rem;
   transition: all .2s ease-in-out;
@@ -372,7 +414,7 @@ hr {
 
 .video:hover {
  background-color: #181818;
-transform: scale(1.075);
+transform: scale(1.07);
 font-weight: 500;
 
 
@@ -381,7 +423,7 @@ font-weight: 500;
 
 .videop:hover {
   background-color: #181818;
- transform: scale(1.075);
+ transform: scale(1.07);
  font-weight: 500;
 
  }
@@ -459,6 +501,34 @@ font-weight: 500;
   text-align: center;
   
 }
+
+.deletlist{
+  display: none;
+}
+
+.video:hover .deletlist{
+  display: inline;
+  position: absolute;
+    bottom: -0.1rem;
+    right: 1rem;
+    font-size: 1.6rem;
+    color: rgb(96, 96, 96);
+    transition: all .2s ease-in-out;
+    z-index: 999;
+    cursor: pointer;
+}
+
+.video:hover .deletlist:hover{
+ color: #DE354C;
+ transform: scale(1.2);
+}
+
+.deletlist:focus {
+  outline: none;
+ box-shadow: 0 0 10px #181818;
+}
+
+
 .addlist{
   position: absolute;
     bottom: 1.25vh;
@@ -466,6 +536,8 @@ font-weight: 500;
     font-size: 1.25vw;
     color: rgb(96, 96, 96);
     transition: all .2s ease-in-out;
+    z-index: 999;
+    cursor: pointer;
 }
 
 .addlist:hover{

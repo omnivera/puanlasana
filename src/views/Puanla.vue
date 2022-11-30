@@ -341,6 +341,7 @@
                       <h5 class="redtitle">
                         <span v-if="kategorigoster=='Film' || kategorigoster=='Dizi'">Oyuncular</span>
                         <span v-if="kategorigoster=='Oyun'">Platformlar</span>
+                        <span v-if="kategorigoster=='Anime'">Ana Karakterler</span>
                         </h5>
                       <hr class="">
                       <p>{{info1}}</p>
@@ -366,6 +367,7 @@
                       <h5 class="redtitle">
                         <span v-if="kategorigoster=='Film'">Film Süresi</span>
                         <span v-if="kategorigoster=='Dizi'">Sezon</span>
+                        <span v-if="kategorigoster=='Anime'">Sezon / Bölüm</span>
                         <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
                       <p>{{info3}}</p>
@@ -378,12 +380,11 @@
       
                      
                       <div v-if="kategorigoster=='Film' || kategorigoster=='Dizi' " class="d-flex justify-content-center">
-            <p class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
-           <p class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
-           <p class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon</p>
-           <p class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO</p>
+            <p v-if="aramaplatform('Netflix')" class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
+           <p v-if="aramaplatform('Disney Plus')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
+           <p  v-if="aramaplatform('Amazon')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon</p>
+           <p v-if="aramaplatform('HBO')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO</p>
 
-           
            
 </div>
           </div>
@@ -608,6 +609,7 @@ export default {
           const filmozet=ref()
          const oyuncular=ref()
          const turler=ref()
+          const platformlar=ref('')
         
          const fsure=ref()
 
@@ -633,6 +635,21 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
 
          let listemcount 
+
+
+           const aramaplatform= (pname)=>{
+
+         
+if (platformlar.value!=null) {
+    return platformlar.value.includes(pname)
+}
+      
+ return false
+
+          
+
+    
+  }
 
 
               const addlist= ()=>{
@@ -1697,7 +1714,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,oyuncular,turler,cyili,fsure,filmozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop,starhover,dostarhover,undostarhover,point,enterbtn,addlist,deleteList,listemcheck
+          yorumladi,loading,itemvideogoster,toggleMute,mutecheck,info1,info2,info3,ozet,backtotop,starhover,dostarhover,undostarhover,point,enterbtn,addlist,deleteList,listemcheck,aramaplatform
           
         }
         

@@ -628,7 +628,7 @@ border-color: transparent;
 
 
         #yorumlabuttonv2dis{
-          margin-top: 0.7vh;
+        
       
           border-color: transparent;
           border-radius: 20px;
@@ -636,8 +636,9 @@ border-color: transparent;
       
           font-size: 1rem;
           color: white;
+         
           
-          padding: 0.8rem 1.3rem;
+          padding: 0.2rem 1.3rem;
        
           
           }

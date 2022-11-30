@@ -386,10 +386,10 @@
       
                      
                       <div v-if="kategorigoster=='Film' || kategorigoster=='Dizi' " class="d-flex justify-content-center">
-           <p class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
-           <p class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
-           <p class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon</p>
-           <p class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO</p>
+           <p v-if="aramaplatform('Netflix')" class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
+           <p v-if="aramaplatform('Disney Plus')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
+           <p  v-if="aramaplatform('Amazon')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon</p>
+           <p v-if="aramaplatform('HBO')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO</p>
 
            
            
@@ -433,8 +433,9 @@
 <br>
    <div class="me-0">
                   
-                 <a v-if="puanladi" href="#yorumlar"> <button  style="float:right" type="submit" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button></a>
-                 <a v-if="!puanladi" href="#yorumlar"> <button  style="float:right;" type="button" @click="backtotop" id="yorumlabuttonv2dis" class="shadow"><i class="fas fa-star"></i> Yorum yapmak için puanla</button></a>
+                 <a v-if="puanladi" href="#yorumlar"> <button style="float:right;"   type="submit" class="btn btn-danger yorumlabtn">Gönder</button> </a>
+                 
+                 <a v-if="!puanladi" href="#yorumlar"> <button style="float:right;"   type="button" @click="backtotop" class="btn btn-danger yorumlabtn">Yorum yapmak için puanla</button></a>
                 </div>
                  </form>
               </div>
@@ -556,7 +557,7 @@
 </template>
 
 <script>
- import {ref,onMounted,watch} from 'vue'
+ import {ref,onMounted,watch,computed} from 'vue'
 import {firestoreRef,storageRef,authRef} from '@/firebase/config' 
 
 import { useRoute,useRouter} from 'vue-router'
@@ -637,6 +638,7 @@ let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
          const cyili=ref()
          const sirket= ref('')
          const info3=ref()
+         const platformlar=ref('')
 
          
 
@@ -651,7 +653,19 @@ let pasarray= JSON.parse(sessionStorage.getItem('pasladi'))
 
 let listarray = JSON.parse(localStorage.getItem('listem'))
 
+  const aramaplatform= (pname)=>{
 
+         
+if (platformlar.value!=null) {
+    return platformlar.value.includes(pname)
+}
+      
+ return false
+
+          
+
+    
+  }
  
           const addlist= ()=>{
 
@@ -1273,6 +1287,7 @@ showtitle.value="hidden"
             sirket.value = doc.data().sirket
             info3.value = doc.data().info3
             ozet.value = doc.data().ozet
+            platformlar.value = doc.data().platformlar
 
            
 let listem = JSON.parse(localStorage.getItem('listem'))
@@ -1340,6 +1355,8 @@ if (listemcount.length > 0) {
 
            
           
+setTimeout(() => {
+  
 
       
 firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
@@ -1371,7 +1388,7 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
             }
         })
-
+}, 500);
          
         })
 
@@ -1558,7 +1575,8 @@ firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
 
           return {veriler,verikayit,itemisim,itemresim,itemvideo,beforeEnter,enter,kategorigoster,puanladi,puan,ortpuan,yildizladi,ortpuanimation,next,anasayfagit,showcardV,doHidden,doVisible,
           showtitle,doYildizla,watchinfo,titlecheck,yorumclick,enteryorumlar,yorum,yorumkayit,yorumshow,yorumlar,likeyorum,dislikeyorum,info1,info2,cyili,info3,ozet,kullaniciad,userimg,kullaniciemail,
-          yorumladi,loading,itemvideogoster,sirket,toggleMute,mutecheck,backtotop,enterbtn,starhover,dostarhover,undostarhover,point,addlist,listemcheck,deleteList
+          yorumladi,loading,itemvideogoster,sirket,toggleMute,mutecheck,backtotop,enterbtn,starhover,dostarhover,undostarhover,point,addlist,listemcheck,deleteList,
+          aramaplatform
           
         }
         

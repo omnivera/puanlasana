@@ -25,24 +25,25 @@
           </strong>
  </div>
 <br>
-<hr>
+<br>
   
- <div class="d-flex justify-content-center">
-    <div class="row">
 
-<div class="container">
+
+
+<div class="center">
   <div class="row">
 <transition @before-enter="beforeEnter" @enter="enterv2" appear > 
       <p class="about">
-<strong>Sitemizin Özellikleri / Site Amacı / Sizi Bekleyen Site</strong>
-
+<strong style="color:#DE354C">Sitemizin Özellikleri / Site Amacı / Sizi Bekleyen Site</strong>
+<br>
 <br>
 Siteyi oluştururken amacımız her insanın bir film, dizi, oyun ve benzeri ürünler hakkında kendi düşüncelerini yorum yaparak ve
  puanlayarak beyan edecek, tasarımı hoş ve kullanımı kolay olan bir yer oluşturmaktı. Bu amacı gerçekleştirebilmek için diğer sitelerden farklı olarak kullanıcıları kritik/kullanıcı veya benzeri ayrımlar yapmıyoruz, sadece bir ürüne odaklanmak yerine farklı farklı, örnek olarak dizi, oyun, film, vb. ürünler verilebilir, ürünlere yer veriyoruz. Sitemizde bulunan bir başka özellik ise sıralamalardır, burada insanların en fazla beğendiği ürünlerinin puanını, kaç insanın oy verdiğini, çıkış yılı ve ürünün sahibini görebilirsiniz.  Bununla birlikte siteye günlük yeni ürünler ilave edildiğinden dolayı sürekli bakabileceğiniz bir ürün olacaktır.
 <br>
 <br>
 <br>
-<strong>İletişim</strong>
+<strong style="color:#DE354C">İletişim</strong>
+<br>
 <br>
 Bize  <span class="vurgu">info@puanlasana.com</span> mail adresi üzerinden siteyle ilgili sorularınızı, problemlerinizi, eklenmesini istediğiniz kategori veya yeni özellik önerilerinizi ve eleştirilerinizi paylaşabilirsiniz. En kısa zamanda attığınız mailleri değerlendirmeye çalışacağız şimdiden anlayışınız için teşekkür ederiz.
 
@@ -61,8 +62,8 @@ Umarım sitemiz ile ilgili kısa bilgilendirmemiz yardımcı olmuştur. <span cl
   
 
   </div>
-      </div>
- </div>
+    
+
 
 <transition @before-enter="beforeEnter" @enter="enterv2" appear > 
 
@@ -187,11 +188,18 @@ export default {
 
 
 .about{
-    padding-left: 15vw;
-    padding-right: 15vw;
-    padding-top: 2vh;
+ 
+
     color: white;
     font-size: 1.1rem;
+    width: 75rem;
+
+    background-color: #0f0f0f;
+
+    padding: 2rem 3rem;
+    border-radius: 20px;
+
+    
   
 }
 

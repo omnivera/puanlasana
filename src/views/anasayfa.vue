@@ -31,7 +31,7 @@
  <button v-for="altkategori in aramaaltkategori" :key="altkategori.id" :class="altkategori.katbuttoncss"  @click="altkategorisecti(altkategori)" type="button" class="btn btn-outline-dark">{{altkategori.altkatad}}</button>
 
  </div>
-<hr>
+
     <!-- Header Ends -->
 
 
@@ -66,6 +66,7 @@
             <div v-if="item.puanladi==false || item.puanladi==null" class="video">
             <div   class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
+              
              
       
             
@@ -126,7 +127,7 @@
 
    <img :src="item.itemresim" class="puanladi"  alt="" />
   <div class="centered my-auto">
-     <img src="@/assets/plogo6.png" style="width:5.2rem" alt />
+     <img src="@/assets/plogo6.png" style="width:5.1rem" alt />
     </div>
 
 
@@ -187,7 +188,10 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
 import firebase from 'firebase/app';
 
+
 export default {
+
+
 
     setup() {
 
@@ -205,6 +209,8 @@ export default {
     const altkategorisec= ref('Tümü')
     const route=useRoute()
     const router=useRouter()
+
+ 
 
 
     watch(() => {
@@ -236,6 +242,9 @@ export default {
           let merged =  [...new Set([...puanlananlar, ...puanlanmayanlar])];
 
             itemler.value  =  merged
+
+
+             shuffle(itemler.value);
 
       
     });
@@ -366,7 +375,7 @@ const aramakategori=computed(()=>{
 
          
 
-        
+           
 
           if (kategorisec.value=="Tümü") {
              return itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase())  ) 
@@ -384,7 +393,7 @@ const aramakategori=computed(()=>{
 
          
 
-          shuffle(aramakategori.value);
+      
 
           if (altkategorisec.value=="Tümü") {
              return aramakategori.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase())  ) 

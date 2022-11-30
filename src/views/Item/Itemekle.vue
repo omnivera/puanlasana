@@ -290,7 +290,7 @@
 
 <div class="modal fade" id="visualview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content infoedit">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">İtem Bilgileri</h5>
         <button  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -352,6 +352,16 @@
 </div>
   </div>
   
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+<div class="form-floating mb-3">
+  <input type="search" autocomplete="off" required class="form-control" v-model="platformlar" id="floatingInput" placeholder="name@example.com">
+  <label for="floatingInput">Platformlar</label>
+</div>
+  </div>
+
 </div>
 
 
@@ -433,7 +443,7 @@
 
 <br>
 
-<div class="d-flex justify-content-center"><button type="submit"   class=" btn-lg shadow "><i class="fas fa-edit"></i> İtem Ekle</button></div>
+<div class="d-flex justify-content-center"><button type="submit"   id="guncelbtn" class=" btn-lg shadow "><i class="fas fa-edit"></i>İtem Ekle</button></div>
 
           </form>
            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -516,6 +526,7 @@ export default {
          const info1=ref('')
          const info2=ref('')
          const info3=ref('')
+         const platformlar=ref('')
          const itemvideogoster=ref('')
          const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
@@ -641,6 +652,7 @@ setTimeout(  function(){
                   info1:info1.value,
                   info2:info2.value,
                   info3:info3.value,
+                  platformlar:platformlar.value,
                   totalpuan:0,
                   puancount:0,
                   kategori:kategori.value,
@@ -694,6 +706,7 @@ itemresim.value=""
 itemvideo.value=""
 start.value=""
 end.value=""
+platformlar.value=""
 
 
 
@@ -750,7 +763,7 @@ setTimeout(  function(){
 
 
           return {kategorisec,kategorikontrol,veriler,resimDosyaYukle,basarili,basarisiz,verikayit,itemisim,kategori,itemresim,itemvideo,itemvideogoster,start,end,
-          info1,info2,cyili,info3,ozet,sirket,toggleMute,mutecheck
+          info1,info2,cyili,info3,ozet,sirket,toggleMute,mutecheck,platformlar
         }
         
     }
@@ -759,6 +772,70 @@ setTimeout(  function(){
 </script>
 
 <style scoped>
+
+
+
+.btn-close{
+  background-color: transparent;
+  color: white;
+}
+
+
+#floatingTextarea2{
+  background-color: #272727;
+  color: white;
+
+}
+
+
+#floatingSelect{
+  background-color: #272727;
+  color: white;
+}
+
+#floatingInput{
+  background-color: #272727;
+  color: white;
+}
+
+#guncelbtn{
+  margin-top: 2.9vh;
+
+  border-color: transparent;
+  background-color: #0f0f0f;
+  font-size: 0.9rem;
+ padding: 1rem 1.2rem;
+  color: white;
+  border: 0.85px solid #454545;
+  margin-top: -1vh;
+border-radius: 20px;
+  
+  font-family: "Comfortaa", cursive;
+
+
+  
+  }
+
+
+    #guncelbtn i{
+  
+    margin-left: -0.1vw;
+ 
+    
+    }
+
+      #guncelbtn:hover{
+  background-color: #272727;
+  color: white;
+  border-color: transparent;
+  }
+
+.infoedit{
+  background-color: #0f0f0f;
+  color: white;
+  border-radius: 20px;
+}
+
 
 
 .textarea{

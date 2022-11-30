@@ -1,4 +1,10 @@
 
+
+.yorumlabtn{
+  padding: 0.6rem 2rem;
+  border-radius: 10px;
+
+}
 .controlbtn{
     background-color:transparent;
   
@@ -106,7 +112,14 @@
   .fa-star{
    
     font-size: 1.4vw;
-    margin-right: 0.5vw;
+    margin-right: 1vw;
+    margin-top: 1.2vh;
+  }
+
+  .small-ratings .fa-star{
+   
+    font-size: 1vw;
+    margin-right: 0.1vw;
     margin-top: 1.2vh;
   }
 
@@ -149,15 +162,15 @@
           resize: none;
           border-radius: 20px;
            height: 130px;
-           border: 0.8px solid #454545;
     background:#0f0f0f;
+    border: none;
        
   
   }
   
   #floatingTextarea2:focus {
       outline: none !important;
-      border:1px solid #DE354C;
+      background-color: #181818;
       box-shadow: 0 0 10px #181818;
     }
   
@@ -166,16 +179,21 @@
       border: none;
       outline: none;
       color: white;
+      border-radius: 20px;
+      background-color: black;
   }
   
   #yorumyap{
   
-    
+
   
   }
   
   #yorumyapcardbody{
       background-color: black;
+
+    
+      
   
       
   
@@ -186,6 +204,8 @@
   
   #yorumcardbody{
       background-color: #181818;
+      border-radius: 20px;
+     
    
   }
   
@@ -207,6 +227,9 @@
       margin-top: 25vh;
       margin-left:5vw;
       margin-right:5vw;
+
+  
+
     
   }
   

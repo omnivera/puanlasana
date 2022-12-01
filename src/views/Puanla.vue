@@ -379,11 +379,12 @@
                      <div class="row text-center">
       
                      
-                      <div v-if="kategorigoster=='Film' || kategorigoster=='Dizi' " class="d-flex justify-content-center">
+                      <div class="d-flex justify-content-center">
             <p v-if="aramaplatform('Netflix')" class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
-           <p v-if="aramaplatform('Disney Plus')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
-           <p  v-if="aramaplatform('Amazon')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon</p>
-           <p v-if="aramaplatform('HBO')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO</p>
+           <p v-if="aramaplatform('disney+')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
+           <p  v-if="aramaplatform('prime video')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon Prime</p>
+           <p v-if="aramaplatform('HBO max')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO Max</p>
+           <p v-if="aramaplatform('steam')" class="platform"><img src="https://w7.pngwing.com/pngs/407/234/png-transparent-steam-mervils-a-vr-adventure-computer-icons-personal-computer-valve-corporation-steam-engine-game-logo-windows.png"  class="platform-pic" > Steam</p>
 
            
 </div>
@@ -641,7 +642,7 @@ const tarih=ref(moment(new Date()).format('YYYY-MM-DD'))
 
          
 if (platformlar.value!=null) {
-    return platformlar.value.includes(pname)
+    return platformlar.value.toLowerCase().includes(pname.toLowerCase())
 }
       
  return false

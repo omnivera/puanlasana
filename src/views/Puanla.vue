@@ -384,9 +384,9 @@
            <p v-if="aramaplatform('disney+')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
            <p  v-if="aramaplatform('prime video')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon Prime</p>
            <p v-if="aramaplatform('HBO max')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO Max</p>
-           <p v-if="aramaplatform('steam')" class="platform"><img src="https://w7.pngwing.com/pngs/407/234/png-transparent-steam-mervils-a-vr-adventure-computer-icons-personal-computer-valve-corporation-steam-engine-game-logo-windows.png"  class="platform-pic" > Steam</p>
+            <p v-if="aramaplatform('steam')" class="platform"><img src="https://banner2.cleanpng.com/20180604/xiy/kisspng-steam-computer-icons-logo-video-game-valves-5b14dba6212cf3.1367866015280936061359.jpg"  class="platform-pic" > Steam</p>
+            <p v-if="aramaplatform('Rockstargames')" class="platform"><img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rockstar_Games_Logo.svg/2226px-Rockstar_Games_Logo.svg.png"  class="platform-pic" > Rockstar</p>
 
-           
 </div>
           </div>
 

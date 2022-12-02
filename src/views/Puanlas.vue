@@ -349,13 +349,13 @@
                         <span v-if="kategorigoster=='Anime'">Ana Karakterler</span>
                         </h5>
                       <hr class="">
-                      <p>{{info1}}</p>
+                      <p class="infotext">{{info1}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Türler</h5>
                       <hr>
-                      <p>{{info2}}</p>
+                      <p class="infotext">{{info2}}</p>
 
                       </div>
                      
@@ -367,7 +367,7 @@
                       <div class="col-md-6">
                       <h5 class="redtitle">Çıkış Yılı</h5>
                       <hr class="">
-                      <p>{{cyili}}</p>
+                      <p class="infotext">{{cyili}}</p>
                       </div>
 
                         <div class="col-md-6">
@@ -377,11 +377,12 @@
                         <span v-if="kategorigoster=='Anime'">Sezon / Bölüm</span>
                         <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
-                      <p>{{info3}}</p>
+                      <p class="infotext">{{info3}}</p>
 
                       </div>
                      
                   </div>
+                
    <div class="row text-center">
       
                      
@@ -390,7 +391,7 @@
            <p v-if="aramaplatform('disney+')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
            <p  v-if="aramaplatform('prime video')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon Prime</p>
            <p v-if="aramaplatform('HBO max')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO Max</p>
-               <p v-if="aramaplatform('steam')" class="platform"><img src="https://e7.pngegg.com/pngimages/699/999/png-clipart-brand-logo-steam-gump-s.png"  class="platform-pic" > Steam</p>
+               <p v-if="aramaplatform('steam')" class="platform"><img src="https://banner2.cleanpng.com/20180604/xiy/kisspng-steam-computer-icons-logo-video-game-valves-5b14dba6212cf3.1367866015280936061359.jpg"  class="platform-pic" > Steam</p>
                 <p v-if="aramaplatform('Rockstargames')" class="platform"><img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rockstar_Games_Logo.svg/2226px-Rockstar_Games_Logo.svg.png"  class="platform-pic" > Rockstar</p>
 
           

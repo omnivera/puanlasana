@@ -29,7 +29,7 @@ import Itemview from '../views/Item/Itemview.vue'
 import Puanla from '../views/Puanla.vue'
 import Puanlas from '../views/Puanlas.vue'
 
-
+import Platformlar from '../views/Platformlar.vue'
 
 
 import {authRef} from '../firebase/config'
@@ -186,7 +186,12 @@ const routes = [
 
     
 
-     
+      {
+        path: '/Platformlar',
+        name: 'Platformlar',
+        component: Platformlar,
+       
+      },
       
 
 

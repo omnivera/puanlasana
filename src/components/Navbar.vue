@@ -66,6 +66,17 @@
             </router-link>
           </li>
 
+
+          <li v-if="kullaniciemail=='mert@gmail.com' || kullaniciemail=='haktanuzun@gmail.com' " class="nav-item">
+            <router-link :to="{name:'Platformlar'} ">
+              <a class="nav-link" aria-current="page" href="#">
+                <button class="btn btn-outline-light" type="submit">
+                  <i class="bi bi-cast"></i> Platformlar
+                </button>
+              </a>
+            </router-link>
+          </li>
+
           <div v-if="kullaniciemail=='mert@gmail.com' || kullaniciemail=='haktanuzun@gmail.com' " class="dropdown nav-link">
             <button
               class="btn btn-outline-light dropdown-toggle"

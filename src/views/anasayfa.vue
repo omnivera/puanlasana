@@ -32,6 +32,13 @@
 
  </div>
 
+ <hr v-if="kategorisec!='Tümü'" >
+  <div v-if="kategorisec!='Tümü'" class="kategoriler">
+
+ <button v-for="platform in aramaplatformlar" :key="platform.id" :class="platform.katbuttoncss"  @click="platformsecti(platform)" type="button" class="btn btn-outline-dark">{{platform.platformad}}</button>
+
+ </div>
+
     <!-- Header Ends -->
 
 
@@ -62,7 +69,7 @@
         <div class="videos__container">
           
           <!-- Single Video starts -->
-          <div v-for="item in aramaitem" :key="item.id" @click="goPuanla(item)" >
+          <div v-for="item in aramaitem2" :key="item.id" @click="goPuanla(item)" >
             <div v-if="item.puanladi==false || item.puanladi==null" class="video">
             <div   class="video__thumbnail">
               <img :src="item.itemresim" alt="" />
@@ -197,6 +204,7 @@ export default {
 
       const kategoriler = ref([])
       const altkategoriler = ref([])
+      const platformlar = ref([])
       const itemler = ref([])
       const puanlar = ref([])
       const listem = ref([])
@@ -207,6 +215,7 @@ export default {
     const search= ref('')
     const kategorisec= ref('Tümü')
     const altkategorisec= ref('Tümü')
+    const platformsec= ref('Tümü')
     const route=useRoute()
     const router=useRouter()
 
@@ -282,6 +291,10 @@ export default {
           localStorage.setItem('altkategoriler', JSON.stringify([]));
         }
 
+         if (localStorage.getItem('platformlar')==null) {
+          localStorage.setItem('platformlar', JSON.stringify([]));
+        }
+
         
  
         
@@ -294,7 +307,14 @@ kategorisec.value=kategori.kisim
 
 
 altkategorisec.value=altkategoriler.value[0].altkatad
+platformsec.value=platformlar.value[0].platformad
 altkategoriler.value[0].katbuttoncss="katbuttonhover"
+platformlar.value[0].katbuttoncss="katbuttonhover"
+
+ for (let i = 1; i < platformlar.value.length; i++) {
+  platformlar.value[i].katbuttoncss="katbutton"
+  
+}     
 
  for (let i = 1; i < altkategoriler.value.length; i++) {
   altkategoriler.value[i].katbuttoncss="katbutton"
@@ -328,6 +348,23 @@ for (let i = 0; i < altkategoriler.value.length; i++) {
   
 }
 altkategori.katbuttoncss="katbuttonhover"
+
+
+
+}
+
+
+
+const platformsecti= (platform)=>{
+
+platformsec.value=platform.platformad
+
+
+for (let i = 0; i < platformlar.value.length; i++) {
+  platformlar.value[i].katbuttoncss="katbutton"
+  
+}
+platform.katbuttoncss="katbuttonhover"
 
 
 
@@ -389,23 +426,45 @@ const aramakategori=computed(()=>{
          return itemler.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase()) && tablo.kategori == kategorisec.value ) 
         })
 
+
+        
+
     const aramaitem=computed(()=>{
 
          
 
-      
 
           if (altkategorisec.value=="Tümü") {
              return aramakategori.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase())  ) 
           }
 
          
-
           
 
           
          return aramakategori.value.filter((tablo)=>tablo.itemisim.toLowerCase().includes(search.value.toLowerCase()) && tablo.info2.toLowerCase().includes(altkategorisec.value.toLowerCase()) ) 
         })
+
+
+
+    const aramaitem2=computed(()=>{
+
+     let filtered =  aramaitem.value.filter((tablo)=> tablo.platformlar != null) 
+
+
+          if (platformsec.value!="Tümü") {
+             return filtered.filter((tablo)=> tablo.platformlar.toLowerCase().includes(platformsec.value.toLowerCase()) ) 
+          }
+
+         
+          
+
+          
+         return filtered
+         
+        })
+
+
 
 
 const aramaaltkategori=computed(()=>{
@@ -415,6 +474,16 @@ const aramaaltkategori=computed(()=>{
         
           
          return altkategoriler.value.filter((tablo)=>tablo.kategori == kategorisec.value || tablo.altkatad == "Tümü" ) 
+        })
+
+
+        const aramaplatformlar=computed(()=>{
+
+         
+
+        
+          
+         return platformlar.value.filter((tablo)=>tablo.kategori == kategorisec.value || tablo.platformad == "Tümü" ) 
         })
     const beforeEnter = el => {
       el.style.opacity = 0;
@@ -456,7 +525,8 @@ const aramaaltkategori=computed(()=>{
 
                  
 
-       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length || doc.data().kategoricount != JSON.parse(localStorage.getItem('kategoriler')).length -1 || doc.data().altkategoricount != JSON.parse(localStorage.getItem('altkategoriler')).length -1) {
+       if (doc.data().itemcount != JSON.parse(localStorage.getItem('itemler')).length || doc.data().kategoricount != JSON.parse(localStorage.getItem('kategoriler')).length -1 || doc.data().altkategoricount != JSON.parse(localStorage.getItem('altkategoriler')).length -1
+       || doc.data().platformlarcount != JSON.parse(localStorage.getItem('platformlar')).length -1) {
            console.log("veritabanı")
 
         
@@ -477,7 +547,7 @@ const aramaaltkategori=computed(()=>{
             if (snapshot.size > 0) {
                   snapshot.forEach(doc => {
 
-       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemvideo:doc.data().itemvideo,kategori:doc.data().kategori,info2:doc.data().info2,id:doc.id})
+       itemler.value.push({itemisim:doc.data().itemisim,itemresim:doc.data().itemresim,itemvideo:doc.data().itemvideo,kategori:doc.data().kategori,info2:doc.data().info2,platformlar:doc.data().platformlar,id:doc.id})
       
 
 
@@ -518,11 +588,37 @@ const aramaaltkategori=computed(()=>{
             }
         })
 
+
+
+        firestoreRef.collection('kategoriler').doc(kategori).collection('platformlar').get()
+        .then(snapshot =>{
+            if (snapshot.size > 0) {
+              
+             
+                  snapshot.forEach(doc => {
+                  
+
+                   platformlar.value.push({...doc.data(),id:doc.id,katbuttoncss:"katbutton",kategori:kategori})
+         
+        });
+
+
+            }else{
+
+         
+
+                console.log("yok")
+              
+
+            }
+        })
+
           
           
                 })
                 kategoriler.value.unshift({kisim:"Tümü",katbuttoncss:"katbuttonhover"})
                 altkategoriler.value.unshift({altkatad:"Tümü",katbuttoncss:"katbuttonhover"})
+                platformlar.value.unshift({platformad:"Tümü",katbuttoncss:"katbuttonhover"})
 
 
           
@@ -569,6 +665,7 @@ setTimeout(() => {
   localStorage.setItem('itemler', JSON.stringify(itemler.value));
   localStorage.setItem('kategoriler', JSON.stringify(kategoriler.value));
   localStorage.setItem('altkategoriler', JSON.stringify(altkategoriler.value));
+  localStorage.setItem('platformlar', JSON.stringify(platformlar.value));
 }, 1500);
          
        }else{
@@ -608,6 +705,7 @@ setTimeout(() => {
      
        kategoriler.value  =  JSON.parse(localStorage.getItem('kategoriler'));
        altkategoriler.value  =  JSON.parse(localStorage.getItem('altkategoriler'));
+       platformlar.value  =  JSON.parse(localStorage.getItem('platformlar'));
        }
       
 
@@ -786,7 +884,8 @@ setTimeout(() => {
 
 
 
-        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti,aramaaltkategori
+        return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti,aramaaltkategori,
+        aramaplatformlar,platformsecti,platformsec,aramaitem2
         }
         
     }

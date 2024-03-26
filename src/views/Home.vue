@@ -109,6 +109,7 @@ border-radius: 50%;
 html, body {
 
   display: none;
+
  
  }
 }

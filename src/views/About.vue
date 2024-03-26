@@ -191,12 +191,12 @@ export default {
  
 
     color: white;
-    font-size: 1.1rem;
-    width: 75rem;
+    font-size: 1.1vw;
+    width: 70vw;
 
     background-color: #0f0f0f;
 
-    padding: 2rem 3rem;
+    padding: 2.7vh 3vw;
     border-radius: 20px;
 
     

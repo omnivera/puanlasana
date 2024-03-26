@@ -6,6 +6,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/auth/Login.vue'
 
 import Profile from '../views/Profile.vue'
+import Profileview from '../views/Profileview.vue'
+import Profileold from '../views/Profileold.vue'
 import Listem from '../views/Listem.vue'
 
 import Anasayfa from '../views/anasayfa.vue'
@@ -95,18 +97,34 @@ const routes = [
 
       },
         
- /*      {
+      {
         path: '/a',
         name: 'anasayfa2',
         component: Anasayfa2,
        
 
-      }, */
+      },
 
       {
         path: '/Profile',
         name: 'Profile',
         component: Profile,
+       
+
+      },
+
+      {
+        path: '/Profileview/:userEmail',
+        name: 'Profileview',
+        component: Profileview,
+       
+
+      },
+
+      {
+        path: '/Profileold',
+        name: 'Profileold',
+        component: Profileold,
        
 
       },

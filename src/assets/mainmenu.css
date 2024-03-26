@@ -51,7 +51,7 @@ input::placeholder {
 
  .puanladi{
      
-     opacity: 0.4;
+     opacity: 0.5;
      background-color: #181818;
    
      
@@ -202,6 +202,15 @@ input::placeholder {
   justify-content: center;
   margin-top: 2vh;
   margin-bottom: 2vh;
+
+  overflow-x: scroll;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+  
+}
+
+.kategoriler::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 .katbutton{
@@ -240,6 +249,7 @@ input::placeholder {
 
 body {
   font-family: 'Roboto', sans-serif;
+  
 }
 
 /* header */
@@ -349,18 +359,18 @@ body {
 }
 
 hr {
-  height: 2px;
+  height: 2.5px;
   background-color: #454545;
-  border: none;
+
 }
 
 /* videos */
 
 .videos {
-  background-color: black;
+ 
   width: 100%;
   height: 100%;
-  padding: 15px 0.8vw;
+  padding: 15px 1.5vw;
   
 
 
@@ -381,15 +391,15 @@ hr {
 }
 
 .video {
-  width: 19.5rem;
- background-color: #121312;
+  width: 18.5vw;
+ background-color: transparent;
   margin-bottom: 30px;
   transition: all .2s ease-in-out;
   color: white;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
   
   z-index: 1;
@@ -398,23 +408,25 @@ hr {
 }
 
 .videop {
-  width: 19.5rem;
-  background-color: #121312;
+  width: 18.5vw;
+  background-color: transparent;
   margin-bottom: 2rem;
   transition: all .2s ease-in-out;
   color: white;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
  
   
 
 }
 
+
+
 .video:hover {
- background-color: #181818;
-transform: scale(1.07);
+ background-color: #0f0f0f;
+transform: scale(1.06);
 font-weight: 500;
 
 
@@ -422,8 +434,8 @@ font-weight: 500;
 }
 
 .videop:hover {
-  background-color: #181818;
- transform: scale(1.07);
+  background-color: #0f0f0f;
+ transform: scale(1.06);
  font-weight: 500;
 
  }
@@ -432,7 +444,7 @@ font-weight: 500;
 
 .video__thumbnail {
   width: 100%;
-  height: 27rem;
+  height: 51vh;
 
   cursor: pointer;
   position: relative;
@@ -449,8 +461,7 @@ font-weight: 500;
   width: 100%;
   cursor: pointer;
   z-index: 1;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-radius: 10px;
 
 
   
@@ -496,7 +507,7 @@ font-weight: 500;
 .title h3 {
    
   line-height: 1.2rem;
-  font-size: 0.9rem;
+  font-size: 0.9vw;
   margin-bottom: 6px;
   text-align: center;
   
@@ -548,10 +559,10 @@ font-weight: 500;
 .itemkat{
   text-decoration: none;
   color: #DE354C;
-  font-size: 0.75rem;
+  font-size: 0.75vw;
   border: 1.5px solid #DE354C;
   border-radius: 20px;
-  width: 4.3rem;
+  width: 4.5vw;
 
   padding: 0.25rem;
   display: flex;
@@ -612,4 +623,77 @@ h1 {
   .header__search input {
     width: 300px;
   }
+}
+
+
+@media screen and (min-width: 1900px) {
+  .video {
+    width: 19.5rem;
+   background-color: transparent;
+    margin-bottom: 30px;
+    transition: all .2s ease-in-out;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  
+    
+    z-index: 1;
+  
+  
+  }
+  
+  .videop {
+    width: 19.5rem;
+    background-color: transparent;
+    margin-bottom: 2rem;
+    transition: all .2s ease-in-out;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+   
+    
+  
+  }
+
+  .video__thumbnail {
+    width: 100%;
+    height: 32rem;
+  
+    cursor: pointer;
+    position: relative;
+   
+  }
+
+
+  .itemkat{
+    text-decoration: none;
+    color: #DE354C;
+    font-size: 0.75rem;
+    border: 1.5px solid #DE354C;
+    border-radius: 20px;
+    width: 4.3rem;
+  
+    padding: 0.25rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.2rem;
+    margin-bottom: 0.4rem;
+    
+  }
+
+
+
+  .title h3 {
+   
+    line-height: 1.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    text-align: center;
+    
+  }
+
 }

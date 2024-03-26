@@ -54,7 +54,7 @@
         </div>
         <div class="ufo-bar-col4">
             <div class="ufo-bar-col4-inner">
-              <!-- <button style="float:right;"   type="submit" class="btn btn-danger takipbtn"><i class="fa-solid fa-user-plus"></i> Takip Et</button> -->
+              <button style="float:right;"   type="submit" class="btn btn-danger takipbtn"><i class="fa-solid fa-user-plus"></i> Takip Et</button>
               <!--   <button class="button2 btn-primary2"><i class="uil uil-plus"></i> Takip Et<div class="btn-secondary2"></div></button> -->
             </div>
         </div>
@@ -325,6 +325,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
 import {authRef} from '../firebase/config'
 import getUser from "../composables/getUser";
+/* import getProfile from "../composables/getProfile"; */
 import Vue3autocounter from 'vue3-autocounter';
 import Loading from '@/components/intro.vue'
 export default {
@@ -337,7 +338,11 @@ components: {
   
     setup() {
 
+      const route=useRoute()
+    const router=useRouter()
+
     const { kullanici } = getUser();
+   /*  const { user } = getProfile(route.params.userID); */
     const yorumlar= ref([])
     const itemler= ref([])
     const kullaniciad= ref('')
@@ -349,8 +354,7 @@ components: {
 
     const followers= ref(0)
 
-    const route=useRoute()
-    const router=useRouter()
+    
 
 
     const loading= ref(true)
@@ -358,26 +362,15 @@ components: {
     const yorumlarshow= ref(true)
 
 
-    if (localStorage.getItem('puanladi')==null) {
-          
-          localStorage.setItem('puanladi', JSON.stringify([]));
-        }
-        
-        if (localStorage.getItem('yorumlar')==null) {
-          
-          localStorage.setItem('yorumlar', JSON.stringify([]));
-        }
 
  setTimeout(  function(){
 loading.value=false
 
  },2500)
 
-     authRef.onAuthStateChanged(k=>{
-    kullaniciad.value=k.displayName
-    kullaniciemail.value=k.email
-   
-})
+
+
+
 
          const beforeEnter = el => {
       el.style.opacity = 0;
@@ -435,7 +428,7 @@ yorumlarshow.value=false
 
 
 
-firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
+firestoreRef.collection('uyeler').doc(route.params.userEmail).update({
 
                    userimg:userimg.value
                    
@@ -460,7 +453,7 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
 
            
          setTimeout(  function(){
-        firestoreRef.collection('uyeler').where('email','==',kullaniciemail.value).get()
+        firestoreRef.collection('uyeler').where('email','==',route.params.userEmail).get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
             
@@ -479,7 +472,6 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
          //puanları alma
 
 
-         if (doc.data().puanladi != JSON.parse(localStorage.getItem('puanladi')).length) {
 
          setTimeout(() => {
 
@@ -488,7 +480,7 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
 console.log("veritabanı puanlar")
 
                        
-         firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('puanlar').get()
+         firestoreRef.collection('uyeler').doc(route.params.userEmail).collection('puanlar').get()
         .then(snapshot =>{
             
             if (snapshot.size > 0) {
@@ -518,19 +510,8 @@ console.log("veritabanı puanlar")
         
 
 
-setTimeout(() => {
-  localStorage.setItem('puanladi', JSON.stringify(itemler.value));
-  
-}, 1500);
          
-       }else{
-           let puanarray= JSON.parse(localStorage.getItem('puanladi'))
-
-       itemler.value=puanarray
-
-          
-     
-       }
+  
 
 
 
@@ -538,7 +519,7 @@ setTimeout(() => {
                 //yorumları alma ----------------
 
 
-         if (doc.data().yorumcount != JSON.parse(localStorage.getItem('yorumlar')).length) {
+   
 
          setTimeout(() => {
 
@@ -547,7 +528,7 @@ setTimeout(() => {
 console.log("veritabanı yorum")
 
                        
-     firestoreRef.collection('uyeler').doc(kullaniciemail.value).collection('yorumlar').orderBy('gtarih','desc').get()
+     firestoreRef.collection('uyeler').doc(route.params.userEmail).collection('yorumlar').orderBy('gtarih','desc').get()
         .then(snapshot =>{
             if (snapshot.size > 0) {
             
@@ -560,11 +541,11 @@ console.log("veritabanı yorum")
 
          
 
-         if (doc.data().begenenler.includes(kullaniciemail.value)==true) {
+         if (doc.data().begenenler.includes(route.params.userEmail)==true) {
                       yorumlar.value.push({...doc.data(),id:doc.id,liked:true,disliked:false,likedcss:"likeselected",dislikedcss:"link-muted"})
-                    }else if (doc.data().begenmeyenler.includes(kullaniciemail.value)==true) {
+                    }else if (doc.data().begenmeyenler.includes(route.params.userEmail)==true) {
                       yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:true,likedcss:"link-muted",dislikedcss:"likeselected"})
-                    }else if (doc.data().begenenler.includes(kullaniciemail.value)==false && doc.data().begenmeyenler.includes(kullaniciad.value)==false){
+                    }else if (doc.data().begenenler.includes(route.params.userEmail)==false && doc.data().begenmeyenler.includes(kullaniciad.value)==false){
                         yorumlar.value.push({...doc.data(),id:doc.id,liked:false,disliked:false,likedcss:"link-muted",dislikedcss:"link-muted"})
                     }
 
@@ -586,26 +567,9 @@ console.log("veritabanı yorum")
         
 
 
-setTimeout(() => {
-  localStorage.setItem('yorumlar', JSON.stringify(yorumlar.value));
-  
-}, 1500);
+
          
-       }else{
-         
-           let yorumarray= JSON.parse(localStorage.getItem('yorumlar'))
-           yorumcount.value=yorumarray.length
-           yorumarray.forEach(element => {
-             begeniler.value+= parseInt(element.like)
-           });
-           
-
-       yorumlar.value=yorumarray
-
-
-          
-     
-       }
+ 
 
 
 

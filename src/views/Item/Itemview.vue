@@ -388,7 +388,7 @@
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 10rem"></textarea>
+  <textarea class="form-control" maxlength="1750" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 10rem"></textarea>
   <label for="floatingTextarea2">{{kategorigoster}} Özeti</label>
 </div>
 <br>

@@ -1,7 +1,9 @@
 .<template>
 
+<div v-if="loading"><Intro/></div>
+   <div v-if="!loading">
 
-   
+     
 
 <div class="mainscroll">
 <br>
@@ -165,14 +167,17 @@
           <!-- Single Video Ends -->
 
           <!-- Single Video starts -->
-       <!--    <br>
-           <hr>
-           <br> -->
+         
+         
+           <br>
           </div>
          
         </div>
+       
       </div>
+      
       </transition>
+    
       </div>
 <div class="col-md-1"></div>
       
@@ -180,7 +185,7 @@
     
 </div>
 
-
+</div>
 
 
 
@@ -194,11 +199,18 @@ import gsap from 'gsap'
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRoute,useRouter} from 'vue-router'
 import firebase from 'firebase/app';
+import Intro from '@/components/intro.vue'
 
 
 export default {
 
 
+components: {
+    Intro
+ 
+    
+  },
+  
 
     setup() {
 
@@ -219,8 +231,11 @@ export default {
     const route=useRoute()
     const router=useRouter()
 
- 
+ const loading= ref(false)
+ setTimeout(  function(){
+loading.value=false
 
+ },3200)
 
     watch(() => {
 
@@ -297,7 +312,10 @@ export default {
 
         
  
-        
+          if (sessionStorage.getItem('intro')==null) {
+          
+          sessionStorage.setItem('intro', true);
+        }
         
 
 
@@ -513,7 +531,7 @@ const aramaaltkategori=computed(()=>{
 
       onMounted(async () => {
 
-      
+      sessionStorage.setItem("intro", false);
 
     await firestoreRef.collection('iteminfo').get()
         .then(snapshot =>{
@@ -885,7 +903,7 @@ setTimeout(() => {
 
 
         return {kategoriler,beforeEnter,enter,enterv2,itemler,search,aramaitem,kategorisec,kategorisecti,goPuanla,altkategoriler,altkategorisecti,aramaaltkategori,
-        aramaplatformlar,platformsecti,platformsec,aramaitem2
+        aramaplatformlar,platformsecti,platformsec,aramaitem2,loading
         }
         
     }

@@ -344,13 +344,13 @@
                         <span v-if="kategorigoster=='Anime'">Ana Karakterler</span>
                         </h5>
                       <hr class="">
-                      <p>{{info1}}</p>
+                      <p class="infotext">{{info1}}</p>
                       </div>
 
                         <div class="col-md-6">
                       <h5 class="redtitle">Türler</h5>
                       <hr>
-                      <p>{{info2}}</p>
+                      <p class="infotext">{{info2}}</p>
 
                       </div>
                      
@@ -360,7 +360,7 @@
                       <div class="col-md-6">
                       <h5 class="redtitle">Çıkış Yılı</h5>
                       <hr class="">
-                      <p>{{cyili}}</p>
+                      <p class="infotext">{{cyili}}</p>
                       </div>
 
                         <div class="col-md-6">
@@ -370,7 +370,7 @@
                         <span v-if="kategorigoster=='Anime'">Sezon / Bölüm</span>
                         <span v-if="kategorigoster=='Oyun'">Oyun Süresi</span></h5>
                       <hr>
-                      <p>{{info3}}</p>
+                      <p class="infotext">{{info3}}</p>
 
                       </div>
                      
@@ -379,14 +379,26 @@
                      <div class="row text-center">
       
                      
-                      <div class="d-flex justify-content-center">
-            <p v-if="aramaplatform('Netflix')" class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
+                  <div class="platformgroup">
+           <p v-if="aramaplatform('Netflix')" class="platform"><img src="https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png"  class="platform-pic"> Netflix</p> 
            <p v-if="aramaplatform('disney+')" class="platform"><img src="https://img.icons8.com/fluency/512/disney-plus.png"  class="platform-pic" >Disney Plus</p>
            <p  v-if="aramaplatform('prime video')" class="platform"><img src="https://www.pngmart.com/files/Amazon-Logo-PNG-Image.png"  class="platform-pic" > Amazon Prime</p>
            <p v-if="aramaplatform('HBO max')" class="platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968611.png"  class="platform-pic" > HBO Max</p>
-            <p v-if="aramaplatform('steam')" class="platform"><img src="https://banner2.cleanpng.com/20180604/xiy/kisspng-steam-computer-icons-logo-video-game-valves-5b14dba6212cf3.1367866015280936061359.jpg"  class="platform-pic" > Steam</p>
-            <p v-if="aramaplatform('Rockstargames')" class="platform"><img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rockstar_Games_Logo.svg/2226px-Rockstar_Games_Logo.svg.png"  class="platform-pic" > Rockstar</p>
 
+           <p v-if="aramaplatform('steam')" class="platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png"  class="platform-pic" > Steam</p>
+           <p v-if="aramaplatform('Rockstargames')" class="platform"><img src=" https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Rockstar_Games_Logo.svg/2226px-Rockstar_Games_Logo.svg.png"  class="platform-pic" > Rockstar</p>
+           <p v-if="aramaplatform('Ubisoft')" class="platform"><img src="https://cdn.imgbin.com/3/25/19/imgbin-dungeon-survivor-ubisoft-video-games-electronic-entertainment-expo-youtube-app-icon-transparent-56nSm3qWT0PrYZsCKGs2uqxP4.jpg"  class="platform-pic" > Ubisoft</p>
+           <p v-if="aramaplatform('Epic Games')" class="platform"><img src="https://assets.reedpopcdn.com/epicgames_mrprvJ4.jpg/BROK/thumbnail/1200x1200/quality/100/epicgames_mrprvJ4.jpg"  class="platform-pic" > Epic Games</p>
+           <p v-if="aramaplatform('Xbox Gamepass')" class="platform"><img src="https://styles.redditmedia.com/t5_3ob8t/styles/communityIcon_lyw5xocnfin91.png"  class="platform-pic" > Gamepass</p>
+           <p v-if="aramaplatform('Gog')" class="platform"><img src="https://w7.pngwing.com/pngs/532/838/png-transparent-gog-com-logo-computer-icons-symbol-miscellaneous-purple-violet.png"  class="platform-pic" > GOG</p>
+           <p v-if="aramaplatform('EA Play')" class="platform"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Electronic_Arts_Logo_2020.png"  class="platform-pic" > EA Play</p>
+           <p v-if="aramaplatform('Nintendo')" class="platform"><img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Nintendo_switch_logo.png"  class="platform-pic" > Nintendo</p>
+           <p v-if="aramaplatform('Ps Store')" class="platform"><img src="https://ovicio.com.br/wp-content/uploads/2022/04/20220426-ovicio-playstation-logo-555x555.jpg"  class="platform-pic" > Ps Store</p>
+           <p v-if="aramaplatform('Xbox Marketplace')" class="platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Xbox_app_logo.svg/2048px-Xbox_app_logo.svg.png"  class="platform-pic" > Xbox Store</p>
+           <p v-if="aramaplatform('Ps Plus')" class="platform"><img src="https://pbs.twimg.com/media/E7ZqjaHXMAQWPQJ.png"  class="platform-pic" > Ps Plus</p>
+
+          
+          
 </div>
           </div>
 
@@ -424,9 +436,10 @@
 <br>
    <div class="me-0">
                   
-                 <a v-if="puanladi" href="#yorumlar"> <button  style="float:right" type="submit" id="yorumlabuttonv2" class="shadow"><i class="fas fa-paper-plane"></i> Gönder</button></a>
-                 <a v-if="!puanladi" href="#yorumlar"> <button  style="float:right;" type="button" @click="backtotop" id="yorumlabuttonv2dis" class="shadow"><i class="fas fa-star"></i> Yorum yapmak için puanla</button></a>
-             </div>
+                 <a v-if="puanladi" href="#yorumlar"> <button style="float:right;"   type="submit" class="btn btn-danger yorumlabtn">Gönder</button> </a>
+                 
+                 <a v-if="!puanladi" href="#yorumlar"> <button style="float:right;"   type="button" @click="backtotop" class="btn btn-danger yorumlabtn">Yorum yapmak için puanla</button></a>
+                </div>
                  </form>
               </div>
             </div>
@@ -474,13 +487,13 @@
         
       <div v-for="yorum in yorumlar" :key="yorum.id" class="col-md-11 col-lg-9 col-xl-7">
         <div class="d-flex flex-start mb-4">
-          <img class="rounded-circle shadow-1-strong me-3"
+          <img class="rounded-circle shadow-1-strong me-3 yorumphoto" @click="goProfile(yorum.kullaniciemail)"
             :src="yorum.userimg" alt="avatar" width="65"
             height="65" />
           <div  class="card w-100 yorumcard">
             <div id="yorumcardbody" class="card-body p-4">
               <div class="">
-                <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
+                <h5 @click="goProfile(yorum.kullaniciemail)" class="yorumisim">{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
                 <p class="small text-muted">{{itemisim}}</p>
                 <p class="yorum">
                   {{yorum.yorum}}
@@ -1455,6 +1468,7 @@ sessionStorage.setItem(kullaniciuid.value,kullaniciuid.value)
             sirket.value = doc.data().sirket
             info3.value = doc.data().info3
             ozet.value = doc.data().ozet
+            platformlar.value = doc.data().platformlar
        
                    
 

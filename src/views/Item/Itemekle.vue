@@ -358,7 +358,7 @@
   <div class="col-md-12">
 <div class="form-floating mb-3">
   <input type="search" autocomplete="off" required class="form-control" v-model="platformlar" id="floatingInput" placeholder="name@example.com">
-  <label for="floatingInput">Platformlar</label>
+  <label for="floatingInput">Satıldığı Yerler</label>
 </div>
   </div>
 
@@ -372,7 +372,7 @@
 
 
 <div class="form-floating">
-  <textarea class="form-control" maxlength="1500" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+  <textarea class="form-control" maxlength="1750" required v-model="ozet" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
   <label for="floatingTextarea2">{{kategori}} Özeti</label>
 </div>
 <br>

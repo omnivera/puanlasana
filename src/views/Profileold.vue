@@ -1,75 +1,57 @@
-<template>
+.<template>
 <div v-if="loading"><Loading/></div>
 
 <div v-if="!loading">
 
 
-
-
-<main>
-   <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-    <div class="user-header-wrapper flexbox">
-        <div class="user-header-inner flexbox">
-            <div class="user-header-overlay"></div>
-            <img class="user-header" src="https://preview.redd.it/52f61nfzmwl51.jpg?auto=webp&s=ea0d396990fbdffe68c214d263810737f9faac6f" alt="">
+<transition @before-enter="beforeEnter" @enter="enterv2" appear >   
+<section class="profile sticky-top" style="z-index: 999">
+  <header class="header">
+    <div class="details">
+      <img :src="userimg" alt="" data-bs-toggle="modal" data-bs-target="#profilepicedit"  class="profile-pic">
+      <h1 class="heading">{{kullaniciad}}</h1>
+      <div class="location">
+        
+   
+      </div>
+      <div class="stats">
+          <div v-if="!puanlarshow" @click="goPuanla" class="col-4">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Puanladı</p>
         </div>
+         <div v-if="puanlarshow" @click="goPuanla" class="col-4" style="color:#DE354C">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Puanladı</p>
+        </div>
+        <div v-if="!yorumlarshow" @click="goYorumlar" class="col-4">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Yorumlar</p>
+        </div>
+        <div v-if="yorumlarshow" @click="goYorumlar" class="col-4" style="color:#DE354C">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Yorumlar</p>
+        </div>
+        <div class="col-4">
+          <h4><vue3-autocounter ref='counter' :startAmount='0' :endAmount='begeniler' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></h4>
+          <p>Beğeniler</p>
+        </div>
+        
+      </div>
     </div>
-   </transition>
-   <transition @before-enter="beforeEnter" @enter="enterv2" appear >  
-    <div class="user-info-bar">
-        <div class="ufo-bar-col1">
-        </div>
-        <div class="ufo-bar-col2">
-            <div class="ufo-bar-col2-inner">
-                <div class="user-icon-wrapper">
-                    <img class="user-icon" :src="userimg" data-bs-toggle="modal" data-bs-target="#profilepicedit" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="ufo-bar-col3">
-            <div class="ufo-bar-col3-inner">
-                <div class="username-wrapper-outer">
-                    <div class="username-wrapper">
-                        <div class="verified" style="opacity: 0; top: 150%;"><p>Verified Account</p></div>
-                        <h3 class="username-dev">{{kullaniciad}}</h3>
-                        <svg class="uname-verified" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.03 1326.16">
-                          
-                            <g id="Layer_3" data-name="Layer 3">
-                                <polygon class="cls-11" points="0 747.37 120.83 569.85 70.11 355.04 283.43 292.38 307.3 107.41 554.93 107.41 693.66 0 862.23 120.83 1072.57 126.8 1112.84 319.23 1293.35 399.79 1256.05 614.6 1350.03 793.61 1197.87 941.29 1202.35 1147.15 969.64 1178.48 868.2 1326.16 675.02 1235.17 493.77 1315.72 354.99 1133.73 165.58 1123.29 152.16 878.64 0 747.37"/></g>
-                            <g id="Layer_2" data-name="Layer 2">
-                                <path class="cls-12" d="M755.33,979.23s125.85,78.43,165.06,114c34.93-36,234.37-277.22,308.24-331.94,54.71,21.89,85,73.4,93,80.25-3.64,21.89-321.91,418.58-368.42,445.94-32.74-3.84-259-195.16-275.4-217C689.67,1049.45,725.24,1003.85,755.33,979.23Z" transform="translate(-322.83 -335.95)"/></g>
-                        </svg>
-                    </div>
-                    <div class="infobar">
-                        <a class="ufo-bar-fff" href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='followers' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span>  Takipçi</a>
-                        <a class="ufo-bar-fff" href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='begeniler' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span> Beğeni</a>
-                         |&nbsp; 
-                        <a v-show="yorumlarshow" @click="goYorumlar" class="ufo-bar-fff profilebtn" style="color:white" href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span> Yorum</a>
-                        <a v-show="puanlarshow" @click="goYorumlar" class="ufo-bar-fff profilebtn" href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='yorumcount' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span> Yorum</a>
-                        <a v-show="yorumlarshow" @click="goPuanla" class="ufo-bar-fff profilebtn"  href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span> Puan</a>
-                        <a v-show="puanlarshow" @click="goPuanla" class="ufo-bar-fff profilebtn" style="color:white" href="#"><span><vue3-autocounter ref='counter' :startAmount='0' :endAmount='puanladi' :duration='2' suffix='' separator=',' decimalSeparator=',' :decimals='0' :autoinit='true' /></span> Puan</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ufo-bar-col4">
-            <div class="ufo-bar-col4-inner">
-              <!-- <button style="float:right;"   type="submit" class="btn btn-danger takipbtn"><i class="fa-solid fa-user-plus"></i> Takip Et</button> -->
-              <!--   <button class="button2 btn-primary2"><i class="uil uil-plus"></i> Takip Et<div class="btn-secondary2"></div></button> -->
-            </div>
-        </div>
-      
-    </div>
-   </transition>
+  </header>
+</section>
+</transition>
 
+<br>
 
-<div v-if="yorumlarshow">
+           
+         <div v-if="yorumlarshow">
          
 
   <transition v-if="yorumcount > 0 " @before-enter="beforeEnter" @enter="enterv2" appear >      
 <div class="row">
    
-    <div class="container my-2 py-4 text-dark">
+    <div class="container my-2 py-5 text-dark">
     <div class="row d-flex justify-content-center">
         
       <div v-for="yorum in yorumlar" :key="yorum.id" class="col-md-11 col-lg-9 col-xl-7">
@@ -82,10 +64,9 @@
               <div class="">
                 <h5>{{yorum.kullaniciad}}<p style="float:right" class="small text-muted">{{yorum.tarih}}</p></h5>  
                 <span class="yorumkat" @click="goItem(yorum)">{{yorum.itemisim}}</span> 
-                 <!-- <span v-if="yorum.kategori!=null" class="yorumkat" style="margin-left:0.7rem">{{yorum.kategori}}</span>  -->
-       
+                 <span v-if="yorum.kategori!=null" class="yorumkat" style="margin-left:0.7rem">{{yorum.kategori}}</span> 
 
-
+<hr>
                
       
                 
@@ -151,7 +132,7 @@
 
   </transition>
 
-  <div v-if="yorumcount == 0" class="row text-center text-white" style="margin-top:3vh">
+  <div v-if="yorumcount == 0" class="row text-center text-white" style="margin-top:4vh">
 <div class="glow"><marquee behavior="scroll" direction="left" scrollamount="15"> </marquee></div>
   
 
@@ -180,7 +161,7 @@
 
 
 
-        <div v-if="puanlarshow" class="d-flex justify-content-center">
+ <div v-if="puanlarshow" class="d-flex justify-content-center">
     <div class="row">
 
 <div class="container">
@@ -238,8 +219,6 @@
       </div>
  </div>
 
- 
-</main>
 
 <div class="modal fade"  id="profilepicedit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg scrollable">
@@ -310,6 +289,7 @@
 </div>
 
 
+
 </div>
 
 
@@ -326,7 +306,7 @@ import { useRoute,useRouter} from 'vue-router'
 import {authRef} from '../firebase/config'
 import getUser from "../composables/getUser";
 import Vue3autocounter from 'vue3-autocounter';
-import Loading from '@/components/intro.vue'
+import Loading from '@/components/Loading3.vue'
 export default {
 
 components: {
@@ -346,8 +326,6 @@ components: {
     const yorumcount= ref(0)
     const begeniler= ref(0)
     const puanladi= ref(0)
-
-    const followers= ref(0)
 
     const route=useRoute()
     const router=useRouter()
@@ -371,7 +349,7 @@ components: {
  setTimeout(  function(){
 loading.value=false
 
- },2500)
+ },2000)
 
      authRef.onAuthStateChanged(k=>{
     kullaniciad.value=k.displayName
@@ -471,7 +449,6 @@ firestoreRef.collection('uyeler').doc(kullaniciemail.value).update({
          kullaniciad.value = doc.data().kullaniciad
          userimg.value = doc.data().userimg
          puanladi.value = doc.data().puanladi
-         followers.value = doc.data().followers
 
 
 
@@ -632,8 +609,7 @@ setTimeout(() => {
          
         })
 
-        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler,goYorumlar,editphoto,goItem,
-        followers
+        return {beforeEnter,enter,enterv2,kullaniciad,userimg,yorumlar,yorumcount,begeniler,puanladi,loading,goPuanla,puanlarshow,yorumlarshow,itemler,goYorumlar,editphoto,goItem
         }
         
     }
@@ -641,9 +617,714 @@ setTimeout(() => {
 }
 </script>
 
-<style scoped src="@/assets/profile.css">
+<style scoped>
 
 
+.profilepiceditmodal{
+  background-color: #0f0f0f;
+  color: white;
+  border-radius: 20px;
+}
+
+
+.user-card {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 65vw;
+  background-color: #121312;
+  margin-bottom: 3vh;
+
+
+  
+ position:relative;
+  z-index:30;
+ border-radius: 20px;
+  transition: all .2s ease-in-out;
+}
+
+.user-card:hover {
+
+transform: scale(1.1);
+
+}
+
+.user-profile {
+
+  width: 10vw;
+border-radius: 20px;
+
+
+  background-color: #181818;
+  text-align: center;
+  
+  
+  
+}
+
+.profilecard {
+  
+object-fit:fill;
+height: 20vh;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  background-color: #ddd;
+
+  
+  
+}
+
+
+.last-submit {
+  font-size: 16px;
+  color: #999;
+}
+
+.user-stats {
+  display: inline-block;
+  padding: 1vw;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.w-clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.name {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: -7px;
+  float: left;
+  font-size: 1.8vw;
+  line-height: 42px;
+  color: white;
+}
+
+.score {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+  display: flex;
+  float: right;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+}
+
+.my-score {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.total-score {
+  display: inline-block;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  float: right;
+  color: #DE354C;
+  font-size: 10px;
+  line-height: 20px;
+  font-weight: 400;
+  text-align: right;
+}
+
+.progress {
+  padding-top: 32px;
+  padding-bottom: 30px;
+  background-color: transparent;
+}
+
+.my-progress {
+  width: 80%;
+  height: 10px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  background-color: #DE354C;
+}
+
+.total-progress {
+  border-radius: 5px;
+  background-color: #ddd;
+  height: 10px;
+  width: 100%;
+}
+
+.meta-stats {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.meta-stat {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+
+.meta-stat-label {
+  margin-top: 0px;
+  margin-bottom: 16px;
+  color: #999;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.meta-stat-block {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -msflexbox;
+
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: center;
+}
+
+.meta-stat-num {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: white;
+  font-size: 1.4vw;
+  line-height: 24px;
+  font-weight: 700;
+  
+}
+
+.meta-stat-total {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: #DE354C;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+
+
+
+
+
+
+
+
+
+
+.textarea{
+    width: 100%;
+    color: #FFF;
+    background: transparent;
+    border: none;
+    outline: none;
+     text-align: center;
+}
+
+@import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+
+
+
+
+
+
+
+
+
+@keyframes neon {
+    0% {
+        color: #b4fcff;
+    border: 2px solid #b4fcff;
+      text-shadow: 0px 0px 10px #b4fcff, 2px 2px 4px #000;
+      box-shadow: inset 0px 0px 10px #8cfbff, 0px 0px 10px #b4fcff;
+    }
+    50% {
+            color: #ffd1f7;
+        border: 2px solid #ffd1f7;
+          text-shadow: 0px 0px 14px #ffd1f7, 2px 2px 4px #000;
+      box-shadow: inset 0px 0px 14px #ffbbbb, 0px 0px 14px #ffd1f7;
+  }
+      75% {
+          color: #fffbc6;
+    border: 2px solid #fffbc6;
+      text-shadow: 0px 0px 10px #fffbc6, 2px 2px 4px #000;
+      box-shadow: inset 0px 0px 10px #fff77a, 0px 0px 10px #fffbc6;
+    }
+      100% {
+          color: #b4fcff;
+    border: 2px solid #b4fcff;
+      text-shadow: 0px 0px 10px #b4fcff, 2px 2px 4px #000;
+      box-shadow: inset 0px 0px 10px #97fbff, 0px 0px 10px #b4fcff;
+    }
+}
+
+@-webkit-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-moz-keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%
+  }
+  50% {
+    background-position: 100% 50%
+  }
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+html, body {
+  margin: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFCEF;
+}
+
+.head {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 230px;
+  height: 230px;
+  background-color: #FFEB97;
+  border-radius: 50%;
+  position: relative;
+}
+
+.face {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 230px;
+  height: 230px;
+  position: relative;
+}
+.pink{
+    background-color: #ffd1f7;
+}
+.yellow{
+    background-color: #fffbc6;
+}
+.blue{
+    background-color: #DE354C;
+}
+.happy {
+  animation: happy-look 5s infinite;
+}
+
+.standard {
+  animation: standard-look 5s infinite;
+}
+
+.sad {
+  animation: sad-look 5s infinite;
+}
+.eye
+{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  background-color: #000;
+  border-radius: 50%;
+}
+
+.mouth
+{
+ width: 100px;
+  height: 50px;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 8px;
+  border-color: transparent transparent #000 transparent;
+  position: absolute;
+}
+
+.happy .eye {
+  top: 75px;
+  animation: blink 12s infinite;
+}
+
+
+.happy .mouth {
+  left: 68px;
+  top: 80px;
+  animation: happy-mouth 10s infinite;
+}
+.left{
+   left:45px;
+}
+.right{
+  left:165px;
+}
+.standard .eye {
+  top: 125px;
+  animation: blink 6s infinite;
+  animation-delay: 1.3s;
+}
+
+.standard .mouth {
+  width: 75px;
+  height: 8px;
+  border-radius: 8px;
+  left: 75px;
+  top: 175px;
+}
+
+.sad .eye {
+  top: 110px;
+  position: absolute;
+  animation: blink 20s infinite;
+  animation-delay: 3.7s;
+}
+
+.sad .mouth {
+  border-color: #000 transparent transparent transparent;
+  left: 68px;
+  top: 166px;
+  animation: sad-mouth 10s infinite;
+}
+
+
+@keyframes blink {
+  0% {
+    transform: scale(1, 1);
+  }
+  10% {
+    transform: scale(1, 1);
+  }
+  12% {
+    transform: scale(1, .1);
+  }
+  14% {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1, 1);
+  }
+  32% {
+    transform: scale(1, .1);
+  }
+  34% {
+    transform: scale(1, 1);
+  }
+  60% {
+    transform: scale(1, 1);
+  }
+  62% {
+    transform: scale(1, .1);
+  }
+  64% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes happy-look {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  10% {
+    transform: translate(10px, 0px);
+  }
+  20% {
+    transform: translate(10px, 0px);
+  }
+  30% {
+    transform: translate(0px, 0px);
+  }
+  60% {
+    transform: translate(0px, 0px);
+  }
+  70% {
+    transform: translate(-10px, -15px);
+  }
+  80% {
+    transform: translate(-10px, -15px);
+  }
+  90% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes happy-mouth {
+  0% {
+    height: 50px;
+  }
+  10% {
+    height: 50px;
+  }
+  20% {
+    height: 50px;
+  }
+  30% {
+    height: 50px;
+  }
+  60% {
+    height: 50px;
+  }
+  70% {
+    height: 40px;
+  }
+  80% {
+    height: 40px;
+  }
+  90% {
+    height: 50px;
+  }
+}
+
+@keyframes standard-look {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  10% {
+    transform: translate(-25px, 0px);
+  }
+  20% {
+    transform: translate(-25px, 0px);
+  }
+  30% {
+    transform: translate(0px, 0px);
+  }
+  60% {
+    transform: translate(0px, 0px);
+  }
+  70% {
+    transform: translate(15px, -15px);
+  }
+  80% {
+    transform: translate(15px, -15px);
+  }
+  90% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes sad-look {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  15% {
+    transform: translate(0px, 0px);
+  }
+  25% {
+    transform: translate(0px, -25px);
+  }
+  35% {
+    transform: translate(0px, -25px);
+  }
+  45% {
+    transform: translate(0px, 0px);
+  }
+  70% {
+    transform: translate(0px, 0px);
+  }
+  80% {
+    transform: translate(-15px, -25px);
+  }
+  90% {
+    transform: translate(-15px, -25px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes sad-mouth {
+  0% {
+    height: 25px;
+  }
+  15% {
+    height: 25px;
+  }
+  25% {
+    height: 50px;
+  }
+  35% {
+    height: 50px;
+  }
+  45% {
+    height: 25px;
+  }
+  70% {
+    height: 25px;
+  }
+  80% {
+    height: 50px;
+  }
+  90% {
+    height: 50px;
+  }
+  100% {
+    height: 25px;
+  }
+}
+
+.ratings{
+    margin-right:1vw;
+}
+
+.ratings i{
+    
+    color:#cecece;
+    font-size:3vw;
+}
+
+.rating-color{
+    color:#DE354C !important;
+}
+
+.review-count{
+    font-weight:400;
+    margin-bottom:2px;
+    font-size:24px !important;
+}
+
+.small-ratings i{
+  color:#cecece;   
+  margin: 0.1vw;
+  cursor: default;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+}
+
+.yorumcard{
+
+  
+    color: white;
+     border-radius: 20px;
+      background-color: black;
+
+}
+
+#yorumyapcardbody{
+    background-color: black;
+    border: none;
+}
+
+#yorumcardbody{
+    background-color: #181818;
+  
+     border-radius: 20px;
+     
+  
+ 
+}
+
+.link-muted { color: #aaa; text-decoration: none;cursor:not-allowed;} 
+
+
+.likeselected { color: white; text-decoration: none;cursor:not-allowed;} 
+
+
+
+
+.yorumresim{
+    margin-top:1vh;
+    width: 4.2vw;
+    height: 7vh;
+}
+
+.yorumlar{
+    margin-top: 25vh;
+    margin-left:5vw;
+    margin-right:5vw;
+}
+
+.header {
+  min-height: 35vh;
+  background-color: black;
+  border-bottom: 1px solid #454545;
+  color: white;
+  clip-path: ellipse(100vw 60vh at 50% 50%);
+  display: flex;
+  position: static;
+  align-items: center;
+  justify-content: center;
+  /* box-shadow: -5px -5px 20px 5px red, 5px 5px 20px 5px #DE354C; */
+}
+
+.details {
+  text-align: center;
+  margin-top: 6vh;
+}
+
+
+
+.location p {
+  display: inline-block;
+}
+
+.location svg {
+  vertical-align: middle;
+}
+
+.stats {
+  display: flex;
+  
+ 
+}
+
+.stats .col-4 {
+  width: 10rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.stats .col-4:hover {
+  transform: scale(1.05);
+  color: #DE354C;
+}
+
+.heading {
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin: 1.1rem 0;
+}
 
 
 </style>
